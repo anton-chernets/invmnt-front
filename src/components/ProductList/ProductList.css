@@ -1,7 +1,11 @@
-.product-list {
-    /* Ваши стили */
+.product-item {
+    border: 1px solid #ddd;
+    padding: 10px;
+    margin-bottom: 20px;
+    border-radius: 5px;
 }
 
-.product-item {
-    /* Стили для каждого товара */
+.product-item img {
+    max-width: 100px;
+    border-radius: 5px;
 }
