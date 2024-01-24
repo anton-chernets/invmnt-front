@@ -1,0 +1,16 @@
+.footer {
+    background-color: #34495e;
+    color: white;
+    text-align: center;
+    padding: 10px 20px;
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    font-family: 'Arial', sans-serif;
+}
+
+.footer p {
+    margin: 0;
+    font-size: 1em;
+}
