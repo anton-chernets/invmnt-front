@@ -9,6 +9,7 @@ const Header = () => {
             <nav>
                 <Link to="/">Главная</Link>
                 <Link to="/shop">Магазин</Link>
+                <Link to="/admin/login">Админка (временно)</Link>
             </nav>
         </header>
     );
