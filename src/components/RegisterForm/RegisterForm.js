@@ -14,8 +14,20 @@ const RegisterForm = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        // Здесь должна быть логика регистрации
-        console.log('Регистрация:', username, email, password, confirmPassword);
+        // Проверка на пустые поля
+        if (!username || !email || !password || !confirmPassword) {
+            alert('Пожалуйста, заполните все поля.');
+            return;
+        }
+        // Проверка совпадения паролей
+        if (password !== confirmPassword) {
+            alert('Пароли не совпадают.');
+            return;
+        }
+        // Здесь должен быть запрос к серверу для регистрации
+        console.log('Регистрация:', username, email, password);
+        // После успешной регистрации перенаправляем на страницу входа
+        navigate('/login');
     };
 
     return (
