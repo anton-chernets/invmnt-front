@@ -62,6 +62,7 @@
         display: none;
         flex-direction: column;
         background-color: #000;
+        border-top: 1px solid white;
         border-bottom: 1px solid white;
         z-index: 1000;
         font-family: 'PT Serif', serif;
