@@ -1,4 +1,7 @@
-
+.product-wrapper {
+    max-width: 1600px;
+    margin: 0 auto;
+}
 .product-item {
     border: 1px solid #ddd;
     padding: 10px;

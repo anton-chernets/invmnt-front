@@ -1,5 +1,5 @@
 .shop-page {
-    max-width: 1200px;
+    max-width: 1600px;
     margin: 0 auto;
     display: flex;
     flex-direction: column;
@@ -20,7 +20,7 @@
 
 /* Стили для ProductList (если нужно) */
 .product-list {
-    width: 80%;
+    width: 100%;
     max-width: 600px;
     background: white;
     padding: 20px;

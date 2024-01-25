@@ -1,5 +1,5 @@
 .home-page {
-    max-width: 1200px; /* Изменено с width на max-width */
+    max-width: 1600px; /* Изменено с width на max-width */
     margin: 0 auto;
     display: flex;
     flex-direction: column;
