@@ -9,7 +9,7 @@
     background-color: #ecf0f1;
     color: #333;
     font-family: 'Arial', sans-serif;
-    padding: 20px;
+
 }
 
 .shop-page h1 {
@@ -19,30 +19,3 @@
 }
 
 /* Стили для ProductList (если нужно) */
-.product-list {
-    width: 100%;
-    max-width: 600px;
-    background: white;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-.product-item {
-    border-bottom: 1px solid #eee;
-    padding: 10px 0;
-}
-
-.product-item:last-child {
-    border-bottom: none;
-}
-
-.product-item h3 {
-    margin: 0 0 10px 0;
-    color: #3498db;
-}
-
-.product-item p {
-    margin: 0;
-    color: #666;
-}
