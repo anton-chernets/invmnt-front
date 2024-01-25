@@ -2,7 +2,6 @@ import React from 'react';
 import NewsFeed from '../../components/NewsFeed/NewsFeed';
 import './HomePage.css';
 
-
 const HomePage = () => {
     return (
         <div className="home-page">

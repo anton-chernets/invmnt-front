@@ -7,7 +7,9 @@ import ShopPage from './pages/ShopPage/ShopPage';
 import AdminDashboard from './pages/admin/AdminDashboard/AdminDashboard';
 import ManageProducts from './pages/admin/ManageProducts/ManageProducts';
 import ManageUsers from './pages/admin/ManageUsers/ManageUsers';
-import AdminLogin from './pages/admin/AdminLogin/AdminLogin';
+
+import LoginForm from './components/LoginForm/LoginForm';
+import RegisterForm from './components/RegisterForm/RegisterForm';
 
 function App() {
     return (
@@ -19,7 +21,8 @@ function App() {
                 <Route path="/admin" element={<AdminDashboard />} />
                 <Route path="/admin/products" element={<ManageProducts />} />
                 <Route path="/admin/users" element={<ManageUsers />} />
-                <Route path="/admin/login" element={<AdminLogin />} />
+                <Route path="/login" element={<LoginForm />} />
+                <Route path="/register" element={<RegisterForm />} />
             </Routes>
             <Footer />
         </Router>
