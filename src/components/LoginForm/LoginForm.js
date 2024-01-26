@@ -32,19 +32,22 @@ const LoginForm = () => {
 
             const data = await response.json();
 
-            // Обработка ответа от сервера
             if (response.ok) {
                 console.log('Вход выполнен:', data);
-                // Сохранение токена в localStorage или cookie
                 localStorage.setItem('authToken', data.token);
-                // Переадресация пользователя на домашнюю страницу
-                navigate('/');
+
+                // Перевірка ролі користувача
+                if (data.role === 'admin') {
+                    // Перенаправлення на адмін-панель
+                    navigate('/');
+                } else {
+                    // Перенаправлення на головну сторінку
+                    navigate('/');
+                }
             } else {
-                // Если ответ сервера содержит ошибку, сообщаем об этом пользователю
                 alert('Ошибка аутентификации: ' + data.message);
             }
         } catch (error) {
-            // Обработка ошибок сети
             alert('Ошибка сети: ' + error.message);
         }
     };
