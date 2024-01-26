@@ -15,15 +15,23 @@ const NewsFeed = () => {
     }, []);
 
 
+    let sidebarContent;
     return (
-        <div className="news-feed">
-            <h2>Новостная Лента</h2>
-            {news.map((item, index) => (
-                <div key={index} className="news-item">
-                    <h3>{item.title}</h3>
-                    <p>{item.content}</p>
-                </div>
-            ))}
+        <div className="news-container">
+            <div className="news-items">
+                <h1>Новости</h1>
+                {/* Тут буде виведення новин */}
+                {news.map((item) => (
+                    <div className="news-item" key={item.id}>
+                        <h3>{item.title}</h3>
+                        <p>{item.description}</p>
+                    </div>
+                ))}
+            </div>
+            <div className="sidebar">
+                {/* Тут можуть бути фрейми, графіки, реклама */}
+                {sidebarContent}
+            </div>
         </div>
     );
 };

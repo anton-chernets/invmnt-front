@@ -1,98 +1,122 @@
+/* Основні стилі для .news-feed */
 .news-feed {
     display: flex;
-    flex-direction: column;
-    align-items: center;
-    /*padding: 20px;*/
+    flex-wrap: wrap;
+    justify-content: space-between;
     max-width: 1600px;
-    margin: 0 auto;
+    margin: 100px auto;
+    width: 80%;
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .news-item {
-    background-color: #ffffff;
+    background-color: #ececec;
     padding: 15px;
     margin-bottom: 20px;
     border-radius: 10px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     transition: transform 0.3s ease;
+    /*width: calc(50% - 10px); !* Віднімаємо 10px, щоб врахувати відступи *!*/
+    max-width: 100%;
 }
 
 .news-item:hover {
     transform: scale(1.02);
 }
 
-.news-item h3 {
-    color: #3498db;
-    margin-bottom: 10px;
+@media (max-width: 768px) {
+    .news-item {
+        width: 100%; /* На мобільних пристроях кожен блок займатиме всю ширину */
+    }
 }
 
+
+/* Заголовки новин */
+.news-item h3 {
+    color: #3498db;
+    margin: 0 0 10px 0;
+}
+
+/* Текст новин */
 .news-item p {
     color: #333;
     line-height: 1.6;
+    margin: 0;
 }
-.news-feed {
-    width: 80%;
-    max-width: 1600px;
-    background: white;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+/* Стилі для контейнера новин і сайдбару */
+.news-container {
+    display: flex;
+    width: 100%;
     margin-top: 20px;
 }
 
-.news-item {
-    border-bottom: 1px solid #eee;
-    padding: 10px 0;
+.news-items {
+    flex: 2; /* 2/3 ширини */
+    padding: 20px;
+    margin-left: 20px;
+    margin-right: 20px;
+    margin-bottom: 20px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-.news-item:last-child {
-    border-bottom: none;
+.news-items h1 {
+    text-align: center;
 }
 
-.news-item h3 {
-    margin: 0 0 10px 0;
-    color: #3498db;
-}
-
-.news-item p {
-    margin: 0;
-    color: #666;
-}
+/* Медіа-запити для адаптивності */
 @media (max-width: 1024px) {
-    .home-page {
-        max-width: 800px; /* Уменьшение ширины для планшетов */
-    }
-
     .news-feed {
-        width: 90%; /* Увеличение ширины новостной ленты для планшетов */
+        width: 90%; /* Більша ширина для планшетів */
     }
 }
 
 @media (max-width: 768px) {
-    .home-page {
-        max-width: 100%; /* Позволяем странице занимать всю ширину на мобильных устройствах */
-        padding: 0 10px; /* Добавляем немного отступа с боков */
-    }
-
     .news-feed {
-        width: 100%; /* Новостная лента занимает всю ширину */
-        margin-top: 10px; /* Уменьшаем верхний отступ */
-        padding: 15px; /* Уменьшаем отступы внутри блока новостей */
+        width: 100%; /* Вся ширина для мобільних */
+        margin-top: 10px;
+        padding: 15px;
     }
-
-    .news-item h3 {
-        font-size: 1.5em; /* Уменьшаем размер заголовков новостей */
+    .news-item {
+        max-width: 90%;
     }
-
-    .news-item p {
-        font-size: 1em; /* Уменьшаем размер текста новостей */
+    .sidebar {
+        order: 2; /* Поміщаємо сайтбар під блок новин */
+        max-width: 95%; /* Сайтбар займатиме всю ширину */
+        margin-top: 20px; /* Додаємо відступ зверху для відокремлення від новин */
+        margin-left: 20px;
+    }
+    .news-items {
+         /* Інші стилі */
+         max-width: 100%; /* Блок новин займатиме всю ширину */
+    }
+    .news-container {
+        flex-direction: column;
     }
 }
 
-/* Медиа-запросы для маленьких мобильных устройств */
+
 @media (max-width: 480px) {
-    .home-page h1 {
-        font-size: 2em; /* Уменьшаем размер заголовка на маленьких мобильных */
+    .news-item h3 {
+        font-size: 1.5em; /* Менший розмір заголовків для мобільних */
     }
+}
 
+
+.sidebar {
+    flex: 1; /* Займає 1 частину з 3 */
+    background-color: white; /* Тимчасовий колір для демонстрації */
+    padding: 20px;
+    margin-right: 20px;
+    margin-bottom: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 
 }
+
+

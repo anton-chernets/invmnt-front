@@ -1,39 +1,43 @@
-.product-wraper {
-    max-width: 1000px;
+.product-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+    max-width: 1500px;
     margin: 0 auto;
 }
 
-.product-item img {
-    max-width: 100px;
+.product-wrapper > div {
+    flex: 0 1 calc(50% - 20px);
+    border: 1px solid #eee;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    margin-bottom: 20px;
+    background: white;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column; /* Организация содержимого карточки в столбец */
+    align-items: center; /* Центрирование содержимого по горизонтали */
+}
+
+.product-wrapper > div img {
+    width: 100%; /* Изображение займет всю ширину карточки */
+    max-width: 100%; /* Убираем ограничение в 100px для адаптивности */
+    margin-bottom: 10px;
     border-radius: 5px;
 }
 
-.product-list {
-    width: 100%;
-    max-width: 600px;
-    background: white;
-
-    border-radius: 10px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    padding-left: 50px;
-}
-
-.product-item {
-    border-bottom: 1px solid #eee;
-    padding: 10px 0;
-
-}
-
-.product-item:last-child {
-    border-bottom: none;
-}
-
-.product-item h3 {
-    margin: 0 0 10px 0;
+.product-wrapper > div h3 {
     color: #3498db;
+    margin-bottom: 10px;
 }
 
-.product-item p {
-    margin: 0;
+.product-wrapper > div p {
     color: #666;
+    margin-bottom: 10px;
+}
+
+.product-wrapper > div:last-child {
+    border-bottom: none;
 }

@@ -1,6 +1,6 @@
 .shop-page {
     max-width: 1600px;
-    margin: 0 auto;
+    margin: 50px auto 100px;
     display: flex;
     flex-direction: column;
     align-items: center;
