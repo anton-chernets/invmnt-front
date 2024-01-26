@@ -9,6 +9,7 @@ import ManageProducts from './pages/admin/ManageProducts/ManageProducts';
 import ManageUsers from './pages/admin/ManageUsers/ManageUsers';
 import LoginForm from './components/LoginForm/LoginForm';
 import RegisterForm from './components/RegisterForm/RegisterForm';
+import UserProfile from "./pages/UserProfile/UserProfile";
 
 function App() {
     return (
@@ -22,6 +23,7 @@ function App() {
                 <Route path="/admin/users" element={<ManageUsers />} />
                 <Route path="/login" element={<LoginForm />} />
                 <Route path="/register" element={<RegisterForm />} />
+                <Route path="/user" element={<UserProfile />} />
             </Routes>
             <Footer />
         </Router>

@@ -7,8 +7,8 @@ const Header = () => {
     const location = useLocation();
 
     const [isMenuOpen, setIsMenuOpen] = useState(false);
-    const [isLoggedIn, setIsLoggedIn] = useState(false);
-    const [isAdmin, setIsAdmin] = useState(false);
+    const [isLoggedIn, setIsLoggedIn] = useState(true);
+    const [isAdmin, setIsAdmin] = useState(true);
 
     useEffect(() => {
         const token = localStorage.getItem('authToken');
@@ -62,6 +62,10 @@ const Header = () => {
         navigate('/admin');
     };
 
+    function goToUserProfile() {
+        navigate('/user')
+    }
+
     return (
         <header className="header">
             <div className="wrap">
@@ -78,7 +82,9 @@ const Header = () => {
                 )}
                 {isLoggedIn && (
                     <div className="button-group">
-                        {shouldShowAdminButton() && <button onClick={goToAdminPanel} className="button">Админ панель</button>}
+                        {shouldShowAdminButton() &&
+                            <button onClick={goToAdminPanel} className="button">Админ панель</button>}
+                        <button onClick={goToUserProfile} className="button">Личный кабинет</button>
                         <button onClick={handleLogout} className="button">Вийти</button>
                     </div>
                 )}

@@ -3,7 +3,7 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
-    max-width: 1600px;
+    max-width: 1400px;
     margin: 100px auto;
     width: 80%;
     background: white;
@@ -19,7 +19,6 @@
     border-radius: 10px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     transition: transform 0.3s ease;
-    /*width: calc(50% - 10px); !* Віднімаємо 10px, щоб врахувати відступи *!*/
     max-width: 100%;
 }
 
@@ -29,10 +28,9 @@
 
 @media (max-width: 768px) {
     .news-item {
-        width: 100%; /* На мобільних пристроях кожен блок займатиме всю ширину */
+        width: 100%;
     }
 }
-
 
 /* Заголовки новин */
 .news-item h3 {
@@ -69,6 +67,17 @@
     text-align: center;
 }
 
+.sidebar {
+    flex: 1; /* Займає 1 частину з 3 */
+    background-color: white; /* Тимчасовий колір для демонстрації */
+    padding: 20px;
+    margin-right: 20px;
+    margin-bottom: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    height: 600px;
+}
+
 /* Медіа-запити для адаптивності */
 @media (max-width: 1024px) {
     .news-feed {
@@ -83,7 +92,7 @@
         padding: 15px;
     }
     .news-item {
-        max-width: 90%;
+        max-width: 93%;
     }
     .sidebar {
         order: 2; /* Поміщаємо сайтбар під блок новин */
@@ -92,8 +101,8 @@
         margin-left: 20px;
     }
     .news-items {
-         /* Інші стилі */
-         max-width: 100%; /* Блок новин займатиме всю ширину */
+        /* Інші стилі */
+        max-width: 100%; /* Блок новин займатиме всю ширину */
     }
     .news-container {
         flex-direction: column;
@@ -106,17 +115,3 @@
         font-size: 1.5em; /* Менший розмір заголовків для мобільних */
     }
 }
-
-
-.sidebar {
-    flex: 1; /* Займає 1 частину з 3 */
-    background-color: white; /* Тимчасовий колір для демонстрації */
-    padding: 20px;
-    margin-right: 20px;
-    margin-bottom: 20px;
-    border-radius: 10px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-
-}
-
-

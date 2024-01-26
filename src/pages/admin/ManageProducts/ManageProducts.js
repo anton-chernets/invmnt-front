@@ -6,6 +6,17 @@ const ManageProducts = () => {
     const [products, setProducts] = useState([]);
     const [newProduct, setNewProduct] = useState({ name: '', description: '', price: '', image: '' });
 
+    const handleAddToCart = (product) => {
+        // Логіка додавання товару до кошика
+    };
+
+    const handleBuyNow = (product) => {
+        // Логіка обробки покупки товару
+    };
+
+// ... ваш JSX для рендеру
+
+
     const handleInputChange = (e) => {
         setNewProduct({ ...newProduct, [e.target.name]: e.target.value });
     };
@@ -65,8 +76,12 @@ const ManageProducts = () => {
                 <button type="submit">Добавить товар</button>
             </form>
             {/* Тепер передаємо products як пропси в ProductList */}
-            <ProductList products={products}/>
 
+            <ProductList
+                products={products}
+                onAddToCart={handleAddToCart}
+                onBuyNow={handleBuyNow}
+            />
         </div>
     );
 };
