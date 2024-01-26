@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
-import './ManageProducts.css'
+import React, {useEffect, useState} from 'react';
+import './ManageProducts.css';
+import ProductList from "../../../components/ProductList/ProductList";
 
 const ManageProducts = () => {
     const [products, setProducts] = useState([]);
@@ -11,9 +12,23 @@ const ManageProducts = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        setProducts([...products, { ...newProduct, id: Date.now() }]);
+        const newProductsList = [...products, { ...newProduct, id: Date.now() }];
+        setProducts(newProductsList);
         setNewProduct({ name: '', description: '', price: '', image: '' }); // Очистка формы
     };
+
+    useEffect(() => {
+        // Запит до вашого API для отримання списку товарів
+        fetch('URL вашого API тут')
+            .then(response => response.json())
+            .then(data => {
+                setProducts(data); // Встановлюємо отримані товари у стан
+            })
+            .catch(error => {
+                console.error('Помилка при завантаженні товарів:', error);
+            });
+    }, []); // Пустий масив залежностей означає, що ефект виконається один раз при монтуванні компонента
+
 
     return (
         <div className="manage-products">
@@ -49,10 +64,11 @@ const ManageProducts = () => {
                 />
                 <button type="submit">Добавить товар</button>
             </form>
-            {/* Отображение списка товаров */}
+            {/* Тепер передаємо products як пропси в ProductList */}
+            <ProductList products={products}/>
+
         </div>
     );
 };
-
 
 export default ManageProducts;

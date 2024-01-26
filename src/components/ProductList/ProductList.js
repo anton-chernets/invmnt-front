@@ -1,14 +1,14 @@
 import React from 'react';
 import './ProductList.css';
 
-const ProductList = ({ products }) => {
+const ProductList = ({ products = [], onDeleteProduct }) => {
     return (
         <div className="product-wrapper">
             {products.map(product => (
                 <div key={product.id}>
                     <h3>{product.title}</h3>
                     <p>{product.description}</p>
-                    <img src={product.image} alt={product.title} style={{ width: '100px' }} />
+                    <img src={product.image} alt={product.title} style={{width: '100px'}}/>
                     <p>Цена: ${product.price}</p>
                 </div>
             ))}
