@@ -3,7 +3,8 @@
     align-items: center;
     background-color: #000;
     color: white;
-    font-family: 'PT Serif', serif;
+    font-family: 'Yahoo Sans Finance', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-size: 20px;
     position: relative;
     height: 50px;
 }

@@ -1,6 +1,6 @@
 .manage-products {
-    max-width: 1400px;
-    margin: 50px auto 100px;
+    max-width: 1000px;
+    /* margin: 50px auto 100px; */
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -9,8 +9,8 @@
     background-color: #ecf0f1;
     color: #333;
     font-family: 'Arial', sans-serif;
-    border-radius: 10px;
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+    /* border-radius: 10px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1); */
 }
 
 .manage-products h1 {
@@ -33,7 +33,7 @@
 
 .manage-products button {
     padding: 8px 15px;
-    background-color: #28a745;
+    background-color: #3498db;
     color: white;
     border: none;
     border-radius: 4px;
@@ -42,7 +42,7 @@
 }
 
 .manage-products button:hover {
-    background-color: #218838;
+    background-color: #2f00ff;
 }
 
 .product-item {

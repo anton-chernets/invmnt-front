@@ -10,6 +10,7 @@
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    font-family: 'Yahoo Sans Finance', 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }
 
 .news-item {
@@ -34,7 +35,7 @@
 
 /* Заголовки новин */
 .news-item h3 {
-    color: #3498db;
+    color: #000000;
     margin: 0 0 10px 0;
 }
 
@@ -69,13 +70,14 @@
 
 .sidebar {
     flex: 1; /* Займає 1 частину з 3 */
-    background-color: white; /* Тимчасовий колір для демонстрації */
-    padding: 20px;
-    margin-right: 20px;
+    background-color: #ffffff;
     margin-bottom: 20px;
+    margin-right: 20px;
     border-radius: 10px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     height: 600px;
+    order: 2; /* Поміщаємо сайтбар під блок новин */
+    max-width: 95%; /* Сайтбар займатиме всю ширину */
 }
 
 /* Медіа-запити для адаптивності */
@@ -94,12 +96,7 @@
     .news-item {
         max-width: 93%;
     }
-    .sidebar {
-        order: 2; /* Поміщаємо сайтбар під блок новин */
-        max-width: 95%; /* Сайтбар займатиме всю ширину */
-        margin-top: 20px; /* Додаємо відступ зверху для відокремлення від новин */
-        margin-left: 20px;
-    }
+    
     .news-items {
         /* Інші стилі */
         max-width: 100%; /* Блок новин займатиме всю ширину */

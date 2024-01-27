@@ -71,8 +71,9 @@ const Header = () => {
             <div className="wrap">
                 <button onClick={handleMenuClick} className="menu-button">Меню</button>
                 <nav className={isMenuOpen ? 'active' : ''}>
-                    <Link to="/" onClick={handleMenuClick}>Главная</Link>
-                    <Link to="/shop" onClick={handleMenuClick}>Магазин</Link>
+                    
+                    <Link to="/" onClick={handleMenuClick}>Home</Link>
+                    <Link to="/shop" onClick={handleMenuClick}>Shop</Link>
                 </nav>
                 {shouldShowAuthButtons() && (
                     <div className="button-group">

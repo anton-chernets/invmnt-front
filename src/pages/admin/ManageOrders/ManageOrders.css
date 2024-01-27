@@ -1,29 +1,18 @@
-.user-profile {
-    max-width: 1400px;
-    margin: 50px auto 100px;
+.manage-orders {
+    max-width: 1000px;
     display: flex;
     flex-direction: column;
+    align-items: center;
     justify-content: flex-start;
     min-height: 100vh;
     background-color: #ecf0f1;
     color: #333;
     font-family: 'Arial', sans-serif;
-    border-radius: 10px;
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
 }
 
-.wrapper {
-    padding: 20px;
-}
-.user-profile h1 {
+.manage-orders h1 {
     color: #333;
-    font-size: 2em;
     margin-bottom: 20px;
-}
-
-.wrapper p {
-    margin: 10px 0;
-    color: #666;
 }
 
 ul {
@@ -41,3 +30,4 @@ li {
     align-items: center;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
+

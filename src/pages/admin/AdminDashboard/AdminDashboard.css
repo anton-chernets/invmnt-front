@@ -1,10 +1,8 @@
 .admin-dashboard {
     max-width: 1400px;
     margin: 50px auto 100px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: flex-start;
+    display: flex; /* Додаємо flex-контейнер для розташування бокової панелі та контенту */
+    align-items: flex-start; /* Вирівнювання елементів по початку */
     min-height: 100vh;
     background-color: #ecf0f1;
     color: #333;
@@ -13,20 +11,54 @@
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
 }
 
-.admin-dashboard h1 {
-    color: #333;
+.sidebar-panel {
+    width: 300px; /* Ширина сайтбара */
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border-right: 1px solid #ececec;
+    margin-right: 20px; /* Відступ між сайтбаром і контентом */
+    margin-left: 20px;
+    margin-top: 20px;
+}
+
+.content {
+    flex-grow: 1; /* Контент займає всю доступну ширину */
+    width: 700px;
 }
 
 .admin-dashboard button {
-    padding: 8px 15px;
-    margin-right: 10px;
-    border-radius: 4px;
-    background-color: #28a745;
-    color: white;
-    border: none;
-    cursor: pointer;
+    display: block; /* Відображення кнопок у стовпчик */
+    width: 100%; /* Ширина кнопок займає всю доступну ширину */
+    padding: 10px; /* Відступи всередині кнопок */
+    margin-bottom: 10px; /* Відступ між кнопками */
+    background-color: #3498db; /* Колір фону кнопок */
+    color: white; /* Колір тексту кнопок */
+    border: none; /* Відсутність рамки */
+    border-radius: 4px; /* Закруглення кутів кнопок */
+    cursor: pointer; /* Курсор у вигляді руки при наведенні */
 }
 
 .admin-dashboard button:hover {
-    background-color: #218838;
+    background-color: #2980b9; /* Колір фону кнопок при наведенні */
+}
+
+.admin-dashboard h1 {
+    margin-bottom: 20px; /* Відступ знизу для заголовка */
+}
+
+/* Стилі для списку користувачів та товарів */
+ul {
+    list-style: none; /* Відсутність маркерів у списку */
+    padding: 0; /* Відсутність відступів у списку */
+}
+
+li {
+    padding: 10px; /* Відступи всередині елементів списку */
+    border-bottom: 1px solid #ececec; /* Лінія між елементами списку */
+}
+
+li:last-child {
+    border-bottom: none; /* Відсутність лінії у останнього елемента */
 }
