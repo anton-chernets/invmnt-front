@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import './Header.css';
+import logoImage from '../../img/Untitled.png';
 
 const Header = () => {
     const navigate = useNavigate();
@@ -68,30 +69,48 @@ const Header = () => {
 
     return (
         <header className="header">
+          {/* Верхній блок для логотипу та навігації */}
+          <div className="header-top">
             <div className="wrap">
-                <button onClick={handleMenuClick} className="menu-button">Меню</button>
-                <nav className={isMenuOpen ? 'active' : ''}>
-                    
-                    <Link to="/" onClick={handleMenuClick}>Home</Link>
-                    <Link to="/shop" onClick={handleMenuClick}>Shop</Link>
-                </nav>
+              
+              <nav className={`header-nav ${isMenuOpen ? 'active' : ''}`}>
+                <Link to="/" onClick={handleMenuClick}>Home</Link>
+                <Link to="/shop" onClick={handleMenuClick}>Shop</Link>
+                {/* ...інші посилання */}
+              </nav>
+            </div>
+          </div>
+          
+          {/* Нижній блок для кнопок авторизації, пошуку та інших контролів */}
+          <div className="header-bottom">
+            <div className="wrap">
+
+                <div className="header-logo">
+                <Link to="/">
+                    <img src={logoImage} alt="Logo" />
+                </Link>
+              </div>
+              <div className='header-controls'>
                 {shouldShowAuthButtons() && (
-                    <div className="button-group">
-                        <Link to="/login" className="button-auth">Вход</Link>
-                        <Link to="/register" className="button-auth">Регистрация</Link>
-                    </div>
+                  <>
+                    <Link to="/login" className="button-auth">Вход</Link>
+                    <Link to="/register" className="button-auth">Регистрация</Link>
+                  </>
                 )}
                 {isLoggedIn && (
-                    <div className="button-group">
-                        {shouldShowAdminButton() &&
-                            <button onClick={goToAdminPanel} className="button">Админ панель</button>}
-                        <button onClick={goToUserProfile} className="button">Личный кабинет</button>
-                        <button onClick={handleLogout} className="button">Вийти</button>
-                    </div>
+                  <>
+                    {shouldShowAdminButton() && <button onClick={goToAdminPanel} className="button">Админ панель</button>}
+                    <button onClick={goToUserProfile} className="button">Личный кабинет</button>
+                    <button onClick={handleLogout} className="button">Вийти</button>
+                  </>
                 )}
+                {/* Тут можна додати пошуковий компонент */}
+              </div>
             </div>
+          </div>
         </header>
-    );
+      );
+      
 };
 
 export default Header;

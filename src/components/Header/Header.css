@@ -1,52 +1,60 @@
 .header {
-    display: flex;
-    align-items: center;
-    background-color: #000;
-    color: white;
     font-family: 'Yahoo Sans Finance', 'Helvetica Neue', Helvetica, Arial, sans-serif;
     font-size: 20px;
-    position: relative;
-    height: 50px;
-}
-
-.wrap {
+  }
+  
+  .header-top {
+    background-color: #000;
+    color: white;
+    padding: 0 20px;
+    height: 25px;
+  }
+  
+  .header-bottom {
+    background: linear-gradient(to bottom, #ffffff 0%, #cccccc 100%);
+    padding: 10px 20px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+    
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+  }
+  
+  .wrap {
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
     max-width: 1400px;
-    width: 100%;
     margin: 0 auto;
-    padding: 0 20px;
-    position: relative;
-}
-/* Скрыть гамбургер-меню на десктопе и показать навигацию */
-.menu-button {
-    display: none;
-    background: transparent;
-    width: 40px;
-    height: 30px;
-    border: hidden;
-    font-family: 'PT Serif', serif;
-    font-size: 20px;
+  }
+  
+  .header-logo a {
+    color: white;
+    text-decoration: none;
+    /* Додайте інші стилі для логотипу тут */
+  }
+  .header-logo img {
+    height: 50px; /* or your preferred size */
+    width: auto; /* to maintain aspect ratio */
 }
 
-.header nav {
-    display: flex;
-    justify-content: center;
-
-}
-
-.header nav a {
+  
+  .header-nav a {
     color: white;
     text-decoration: none;
     padding: 0 10px;
-    font-size: 1em;
-    transition: color 0.3s;
-}
-
-.header nav a:hover {
+    /* Додайте інші стилі для посилань тут */
+  }
+  
+  .header-nav a:hover {
     color: #bdc3c7;
-}
+  }
+  
+  /* Стилі для кнопок і пошуку */
+  .header-controls {
+    display: flex;
+    align-items: center;
+    /* Додайте інші стилі для контрольної панелі тут */
+  }
 
 /* Адаптивные стили для мобильных устройств */
 @media (max-width: 768px) {
