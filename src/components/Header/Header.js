@@ -68,13 +68,15 @@ const Header = () => {
     }
 
     return (
+        
         <header className="header">
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css"></link>
           {/* Верхній блок для логотипу та навігації */}
           <div className="header-top">
             <div className="wrap">
               
               <nav className={`header-nav ${isMenuOpen ? 'active' : ''}`}>
-                <Link to="/" onClick={handleMenuClick}>Home</Link>
+                <Link to="/" onClick={handleMenuClick}><i className="fas fa-home"></i> Home</Link>
                 <Link to="/shop" onClick={handleMenuClick}>Shop</Link>
                 {/* ...інші посилання */}
               </nav>

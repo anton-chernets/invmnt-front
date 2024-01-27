@@ -7,7 +7,7 @@
     background-color: #000;
     color: white;
     padding: 0 20px;
-    height: 25px;
+    height: 23px;
   }
   
   .header-bottom {
@@ -42,6 +42,7 @@
     color: white;
     text-decoration: none;
     padding: 0 30px;
+    padding-left: 0;
     /* Додайте інші стилі для посилань тут */
   }
   
