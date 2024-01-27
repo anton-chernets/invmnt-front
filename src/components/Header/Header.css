@@ -4,6 +4,8 @@
   }
   
   .header-top {
+    display: flex;
+    justify-content: space-between;
     background-color: #000;
     color: white;
     padding: 0 20px;
@@ -20,14 +22,13 @@
   
   .wrap {
     display: flex;
-    justify-content: space-evenly;
-    align-items: center;
+    justify-content: space-between;
     max-width: 1400px;
     margin: 0 auto;
   }
   
   .header-logo a {
-    color: white;
+    color: rgb(0, 0, 0);
     text-decoration: none;
     
   }
@@ -35,15 +36,18 @@
     height: 50px; 
     width: auto; 
 }
-
+  
+  .header-logo {
+    font-family: 'Noto Serif', serif;
+    font-size: 30px;
+    
+  }
   
   .header-nav a {
     color: white;
     text-decoration: none;
     padding: 0 30px;
     padding-left: 0;
-    
-    
   }
   
   .header-nav a:hover {
@@ -53,10 +57,12 @@
   /* Стилі для кнопок і пошуку */
   .header-controls {
     display: flex;
-    align-items: center;
-    margin-left: 70%;
+    justify-content: space-between;
+    margin-top: 10px;
+    
   }
   button {
+    height: 40px;
     padding: 10px 15px;
     margin: 5px;
     border: none;
@@ -66,27 +72,14 @@
     border-radius: 4px;
     cursor: pointer;
     transition: background-color 0.3s;
-}
-.button-auth {
-    padding: 10px 15px;
-    margin: 5px;
-    border: none;
-    background-color: #3498db;
-    color: white;
-    font-size: 16px;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-    text-decoration: none;
-    display: inline-block;
 }
 
 button:hover {
-    background-color: #fcfcfc;
+    background-color: #2980b9;
 }
 
 .button-group {
-    position: absolute;
+    position: relative;
     right: 20px;
     top: 50%;
     transform: translateY(-50%);
@@ -94,6 +87,48 @@ button:hover {
 
 .menu-button {
   display: none;
+}
+
+.search-form {
+  margin-top: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-left: 0; /* Додайте відступ зліва, якщо потрібно */
+  max-width: 600px;
+}
+
+.search-input {
+  height: 21px;
+  width: 600px;
+  padding: 8px 12px;
+  font-size: 16px;
+  border: 1px solid #e7e5e5; /* Колір бордеру можна змінити */
+  border-right: none; /* Видаліть правий бордер, щоб кнопка зливалася з інпутом */
+  border-top-left-radius: 4px;
+  border-bottom-left-radius: 4px;
+  outline: none; /* Видаліть outline для фокусу */
+}
+
+.search-button {
+    height: 40px;
+    padding: 10px 15px;
+    margin: 5px;
+    border: none;
+    background-color: #3498db;
+    color: white;
+    font-size: 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.search-button:hover {
+  background-color: #2980b9; /* Колір кнопки при наведенні */
+}
+
+.search-button i {
+  font-size: 16px; /* Збільшіть розмір іконки, якщо потрібно */
 }
 
 /* Адаптивные стили для мобильных устройств */
@@ -104,20 +139,34 @@ button:hover {
       align-items: flex-start;
       max-width: 91%;
   }
+  .header-logo {
+    display: none;
+  }
+  .search-input {
+    width: 100px;
+    
+  }
+  .search-form {
+    
+    width: 100px;
+  }
 
   .wrap {
       
-      width: 90%;
+      width: 100%;
   }
-
+  .search-form {
+    margin-top: 10px; /* Додайте верхній відступ на мобільних пристроях */
+  }
   .menu-button {
-      display: block;
-      background-color: transparent;
-      border: none;
-      color: white;
-      font-size: 30px; 
-      padding: 10px; 
-      margin: 0; 
+    display: block;
+    background-color: black;
+    border: none;
+    height: 50px;
+    color: rgb(255, 255, 255);
+    font-size: 30px;
+    margin: 0;
+    z-index: 1010;
   }
 
   .header-top {
@@ -164,7 +213,6 @@ button:hover {
   }
 
   .header-bottom {
-      
       position: relative;
       z-index: 10;
       background-color: transparent; 
@@ -184,9 +232,9 @@ button:hover {
   }
 
   .button-group {
-      position: static; /* Adjust position for mobile layout */
+      position: static; 
       transform: none;
-      margin-top: 10px; /* Add some space between navigation and buttons */
+      margin-top: 10px; 
   }
 }
 

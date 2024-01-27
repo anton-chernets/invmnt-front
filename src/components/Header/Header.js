@@ -8,8 +8,20 @@ const Header = () => {
     const location = useLocation();
 
     const [isMenuOpen, setIsMenuOpen] = useState(false);
-    const [isLoggedIn, setIsLoggedIn] = useState(true);
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [isAdmin, setIsAdmin] = useState(false);
+
+    const [searchTerm, setSearchTerm] = useState(''); // Стан для тексту пошуку
+
+    const handleSearchChange = (event) => {
+        setSearchTerm(event.target.value);
+    };
+
+    const handleSearchSubmit = (event) => {
+        event.preventDefault();
+        console.log('Пошуковий запит: ', searchTerm);
+        // Тут ви можете додати логіку для відправки запиту пошуку
+    };
 
     useEffect(() => {
         const token = localStorage.getItem('authToken');
@@ -63,10 +75,17 @@ const Header = () => {
         navigate('/admin');
     };
 
-    function goToUserProfile() {
+    const goToUserProfile = () => {
         navigate('/user')
     }
 
+    const goToLogin = () => {
+      navigate('/login')
+    };
+    
+    const goToRegister = () => {
+      navigate('/register')
+    }
     return (
       <header className="header">
           {/* Підключення Font Awesome для іконки меню */}
@@ -93,14 +112,27 @@ const Header = () => {
 
                 <div className="header-logo">
                 <Link to="/">
-                    <img src={logoImage} alt="Logo" />
+                    <img src={logoImage} alt="Logo" />Professional Company
                 </Link>
+                
               </div>
+              <form onSubmit={handleSearchSubmit} className="search-form">
+                            <input
+                                type="text"
+                                value={searchTerm}
+                                onChange={handleSearchChange}
+                                placeholder="Пошук..."
+                                className="search-input"
+                            />
+                            <button type="submit" className="search-button">
+                                <i className="fas fa-search"></i>
+                            </button>
+                        </form>
               <div className='header-controls'>
                 {shouldShowAuthButtons() && (
                   <>
-                    <Link to="/login" className="button-auth">Вход</Link>
-                    <Link to="/register" className="button-auth">Регистрация</Link>
+                    <button onClick={goToLogin} className="button">Login</button>
+                    <button onClick={goToRegister} className="button">Register</button>
                   </>
                 )}
                 {isLoggedIn && (
