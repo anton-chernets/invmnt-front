@@ -8,8 +8,8 @@ const Header = () => {
     const location = useLocation();
 
     const [isMenuOpen, setIsMenuOpen] = useState(false);
-    const [isLoggedIn, setIsLoggedIn] = useState(false);
-    const [isAdmin, setIsAdmin] = useState(false);
+    const [isLoggedIn, setIsLoggedIn] = useState(true);
+    const [isAdmin, setIsAdmin] = useState(true);
 
     const [searchTerm, setSearchTerm] = useState(''); // Стан для тексту пошуку
 
@@ -121,7 +121,7 @@ const Header = () => {
                                 type="text"
                                 value={searchTerm}
                                 onChange={handleSearchChange}
-                                placeholder="Пошук..."
+                                placeholder="Search..."
                                 className="search-input"
                             />
                             <button type="submit" className="search-button">
@@ -137,12 +137,11 @@ const Header = () => {
                 )}
                 {isLoggedIn && (
                   <>
-                    {shouldShowAdminButton() && <button onClick={goToAdminPanel} className="button">Админ панель</button>}
-                    <button onClick={goToUserProfile} className="button">Личный кабинет</button>
-                    <button onClick={handleLogout} className="button">Вийти</button>
+                    {shouldShowAdminButton() && <button onClick={goToAdminPanel} className="button">Admin panel</button>}
+                    <button onClick={goToUserProfile} className="button">Personal Area</button>
+                    <button onClick={handleLogout} className="button">Logout</button>
                   </>
                 )}
-                {/* Тут можна додати пошуковий компонент */}
               </div>
             </div>
           </div>
