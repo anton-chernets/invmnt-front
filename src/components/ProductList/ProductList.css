@@ -5,6 +5,7 @@
     justify-content: center;
     max-width: 1500px;
     margin: 0 auto;
+    font-family: 'Yahoo Sans Finance', 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }
 
 .product-wrapper > div {
@@ -29,7 +30,7 @@
 }
 
 .product-wrapper > div h3 {
-    color: #3498db;
+    color: #000000;
     margin-bottom: 10px;
 }
 
