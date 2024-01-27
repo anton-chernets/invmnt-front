@@ -9,7 +9,7 @@ const Header = () => {
 
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [isLoggedIn, setIsLoggedIn] = useState(true);
-    const [isAdmin, setIsAdmin] = useState(true);
+    const [isAdmin, setIsAdmin] = useState(false);
 
     useEffect(() => {
         const token = localStorage.getItem('authToken');
@@ -40,7 +40,7 @@ const Header = () => {
         }
     }, []);
 
-    const handleMenuClick = () => {
+    const toggleMenu = () => {
         setIsMenuOpen(!isMenuOpen);
     };
 
@@ -68,18 +68,22 @@ const Header = () => {
     }
 
     return (
-        
-        <header className="header">
-            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css"></link>
-          {/* Верхній блок для логотипу та навігації */}
+      <header className="header">
+          {/* Підключення Font Awesome для іконки меню */}
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" />
           <div className="header-top">
-            <div className="wrap">
-              
-              <nav className={`header-nav ${isMenuOpen ? 'active' : ''}`}>
-                <Link to="/" onClick={handleMenuClick}><i className="fas fa-home"></i> Home</Link>
-                <Link to="/shop" onClick={handleMenuClick}>Shop</Link>
-                {/* ...інші посилання */}
-              </nav>
+              <div className="wrap">
+                  {/* Кнопка для відкриття меню на мобільних пристроях */}
+                  <button className="menu-button" onClick={toggleMenu}>
+                      <i className="fas fa-bars"></i> Menu
+                  </button>
+                  {/* Навігація, яка стає випадаючою на мобільних пристроях */}
+                  
+                  <nav className={`header-nav ${isMenuOpen ? 'active' : ''}`}>
+                      <Link to="/" onClick={toggleMenu}><i className="fas fa-home"></i> Home</Link>
+                      <Link to="/shop" onClick={toggleMenu}>Shop</Link>
+                      {/* ...інші посилання */}
+                  </nav>
             </div>
           </div>
           
