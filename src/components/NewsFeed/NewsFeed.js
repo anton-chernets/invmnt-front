@@ -39,7 +39,7 @@ const NewsFeed = () => {
                     const key = `${item.title}-${item.publishedAt}`; // Унікальний ключ
                     return (
                         <div className="news-item" key={key}>
-                            <Link to={`/news/${index}`}>
+                            <Link to={`/news/${index}`}style={{ textDecoration: 'none' }}>
                                 <h2>{item.title}</h2>
                                 {/* Відображення зображення новини */}
                                 <img src={item.urlToImage} alt={item.title} className="news-image" />
