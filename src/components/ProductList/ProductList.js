@@ -7,7 +7,7 @@ const ProductList = ({ products = [], onDeleteProduct, onAddToCart, onBuyNow }) 
         <div className="product-wrapper">
             {products.map(product => (
                 <div key={product.id} className="product-item">
-                    <Link to={`/products/${product.id}`}>
+                    <Link to={`/products/${product.id}`} style={{ textDecoration: 'none' }}>
                         <h2>{product.title}</h2>
                     </Link>
                     <p>{product.description}</p>
