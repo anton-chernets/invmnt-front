@@ -114,7 +114,7 @@
     }
     .news-item {
         flex: 0 0 100%; /* Одна новина на рядок для мобільних */
-        max-width: 100%;
+        max-width: 93%;
         margin-bottom: 20px;
     }
 
