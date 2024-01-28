@@ -138,7 +138,7 @@ const Header = () => {
                 {isLoggedIn && (
                   <>
                     {shouldShowAdminButton() && <button onClick={goToAdminPanel} className="button">Admin panel</button>}
-                    <button onClick={goToUserProfile} className="button">Personal Area</button>
+                    <button onClick={goToUserProfile} className="button">Personal</button>
                     <button onClick={handleLogout} className="button">Logout</button>
                   </>
                 )}
