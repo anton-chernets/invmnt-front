@@ -2,7 +2,7 @@
 .news-feed {
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
+    justify-content: flex-start; /* Змінено з space-between для більшого контролю */
     max-width: 1400px;
     margin: 100px auto;
     width: 80%;
@@ -13,25 +13,36 @@
     font-family: 'Yahoo Sans Finance', 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }
 
+/* Стилі для кожної новини */
 .news-item {
     background-color: #ececec;
     padding: 15px;
-    margin-bottom: 20px;
+    margin: 10px;
     border-radius: 10px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     transition: transform 0.3s ease;
-    max-width: 100%;
+    
+    /* Встановлюємо базову ширину для елементів */
+    flex-basis: calc(50% - 20px); /* ширина елемента мінус відступи */
+    max-width: calc(50% - 20px); /* максимальна ширина елемента мінус відступи */
+    box-sizing: border-box; /* padding і border враховуються в загальній ширині елемента */
+}
+
+.news-item img {
+    max-height: 200px;
+    width: 100%;
+    object-fit: cover;
+    border-radius: 5px;
 }
 
 .news-item:hover {
     transform: scale(1.02);
 }
-
-@media (max-width: 768px) {
-    .news-item {
-        width: 100%;
-    }
+.news-image {
+    width: 100%;
 }
+
+
 
 /* Заголовки новин */
 .news-item h3 {
@@ -54,7 +65,11 @@
 }
 
 .news-items {
-    flex: 2; /* 2/3 ширини */
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start; /* Вирівнювання елементів на початку контейнера */
+    align-items: flex-start;
+    flex: 3; /* 2/3 ширини */
     padding: 20px;
     margin-left: 20px;
     margin-right: 20px;
@@ -62,9 +77,11 @@
     background-color: #ffffff;
     border-radius: 10px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    
 }
 
-.news-items h1 {
+.news-header {
+    width: 100%;
     text-align: center;
 }
 
@@ -82,10 +99,12 @@
 
 /* Медіа-запити для адаптивності */
 @media (max-width: 1024px) {
-    .news-feed {
-        width: 90%; /* Більша ширина для планшетів */
+    .news-item {
+        flex: 0 0 calc(50% - 20px); /* Дві новини в рядок для планшетів */
     }
 }
+
+    
 
 @media (max-width: 768px) {
     .news-feed {
@@ -94,8 +113,11 @@
         padding: 15px;
     }
     .news-item {
-        max-width: 93%;
+        flex: 0 0 100%; /* Одна новина на рядок для мобільних */
+        max-width: 100%;
+        margin-bottom: 20px;
     }
+
     
     .news-items {
         /* Інші стилі */

@@ -1,0 +1,75 @@
+.product-details {
+  max-width: 1400px;
+    margin: 50px auto 100px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: top;
+    min-height: 100vh;
+    background-color: #ecf0f1;
+    color: #333;
+    font-family: 'Yahoo Sans Finance', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    border-radius: 10px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+}
+
+/* Стилі для зображення товару */
+.product-image {
+    max-width: 30%;
+    height: auto;
+    margin-bottom: 20px;
+}
+
+/* Стилі для тексту опису товару */
+.product-details p {
+    font-size: 16px;
+    line-height: 1.6;
+    color: #333;
+}
+
+/* Стилі для заголовку товару */
+.product-details h1 {
+    margin-bottom: 20px;
+    color: #333;
+}
+
+/* Стилі для повідомлення про завантаження */
+.loading-message {
+    text-align: center;
+    padding: 50px;
+    font-size: 20px;
+    color: #666;
+}
+  
+  /* Стилі для кнопок, якщо вони є */
+  .details-button {
+    padding: 10px 20px;
+    background-color: #3498db;
+    color: white;
+    text-decoration: none;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .details-button:hover {
+    background-color: #2980b9;
+  }
+  
+  /* Адаптивність: налаштування для мобільних пристроїв */
+  @media (max-width: 768px) {
+    .details-container {
+      margin: 10px;
+      padding: 10px;
+    }
+    
+    .details-title {
+      font-size: 1.5rem;
+    }
+  
+    .details-content {
+      font-size: 0.9rem;
+    }
+  }
+  

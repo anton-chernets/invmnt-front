@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import './NewsFeed.css';
 
 const NewsFeed = () => {
@@ -9,24 +10,47 @@ const NewsFeed = () => {
         const url = `https://newsapi.org/v2/top-headlines?country=us&apiKey=${apiKey}`;
 
         fetch(url)
-            .then(response => response.json())
-            .then(data => setNews(data.articles)) // Предполагается, что ответ содержит поле 'articles'
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`HTTP error! Status: ${response.status}`);
+                }
+                return response.json();
+            })
+            .then(data => {
+                if (data && data.articles) {
+                    setNews(data.articles);
+                } else {
+                    console.error('Поле "articles" відсутнє у відповіді');
+                }
+            })
             .catch(error => console.error('Ошибка:', error));
     }, []);
-
 
     let sidebarContent;
     return (
         <div className="news-container">
+            
             <div className="news-items">
-                <h1>Новости</h1>
-                {/* Тут буде виведення новин */}
-                {news.map((item) => (
-                    <div className="news-item" key={item.id}>
-                        <h3>{item.title}</h3>
-                        <p>{item.description}</p>
-                    </div>
-                ))}
+                <div className="news-header">
+                    <h1>Новости</h1>
+                </div>
+                
+                {news.map((item, index) => {
+                    const key = `${item.title}-${item.publishedAt}`; // Унікальний ключ
+                    return (
+                        <div className="news-item" key={key}>
+                            <Link to={`/news/${index}`}>
+                                <h2>{item.title}</h2>
+                                {/* Відображення зображення новини */}
+                                <img src={item.urlToImage} alt={item.title} className="news-image" />
+                            </Link>
+                            <p>{item.description}</p>
+                        </div>
+                    
+                    );
+                    
+                })}
+
             </div>
             <div className="sidebar">
                 {/* Тут можуть бути фрейми, графіки, реклама */}

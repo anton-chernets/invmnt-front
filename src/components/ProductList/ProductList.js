@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import './ProductList.css';
 
 const ProductList = ({ products = [], onDeleteProduct, onAddToCart, onBuyNow }) => {
@@ -6,7 +7,9 @@ const ProductList = ({ products = [], onDeleteProduct, onAddToCart, onBuyNow }) 
         <div className="product-wrapper">
             {products.map(product => (
                 <div key={product.id} className="product-item">
-                    <h3>{product.title}</h3>
+                    <Link to={`/products/${product.id}`}>
+                        <h2>{product.title}</h2>
+                    </Link>
                     <p>{product.description}</p>
                     <img src={product.image} alt={product.title} style={{ width: '100px' }} />
                     <p>Цена: ${product.price}</p>

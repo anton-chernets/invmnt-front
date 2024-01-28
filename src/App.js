@@ -10,6 +10,8 @@ import ManageUsers from './pages/admin/ManageUsers/ManageUsers';
 import LoginForm from './components/LoginForm/LoginForm';
 import RegisterForm from './components/RegisterForm/RegisterForm';
 import UserProfile from "./pages/UserProfile/UserProfile";
+import ProductDetails from './pages/ProductDetails/ProductDetails';
+import NewsDetails from './pages/NewsDetails/NewsDetails';
 
 function App() {
     return (
@@ -24,6 +26,8 @@ function App() {
                 <Route path="/login" element={<LoginForm />} />
                 <Route path="/register" element={<RegisterForm />} />
                 <Route path="/user" element={<UserProfile />} />
+                <Route path="/products/:productId" element={<ProductDetails />} />
+                <Route path="/news/:newsId" element={<NewsDetails />} />
             </Routes>
             <Footer />
         </Router>
