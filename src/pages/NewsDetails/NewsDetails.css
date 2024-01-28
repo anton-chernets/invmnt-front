@@ -16,11 +16,13 @@
   }
   
   .news-details h1 {
-    margin-bottom: 20px;
+    margin: 20px;
+
     color: #333;
   }
   
   .news-details p {
+    margin: 20px;
     font-size: 16px;
     line-height: 1.6;
     color: #333;
@@ -33,5 +35,5 @@
     color: #666;
   }
 .news-img {
-    max-width: 100%;
+    max-width: 90%;
 }  
