@@ -1,6 +1,6 @@
 .shop-page {
     max-width: 1400px;
-    margin: 50px auto 100px;
+    margin: 20px auto 100px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -16,7 +16,10 @@
 .shop-page h1 {
     color: #2c3e50;
     font-size: 2.5em;
-    margin-bottom: 20px;
+
+    margin: 10px 10px ;
+    /*margin-bottom: 20px;*/
+    text-align: center;
 }
 
 
