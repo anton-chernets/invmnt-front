@@ -1,6 +1,6 @@
 .admin-dashboard {
     max-width: 1400px;
-    margin: 50px auto 100px;
+    margin: 20px auto 100px;
     display: flex; /* Додаємо flex-контейнер для розташування бокової панелі та контенту */
     align-items: flex-start; /* Вирівнювання елементів по початку */
     min-height: 100vh;
