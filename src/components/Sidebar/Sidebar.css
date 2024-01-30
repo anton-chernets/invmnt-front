@@ -1,0 +1,23 @@
+.sidebar {
+    flex: 1;
+    margin-bottom: 20px;
+    border-radius: 10px;
+    height: max-content;
+    order: 2;
+    max-width: 500px;
+    margin-right: 20px;
+}
+
+.binance-img {
+    width: 100%;
+    max-width: 330px;
+    height: auto;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+@media (max-width: 768px) {
+    .sidebar {
+        max-width: 100%;
+        margin: 0 auto;
+    }
+}

@@ -1,6 +1,5 @@
 .manage-users {
     max-width: 1000px;
-    /* margin: 50px auto 100px; */
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -8,7 +7,7 @@
     min-height: 100vh;
     background-color: #ecf0f1;
     color: #333;
-    font-family: 'Arial', sans-serif;
+
     
 }
 
