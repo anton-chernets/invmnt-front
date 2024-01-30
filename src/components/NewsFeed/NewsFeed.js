@@ -9,7 +9,7 @@ const NewsFeed = () => {
 
     useEffect(() => {
         const apiKey = '85f5aebd9d3d4d74a93715856a5a5693';
-        const url = `https://newsapi.org/v2/top-headlines?country=us&apiKey=${apiKey}`;
+        const url = `https://newsapi.org/v2/top-headlines?country=ua&apiKey=${apiKey}`;
 
 
 
