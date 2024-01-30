@@ -20,7 +20,16 @@ const Header = () => {
     const handleSearchSubmit = (event) => {
         event.preventDefault();
         console.log('Пошуковий запит: ', searchTerm);
-        // Тут ви можете додати логіку для відправки запиту пошуку
+
+        fetch(`/api/search?q=${encodeURIComponent(searchTerm)}`)
+            .then(response => response.json())
+            .then(data => {
+                // обработка данных
+                console.log(data);
+            })
+            .catch(error => {
+                console.error('Помилка при отриманні даних:', error);
+            });
     };
 
     useEffect(() => {
