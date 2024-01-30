@@ -178,8 +178,8 @@
       max-width: 91%;
   }
   .header-logo {
-    size: 40%;
-    /* display: none; */
+    /*size: 40%;*/
+    /* display: none;*/
   }
  
   .wrap {
@@ -207,6 +207,7 @@
     flex-direction: column;
     align-items: center;
     height: 180px;
+      max-width: 98%;
 }
   .header-top {
       height: 50px;
@@ -270,4 +271,9 @@
       color: white; 
       
   }
+}
+@media (max-width: 768px) {
+    .header-bottom {
+        height: 220px;
+    }
 }

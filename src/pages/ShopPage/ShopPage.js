@@ -11,6 +11,8 @@ const ShopPage = () => {
             .then(response => response.json())
             .then(data => setProducts(data))
             .catch(error => console.error('Ошибка:', error));
+
+
     }, []);
 
     return (

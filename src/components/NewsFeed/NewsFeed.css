@@ -12,7 +12,14 @@
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     font-family: 'Yahoo Sans Finance', 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }
-
+.binance-img {
+    width: 100%; /* Установите ширину изображения на 100% от его контейнера */
+    max-width: 310px; /* Максимальная ширина изображения */
+    height: auto; /* Высота будет устанавливаться автоматически */
+    /*margin: 20px 0; !* Добавляем верхний и нижний отступы *!*/
+    border-radius: 10px; /* Округление углов изображения */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
 /* Стилі для кожної новини */
 .news-item {
     background-color: #ececec;
@@ -86,15 +93,15 @@
 }
 
 .sidebar {
+
     flex: 1; /* Займає 1 частину з 3 */
-    background-color: #ffffff;
+    /*background-color: #ffffff;*/
     margin-bottom: 20px;
-    margin-right: 20px;
     border-radius: 10px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    height: 600px;
+    /*box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);*/
+    height: max-content;
     order: 2; /* Поміщаємо сайтбар під блок новин */
-    max-width: 95%; /* Сайтбар займатиме всю ширину */
+    max-width: 500px; /* Сайтбар займатиме всю ширину */
 }
 
 /* Медіа-запити для адаптивності */
@@ -126,6 +133,10 @@
     .news-container {
         flex-direction: column;
     }
+    .sidebar {
+        max-width: 100%; /* Сайтбар займатиме всю ширину */
+        margin: 0 auto;
+    }
 }
 
 
@@ -133,4 +144,5 @@
     .news-item h3 {
         font-size: 1.5em; /* Менший розмір заголовків для мобільних */
     }
+
 }

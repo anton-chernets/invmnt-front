@@ -111,11 +111,11 @@ const Header = () => {
             <div className="wrap">
 
                 <div className="header-logo">
-                <Link to="/">
-                    <img src={logoImage} alt="Logo" />Professional Company
-                </Link>
-                
-              </div>
+                    <Link to="/">
+                        <img src={logoImage} alt="Investment"/>Investment
+                    </Link>
+
+                </div>
               <form onSubmit={handleSearchSubmit} className="search-form">
                             <input
                                 type="text"
@@ -137,7 +137,7 @@ const Header = () => {
                 )}
                 {isLoggedIn && (
                   <>
-                    {shouldShowAdminButton() && <button onClick={goToAdminPanel} className="button">Admin panel</button>}
+                    {shouldShowAdminButton() && <button onClick={goToAdminPanel} className="button">Admin</button>}
                     <button onClick={goToUserProfile} className="button">Personal</button>
                     <button onClick={handleLogout} className="button">Logout</button>
                   </>
