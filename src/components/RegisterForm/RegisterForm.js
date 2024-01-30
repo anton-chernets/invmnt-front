@@ -14,20 +14,45 @@ const RegisterForm = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        // Проверка на пустые поля
         if (!username || !email || !password || !confirmPassword) {
             alert('Пожалуйста, заполните все поля.');
             return;
         }
-        // Проверка совпадения паролей
         if (password !== confirmPassword) {
             alert('Пароли не совпадают.');
             return;
         }
-        // Здесь должен быть запрос к серверу для регистрации
-        console.log('Регистрация:', username, email, password);
-        // После успешной регистрации перенаправляем на страницу входа
-        navigate('/login');
+
+        // Создаем объект с данными пользователя
+        const userData = {
+            username,
+            email,
+            password,
+        };
+
+        // Отправляем запрос к серверу
+        fetch('YOUR_REGISTRATION_ENDPOINT', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(userData),
+        })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Ошибка при регистрации');
+                }
+                return response.json();
+            })
+            .then(data => {
+                console.log('Регистрация успешна:', data);
+                // После успешной регистрации перенаправляем на страницу входа
+                navigate('/login');
+            })
+            .catch(error => {
+                console.error('Ошибка:', error);
+                alert('Ошибка при регистрации. Попробуйте еще раз.');
+            });
     };
 
     return (
