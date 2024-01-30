@@ -144,7 +144,7 @@
   .search-form {
     order: 1;
     width: 100%;
-    margin-top: 20px;
+    margin-top: 10px;
 }
   .search-input {
     height: 22px;
@@ -167,25 +167,25 @@
   }
   
   .menu-button {
-    display: block;
-    background-color: black;
-    border: none;
-    height: 48px;
-    color: rgb(255, 255, 255);
-    font-size: 30px;
-    margin: 0;
-    z-index: 1010;
+      display: block;
+      background-color: black;
+      border: none;
+      height: 48px;
+      color: rgb(255, 255, 255);
+      font-size: 30px;
+      margin: 0;
+      z-index: 1010;
   }
   .menu-button :active {
     background-color: #000;
   }
 
   .header-bottom {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    height: 180px;
-      max-width: 98%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      height: 180px;
+      max-width: 100%;
 }
   .header-top {
       height: 50px;
@@ -252,6 +252,6 @@
 }
 @media (max-width: 768px) {
     .header-bottom {
-        height: 220px;
+        height: 180px;
     }
 }
