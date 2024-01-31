@@ -17,9 +17,6 @@ const ProductList = ({ products, onAddToCart, cart, setCart, onDeleteProduct }) 
         }, 2000);
     };
 
-    const handleDeleteProduct = (productId) => {
-        onDeleteProduct(productId);
-    };
 
     return (
         <div className="product-wrapper">
