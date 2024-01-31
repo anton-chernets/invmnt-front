@@ -106,15 +106,18 @@ const Header = () => {
                       <i className="fas fa-bars"></i> Menu
                   </button>
                   {/* Навігація, яка стає випадаючою на мобільних пристроях */}
-                  
+
                   <nav className={`header-nav ${isMenuOpen ? 'active' : ''}`}>
+                      <button className="menu-button-active" onClick={toggleMenu}>
+                          <i className="fas fa-bars"></i> Menu
+                      </button>
                       <Link to="/" onClick={toggleMenu}><i className="fas fa-home"></i> Home</Link>
                       <Link to="/shop" onClick={toggleMenu}>Shop</Link>
                       {/* ...інші посилання */}
                   </nav>
-            </div>
+              </div>
           </div>
-          
+
           {/* Нижній блок для кнопок авторизації, пошуку та інших контролів */}
           <div className="header-bottom">
             <div className="wrap">
