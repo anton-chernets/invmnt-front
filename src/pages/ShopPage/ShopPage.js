@@ -1,14 +1,17 @@
 import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom'; // Import useNavigate
+import { useNavigate } from 'react-router-dom';
 import ProductList from '../../components/ProductList/ProductList';
 import './ShopPage.css';
+import CartPage from '../CartPage/CartPage';
+
 
 const ShopPage = () => {
     const [products, setProducts] = useState([]);
     const [cart, setCart] = useState([]); // Add local cart state (replace with your actual cart state logic)
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
-    const navigate = useNavigate(); // Initialize navigate function
+    const navigate = useNavigate();
+    const [showCart, setShowCart] = useState(false);
 
     useEffect(() => {
         setLoading(true);
@@ -39,11 +42,11 @@ const ShopPage = () => {
         console.log('Product added to cart:', product);
     };
 
-    const onBuyNow = (product) => {
-        onAddToCart(product);
-        navigate('/checkout');
-        console.log('Proceeding to checkout with product:', product);
-    };
+    // const onBuyNow = (product) => {
+    //     onAddToCart(product);
+    //     navigate('/checkout');
+    //     console.log('Proceeding to checkout with product:', product);
+    // };
 
     const onDeleteProduct = (productId) => {
         // Assuming you have a state for products and a method to update it
@@ -62,10 +65,13 @@ const ShopPage = () => {
     return (
         <div className="shop-page">
             <h1>Добро пожаловать в магазин!</h1>
+            <button onClick={() => setShowCart(!showCart)} className="cart-button">
+                {showCart ? 'Hide Cart' : 'Show Cart'}
+            </button>
+            {showCart && <CartPage cart={cart} setCart={setCart}/>}
             <ProductList
                 products={products}
                 onAddToCart={onAddToCart}
-                onBuyNow={onBuyNow}
                 onDeleteProduct={onDeleteProduct}
             />
         </div>

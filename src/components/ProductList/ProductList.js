@@ -1,15 +1,20 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import './ProductList.css';
 
-const ProductList = ({ products, onAddToCart, onBuyNow, onDeleteProduct }) => {
-    // Handlers
+const ProductList = ({ products, onAddToCart, cart, setCart, onDeleteProduct }) => {
+    const navigate = useNavigate();
+
     const handleAddToCart = (product) => {
         onAddToCart(product);
     };
 
-    const handleBuyNow = (product) => {
-        onBuyNow(product);
+    const handleBuy = () => {
+        console.log('Buying', cart);
+        setTimeout(() => {
+            console.log('Purchase successful');
+            navigate('/shop'); // Navigate back to the shop or to '/confirmation' if you have a confirmation page
+        }, 2000);
     };
 
     const handleDeleteProduct = (productId) => {
@@ -27,11 +32,8 @@ const ProductList = ({ products, onAddToCart, onBuyNow, onDeleteProduct }) => {
                     <img src={product.image} alt={product.title} style={{ width: '100px' }} />
                     <p>Цена: ${product.price}</p>
                     <div className="product-actions">
-                        <button onClick={() => handleAddToCart(product)} className="shop-button">Добавить в корзину</button>
-                        <button onClick={() => handleBuyNow(product)} className="shop-button">Купить сейчас</button>
-                        {onDeleteProduct && (
-                            <button onClick={() => handleDeleteProduct(product.id)} className="shop-button">Удалить</button>
-                        )}
+                        <button onClick={() => handleAddToCart(product)} className="shop-button">Add to cart</button>
+                        <button onClick={handleBuy} className='shop-button'>Buy</button>
                     </div>
                 </div>
             ))}

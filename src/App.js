@@ -13,6 +13,8 @@ import UserProfile from "./pages/UserProfile/UserProfile";
 import ProductDetails from './pages/ProductDetails/ProductDetails';
 import NewsDetails from './pages/NewsDetails/NewsDetails';
 import Checkout from './pages/Checkout/Checkout';
+import CartPage from "./pages/CartPage/CartPage";
+
 
 function App() {
 
@@ -62,7 +64,7 @@ function App() {
                 <Route path="/products/:productId" element={<ProductDetails />} />
                 <Route path="/news/:newsId" element={<NewsDetails />} />
                 <Route path="/checkout" element={<Checkout  />} />
-
+                <Route path="/cart" element={<CartPage />} />
             </Routes>
             <Footer />
         </Router>
