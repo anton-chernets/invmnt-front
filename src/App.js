@@ -12,6 +12,7 @@ import RegisterForm from './components/RegisterForm/RegisterForm';
 import UserProfile from "./pages/UserProfile/UserProfile";
 import ProductDetails from './pages/ProductDetails/ProductDetails';
 import NewsDetails from './pages/NewsDetails/NewsDetails';
+import Checkout from './pages/Checkout/Checkout';
 
 function App() {
 
@@ -60,6 +61,8 @@ function App() {
                 <Route path="/user" element={<UserProfile />} />
                 <Route path="/products/:productId" element={<ProductDetails />} />
                 <Route path="/news/:newsId" element={<NewsDetails />} />
+                <Route path="/checkout" element={<Checkout  />} />
+
             </Routes>
             <Footer />
         </Router>

@@ -140,8 +140,8 @@ const Header = () => {
               <div className='header-controls'>
                 {shouldShowAuthButtons() && (
                   <>
-                    <button onClick={goToLogin} className="button">Login</button>
-                    <button onClick={goToRegister} className="button">Register</button>
+                      <button onClick={goToLogin} className="button">Login</button>
+                      <button onClick={goToRegister} className="button">Register</button>
                   </>
                 )}
                 {isLoggedIn && (

@@ -12,7 +12,7 @@
   }
   
   .header-bottom {
-    background: linear-gradient(to bottom, #ffffff 0%, #cccccc 100%);
+    background: linear-gradient(to top, #ffffff 0%, #3a3a3a 100%);
     padding: 10px 20px;
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
     border-bottom-left-radius: 10px;
@@ -27,7 +27,7 @@
   }
   
   .header-logo a {
-    color: rgb(0, 0, 0);
+    color: white;
     text-decoration: none;
     
   }
@@ -56,24 +56,59 @@
     margin-top: 10px;
     
   }
-  button {
-    height: 40px;
-    padding: 10px 15px;
-    margin: 5px;
+.button {
+    height: 48px;
+    padding: 0 30px;
+    margin: 10px;
     border: none;
-    background-color: #3498db;
+    background: linear-gradient(45deg, #37474f, #414141);
     color: white;
     font-size: 16px;
-    border-radius: 4px;
+    font-weight: 600;
+    border-radius: 15px;
     cursor: pointer;
-    transition: background-color 0.3s;
-  }
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    outline: none;
+    position: relative;
+    overflow: hidden;
+    letter-spacing: 0.5px;
+}
 
-  button:hover {
-    background-color: #000000;
-  }
+.button:hover {
+    background: linear-gradient(45deg, #b6b6b6, #111111);
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2);
+}
 
-  .button-group {
+.button:active {
+    background: linear-gradient(45deg, #4d4d4d, #2c2c2c);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transform: translateY(2px);
+}
+
+/* Эффект волны при нажатии */
+.button:before {
+    content: '';
+    position: absolute;
+    width: 120%;
+    height: 120%;
+    background: rgba(255, 255, 255, 0.3);
+    display: block;
+    transform: translate(-50%, -75%) rotate(45deg);
+    transition: all 0.5s ease;
+    opacity: 0;
+    border-radius: 30px;
+}
+
+.button:active:before {
+    opacity: 1; /* Показать эффект волны */
+    transform: translate(-50%, -50%) rotate(45deg);
+    transition: 0s;
+}
+
+
+
+.button-group {
     position: relative;
     right: 20px;
     top: 50%;
@@ -81,7 +116,6 @@
   }
 
   .menu-button {
-    
     display: none;
   }
 
@@ -107,20 +141,27 @@
   }
 
   .search-button {
-      height: 40px;
-      padding: 10px 15px;
-      margin: 5px;
-      border: none;
-      background-color: #3498db;
-      color: white;
-      font-size: 16px;
-      border-radius: 4px;
-      cursor: pointer;
-      transition: background-color 0.3s;
+      height: 48px; /* Высота кнопки */
+      padding: 0 30px; /* Внутренние отступы */
+      margin: 10px; /* Внешний отступ */
+      border: none; /* Убрать стандартный бордюр */
+      background: linear-gradient(45deg, #37474f, #414141);
+      color: white; /* Цвет текста */
+      font-size: 16px; /* Размер текста */
+      font-weight: 600; /* Жирность текста */
+      border-radius: 15px; /* Скругление углов */
+      cursor: pointer; /* Изменение курсора на указатель */
+      transition: all 0.3s ease; /* Плавный переход всех свойств */
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Тень кнопки */
+      outline: none; /* Убрать стандартный фокус */
+      position: relative; /* Позиционирование относительно */
+      overflow: hidden; /* Скрыть все что выходит за границы кнопки */
+
   }
 
     .search-button:hover {
-      background-color: #2980b9;
+        background: linear-gradient(45deg, #b6b6b6, #111111); /* Градиентный фон при наведении */
+        box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2); /* Тень кнопки при наведении */
     }
 
     .search-button i {
@@ -129,7 +170,13 @@
 
 /* Адаптивные стили для мобильных устройств */
 @media (max-width: 768px) {
-  
+
+    .search-button {
+        width: 30%;
+
+
+    }
+
   .header-controls {
     flex-direction: row;
     align-items: center;
@@ -137,8 +184,9 @@
     height: 50px;
 }
   .button {
-    width: 100%;
+    width: 80%;
     margin-bottom: 10px;
+      font-size: 11px;
 }
 
   .search-form {
@@ -165,16 +213,15 @@
     justify-content: left;
       width: 100%;
   }
-  
-  .menu-button {
-      display: block;
-      background-color: black;
-      border: none;
-      height: 48px;
-      color: rgb(255, 255, 255);
-      font-size: 30px;
-      margin: 0;
-      z-index: 1010;
+    .menu-button {
+        display: block;
+        background-color: #000;
+        border: none;
+        height: 48px;
+        color: rgb(255, 255, 255);
+        font-size: 30px;
+        margin: 0;
+        z-index: 1010;
   }
   .menu-button :active {
     background-color: #000;
@@ -245,13 +292,8 @@
   }
 
   button, .button-auth {
-      background-color: #3498db;
+      background-color: #4b4b4b;
       color: white; 
       
   }
-}
-@media (max-width: 768px) {
-    .header-bottom {
-        height: 180px;
-    }
 }

@@ -35,7 +35,7 @@ const NewsFeed = () => {
                     <h1>Новости</h1>
                 </div>
                 {news.map((item, index) => {
-                    const key = `${item.title}-${item.publishedAt}`; // Унікальний ключ
+                    const key = `${item.title}-${item.publishedAt}-${index}`;
                     return (
                         <div className="news-item" key={key}>
                             <Link to={`/news/${index}`} style={{ textDecoration: 'none' }}>

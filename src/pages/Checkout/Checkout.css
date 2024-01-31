@@ -1,0 +1,41 @@
+.checkout-page {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.cart-items .cart-item {
+    display: flex;
+    margin-bottom: 20px;
+}
+
+.cart-item img {
+    width: 100px;
+    height: 100px;
+    margin-right: 20px;
+    object-fit: cover;
+}
+
+.total-price {
+    margin-top: 20px;
+    font-size: 1.5em;
+}
+
+.checkout-button {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    margin-top: 20px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-size: 1em;
+    border-radius: 5px;
+}
+
+.checkout-button:hover {
+    background-color: #45a049;
+}

@@ -95,8 +95,8 @@ const RegisterForm = () => {
                         onChange={(e) => setConfirmPassword(e.target.value)}
                     />
                 </div>
-                <button type="submit">Зарегистрироваться</button>
-                <button onClick={goToLogin}>Вход</button>
+                <button type="submit" className="register-form-button">Зарегистрироваться</button>
+                <button onClick={goToLogin} className="register-form-button">Вход</button>
             </form>
         </div>
     );
