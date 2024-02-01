@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import './SiteStats.css';
+import VisitorChart from '../../../components/Chart/Chart';
 
-const SiteStats = () => {
+const SiteStats = ({ visitorData }) => { // Removed stats from props to avoid naming collision
     const [stats, setStats] = useState({
         usersCount: 0,
         productsCount: 0,
         ordersCount: 0,
-        // Інші статистичні дані
+        // Other statistical data
     });
 
     useEffect(() => {
@@ -15,14 +16,14 @@ const SiteStats = () => {
 
     const fetchStats = async () => {
         try {
-            const response = await fetch('/api/stats'); // URL вашого API для статистики
+            const response = await fetch('/api/stats'); // Your API URL for stats
             if (!response.ok) {
-                throw new Error('Помилка при завантаженні статистики');
+                throw new Error('Error loading stats');
             }
             const data = await response.json();
-            setStats(data); // Оновлення статистики
+            setStats(data); // Updating stats
         } catch (error) {
-            console.error('Помилка:', error);
+            console.error('Error:', error);
         }
     };
 
@@ -42,6 +43,7 @@ const SiteStats = () => {
                     <h2>Замовлень:</h2>
                     <p>{stats.ordersCount}</p>
                 </div>
+                <VisitorChart visitorData={visitorData} />
                 {/* Додайте інші статистичні дані */}
             </div>
         </div>

@@ -1,10 +1,8 @@
-/* Admin Dashboard Styles */
-
 .admin-dashboard {
     max-width: 1400px;
     margin: 20px auto;
     display: flex;
-    flex-direction: column; /* Stack sidebar and content vertically */
+    flex-direction: column;
     align-items: center;
     background-color: #ecf0f1;
     color: #333;
@@ -13,7 +11,7 @@
 }
 
 .sidebar-panel {
-    max-width: 100%; /* Full width to allow buttons to wrap */
+    max-width: 100%;
 
     background-color: #ffffff;
     padding: 20px;
@@ -28,9 +26,11 @@
 }
 
 .content {
-    width: 100%; /* Full width */
-    padding: 20px; /* Padding around content */
+    width: 100%;
+    padding: 20px;
 }
+
+
 
 .button-admin {
     padding: 10px 15px;
@@ -38,41 +38,64 @@
     color: white;
     font-size: 16px;
     font-weight: 600;
-    border-radius: 4px; /* Smaller border-radius for a subtle effect */
+    border-radius: 4px;
     cursor: pointer;
-    transition: background-color 0.3s ease;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease, transform 0.1s ease;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    border: none; /* Remove border */
+    border: none;
+    position: relative;
+    overflow: hidden;
 }
 
 .button-admin:hover {
     background: linear-gradient(45deg, #b6b6b6, #111111);
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2);
 }
 
 .button-admin:active {
+    background: linear-gradient(45deg, #4d4d4d, #2c2c2c);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     transform: translateY(2px);
 }
 
-/* Media query for smaller screens */
+.button-admin::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 120%;
+    height: 120%;
+    background: rgba(255, 255, 255, 0.3);
+    transform: translate(-50%, -50%) rotate(45deg);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+    opacity: 0;
+    border-radius: 30px;
+}
+
+.button-admin:active::before {
+    opacity: 1;
+    transition: none;
+}
+
+
+
 @media (max-width: 768px) {
     .admin-dashboard {
-        /* Remove margin for full width on small screens */
         margin: 20px 0 0;
     }
 
     .sidebar-panel {
-        /* Remove margin for full width on small screens */
         margin: 20px 0 0;
-        padding: 10px; /* Smaller padding on small screens */
+        padding: 10px;
     }
 
     .button-admin {
-        flex: 1 1 auto; /* Allow buttons to grow and shrink */
-        margin: 5px; /* Smaller margin for buttons */
-        text-align: center; /* Center text in buttons */
+        flex: 1 1 auto;
+        margin: 5px;
+        text-align: center;
     }
 
     .content {
-        padding: 10px; /* Smaller padding on small screens */
+        padding: 10px;
     }
 }
