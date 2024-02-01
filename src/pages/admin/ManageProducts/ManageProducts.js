@@ -1,21 +1,37 @@
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import './ManageProducts.css';
 import ProductList from "../../../components/ProductList/ProductList";
 
 const ManageProducts = () => {
     const [products, setProducts] = useState([]);
-    const [newProduct, setNewProduct] = useState({ name: '', description: '', price: '', image: '' });
+    const [newProduct, setNewProduct] = useState({ name: '', description: '', price: 0, image: '' });
 
-    const handleAddToCart = (product) => {
-        // Логіка додавання товару до кошика
+    const handleAddProduct = async (product) => {
+        // Here you would send a POST request to your API to add a product
+        const response = await fetch('/api/products', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(product),
+        });
+
+        if (response.ok) {
+            const addedProduct = await response.json();
+            setProducts([...products, addedProduct]);
+        }
     };
 
-    const handleBuyNow = (product) => {
-        // Логіка обробки покупки товару
+    const handleDeleteProduct = async (productId) => {
+        // Here you would send a DELETE request to your API to delete a product
+        const response = await fetch(`/api/products/${productId}`, {
+            method: 'DELETE',
+        });
+
+        if (response.ok) {
+            setProducts(products.filter(product => product.id !== productId));
+        }
     };
-
-// ... ваш JSX для рендеру
-
 
     const handleInputChange = (e) => {
         setNewProduct({ ...newProduct, [e.target.name]: e.target.value });
@@ -23,41 +39,44 @@ const ManageProducts = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        const newProductsList = [...products, { ...newProduct, id: Date.now() }];
-        setProducts(newProductsList);
-        setNewProduct({ name: '', description: '', price: '', image: '' }); // Очистка формы
+        handleAddProduct(newProduct);
+        setNewProduct({ name: '', description: '', price: 0, image: '' }); // Reset form
     };
 
     useEffect(() => {
-        // Запит до вашого API для отримання списку товарів
-        fetch('URL вашого API тут')
-            .then(response => response.json())
-            .then(data => {
-                setProducts(data); // Встановлюємо отримані товари у стан
-            })
-            .catch(error => {
-                console.error('Помилка при завантаженні товарів:', error);
-            });
-    }, []); // Пустий масив залежностей означає, що ефект виконається один раз при монтуванні компонента
+        // Fetch the list of products from your API
+        const fetchProducts = async () => {
+            const response = await fetch('/api/products');
+            if (!response.ok) {
+                throw new Error('Failed to fetch products');
+            }
+            const products = await response.json();
+            setProducts(products);
+        };
 
+        fetchProducts().catch(error => {
+            console.error('Error loading products:', error);
+        });
+    }, []);
 
     return (
         <div className="manage-products">
             <h1>Управление Товарами</h1>
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={handleSubmit} className="add-product-form">
                 <input
                     name="name"
                     type="text"
                     placeholder="Название товара"
                     value={newProduct.name}
                     onChange={handleInputChange}
+                    required
                 />
-                <input
+                <textarea
                     name="description"
-                    type="text"
                     placeholder="Описание"
                     value={newProduct.description}
                     onChange={handleInputChange}
+                    required
                 />
                 <input
                     name="price"
@@ -65,6 +84,7 @@ const ManageProducts = () => {
                     placeholder="Цена"
                     value={newProduct.price}
                     onChange={handleInputChange}
+                    required
                 />
                 <input
                     name="image"
@@ -72,15 +92,13 @@ const ManageProducts = () => {
                     placeholder="URL изображения"
                     value={newProduct.image}
                     onChange={handleInputChange}
+                    required
                 />
-                <button type="submit">Добавить товар</button>
+                <button type="submit" className="add-button">Добавить товар</button>
             </form>
-            {/* Тепер передаємо products як пропси в ProductList */}
-
             <ProductList
                 products={products}
-                onAddToCart={handleAddToCart}
-                onBuyNow={handleBuyNow}
+                onDeleteProduct={handleDeleteProduct}
             />
         </div>
     );

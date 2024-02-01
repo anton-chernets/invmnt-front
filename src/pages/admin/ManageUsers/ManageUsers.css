@@ -1,53 +1,106 @@
 .manage-users {
-    max-width: 1000px;
+    max-width: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: flex-start;
-    min-height: 100vh;
-    background-color: #ecf0f1;
+    min-height: 50vh;
+    background-color: #f9f9f9;
     color: #333;
-
-    
+    padding: 20px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    margin: auto 20px;
 }
 
 .manage-users h1 {
     color: #333;
-}
-
-.manage-users form {
     margin-bottom: 20px;
 }
 
-.manage-users input {
-    padding: 8px;
-    margin-right: 10px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
+.manage-users form {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 30px;
+}
+
+.manage-users input,
+.manage-users button {
+    flex-grow: 1;
+    margin: 0 10px;
+    padding: 10px;
+    font-size: 16px;
 }
 
 .manage-users button {
-    padding: 8px 15px;
-    background-color: #3498db;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-}
-
-.manage-users button:hover {
-    background-color: #2f00ff;
+    flex-basis: 150px;
 }
 
 .user-item {
-    border-bottom: 1px solid #eee;
-    padding: 10px 0;
+    background: #fff;
+    padding: 15px;
+    margin-bottom: 10px;
+    border-radius: 4px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
 .user-item h3 {
     margin: 0;
     color: #555;
+    font-size: 18px;
 }
+
+.user-item:last-child {
+    margin-bottom: 0;
+}
+
+.user-item button {
+    padding: 8px 12px;
+    background-color: #dc3545;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.user-item button:hover {
+    background-color: #c82333;
+}
+
+@media (max-width: 768px) {
+    .manage-users {
+        padding: 10px;
+    }
+
+    .manage-users h1 {
+        font-size: 20px;
+    }
+
+    .manage-users form {
+        flex-direction: column;
+    }
+
+    .manage-users input,
+    .manage-users button {
+        margin-bottom: 10px;
+    }
+
+    .user-item {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .user-item button {
+        margin-top: 10px;
+    }
+}
+
+
 
 .button-user {
     height: 48px;
@@ -97,14 +150,4 @@
     opacity: 1; /* Показать эффект волны */
     transform: translate(-50%, -50%) rotate(45deg);
     transition: 0s;
-}
-
-
-.user-item button {
-    margin-left: 10px;
-    background-color: #dc3545;
-}
-
-.user-item button:hover {
-    background-color: #c82333;
 }

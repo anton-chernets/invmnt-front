@@ -1,32 +1,70 @@
 .manage-orders {
-    max-width: 1000px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: flex-start;
-    min-height: 100vh;
-    background-color: #ecf0f1;
-    color: #333;
+    padding: 20px;
+    background: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    max-width: 100%;
+    margin: auto 20px;
 }
 
 .manage-orders h1 {
     color: #333;
+    font-size: 24px;
+    text-align: center;
     margin-bottom: 20px;
 }
 
-ul {
-    list-style: none;
+.manage-orders ul {
+    list-style-type: none;
     padding: 0;
+    margin: 0;
 }
 
-li {
-    background-color: #fff;
+.manage-orders li {
+    background: #fff;
+    padding: 15px;
     margin-bottom: 10px;
-    padding: 10px;
-    border-radius: 5px;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     display: flex;
     justify-content: space-between;
     align-items: center;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
+.manage-orders li:last-child {
+    margin-bottom: 0;
+}
+
+.manage-orders button {
+    padding: 8px 16px;
+    background-color: #d9534f;
+    color: #fff;
+    font-size: 14px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.manage-orders button:hover {
+    background-color: #c9302c;
+}
+
+@media (max-width: 768px) {
+    .manage-orders {
+        padding: 10px;
+    }
+
+    .manage-orders h1 {
+        font-size: 20px;
+    }
+
+    .manage-orders li {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .manage-orders button {
+        margin-top: 10px;
+    }
+}
