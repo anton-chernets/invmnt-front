@@ -39,11 +39,11 @@ const AdminDashboard = () => {
         
         <div className='admin-dashboard'>
             <div className="sidebar-panel">
-                <button onClick={() => handleSectionClick('users')}>Управление пользователями</button>
-                <button onClick={() => handleSectionClick('products')}>Управление товарами</button>
-                <button onClick={() => handleSectionClick('orders')}>Управление заказами</button>
-                <button onClick={() => handleSectionClick('messages')}>Сообщения пользователей</button>
-                <button onClick={() => handleSectionClick('stats')}>Статистика сайта</button>
+                <button onClick={() => handleSectionClick('users')} className="button-admin">Управление пользователями</button>
+                <button onClick={() => handleSectionClick('products')} className="button-admin">Управление товарами</button>
+                <button onClick={() => handleSectionClick('orders')} className="button-admin">Управление заказами</button>
+                <button onClick={() => handleSectionClick('messages')} className="button-admin">Сообщения пользователей</button>
+                <button onClick={() => handleSectionClick('stats')} className="button-admin">Статистика сайта</button>
             </div>
             <div className="content">
                 {renderContent()}

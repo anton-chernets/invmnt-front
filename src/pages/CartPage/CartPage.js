@@ -2,6 +2,7 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import './CartPage.css'
+// import productList from "../../components/ProductList/ProductList";
 
 const CartPage = ({ cart, setCart }) => {
     const navigate = useNavigate();
@@ -43,7 +44,10 @@ const CartPage = ({ cart, setCart }) => {
                             <div key={item.id} className="cart-item">
                                 <h3>{item.title}</h3>
                                 <p>Price: ${item.price}</p>
-                                <p>Quantity: {item.quantity}</p>
+                                <div className="img-item">
+                                <img src={item.image} alt="" />
+                                </div>
+                                {/*<p>Quantity: {item.quantity}</p>*/}
                                 <button onClick={() => handleRemoveFromCart(item.id)} className='in-cart-button'>Remove</button>
                             </div>
                         ))}

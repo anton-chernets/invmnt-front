@@ -1,64 +1,78 @@
+/* Admin Dashboard Styles */
+
 .admin-dashboard {
     max-width: 1400px;
-    margin: 20px auto 100px;
-    display: flex; /* Додаємо flex-контейнер для розташування бокової панелі та контенту */
-    align-items: flex-start; /* Вирівнювання елементів по початку */
-    min-height: 100vh;
+    margin: 20px auto;
+    display: flex;
+    flex-direction: column; /* Stack sidebar and content vertically */
+    align-items: center;
     background-color: #ecf0f1;
     color: #333;
-
     border-radius: 10px;
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
 }
 
 .sidebar-panel {
-    width: 300px; /* Ширина сайтбара */
+    max-width: 100%; /* Full width to allow buttons to wrap */
+
     background-color: #ffffff;
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    border-right: 1px solid #ececec;
-    margin-right: 20px; /* Відступ між сайтбаром і контентом */
-    margin-left: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 20px;
     margin-top: 20px;
 }
 
 .content {
-    flex-grow: 1; /* Контент займає всю доступну ширину */
-    width: 700px;
+    width: 100%; /* Full width */
+    padding: 20px; /* Padding around content */
 }
 
-.admin-dashboard button {
-    display: block; /* Відображення кнопок у стовпчик */
-    width: 100%; /* Ширина кнопок займає всю доступну ширину */
-    padding: 10px; /* Відступи всередині кнопок */
-    margin-bottom: 10px; /* Відступ між кнопками */
-    background-color: #3498db; /* Колір фону кнопок */
-    color: white; /* Колір тексту кнопок */
-    border: none; /* Відсутність рамки */
-    border-radius: 4px; /* Закруглення кутів кнопок */
-    cursor: pointer; /* Курсор у вигляді руки при наведенні */
+.button-admin {
+    padding: 10px 15px;
+    background: linear-gradient(45deg, #37474f, #414141);
+    color: white;
+    font-size: 16px;
+    font-weight: 600;
+    border-radius: 4px; /* Smaller border-radius for a subtle effect */
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border: none; /* Remove border */
 }
 
-.admin-dashboard button:hover {
-    background-color: #2980b9; /* Колір фону кнопок при наведенні */
+.button-admin:hover {
+    background: linear-gradient(45deg, #b6b6b6, #111111);
 }
 
-.admin-dashboard h1 {
-    margin-bottom: 20px; /* Відступ знизу для заголовка */
+.button-admin:active {
+    transform: translateY(2px);
 }
 
-/* Стилі для списку користувачів та товарів */
-ul {
-    list-style: none; /* Відсутність маркерів у списку */
-    padding: 0; /* Відсутність відступів у списку */
-}
+/* Media query for smaller screens */
+@media (max-width: 768px) {
+    .admin-dashboard {
+        /* Remove margin for full width on small screens */
+        margin: 20px 0 0;
+    }
 
-li {
-    padding: 10px; /* Відступи всередині елементів списку */
-    border-bottom: 1px solid #ececec; /* Лінія між елементами списку */
-}
+    .sidebar-panel {
+        /* Remove margin for full width on small screens */
+        margin: 20px 0 0;
+        padding: 10px; /* Smaller padding on small screens */
+    }
 
-li:last-child {
-    border-bottom: none; /* Відсутність лінії у останнього елемента */
+    .button-admin {
+        flex: 1 1 auto; /* Allow buttons to grow and shrink */
+        margin: 5px; /* Smaller margin for buttons */
+        text-align: center; /* Center text in buttons */
+    }
+
+    .content {
+        padding: 10px; /* Smaller padding on small screens */
+    }
 }

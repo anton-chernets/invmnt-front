@@ -40,6 +40,9 @@
     font-size: 30px;
   }
 
+.header-logo b{
+    margin-left: 15px;
+}
 .header-nav a {
     color: white;
     text-decoration: none;
