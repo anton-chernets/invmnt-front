@@ -59,7 +59,7 @@ const RegisterForm = () => {
         <div className="register-form-container">
             <div className="wrapper-form">
                 <form onSubmit={handleSubmit} className="form-field-reg">
-                    <h2 className="register-form-title">Реєстрція</h2>
+                    <h2 className="register-form-title">Реєстрація</h2>
 
                     <div className="form-group">
                         <label htmlFor="username">Ім'я користувача:</label>
