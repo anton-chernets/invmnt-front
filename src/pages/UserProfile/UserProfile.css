@@ -105,7 +105,14 @@ li:last-child {
         flex-direction: column;
     }
     .form-setting {
+        max-width: 95%;
+    }
+    .form-setting input {
+        padding: 8px;
+        border: solid 1px black;
+        border-radius: 4px;
         width: 95%;
+        margin-right: 5px;
     }
     .user-cart {
         padding: 0;
