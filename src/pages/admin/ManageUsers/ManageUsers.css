@@ -34,7 +34,7 @@
 }
 
 .manage-users button {
-    flex-basis: 150px;
+    flex-basis: 40px;
 }
 
 .user-item {
@@ -88,5 +88,8 @@
 
     .user-item button {
         margin-top: 10px;
+    }
+    .manage-users button {
+        flex-basis: 50px;
     }
 }

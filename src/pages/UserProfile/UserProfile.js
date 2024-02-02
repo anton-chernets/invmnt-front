@@ -12,6 +12,9 @@ const UserProfile = () => {
     };
 
     const [user, setUser] = useState(fakeUser);
+    // const [user, setUser] = useState(null);
+    const [newEmail, setNewEmail] = useState('');
+    const [newPassword, setNewPassword] = useState('');
 
     const removeFromCart = (productId) => {
         setUser(prevUser => ({
@@ -38,32 +41,77 @@ const UserProfile = () => {
         fetchUserData();
     }, []);
 
+    const handleEmailChange = (e) => {
+        setNewEmail(e.target.value);
+    };
+
+    const handlePasswordChange = (e) => {
+        setNewPassword(e.target.value);
+    };
+
+    const handleUpdateProfile = (e) => {
+        e.preventDefault();
+        // Виконайте запит до API для оновлення профілю
+    };
+
+    const handleDeleteAccount = () => {
+        if (window.confirm('Ви впевнені, що хочете видалити свій акаунт?')) {
+            // Виконайте запит до API для видалення акаунту
+        }
+    };
+
     if (!user) {
         return <div>Завантаження...</div>;
     }
 
     return (
         <div className="user-profile">
-            <div className='wrapper'>
-            <h1>Профіль Користувача</h1>
+            <h1>Особистий кабінет</h1>
             <div className="wrapper-inner">
-                <p>Ім'я: {user.name}</p>
-                <p>Email: {user.email}</p>
-                {user.cart && user.cart.length > 0 && (
-                    <>
-                        <h2>Кошик</h2>
-                        <ul>
-                            {user.cart.map(item => (
-                                <li key={item.id}>
-                                    {item.title} - Ціна: {item.price}
-                                    <button onClick={() => removeFromCart(item.id)}>Видалити з кошика</button>
-                                </li>
-                            ))}
-                        </ul>
-                    </>
-                )}
+
+                <div className="user-info">
+
+                    <p><b>Ім'я:</b> {user.name}</p>
+                    <p><b>Email:</b> {user.email}</p>
+
+                    <div className="user-cart">
+                        {user.cart && user.cart.length > 0 && (
+                            <>
+                                <h2>Кошик</h2>
+                                <ul>
+                                    {user.cart.map(item => (
+                                        <li key={item.id}>
+                                            {item.title} - Ціна: {item.price}
+                                            <button onClick={() => removeFromCart(item.id)}>Видалити з кошика</button>
+                                        </li>
+                                    ))}
+                                </ul>
+                            </>
+                        )}
+                    </div>
+                </div>
+                <div className="user-setting">
+                    <h3>Налаштунки</h3>
+                    <form onSubmit={handleUpdateProfile} className="form-setting">
+                        <label htmlFor="newEmail">Новий Email:</label>
+                        <input
+                            id="newEmail"
+                            type="email"
+                            value={newEmail}
+                            onChange={handleEmailChange}
+                        />
+                        <label htmlFor="newPassword">Новий Пароль:</label>
+                        <input
+                            id="newPassword"
+                            type="password"
+                            value={newPassword}
+                            onChange={handlePasswordChange}
+                        />
+                        <button type="submit">Оновити дані</button>
+                    </form>
+                    <button onClick={handleDeleteAccount} className="delete-account">Видалити акаунт</button>
+                </div>
             </div>
-        </div>
         </div>
     );
 };
