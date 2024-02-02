@@ -30,8 +30,9 @@
 .delete-account {
     width: 100px;
     height: 50px;
-    margin-left: 90%;
+    margin-left: 88%;
     background: #c82333;
+    margin-top: 150px;
 
 }
 .wrapper-inner {
@@ -47,6 +48,13 @@
     background-color: #ffffff;
     color: #333;
     padding: 20px;
+}
+.form-setting input {
+    padding: 8px;
+    border: solid 1px black;
+    border-radius: 4px;
+    width: 100%;
+    margin-right: 5px;
 }
 h1 {
     color: #333;
@@ -107,13 +115,7 @@ li:last-child {
     .form-setting {
         max-width: 95%;
     }
-    .form-setting input {
-        padding: 8px;
-        border: solid 1px black;
-        border-radius: 4px;
-        width: 95%;
-        margin-right: 5px;
-    }
+
     .user-cart {
         padding: 0;
     }
@@ -122,5 +124,8 @@ li:last-child {
     }
     p {
         padding: 5px;
+    }
+    .form-setting input {
+        width: 95%;
     }
 }
