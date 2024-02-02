@@ -57,7 +57,7 @@ const LoginForm = () => {
         <div className="login-form-container">
             <h2 className="login-form-title">Вхід</h2>
             <form onSubmit={handleSubmit}>
-                <label className="form-input-label" htmlFor="username">Ім'я користувача</label>
+                <label className="form-input-label" htmlFor="email">Пошта користувача</label>
                 <input className="form-field" id="username" type="text" value={username}
                        onChange={(e) => setUsername(e.target.value)}/>
 
