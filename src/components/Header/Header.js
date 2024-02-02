@@ -102,17 +102,15 @@ const Header = () => {
           <div className="header-top">
               <div className="wrap">
                   {/* Кнопка для відкриття меню на мобільних пристроях */}
-                  <button className="menu-button" onClick={toggleMenu}>
-                      <i className="fas fa-bars"></i> Menu
+                  <button onClick={toggleMenu} className="button-menu">
+                      <i className="fas fa-bars"></i> Меню
                   </button>
-                  {/* Навігація, яка стає випадаючою на мобільних пристроях */}
-
                   <nav className={`header-nav ${isMenuOpen ? 'active' : ''}`}>
-                      <button className="menu-button-active" onClick={toggleMenu}>
-                          <i className="fas fa-bars"></i> Menu
+                      <button  onClick={toggleMenu} className="button-menu">
+                          <i className="fas fa-bars"></i> Меню
                       </button>
-                      <Link to="/" onClick={toggleMenu}><i className="fas fa-home"></i> Home</Link>
-                      <Link to="/shop" onClick={toggleMenu}>Shop</Link>
+                      <Link to="/" onClick={toggleMenu}><i className="fas fa-home"></i> Головна сторінка</Link>
+                      <Link to="/shop" onClick={toggleMenu}>Магазин</Link>
                       {/* ...інші посилання */}
                   </nav>
               </div>
@@ -121,7 +119,6 @@ const Header = () => {
           {/* Нижній блок для кнопок авторизації, пошуку та інших контролів */}
           <div className="header-bottom">
             <div className="wrap">
-
                 <div className="header-logo">
                     <Link to="/">
                         <img src={logoImage} alt="Investment"/><b>Investment</b>
@@ -133,7 +130,7 @@ const Header = () => {
                                 type="text"
                                 value={searchTerm}
                                 onChange={handleSearchChange}
-                                placeholder="Search..."
+                                placeholder="Пошук..."
                                 className="search-input"
                             />
                             <button type="submit" className="search-button">
@@ -143,15 +140,15 @@ const Header = () => {
               <div className='header-controls'>
                 {shouldShowAuthButtons() && (
                   <>
-                      <button onClick={goToLogin} className="button">Login</button>
-                      <button onClick={goToRegister} className="button">Register</button>
+                      <button onClick={goToLogin} className="button">Логін</button>
+                      <button onClick={goToRegister} className="button">Зареєструватися</button>
                   </>
                 )}
                 {isLoggedIn && (
                   <>
-                    {shouldShowAdminButton() && <button onClick={goToAdminPanel} className="button">Admin</button>}
-                    <button onClick={goToUserProfile} className="button">Personal</button>
-                    <button onClick={handleLogout} className="button">Logout</button>
+                    {shouldShowAdminButton() && <button onClick={goToAdminPanel} className="button">Адмін</button>}
+                    <button onClick={goToUserProfile} className="button">Кабінет</button>
+                    <button onClick={handleLogout} className="button">Вийти</button>
                   </>
                 )}
               </div>

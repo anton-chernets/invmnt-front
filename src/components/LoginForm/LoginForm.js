@@ -55,9 +55,9 @@ const LoginForm = () => {
 
     return (
         <div className="login-form-container">
-            <h2 className="login-form-title">Вход</h2>
+            <h2 className="login-form-title">Вхід</h2>
             <form onSubmit={handleSubmit}>
-                <label className="form-input-label" htmlFor="username">Имя пользователя</label>
+                <label className="form-input-label" htmlFor="username">Ім'я користувача</label>
                 <input className="form-field" id="username" type="text" value={username}
                        onChange={(e) => setUsername(e.target.value)}/>
 
@@ -65,10 +65,10 @@ const LoginForm = () => {
                 <input className="form-field" id="password" type="password" value={password}
                        onChange={(e) => setPassword(e.target.value)}/>
 
-                <button className="form-button" type="submit">Войти</button>
+                <button className="form-button" type="submit">Увійти</button>
             </form>
             <div className="form-link">
-                <a href="/register">Зарегистрироваться</a>
+                <a href="/register">Зареєструватись</a>
             </div>
         </div>
     );

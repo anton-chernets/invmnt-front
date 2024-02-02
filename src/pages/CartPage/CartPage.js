@@ -36,29 +36,29 @@ const CartPage = ({ cart, setCart }) => {
 
     return (
         <div className="cart-page">
-            <h1>Your Cart</h1>
+            <h1>Ваш кошик</h1>
             {cart.length > 0 ? (
                 <>
                     <div className="cart-items">
                         {cart.map(item => (
                             <div key={item.id} className="cart-item">
                                 <h3>{item.title}</h3>
-                                <p>Price: ${item.price}</p>
+                                <p>Ціна: ${item.price}</p>
                                 <div className="img-item">
                                 <img src={item.image} alt="" />
                                 </div>
                                 {/*<p>Quantity: {item.quantity}</p>*/}
-                                <button onClick={() => handleRemoveFromCart(item.id)} className='in-cart-button'>Remove</button>
+                                <button onClick={() => handleRemoveFromCart(item.id)} className='in-cart-button'>Видалити</button>
                             </div>
                         ))}
                     </div>
                     <div className="cart-summary">
-                        <p>Total Price: ${totalPrice.toFixed(2)}</p>
-                        <button onClick={handleBuy} className='in-cart-button'>Buy</button>
+                        <p>Загальна сума: ${totalPrice.toFixed(2)}</p>
+                        <button onClick={handleBuy} className='in-cart-button'>Придбати</button>
                     </div>
                 </>
             ) : (
-                <p>Your cart is empty.</p>
+                <p>Ваш кошик пустий.</p>
             )}
         </div>
     );

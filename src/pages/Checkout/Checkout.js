@@ -34,17 +34,17 @@ const CheckoutPage = ({ cart, setCart }) => {
                         <img src={item.image} alt={item.title} />
                         <div>
                             <h2>{item.title}</h2>
-                            <p>Quantity: {item.quantity}</p>
-                            <p>Price: ${item.price}</p>
-                            <p>Subtotal: ${item.price * item.quantity}</p>
+                            <p>Кількість: {item.quantity}</p>
+                            <p>Ціна: ${item.price}</p>
+                            <p>Проміжний підсумок: ${item.price * item.quantity}</p>
                         </div>
                     </div>
                 ))}
             </div>
             <div className="total-price">
-                <h2>Total Price: ${totalPrice.toFixed(2)}</h2>
+                <h2>Загальна сума: ${totalPrice.toFixed(2)}</h2>
             </div>
-            <button onClick={handleCheckout} className="checkout-button">Proceed to Checkout</button>
+            <button onClick={handleCheckout} className="checkout-button">Перейти до оформлення замовлення</button>
         </div>
     );
 };

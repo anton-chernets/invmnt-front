@@ -40,24 +40,8 @@
     color: #666;
 }
   
-  /* Стилі для кнопок, якщо вони є */
-  .details-button {
-    padding: 10px 20px;
-    background-color: #3498db;
-    color: white;
-    text-decoration: none;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-  }
-  
-  .details-button:hover {
-    background-color: #2980b9;
-  }
-  
   /* Адаптивність: налаштування для мобільних пристроїв */
-  @media (max-width: 768px) {
+@media (max-width: 768px) {
     .details-container {
       margin: 10px;
       padding: 10px;
@@ -71,4 +55,3 @@
       font-size: 0.9rem;
     }
   }
-  

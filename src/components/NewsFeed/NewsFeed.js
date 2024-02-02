@@ -32,7 +32,7 @@ const NewsFeed = () => {
         <div className="news-container">
             <div className="news-items">
                 <div className="news-header">
-                    <h1>Новости</h1>
+                    <h1>Новини</h1>
                 </div>
                 {news.map((item, index) => {
                     const key = `${item.title}-${item.publishedAt}-${index}`;

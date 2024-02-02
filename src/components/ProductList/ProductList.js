@@ -29,8 +29,8 @@ const ProductList = ({ products, onAddToCart, cart, setCart, onDeleteProduct }) 
                     <img src={product.image} alt={product.title} style={{ width: '100px' }} />
                     <p>Цена: ${product.price}</p>
                     <div className="product-actions">
-                        <button onClick={() => handleAddToCart(product)} className="shop-button">Add to cart</button>
-                        <button onClick={handleBuy} className='shop-button'>Buy</button>
+                        <button onClick={() => handleAddToCart(product)} className="shop-button">Додати у кошик</button>
+                        <button onClick={handleBuy} className='shop-button'>Придбати</button>
                     </div>
                 </div>
             ))}

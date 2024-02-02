@@ -35,20 +35,6 @@
     margin-bottom: 0;
 }
 
-.manage-orders button {
-    padding: 8px 16px;
-    background-color: #d9534f;
-    color: #fff;
-    font-size: 14px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: background-color 0.2s;
-}
-
-.manage-orders button:hover {
-    background-color: #c9302c;
-}
 
 @media (max-width: 768px) {
     .manage-orders {

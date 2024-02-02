@@ -57,10 +57,10 @@ const RegisterForm = () => {
 
     return (
         <div className="register-form-container">
-            <h2 className="register-form-title">Регистрация</h2>
+            <h2 className="register-form-title">Реєстрція</h2>
             <form onSubmit={handleSubmit}>
                 <div className="form-group">
-                    <label htmlFor="username">Имя пользователя:</label>
+                    <label htmlFor="username">Ім'я користувача:</label>
                     <input
                         id="username"
                         type="text"
@@ -87,7 +87,7 @@ const RegisterForm = () => {
                     />
                 </div>
                 <div className="form-group">
-                    <label htmlFor="confirmPassword">Подтвердите пароль:</label>
+                    <label htmlFor="confirmPassword">Підтвердіть пароль:</label>
                     <input
                         id="confirmPassword"
                         type="password"
@@ -95,8 +95,8 @@ const RegisterForm = () => {
                         onChange={(e) => setConfirmPassword(e.target.value)}
                     />
                 </div>
-                <button type="submit" className="register-form-button">Зарегистрироваться</button>
-                <button onClick={goToLogin} className="register-form-button">Вход</button>
+                <button type="submit" className="register-form-button">Зареєструватись</button>
+                <button onClick={goToLogin} className="register-form-button">Вхід</button>
             </form>
         </div>
     );

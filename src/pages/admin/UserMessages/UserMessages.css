@@ -36,20 +36,6 @@
     word-wrap: break-word;
 }
 
-.user-messages button {
-    padding: 8px 12px;
-    background-color: #dc3545;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-}
-
-.user-messages button:hover {
-    background-color: #c82333;
-}
-
 @media (max-width: 768px) {
     .user-messages {
         padding: 10px;

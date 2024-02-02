@@ -5,7 +5,7 @@ import ManageUsers from "../ManageUsers/ManageUsers";
 import ManageOrders from "../ManageOrders/ManageOrders";
 import UserMessages from "../UserMessages/UserMessages";
 import SiteStats from "../SiteStats/SiteStats";
-// Імпортуйте інші компоненти управління тут
+
 
 const AdminDashboard = () => {
     const [activeSection, setActiveSection] = useState(''); // Для відслідковування активної секції
@@ -39,11 +39,11 @@ const AdminDashboard = () => {
         
         <div className='admin-dashboard'>
             <div className="sidebar-panel">
-                <button onClick={() => handleSectionClick('users')} className="button-admin">Управление пользователями</button>
-                <button onClick={() => handleSectionClick('products')} className="button-admin">Управление товарами</button>
-                <button onClick={() => handleSectionClick('orders')} className="button-admin">Управление заказами</button>
-                <button onClick={() => handleSectionClick('messages')} className="button-admin">Сообщения пользователей</button>
-                <button onClick={() => handleSectionClick('stats')} className="button-admin">Статистика сайта</button>
+                <button onClick={() => handleSectionClick('users')} className="button-admin">Керування користувачами</button>
+                <button onClick={() => handleSectionClick('products')} className="button-admin">Керування товарами</button>
+                <button onClick={() => handleSectionClick('orders')} className="button-admin">Управління замовленнями</button>
+                <button onClick={() => handleSectionClick('messages')} className="button-admin">Повідомлення користувачів</button>
+                <button onClick={() => handleSectionClick('stats')} className="button-admin">Статистика сайту</button>
             </div>
             <div className="content">
                 {renderContent()}

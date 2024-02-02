@@ -61,19 +61,19 @@ const ManageProducts = () => {
 
     return (
         <div className="manage-products">
-            <h1>Управление Товарами</h1>
+            <h1>Керування Товарами</h1>
             <form onSubmit={handleSubmit} className="add-product-form">
                 <input
                     name="name"
                     type="text"
-                    placeholder="Название товара"
+                    placeholder="Назва товару"
                     value={newProduct.name}
                     onChange={handleInputChange}
                     required
                 />
                 <textarea
                     name="description"
-                    placeholder="Описание"
+                    placeholder="Опис"
                     value={newProduct.description}
                     onChange={handleInputChange}
                     required
@@ -81,7 +81,7 @@ const ManageProducts = () => {
                 <input
                     name="price"
                     type="number"
-                    placeholder="Цена"
+                    placeholder="Ціна"
                     value={newProduct.price}
                     onChange={handleInputChange}
                     required
@@ -89,12 +89,12 @@ const ManageProducts = () => {
                 <input
                     name="image"
                     type="text"
-                    placeholder="URL изображения"
+                    placeholder="URL зображення"
                     value={newProduct.image}
                     onChange={handleInputChange}
                     required
                 />
-                <button type="submit" className="add-button">Добавить товар</button>
+                <button type="submit" className="add-button">Додати товар</button>
             </form>
             <ProductList
                 products={products}

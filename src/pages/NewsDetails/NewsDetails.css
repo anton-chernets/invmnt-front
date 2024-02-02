@@ -1,12 +1,9 @@
-/* NewsDetails.css */
-
 .news-details {
     max-width: 1400px;
     margin: 50px auto 100px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: top;
     min-height: 100vh;
     background-color: #ecf0f1;
     color: #333;

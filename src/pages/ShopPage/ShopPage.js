@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+// import { useNavigate } from 'react-router-dom';
 import ProductList from '../../components/ProductList/ProductList';
 import './ShopPage.css';
 import CartPage from '../CartPage/CartPage';
@@ -10,7 +10,7 @@ const ShopPage = () => {
     const [cart, setCart] = useState([]); // Add local cart state (replace with your actual cart state logic)
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
-    const navigate = useNavigate();
+    // const navigate = useNavigate();
     const [showCart, setShowCart] = useState(false);
 
     useEffect(() => {
@@ -64,9 +64,9 @@ const ShopPage = () => {
 
     return (
         <div className="shop-page">
-            <h1>Добро пожаловать в магазин!</h1>
+            {/*<h1>Добро пожаловать в магазин!</h1>*/}
             <button onClick={() => setShowCart(!showCart)} className="cart-button">
-                {showCart ? 'Hide Cart' : 'Show Cart'}
+                {showCart ? 'Кошик' : 'Кошик'}
             </button>
             {showCart && <CartPage cart={cart} setCart={setCart}/>}
             <ProductList

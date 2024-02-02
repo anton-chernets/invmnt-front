@@ -46,7 +46,7 @@ const UserProfile = () => {
         <div className="user-profile">
             <div className='wrapper'>
             <h1>Профіль Користувача</h1>
-            <div className="wrapper">
+            <div className="wrapper-inner">
                 <p>Ім'я: {user.name}</p>
                 <p>Email: {user.email}</p>
                 {user.cart && user.cart.length > 0 && (

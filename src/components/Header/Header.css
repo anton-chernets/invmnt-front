@@ -60,64 +60,12 @@
 
 }
 
-.button {
-    height: 48px;
-    padding: 0 30px;
-    margin: 10px;
-    border: none;
-    background: linear-gradient(45deg, #37474f, #414141);
-    color: white;
-    font-size: 16px;
-    font-weight: 600;
-    border-radius: 15px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    outline: none;
-    position: relative;
-    overflow: hidden;
-    letter-spacing: 0.5px;
-}
-
-.button:hover {
-    background: linear-gradient(45deg, #b6b6b6, #111111);
-    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2);
-}
-
-.button:active {
-    background: linear-gradient(45deg, #4d4d4d, #2c2c2c);
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    transform: translateY(2px);
-}
-
-/* Эффект волны при нажатии */
-.button:before {
-    content: '';
-    position: absolute;
-    width: 120%;
-    height: 120%;
-    background: rgba(255, 255, 255, 0.3);
-    display: block;
-    transform: translate(-50%, -75%) rotate(45deg);
-    transition: all 0.5s ease;
-    opacity: 0;
-    border-radius: 30px;
-}
-
-.button:active:before {
-    opacity: 1; /* Показать эффект волны */
-    transform: translate(-50%, -50%) rotate(45deg);
-    transition: 0s;
-}
-
-
-
 .button-group {
     position: relative;
     right: 20px;
     top: 50%;
     transform: translateY(-50%);
-  }
+}
 
   .menu-button {
     display: none;
@@ -144,34 +92,7 @@
     outline: none;
   }
 
-  .search-button {
-      height: 48px; /* Высота кнопки */
-      padding: 0 30px; /* Внутренние отступы */
-      margin: 10px; /* Внешний отступ */
-      border: none; /* Убрать стандартный бордюр */
-      background: linear-gradient(45deg, #37474f, #414141);
-      color: white; /* Цвет текста */
-      font-size: 16px; /* Размер текста */
-      font-weight: 600; /* Жирность текста */
-      border-radius: 15px; /* Скругление углов */
-      cursor: pointer; /* Изменение курсора на указатель */
-      transition: all 0.3s ease; /* Плавный переход всех свойств */
-      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Тень кнопки */
-      outline: none; /* Убрать стандартный фокус */
-      position: relative; /* Позиционирование относительно */
-      overflow: hidden; /* Скрыть все что выходит за границы кнопки */
-
-  }
-
-    .search-button:hover {
-        background: linear-gradient(45deg, #b6b6b6, #111111); /* Градиентный фон при наведении */
-        box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2); /* Тень кнопки при наведении */
-    }
-
-    .search-button i {
-      font-size: 16px;
-    }
-.menu-button-active {
+.button-menu {
     display: none;
 }
 @media (max-width: 1000px) {
@@ -192,56 +113,55 @@
 }
 /* Адаптивные стили для мобильных устройств */
 @media (max-width: 768px) {
-
     .search-button {
         width: 30%;
     }
 
-  .header-controls {
-      display: flex;
-    flex-direction: row;
-    align-items: center;
-    width: 100%;
-    height: 50px;
-}
+    .header-controls {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        width: 100%;
+        height: 50px;
+    }
     .header-controls {
         position: absolute;
         top: 140px;
         right: 0;
     }
-  .button {
-    width: 80%;
-    margin-bottom: 10px;
-      font-size: 11px;
-}
+    .button {
+        width: 80%;
+        margin-bottom: 10px;
+        font-size: 16px;
+    }
 
-  .search-form {
-    order: 1;
-    width: 100%;
-    margin-top: 10px;
-}
-  .search-input {
-    height: 22px;
-    width: 600px;
-    padding: 8px 12px;
-    font-size: 16px;
-    outline: none;
-  }
+    .search-form {
+        order: 1;
+        width: 100%;
+        margin-top: 10px;
+    }
+    .search-input {
+        height: 22px;
+        width: 600px;
+        padding: 8px 12px;
+        font-size: 16px;
+        outline: none;
+    }
 
-  .header {
-      flex-direction: column;
-      align-items: center;
-      max-width: 91%;
-  }
+    .header {
+        flex-direction: column;
+        align-items: center;
+        max-width: 91%;
+    }
  
-  .wrap {
-    flex-direction: column;
-    justify-content: center;
-      width: 100%;
-  }
-    .menu-button {
-        display: block; /* Show the menu button */
-        background-color: #000;
+    .wrap {
+        flex-direction: column;
+        justify-content: center;
+        width: 100%;
+    }
+    .button-menu {
+        display: block;
+        background: #000;
         color: #fff;
         padding: 10px 20px;
         font-size: 25px;
@@ -251,20 +171,7 @@
         cursor: pointer;
         transition: background-color 0.3s, color 0.3s;
     }
-    .menu-button-active {
 
-        display: block; /* Show the menu button */
-        background-color: #000;
-        color: #fff;
-        padding: 10px 20px;
-        font-size: 25px;
-        border: none;
-        border-radius: 4px;
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-        cursor: pointer;
-        transition: background-color 0.3s, color 0.3s;
-        margin-left: 20px;
-    }
 
 
 
@@ -283,25 +190,45 @@
       }
 
       .header-nav {
-          position: fixed;
-          top: 0;
+          position: absolute;
+          top: -5px;
           left: 0;
           width: 100%;
-          flex-direction: column;
-          background-color: #000;
+          /*flex-direction: column;*/
+          background: #000;
           z-index: 1000;
           overflow: hidden;
-          transition: max-height 0.3s ease-in-out;
+          /*transition: max-height 0.3s ease-in-out;*/
           max-height: 0;
+
+
       }
 
       .header-nav.active {
+          margin-top: 5px;
+          background: #000000;
           color: white;
           max-height: 100vh;
-          padding-top: 0;
+          padding-top: 50px;
 
       }
-
+    .button-menu {
+        position: absolute;
+        top: -5px;
+        left: 0;
+        display: block;
+        background: black;
+        color: #ffffff;
+        padding: 10px 20px;
+        font-size: 25px;
+        border: none;
+        border-radius: 4px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        cursor: pointer;
+        transition: background-color 0.3s, color 0.3s;
+        margin-left: 10px;
+        height: 42px;
+    }
       .header-nav a {
           color: white;
           text-decoration: none;
