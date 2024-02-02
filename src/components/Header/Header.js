@@ -72,8 +72,10 @@ const Header = () => {
         navigate('/');
     };
 
+    const hideAuthButtonsPaths = ['/login', '/register', '/passwordreset'];
+
     const shouldShowAuthButtons = () => {
-        return !isLoggedIn && location.pathname !== '/login' && location.pathname !== '/register';
+        return !isLoggedIn && !hideAuthButtonsPaths.includes(location.pathname);
     };
 
     const shouldShowAdminButton = () => {
@@ -95,6 +97,8 @@ const Header = () => {
     const goToRegister = () => {
       navigate('/register')
     }
+
+
     return (
       <header className="header">
           {/* Підключення Font Awesome для іконки меню */}

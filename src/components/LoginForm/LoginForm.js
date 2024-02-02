@@ -55,20 +55,25 @@ const LoginForm = () => {
 
     return (
         <div className="login-form-container">
-            <h2 className="login-form-title">Вхід</h2>
-            <form onSubmit={handleSubmit}>
-                <label className="form-input-label" htmlFor="email">Пошта користувача</label>
-                <input className="form-field" id="username" type="text" value={username}
-                       onChange={(e) => setUsername(e.target.value)}/>
+            <div className="wrapper-form">
+                <h2 className="login-form-title">Вхід</h2>
+                <form onSubmit={handleSubmit} className="form">
+                    <label className="form-input-label" htmlFor="email">Пошта користувача:</label>
+                    <input className="form-field" id="username" type="text" value={username}
+                           onChange={(e) => setUsername(e.target.value)}/>
 
-                <label className="form-input-label" htmlFor="password">Пароль</label>
-                <input className="form-field" id="password" type="password" value={password}
-                       onChange={(e) => setPassword(e.target.value)}/>
+                    <label className="form-input-label" htmlFor="password">Пароль:</label>
+                    <input className="form-field" id="password" type="password" value={password}
+                           onChange={(e) => setPassword(e.target.value)}/>
+                    <div className="droup-button">
+                        <button className="form-button" type="submit">Увійти</button>
+                        <div className="form-link">
+                            <a href="/register">Зареєструватись</a>
+                            <a href="/passwordreset">Забули палоль</a>
+                        </div>
+                    </div>
+                </form>
 
-                <button className="form-button" type="submit">Увійти</button>
-            </form>
-            <div className="form-link">
-                <a href="/register">Зареєструватись</a>
             </div>
         </div>
     );

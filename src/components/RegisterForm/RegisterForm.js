@@ -57,47 +57,52 @@ const RegisterForm = () => {
 
     return (
         <div className="register-form-container">
-            <h2 className="register-form-title">Реєстрція</h2>
-            <form onSubmit={handleSubmit}>
-                <div className="form-group">
-                    <label htmlFor="username">Ім'я користувача:</label>
-                    <input
-                        id="username"
-                        type="text"
-                        value={username}
-                        onChange={(e) => setUsername(e.target.value)}
-                    />
-                </div>
-                <div className="form-group">
-                    <label htmlFor="email">Email:</label>
-                    <input
-                        id="email"
-                        type="email"
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)}
-                    />
-                </div>
-                <div className="form-group">
-                    <label htmlFor="password">Пароль:</label>
-                    <input
-                        id="password"
-                        type="password"
-                        value={password}
-                        onChange={(e) => setPassword(e.target.value)}
-                    />
-                </div>
-                <div className="form-group">
-                    <label htmlFor="confirmPassword">Підтвердіть пароль:</label>
-                    <input
-                        id="confirmPassword"
-                        type="password"
-                        value={confirmPassword}
-                        onChange={(e) => setConfirmPassword(e.target.value)}
-                    />
-                </div>
-                <button type="submit" className="register-form-button">Зареєструватись</button>
-                <button onClick={goToLogin} className="register-form-button">Вхід</button>
-            </form>
+            <div className="wrapper-form">
+                <form onSubmit={handleSubmit} className="form-field-reg">
+                    <h2 className="register-form-title">Реєстрція</h2>
+
+                    <div className="form-group">
+                        <label htmlFor="username">Ім'я користувача:</label>
+                        <input
+                            id="username"
+                            type="text"
+                            value={username}
+                            onChange={(e) => setUsername(e.target.value)}
+                        />
+                    </div>
+                    <div className="form-group">
+                        <label htmlFor="email">Email:</label>
+                        <input
+                            id="email"
+                            type="email"
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
+                        />
+                    </div>
+                    <div className="form-group">
+                        <label htmlFor="password">Пароль:</label>
+                        <input
+                            id="password"
+                            type="password"
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
+                        />
+                    </div>
+                    <div className="form-group">
+                        <label htmlFor="confirmPassword">Підтвердіть пароль:</label>
+                        <input
+                            id="confirmPassword"
+                            type="password"
+                            value={confirmPassword}
+                            onChange={(e) => setConfirmPassword(e.target.value)}
+                        />
+                    </div>
+                        <div className="droup-button">
+                            <button type="submit" className="register-form-button">Зареєструватись</button>
+                            <button onClick={goToLogin} className="register-form-button">Вхід</button>
+                        </div>
+                </form>
+            </div>
         </div>
     );
 };

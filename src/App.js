@@ -14,6 +14,7 @@ import ProductDetails from './pages/ProductDetails/ProductDetails';
 import NewsDetails from './pages/NewsDetails/NewsDetails';
 import Checkout from './pages/Checkout/Checkout';
 import CartPage from "./pages/CartPage/CartPage";
+import PasswordReset from "./components/PasswordReset/PasswordReset";
 
 
 function App() {
@@ -65,6 +66,7 @@ function App() {
                 <Route path="/news/:newsId" element={<NewsDetails />} />
                 <Route path="/checkout" element={<Checkout  />} />
                 <Route path="/cart" element={<CartPage />} />
+                <Route path="/passwordreset" element={<PasswordReset />} />
             </Routes>
             <Footer />
         </Router>
