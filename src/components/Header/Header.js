@@ -109,7 +109,7 @@ const Header = () => {
                       <button  onClick={toggleMenu} className="button-menu">
                           <i className="fas fa-bars"></i> Меню
                       </button>
-                      <Link to="/" onClick={toggleMenu}><i className="fas fa-home"></i> Головна сторінка</Link>
+                      <Link to="/" onClick={toggleMenu}><i className="fas fa-home"></i> Головна</Link>
                       <Link to="/shop" onClick={toggleMenu}>Магазин</Link>
                       {/* ...інші посилання */}
                   </nav>
