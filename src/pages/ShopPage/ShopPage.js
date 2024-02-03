@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import ProductList from '../../components/ProductList/ProductList';
 import './ShopPage.css';
 import CartPage from '../CartPage/CartPage';
+import ScrollToTopButton from "../../components/ScrollToTopButton/ScrollToTopButton";
 
 
 const ShopPage = () => {
@@ -63,7 +64,11 @@ const ShopPage = () => {
     if (error) return <p>Error: {error.message}</p>;
 
     return (
+
         <div className="shop-page">
+            <div className="scroll-to-top">
+                <ScrollToTopButton/>
+            </div>
             {/*<h1>Добро пожаловать в магазин!</h1>*/}
             <button onClick={() => setShowCart(!showCart)} className="cart-button">
                 {showCart ? 'Кошик' : 'Кошик'}

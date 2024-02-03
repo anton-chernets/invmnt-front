@@ -107,65 +107,67 @@ const Header = () => {
     };
 
     return (
-      <header className="header">
-          {/* Підключення Font Awesome для іконки меню */}
-          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" />
-          <div className="header-top">
-              <div className="wrap">
-                  {/* Кнопка для відкриття меню на мобільних пристроях */}
-                  <button onClick={toggleMenu} className="button-menu">
-                      <i className="fas fa-bars"></i> Меню
-                  </button>
-                  <nav className={`header-nav ${isMenuOpen ? 'active' : ''}`}>
-                      <button  onClick={toggleMenu} className="button-menu">
-                          <i className="fas fa-bars"></i> Меню
-                      </button>
-                      <Link to="/" onClick={toggleMenu}><i className="fas fa-home"></i> Головна</Link>
-                      <Link to="/shop" onClick={toggleMenu}>Магазин</Link>
-                      {/* ...інші посилання */}
-                  </nav>
-              </div>
-          </div>
+        <header className="header">
 
-          {/* Нижній блок для кнопок авторизації, пошуку та інших контролів */}
-          <div className="header-bottom">
-            <div className="wrap">
-                <div className="header-logo">
-                    <Link to="/">
-                        <img src={logoImage} alt="Investment"/><b>Investment</b>
-                    </Link>
-
+            {/* Підключення Font Awesome для іконки меню */}
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css"/>
+            <div className="header-top">
+                <div className="wrap">
+                    {/* Кнопка для відкриття меню на мобільних пристроях */}
+                    <button onClick={toggleMenu} className="button-menu">
+                        <i className="fas fa-bars"></i> Меню
+                    </button>
+                    <nav className={`header-nav ${isMenuOpen ? 'active' : ''}`}>
+                        <button onClick={toggleMenu} className="button-menu">
+                            <i className="fas fa-bars"></i> Меню
+                        </button>
+                        <Link to="/" onClick={toggleMenu}><i className="fas fa-home"></i> Головна</Link>
+                        <Link to="/shop" onClick={toggleMenu}>Магазин</Link>
+                        {/* ...інші посилання */}
+                    </nav>
                 </div>
-
-              <form onSubmit={handleSearchSubmit} className="search-form">
-                  <input
-                      type="text"
-                      value={query}
-                      onChange={handleSearchChange}
-                      placeholder="Пошук..."
-                      className="search-input"
-                  />
-                  <button type="submit" className="search-button">
-                      <i className="fas fa-search"></i>
-                  </button>
-                        </form>
-              <div className='header-controls'>
-                {shouldShowAuthButtons() && (
-                  <>
-                      <button onClick={goToLogin} className="button">Вхід</button>
-                      <button onClick={goToRegister} className="button">Зареєструватися</button>
-                  </>
-                )}
-                {isLoggedIn && (
-                  <>
-                    {shouldShowAdminButton() && <button onClick={goToAdminPanel} className="button">Адмін</button>}
-                    <button onClick={goToUserProfile} className="button">Кабінет</button>
-                    <button onClick={handleLogout} className="button">Вийти</button>
-                  </>
-                )}
-              </div>
             </div>
-          </div>
+
+            {/* Нижній блок для кнопок авторизації, пошуку та інших контролів */}
+            <div className="header-bottom">
+                <div className="wrap">
+                    <div className="header-logo">
+                        <Link to="/">
+                            <img src={logoImage} alt="Investment"/><b>Investment</b>
+                        </Link>
+
+                    </div>
+
+                    <form onSubmit={handleSearchSubmit} className="search-form">
+                        <input
+                            type="text"
+                            value={query}
+                            onChange={handleSearchChange}
+                            placeholder="Пошук..."
+                            className="search-input"
+                        />
+                        <button type="submit" className="search-button">
+                            <i className="fas fa-search"></i>
+                        </button>
+                    </form>
+                    <div className='header-controls'>
+                        {shouldShowAuthButtons() && (
+                            <>
+                                <button onClick={goToLogin} className="button">Вхід</button>
+                                <button onClick={goToRegister} className="button">Зареєструватися</button>
+                            </>
+                        )}
+                        {isLoggedIn && (
+                            <>
+                                {shouldShowAdminButton() &&
+                                    <button onClick={goToAdminPanel} className="button">Адмін</button>}
+                                <button onClick={goToUserProfile} className="button">Кабінет</button>
+                                <button onClick={handleLogout} className="button">Вийти</button>
+                            </>
+                        )}
+                    </div>
+                </div>
+            </div>
         </header>
     );
 };

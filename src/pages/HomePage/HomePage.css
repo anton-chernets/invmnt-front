@@ -18,3 +18,27 @@
     font-size: 2.5em;
     margin-bottom: 20px;
 }
+.scroll-to-top {
+    position: fixed;
+    bottom: 100px;
+    right: 20px;
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 3px;
+    cursor: pointer;
+    opacity: 1; /* Set to 1 for debugging */
+    transition: opacity 0.3s;
+    z-index: 1200; /* Ensure it's above other elements */
+
+}
+
+.scroll-to-top:hover {
+    opacity: 1; /* Fully opaque on hover */
+}
+@media (max-width: 768px) {
+    .scroll-to-top {
+        bottom: 50px;
+        right: 20px;
+    }
+
+}
