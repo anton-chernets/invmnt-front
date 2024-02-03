@@ -7,9 +7,21 @@ const RegisterForm = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
+    const [showPassword, setShowPassword] = useState(false);
+    const [showConfirmPassword, setShowConfirmPassword] = useState(false);
     const navigate = useNavigate();
     const goToLogin = () => {
         navigate('/login');
+    };
+
+    // Функція для перемикання видимості пароля
+    const togglePasswordVisibility = () => {
+        setShowPassword(!showPassword);
+    };
+
+    // Функція для перемикання видимості підтвердження пароля
+    const toggleConfirmPasswordVisibility = () => {
+        setShowConfirmPassword(!showConfirmPassword);
     };
 
     const handleSubmit = (e) => {
@@ -83,24 +95,40 @@ const RegisterForm = () => {
                         <label htmlFor="password">Пароль:</label>
                         <input
                             id="password"
-                            type="password"
+                            type={showPassword ? "text" : "password"}
                             value={password}
                             onChange={(e) => setPassword(e.target.value)}
                         />
+                        <div className="show-password">
+                            <input
+                                type="checkbox"
+                                checked={showPassword}
+                                onChange={togglePasswordVisibility}
+                            />
+                            <label>Показати пароль</label>
+                        </div>
                     </div>
                     <div className="form-group">
                         <label htmlFor="confirmPassword">Підтвердіть пароль:</label>
                         <input
                             id="confirmPassword"
-                            type="password"
+                            type={showConfirmPassword ? "text" : "password"}
                             value={confirmPassword}
                             onChange={(e) => setConfirmPassword(e.target.value)}
                         />
-                    </div>
-                        <div className="droup-button">
-                            <button type="submit" className="register-form-button">Зареєструватись</button>
-                            <button onClick={goToLogin} className="register-form-button">Вхід</button>
+                        <div className="show-password">
+                            <input
+                                type="checkbox"
+                                checked={showConfirmPassword}
+                                onChange={toggleConfirmPasswordVisibility}
+                            />
+                            <label htmlFor="confirmPassword-checkbox">Показати пароль</label>
                         </div>
+                    </div>
+                    <div className="droup-button">
+                        <button type="submit" className="register-form-button">Зареєструватись</button>
+                        <button onClick={goToLogin} className="register-form-button">Вхід</button>
+                    </div>
                 </form>
             </div>
         </div>

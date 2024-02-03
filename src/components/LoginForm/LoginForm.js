@@ -4,7 +4,13 @@ import {useNavigate} from "react-router-dom";
 const LoginForm = () => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
+
     const navigate = useNavigate();
+    const [showPassword, setShowPassword] = useState(false);
+    const togglePasswordVisibility = () => {
+        setShowPassword(!showPassword);
+    };
+
     const handleSubmit = async (e) => {
         e.preventDefault();
 
@@ -63,8 +69,21 @@ const LoginForm = () => {
                            onChange={(e) => setUsername(e.target.value)}/>
 
                     <label className="form-input-label" htmlFor="password">Пароль:</label>
-                    <input className="form-field" id="password" type="password" value={password}
-                           onChange={(e) => setPassword(e.target.value)}/>
+                    <input
+                        className="form-field"
+                        id="password"
+                        type={showPassword ? "text" : "password"}
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
+                    />
+                    <label className="show-password">
+                        <input
+                            type="checkbox"
+                            checked={showPassword}
+                            onChange={togglePasswordVisibility}
+                        />
+                        Показати пароль
+                    </label>
                     <div className="droup-button">
                         <button className="form-button" type="submit">Увійти</button>
                         <div className="form-link">

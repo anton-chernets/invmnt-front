@@ -20,6 +20,24 @@
     margin-bottom: 1rem;
     font-size: 1rem;
 }
+.show-password {
+    display: flex;
+    align-items: center; /* Align checkbox and label vertically */
+     /* Add some space above the checkbox */
+}
+
+.show-password input[type="checkbox"] {
+    width: 15px;
+    /* Add some space between the checkbox and the label */
+    margin: 0 0.5rem 0 0;
+}
+
+/* You might also want to adjust the label styling to match your design */
+.show-password label {
+    margin-top: 12px;
+     /* Remove any default margin */
+    /* Add other styles if necessary */
+}
 
 .register-form-title {
     color: #333;
