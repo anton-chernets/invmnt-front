@@ -70,17 +70,9 @@
     transform: translateY(-2px);
 }
 
-/* Delete button specific styles */
-.product-item .delete-button {
-    background-color: #d9534f;
-    color: white;
-    border: none;
-    padding: 5px 10px;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-
-.product-item .delete-button:hover {
-    background-color: #c9302c;
+@media (max-width: 768px) {
+    .add-product-form {
+        display: flex;
+        flex-direction: column;
+    }
 }
