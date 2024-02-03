@@ -23,18 +23,18 @@
     bottom: 100px;
     right: 20px;
     color: white;
-    padding: 0.5rem 1rem;
+
     border-radius: 3px;
     cursor: pointer;
-    opacity: 1; /* Set to 1 for debugging */
+    opacity: 1;
     transition: opacity 0.3s;
-    z-index: 1200; /* Ensure it's above other elements */
-
+    z-index: 1200;
 }
 
 .scroll-to-top:hover {
-    opacity: 1; /* Fully opaque on hover */
+    opacity: 1;
 }
+
 @media (max-width: 768px) {
     .scroll-to-top {
         bottom: 50px;
