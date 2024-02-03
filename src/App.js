@@ -15,6 +15,7 @@ import NewsDetails from './pages/NewsDetails/NewsDetails';
 import Checkout from './pages/Checkout/Checkout';
 import CartPage from "./pages/CartPage/CartPage";
 import PasswordReset from "./components/PasswordReset/PasswordReset";
+import SearchResults from "./components/SearchResaults/SearchResults";
 
 
 function App() {
@@ -67,6 +68,7 @@ function App() {
                 <Route path="/checkout" element={<Checkout  />} />
                 <Route path="/cart" element={<CartPage />} />
                 <Route path="/passwordreset" element={<PasswordReset />} />
+                <Route path="/search" element={<SearchResults />} />
             </Routes>
             <Footer />
         </Router>

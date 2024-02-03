@@ -11,26 +11,8 @@ const Header = () => {
     const [isLoggedIn, setIsLoggedIn] = useState(true);
     const [isAdmin, setIsAdmin] = useState(true);
 
-    const [searchTerm, setSearchTerm] = useState(''); // Стан для тексту пошуку
-
-    const handleSearchChange = (event) => {
-        setSearchTerm(event.target.value);
-    };
-
-    const handleSearchSubmit = (event) => {
-        event.preventDefault();
-        console.log('Пошуковий запит: ', searchTerm);
-
-        fetch(`/api/search?q=${encodeURIComponent(searchTerm)}`)
-            .then(response => response.json())
-            .then(data => {
-                // обработка данных
-                console.log(data);
-            })
-            .catch(error => {
-                console.error('Помилка при отриманні даних:', error);
-            });
-    };
+    const [query, setQuery] = useState('');
+    const [searchResults, setSearchResults] = useState([]);
 
     useEffect(() => {
         const token = localStorage.getItem('authToken');
@@ -50,7 +32,6 @@ const Header = () => {
                     return response.json();
                 })
                 .then(profile => {
-                    // Перевірте поле ролі в отриманому профілі
                     if (profile.role === 'admin') {
                         setIsAdmin(true);
                     }
@@ -87,17 +68,43 @@ const Header = () => {
     };
 
     const goToUserProfile = () => {
-        navigate('/user')
-    }
+        navigate('/user');
+    };
 
     const goToLogin = () => {
-      navigate('/login')
+        navigate('/login');
     };
-    
-    const goToRegister = () => {
-      navigate('/register')
-    }
 
+    const goToRegister = () => {
+        navigate('/register');
+    };
+
+
+    const handleSearchChange = (e) => {
+        const newQuery = e.target.value;
+        setQuery(newQuery);
+        if (newQuery.length > 2) {
+            fetchSearchResults(newQuery);
+        } else {
+            setSearchResults([]);
+        }
+    };
+
+    const handleSearchSubmit = (event) => {
+        event.preventDefault();
+        fetchSearchResults(query);
+        navigate('/search', { state: { query, searchResults } }); // Переход на страницу результатов поиска
+    };
+
+    const fetchSearchResults = async (query) => {
+        try {
+            const response = await fetch(`/api/search?q=${encodeURIComponent(query)}`);
+            const data = await response.json();
+            setSearchResults(data);
+        } catch (error) {
+            console.error('Error fetching data:', error);
+        }
+    };
 
     return (
       <header className="header">
@@ -129,17 +136,18 @@ const Header = () => {
                     </Link>
 
                 </div>
+
               <form onSubmit={handleSearchSubmit} className="search-form">
-                            <input
-                                type="text"
-                                value={searchTerm}
-                                onChange={handleSearchChange}
-                                placeholder="Пошук..."
-                                className="search-input"
-                            />
-                            <button type="submit" className="search-button">
-                                <i className="fas fa-search"></i>
-                            </button>
+                  <input
+                      type="text"
+                      value={query}
+                      onChange={handleSearchChange}
+                      placeholder="Пошук..."
+                      className="search-input"
+                  />
+                  <button type="submit" className="search-button">
+                      <i className="fas fa-search"></i>
+                  </button>
                         </form>
               <div className='header-controls'>
                 {shouldShowAuthButtons() && (
@@ -159,8 +167,8 @@ const Header = () => {
             </div>
           </div>
         </header>
-      );
-      
+    );
 };
 
 export default Header;
+
