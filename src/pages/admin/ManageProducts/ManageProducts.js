@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import './ManageProducts.css';
 import ProductList from "../../../components/ProductList/ProductList";
-import ShopPage from "../../ShopPage/ShopPage";
 
 const ManageProducts = () => {
     const [products, setProducts] = useState([]);
