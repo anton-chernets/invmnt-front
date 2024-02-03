@@ -89,7 +89,8 @@ const ManageUsers = () => {
                     value={selectedUser ? selectedUser.email : ''}
                     onChange={handleInputChange}
                 />
-                <button type="submit" className="button-user">{selectedUser && selectedUser.id ? 'Оновити' : 'Додати користувача'}</button>
+                <button type="submit"
+                        className="button-user">{selectedUser && selectedUser.id ? 'Оновити' : 'Додати користувача'}</button>
 
             </form>
             <ul>
@@ -98,6 +99,23 @@ const ManageUsers = () => {
                         {user.name} - {user.email}
                         <button onClick={() => handleEditUser(user)} className="button-user">Редагувати</button>
                         <button onClick={() => handleDeleteUser(user.id)} className="button-user">Видалити</button>
+                    </li>
+                ))}
+            </ul>
+            <h2>Список Користувачів</h2>
+            <ul className="user-list">
+                {users.map(user => (
+                    <li key={user.id} className="user-item">
+                        <div className="user-details">
+                            <p><b>Ім'я:</b> {user.name}</p>
+                            <p><b>Email:</b> {user.email}</p>
+                            {/* Додайте інші деталі, якщо необхідно */}
+                        </div>
+                        <div className="user-actions">
+                            <button onClick={() => handleEditUser(user)} className="button-edit">Редагувати</button>
+                            <button onClick={() => handleDeleteUser(user.id)} className="button-delete">Видалити
+                            </button>
+                        </div>
                     </li>
                 ))}
             </ul>
