@@ -43,6 +43,10 @@
 }
 
 @media (max-width: 768px) {
+    .product-wrapper {
+        width: 100%;
+    }
+
     .product-wrapper > div {
         flex-basis: 100%;
         max-width: 100%;

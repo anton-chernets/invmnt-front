@@ -21,7 +21,7 @@
     text-align: center;
 }
 .cart-button {
-    margin: 10px 0 10px 1250px
+    margin: 10px 0 10px 1155px;
 }
 
 @media (max-width: 1000px) {
@@ -31,7 +31,28 @@
 }
 @media (max-width: 768px) {
     .cart-button {
-        margin: 10px 10px 10px 250px;
+        margin: 10px 10px 10px 67%;
+    }
+    .shop-page {
+        width: 100%;
     }
 
+}
+@media (max-width: 740px) {
+    .shop-page {
+        width: 98%;
+        margin-left: 0;
+        margin-right: 0;
+    }
+
+}
+@media (max-width: 430px) {
+    .shop-page {
+        width: 100%;
+    }
+}
+@media (max-width: 360px) {
+    .shop-page {
+        width: 100%;
+    }
 }
