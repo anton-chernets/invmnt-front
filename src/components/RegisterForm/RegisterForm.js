@@ -27,22 +27,20 @@ const RegisterForm = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
         if (!username || !email || !password || !confirmPassword) {
-            alert('Пожалуйста, заполните все поля.');
+            alert('Будь ласка, заповніть усі поля.');
             return;
         }
         if (password !== confirmPassword) {
-            alert('Пароли не совпадают.');
+            alert('Паролі не співпадають.');
             return;
         }
 
-        // Создаем объект с данными пользователя
         const userData = {
-            username,
-            email,
-            password,
+            name: username,
+            email: email,
+            password: password,
         };
 
-        // Отправляем запрос к серверу
         fetch('http://95.217.181.158/api/register', {
             method: 'POST',
             headers: {
@@ -52,18 +50,17 @@ const RegisterForm = () => {
         })
             .then(response => {
                 if (!response.ok) {
-                    throw new Error('Ошибка при регистрации');
+                    throw new Error('Помилка при реєстрації');
                 }
                 return response.json();
             })
             .then(data => {
-                console.log('Регистрация успешна:', data);
-                // После успешной регистрации перенаправляем на страницу входа
+                console.log('Реєстрація успішна:', data);
                 navigate('/login');
             })
             .catch(error => {
-                console.error('Ошибка:', error);
-                alert('Ошибка при регистрации. Попробуйте еще раз.');
+                console.error('Помилка:', error);
+                alert('Помилка при реєстрації. Спробуйте ще раз.');
             });
     };
 
