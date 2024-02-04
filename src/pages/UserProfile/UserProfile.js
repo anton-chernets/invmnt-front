@@ -2,37 +2,20 @@ import React, { useState, useEffect } from 'react';
 import './UserProfile.css';
 
 const UserProfile = () => {
-    const fakeUser = {
-        name: 'Іван Іванов',
-        email: 'ivan@example.com',
-        cart: [
-            { id: 1, title: 'Товар 1', price: 100 },
-            { id: 2, title: 'Товар 2', price: 200 },
-        ],
-    };
-
-    const [user, setUser] = useState(fakeUser);
-    // const [user, setUser] = useState(null);
+    const [user, setUser] = useState(null);
     const [newEmail, setNewEmail] = useState('');
     const [newPassword, setNewPassword] = useState('');
 
-    const removeFromCart = (productId) => {
-        setUser(prevUser => ({
-            ...prevUser,
-            cart: prevUser.cart.filter(item => item.id !== productId)
-        }));
-    };
-
     useEffect(() => {
-        // Код для завантаження даних користувача
         const fetchUserData = async () => {
             try {
-                const response = await fetch('/api/userdata'); // URL вашого API
+                const response = await fetch('/api/userdata'); // Припускаємо, що API використовує Bearer токен
                 if (!response.ok) {
                     throw new Error('Помилка при завантаженні даних користувача');
                 }
                 const userData = await response.json();
                 setUser(userData);
+                setNewEmail(userData.email); // Ініціалізуємо поля зміни з поточними даними
             } catch (error) {
                 console.error('Помилка:', error);
             }
@@ -40,6 +23,12 @@ const UserProfile = () => {
 
         fetchUserData();
     }, []);
+    const removeFromCart = (productId) => {
+        setUser(prevUser => ({
+            ...prevUser,
+            cart: prevUser.cart.filter(item => item.id !== productId)
+        }));
+    };
 
     const handleEmailChange = (e) => {
         setNewEmail(e.target.value);
@@ -49,14 +38,50 @@ const UserProfile = () => {
         setNewPassword(e.target.value);
     };
 
-    const handleUpdateProfile = (e) => {
+    const handleUpdateProfile = async (e) => {
         e.preventDefault();
-        // Виконайте запит до API для оновлення профілю
+        try {
+            const response = await fetch('/api/update-profile', {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                    // Authorization header should be included if API requires
+                },
+                body: JSON.stringify({ email: newEmail, password: newPassword })
+            });
+
+            if (!response.ok) {
+                throw new Error('Помилка при оновленні профілю');
+            }
+            const updatedUser = await response.json();
+            setUser(updatedUser);
+            alert('Дані оновлено успішно');
+        } catch (error) {
+            console.error('Помилка:', error);
+            alert('Не вдалось оновити дані');
+        }
     };
 
-    const handleDeleteAccount = () => {
+    const handleDeleteAccount = async () => {
         if (window.confirm('Ви впевнені, що хочете видалити свій акаунт?')) {
-            // Виконайте запит до API для видалення акаунту
+            try {
+                const response = await fetch('/api/delete-account', {
+                    method: 'DELETE',
+                    headers: {
+                        // Authorization header should be included if API requires
+                    }
+                });
+
+                if (!response.ok) {
+                    throw new Error('Помилка при видаленні акаунту');
+                }
+                alert('Акаунт видалено');
+                // Here you should also clear any stored authentication tokens
+                // and redirect the user to the login page or home page
+            } catch (error) {
+                console.error('Помилка:', error);
+                alert('Не вдалось видалити акаунт');
+            }
         }
     };
 
