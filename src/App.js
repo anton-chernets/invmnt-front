@@ -16,6 +16,8 @@ import Checkout from './pages/Checkout/Checkout';
 import CartPage from "./pages/CartPage/CartPage";
 import PasswordReset from "./components/PasswordReset/PasswordReset";
 import SearchResults from "./components/SearchResaults/SearchResults";
+import {AuthProvider} from "./components/AuthContext/AuthContext";
+
 
 
 
@@ -54,10 +56,11 @@ function App() {
     }, []);
 
     return (
-        <Router>
-            <Header/>
+        <AuthProvider>
+            <Router>
 
-            <Routes>
+                <Header/>
+                <Routes>
 
                 <Route path="/" element={<HomePage/>}/>
                 <Route path="/shop" element={<ShopPage/>}/>
@@ -74,8 +77,12 @@ function App() {
                 <Route path="/passwordreset" element={<PasswordReset/>}/>
                 <Route path="/search" element={<SearchResults/>}/>
             </Routes>
+
             <Footer/>
+
         </Router>
+</AuthProvider>
+
     );
 }
 

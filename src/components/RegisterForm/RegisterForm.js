@@ -43,7 +43,7 @@ const RegisterForm = () => {
         };
 
         // Отправляем запрос к серверу
-        fetch('YOUR_REGISTRATION_ENDPOINT', {
+        fetch('http://95.217.181.158/api/register', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

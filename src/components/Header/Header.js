@@ -1,45 +1,23 @@
-import React, { useState, useEffect } from 'react';
+import React, {useState, useEffect, useContext} from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import './Header.css';
 import logoImage from '../../img/Untitled.png';
+import {AuthContext} from "../AuthContext/AuthContext";
 
 const Header = () => {
     const navigate = useNavigate();
+
     const location = useLocation();
 
+    const { isAuthenticated, setIsAuthenticated } = useContext(AuthContext);
     const [isMenuOpen, setIsMenuOpen] = useState(false);
-    const [isLoggedIn, setIsLoggedIn] = useState(true);
-    const [isAdmin, setIsAdmin] = useState(true);
+    // const [isLoggedIn, setIsLoggedIn] = useState(false);
+    // const [isAdmin, setIsAdmin] = useState(false);
 
     const [query, setQuery] = useState('');
     const [searchResults, setSearchResults] = useState([]);
 
     useEffect(() => {
-        const token = localStorage.getItem('authToken');
-
-        if (token) {
-            setIsLoggedIn(true);
-
-            fetch('https://example.com/api/user/profile', {
-                headers: {
-                    'Authorization': `Bearer ${token}`
-                }
-            })
-                .then(response => {
-                    if (!response.ok) {
-                        throw new Error('Failed to fetch user profile');
-                    }
-                    return response.json();
-                })
-                .then(profile => {
-                    if (profile.role === 'admin') {
-                        setIsAdmin(true);
-                    }
-                })
-                .catch(error => {
-                    console.error('Error fetching profile:', error);
-                });
-        }
     }, []);
 
     const toggleMenu = () => {
@@ -48,24 +26,23 @@ const Header = () => {
 
     const handleLogout = () => {
         localStorage.removeItem('authToken');
-        setIsLoggedIn(false);
-        setIsAdmin(false);
+        setIsAuthenticated(false); // Оновіть стан аутентифікації
         navigate('/');
     };
 
     const hideAuthButtonsPaths = ['/login', '/register', '/passwordreset'];
 
     const shouldShowAuthButtons = () => {
-        return !isLoggedIn && !hideAuthButtonsPaths.includes(location.pathname);
+        return !isAuthenticated && !hideAuthButtonsPaths.includes(location.pathname);
     };
 
-    const shouldShowAdminButton = () => {
-        return isLoggedIn && isAdmin;
-    };
+    // const shouldShowAdminButton = () => {
+    //     return isAuthenticated; // Упростіть цю логіку, якщо роль 'admin' вже врахована в `isAuthenticated`
+    // };
 
-    const goToAdminPanel = () => {
-        navigate('/admin');
-    };
+    // const goToAdminPanel = () => {
+    //     navigate('/admin');
+    // };
 
     const goToUserProfile = () => {
         navigate('/user');
@@ -93,7 +70,7 @@ const Header = () => {
     const handleSearchSubmit = (event) => {
         event.preventDefault();
         fetchSearchResults(query);
-        navigate('/search', { state: { query, searchResults } }); // Переход на страницу результатов поиска
+        navigate('/search', { state: { query, searchResults } });
     };
 
     const fetchSearchResults = async (query) => {
@@ -157,12 +134,12 @@ const Header = () => {
                                 <button onClick={goToRegister} className="button">Зареєструватися</button>
                             </>
                         )}
-                        {isLoggedIn && (
+                        {isAuthenticated && (
                             <>
-                                {shouldShowAdminButton() &&
-                                    <button onClick={goToAdminPanel} className="button">Адмін</button>}
-                                <button onClick={goToUserProfile} className="button">Кабінет</button>
-                                <button onClick={handleLogout} className="button">Вийти</button>
+                                {/*{shouldShowAdminButton() &&*/}
+                                {/*    <button onClick={goToAdminPanel} className="button">Адмін</button>*/}
+                                    <button onClick={goToUserProfile} className="button">Кабінет</button>
+                                    <button onClick={handleLogout} className="button">Вийти</button>
                             </>
                         )}
                     </div>

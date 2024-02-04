@@ -1,12 +1,18 @@
-import React, { useState } from 'react';
-import './LoginForm.css'
-import {useNavigate} from "react-router-dom";
+import React, {useContext, useState} from 'react';
+import './LoginForm.css';
+import { useNavigate } from 'react-router-dom';
+import { AuthContext } from '../AuthContext/AuthContext';
+
 const LoginForm = () => {
-    const [username, setUsername] = useState('');
+    const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [showPassword, setShowPassword] = useState(false);
+    const { setIsAuthenticated } = useContext(AuthContext);
+
+
 
     const navigate = useNavigate();
-    const [showPassword, setShowPassword] = useState(false);
+
     const togglePasswordVisibility = () => {
         setShowPassword(!showPassword);
     };
@@ -14,21 +20,18 @@ const LoginForm = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        // Проверка на пустые поля
-        if (!username || !password) {
-            alert('Пожалуйста, введите имя пользователя и пароль.');
+        if (!email || !password) {
+            alert('Будь ласка, введіть email та пароль.');
             return;
         }
 
-        // Объект с данными для отправки на сервер
         const loginData = {
-            username: username,
+            email: email,
             password: password,
         };
 
         try {
-            // Здесь должен быть запрос на сервер для аутентификации
-            const response = await fetch('https://example.com/api/auth/login', {
+            const response = await fetch('http://95.217.181.158/api/login', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -39,34 +42,39 @@ const LoginForm = () => {
             const data = await response.json();
 
             if (response.ok) {
-                console.log('Вход выполнен:', data);
+                console.log('Вхід виконано:', data);
                 localStorage.setItem('authToken', data.token);
+                setIsAuthenticated(true);
+                // setUser(data.user);
+                navigate('/');
 
-                // Перевірка ролі користувача
-                if (data.role === 'admin') {
-                    // Перенаправлення на адмін-панель
-                    navigate('/');
-                } else {
-                    // Перенаправлення на головну сторінку
-                    navigate('/');
-                }
+                // if (data.role === 'admin') {
+                //     navigate('/');
+                // } else {
+                //     navigate('/');
+                // }
+
             } else {
-                alert('Ошибка аутентификации: ' + data.message);
+                alert('Помилка аутентифікації: ' + data.message);
             }
         } catch (error) {
-            alert('Ошибка сети: ' + error.message);
+            alert('Помилка мережі: ' + error.message);
         }
     };
-
 
     return (
         <div className="login-form-container">
             <div className="wrapper-form">
                 <h2 className="login-form-title">Вхід</h2>
                 <form onSubmit={handleSubmit} className="form">
-                    <label className="form-input-label" htmlFor="email">Пошта користувача:</label>
-                    <input className="form-field" id="username" type="text" value={username}
-                           onChange={(e) => setUsername(e.target.value)}/>
+                    <label className="form-input-label" htmlFor="email">Email користувача:</label>
+                    <input
+                        className="form-field"
+                        id="email"
+                        type="email"
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                    />
 
                     <label className="form-input-label" htmlFor="password">Пароль:</label>
                     <input
@@ -88,11 +96,10 @@ const LoginForm = () => {
                         <button className="form-button" type="submit">Увійти</button>
                         <div className="form-link">
                             <a href="/register">Зареєструватись</a>
-                            <a href="/passwordreset">Забули палоль</a>
+                            <a href="/passwordreset">Забули пароль</a>
                         </div>
                     </div>
                 </form>
-
             </div>
         </div>
     );
