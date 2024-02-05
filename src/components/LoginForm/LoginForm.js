@@ -42,18 +42,9 @@ const LoginForm = () => {
             const data = await response.json();
 
             if (response.ok) {
-                console.log('Вхід виконано:', data);
-                localStorage.setItem('authToken', data.token);
+                localStorage.setItem('authToken', data.data.access_token);
                 setIsAuthenticated(true);
-                // setUser(data.user);
                 navigate('/');
-
-                // if (data.role === 'admin') {
-                //     navigate('/');
-                // } else {
-                //     navigate('/');
-                // }
-
             } else {
                 alert('Помилка аутентифікації: ' + data.message);
             }

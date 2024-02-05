@@ -1,120 +1,73 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import './UserProfile.css';
+import useFetchUser from '../../components/FetchUser/FetchUser';
 
 const UserProfile = () => {
-    const [user, setUser] = useState(null);
-    const [newEmail, setNewEmail] = useState('');
+    const token = localStorage.getItem('authToken');
+    const { user, loading, error } = useFetchUser(token);
+    console.log(user)
+
+    const [newEmail, setNewEmail] = useState(user?.email || '');
     const [newPassword, setNewPassword] = useState('');
 
-    useEffect(() => {
-        const fetchUserData = async () => {
-            try {
-                const response = await fetch('/api/userdata'); // Припускаємо, що API використовує Bearer токен
-                if (!response.ok) {
-                    throw new Error('Помилка при завантаженні даних користувача');
-                }
-                const userData = await response.json();
-                setUser(userData);
-                setNewEmail(userData.email); // Ініціалізуємо поля зміни з поточними даними
-            } catch (error) {
-                console.error('Помилка:', error);
-            }
-        };
-
-        fetchUserData();
-    }, []);
-    const removeFromCart = (productId) => {
-        setUser(prevUser => ({
-            ...prevUser,
-            cart: prevUser.cart.filter(item => item.id !== productId)
-        }));
-    };
-
-    const handleEmailChange = (e) => {
-        setNewEmail(e.target.value);
-    };
-
-    const handlePasswordChange = (e) => {
-        setNewPassword(e.target.value);
-    };
+    const handleEmailChange = (e) => setNewEmail(e.target.value);
+    const handlePasswordChange = (e) => setNewPassword(e.target.value);
 
     const handleUpdateProfile = async (e) => {
         e.preventDefault();
         try {
-            const response = await fetch('/api/update-profile', {
-                method: 'PUT',
-                headers: {
-                    'Content-Type': 'application/json',
-                    // Authorization header should be included if API requires
-                },
-                body: JSON.stringify({ email: newEmail, password: newPassword })
-            });
-
-            if (!response.ok) {
-                throw new Error('Помилка при оновленні профілю');
-            }
-            const updatedUser = await response.json();
-            setUser(updatedUser);
-            alert('Дані оновлено успішно');
+            // Оновлення профілю користувача
         } catch (error) {
-            console.error('Помилка:', error);
-            alert('Не вдалось оновити дані');
+            console.error('Error updating profile:', error);
         }
     };
 
     const handleDeleteAccount = async () => {
         if (window.confirm('Ви впевнені, що хочете видалити свій акаунт?')) {
             try {
-                const response = await fetch('/api/delete-account', {
-                    method: 'DELETE',
-                    headers: {
-                        // Authorization header should be included if API requires
-                    }
-                });
-
-                if (!response.ok) {
-                    throw new Error('Помилка при видаленні акаунту');
-                }
-                alert('Акаунт видалено');
-                // Here you should also clear any stored authentication tokens
-                // and redirect the user to the login page or home page
+                // Видалення акаунта користувача
             } catch (error) {
-                console.error('Помилка:', error);
-                alert('Не вдалось видалити акаунт');
+                console.error('Error deleting account:', error);
             }
         }
     };
 
-    if (!user) {
-        return <div>Завантаження...</div>;
-    }
+    // Додаємо пропущені функції
+    const removeFromCart = (productId) => {
+        // Реалізація видалення товару з кошика
+    };
+
+    if (loading) return <div>Loading...</div>;
+    if (error) return <div>Error: {error}</div>;
+    if (!user) return <div>No user data available</div>;
 
     return (
         <div className="user-profile">
             <h1>Особистий кабінет</h1>
             <div className="wrapper-inner">
-
                 <div className="user-info">
-
-                    <p><b>Ім'я:</b> {user.name}</p>
-                    <p><b>Email:</b> {user.email}</p>
-
+                    <p><b>Ім'я:</b> {user?.name || 'No name provided'}</p>
+                    <p><b>Email:</b> {user?.email || 'No email provided'}</p>
                     <div className="user-cart">
-                        {user.cart && user.cart.length > 0 && (
+                        {user.cart && user.cart.length > 0 ? (
                             <>
                                 <h2>Кошик</h2>
                                 <ul>
                                     {user.cart.map(item => (
                                         <li key={item.id}>
                                             {item.title} - Ціна: {item.price}
+
                                             <button onClick={() => removeFromCart(item.id)}>Видалити з кошика</button>
                                         </li>
                                     ))}
                                 </ul>
                             </>
+                        ) : (
+                            <p>Кошик пустий.</p>
                         )}
                     </div>
                 </div>
+
                 <div className="user-setting">
                     <h3>Налаштунки</h3>
                     <form onSubmit={handleUpdateProfile} className="form-setting">
