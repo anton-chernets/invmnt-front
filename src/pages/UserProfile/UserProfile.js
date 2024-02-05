@@ -46,8 +46,10 @@ const UserProfile = () => {
             <h1>Особистий кабінет</h1>
             <div className="wrapper-inner">
                 <div className="user-info">
-                    <p><b>Ім'я:</b> {user?.name || 'No name provided'}</p>
-                    <p><b>Email:</b> {user?.email || 'No email provided'}</p>
+                    <div className="user-contacts">
+                        <p><b>Ім'я:</b> {user?.name || 'No name provided'}</p>
+                        <p><b>Email:</b> {user?.email || 'No email provided'}</p>
+                    </div>
                     <div className="user-cart">
                         {user.cart && user.cart.length > 0 ? (
                             <>
