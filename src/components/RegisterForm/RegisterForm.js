@@ -6,9 +6,9 @@ const RegisterForm = () => {
     const [username, setUsername] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [confirmPassword, setConfirmPassword] = useState('');
+    // const [confirmPassword, setConfirmPassword] = useState('');
     const [showPassword, setShowPassword] = useState(false);
-    const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+    // const [showConfirmPassword, setShowConfirmPassword] = useState(false);
     const navigate = useNavigate();
     const goToLogin = () => {
         navigate('/login');
@@ -20,20 +20,20 @@ const RegisterForm = () => {
     };
 
     // Функція для перемикання видимості підтвердження пароля
-    const toggleConfirmPasswordVisibility = () => {
-        setShowConfirmPassword(!showConfirmPassword);
-    };
+    // const toggleConfirmPasswordVisibility = () => {
+    //     setShowConfirmPassword(!showConfirmPassword);
+    // };
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        if (!username || !email || !password || !confirmPassword) {
+        if (!username || !email || !password ) {
             alert('Будь ласка, заповніть усі поля.');
             return;
         }
-        if (password !== confirmPassword) {
-            alert('Паролі не співпадають.');
-            return;
-        }
+        // if (password !== confirmPassword) {
+        //     alert('Паролі не співпадають.');
+        //     return;
+        // }
 
         const userData = {
             name: username,
