@@ -4,21 +4,53 @@ import useFetchUser from '../../components/FetchUser/FetchUser';
 
 const UserProfile = () => {
     const token = localStorage.getItem('authToken');
-    const { user, loading, error } = useFetchUser(token);
+    const { user, setUser, loading, error } = useFetchUser(token);
     console.log(user)
 
-    const [newEmail, setNewEmail] = useState(user?.email || '');
+    // const [newEmail, setNewEmail] = useState(user?.email || '');
     const [newPassword, setNewPassword] = useState('');
 
-    const handleEmailChange = (e) => setNewEmail(e.target.value);
+    // const handleEmailChange = (e) => setNewEmail(e.target.value);
     const handlePasswordChange = (e) => setNewPassword(e.target.value);
+    const [newName, setNewName] = useState(user?.name || '');
 
+    const handleNameChange = (e) => {
+        setNewName(e.target.value);
+    };
     const handleUpdateProfile = async (e) => {
         e.preventDefault();
+
+        const updatedInfo = {
+            password: newPassword,
+        };
+
         try {
-            // Оновлення профілю користувача
+
+            const response = await fetch('http://95.217.181.158/api/user/update', {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`
+                },
+                body: JSON.stringify(updatedInfo)
+            });
+
+            if (!response.ok) {
+                // If the response is not OK, throw an error
+                const errorData = await response.json();
+                throw new Error(errorData.message || 'Failed to update profile');
+            }
+
+
+            const data = await response.json();
+            setUser(data);
+
+
+            alert('Profile updated successfully');
         } catch (error) {
+
             console.error('Error updating profile:', error);
+            alert(error.toString());
         }
     };
 
@@ -33,9 +65,34 @@ const UserProfile = () => {
     };
 
     // Додаємо пропущені функції
-    const removeFromCart = (productId) => {
-        // Реалізація видалення товару з кошика
+    const removeFromCart = async (productId) => {
+        try {
+            const response = await fetch(`http://95.217.181.158/api/cart/${productId}`, {
+                method: 'DELETE',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`, // Тут використовуємо збережений токен
+                },
+            });
+
+            if (!response.ok) {
+                throw new Error('Failed to remove product from cart');
+            }
+
+            // Оновлення стану кошика після успішного видалення товару на сервері
+            setUser(prevUser => ({
+                ...prevUser,
+                cart: prevUser.cart.filter(item => item.id !== productId)
+            }));
+
+            // Оповіщення користувача про успішне видалення товару
+            alert('Product removed from cart');
+        } catch (error) {
+            console.error('Error removing product from cart:', error);
+            alert('Failed to remove product from cart');
+        }
     };
+
 
     if (loading) return <div>Loading...</div>;
     if (error) return <div>Error: {error}</div>;
@@ -73,12 +130,12 @@ const UserProfile = () => {
                 <div className="user-setting">
                     <h3>Налаштунки</h3>
                     <form onSubmit={handleUpdateProfile} className="form-setting">
-                        <label htmlFor="newEmail">Новий Email:</label>
+                        <label htmlFor="newName">Нове Ім'я:</label>
                         <input
-                            id="newEmail"
-                            type="email"
-                            value={newEmail}
-                            onChange={handleEmailChange}
+                            id="newName"
+                            type="text"
+                            value={newName}
+                            onChange={handleNameChange}
                         />
                         <label htmlFor="newPassword">Новий Пароль:</label>
                         <input
