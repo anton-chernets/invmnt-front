@@ -20,13 +20,14 @@ const Header = () => {
     const [rates, setRates] = useState([]);
 
     const API_KEY = 'b711ef9539457b4879560e7e'; // Замініть на ваш ключ API
-    const URL = `https://v6.exchangerate-api.com/v6/${API_KEY}/latest/USD`;
+    const URL = `https://v6.exchangerate-api.com/v6/${API_KEY}/latest/UAH`;
 
     useEffect(() => {
         const fetchRates = async () => {
             const response = await fetch(URL);
             const data = await response.json();
-            setRates(Object.entries(data.conversion_rates).slice(0, 10));
+            console.log(data)
+            setRates(Object.entries(data.conversion_rates).slice(0, 50));
         };
 
         fetchRates();
