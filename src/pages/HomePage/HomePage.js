@@ -8,6 +8,7 @@ const HomePage = () => {
 
 
         <div className="home-page">
+            <h1>Новини</h1>
             <div className="scroll-to-top">
                 <ScrollToTopButton/>
             </div>

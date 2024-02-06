@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './Checkout.css';
+// import useFetchUser from '../../components/FetchUser/FetchUser';
 
 const CheckoutPage = ({ cart, setCart }) => {
     const [totalPrice, setTotalPrice] = useState(0);
     const navigate = useNavigate();
+    const token = localStorage.getItem('authToken');
 
     useEffect(() => {
         // Calculate total price of the cart items
@@ -12,13 +14,47 @@ const CheckoutPage = ({ cart, setCart }) => {
         setTotalPrice(total);
     }, [cart]);
 
-    const handleCheckout = () => {
-        // Implement checkout logic here
-        console.log('Proceeding to checkout...');
-        // After successful checkout, you might want to clear the cart
-        // setCart([]);
-        // navigate to a success page
-        navigate('/success');
+    const handleCheckout = async () => {
+        // Перевірка на наявність товарів у корзині
+        if (cart.length === 0) {
+            alert("Ваша корзина порожня!");
+            return;
+        }
+
+        // Підготовка даних для відправки
+        const orderData = {
+            items: cart,
+            total: totalPrice,
+            // Додайте інші необхідні дані, якщо потрібно
+        };
+
+        try {
+            // Відправка POST-запиту до API
+            const response = await fetch('http://95.217.181.158/api/checkout', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`
+                },
+                body: JSON.stringify(orderData)
+            });
+
+            if (!response.ok) {
+                // Якщо відповідь не OK, вивести помилку
+                const errorData = await response.json();
+                throw new Error(errorData.message || 'Помилка під час оформлення замовлення');
+            }
+
+            // Очищення корзини після успішного оформлення замовлення
+            setCart([]);
+
+            // Перехід на сторінку успіху або показ сповіщення про успішне оформлення замовлення
+            navigate('/success');
+            alert('Ваше замовлення успішно оформлено!');
+        } catch (error) {
+            console.error('Помилка:', error);
+            alert('Помилка під час оформлення замовлення: ' + error.message);
+        }
     };
 
     if (!cart.length) {

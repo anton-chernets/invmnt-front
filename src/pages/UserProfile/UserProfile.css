@@ -6,10 +6,8 @@
     align-items: center;
     justify-content: flex-start;
     min-height: 100vh;
-    background-color: #ecf0f1;
+    background-color: transparent;
     color: #333;
-    border-radius: 10px;
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
 }
 
 .user-info {

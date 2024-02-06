@@ -30,18 +30,19 @@ const NewsFeed = () => {
     }, []);
     return (
         <div className="news-container">
+
             <div className="news-items">
                 <div className="news-header">
-                    <h1>Новини</h1>
+
                 </div>
                 {news.map((item, index) => {
                     const key = `${item.title}-${item.publishedAt}-${index}`;
                     return (
                         <div className="news-item" key={key}>
-                            <Link to={`/news/${index}`} style={{ textDecoration: 'none' }}>
+                            <Link to={`/news/${index}`} style={{textDecoration: 'none'}}>
                                 <h2>{item.title}</h2>
                                 {/* Відображення зображення новини */}
-                                <img src={item.urlToImage} alt={item.title} className="news-image" />
+                                <img src={item.urlToImage} alt={item.title} className="news-image"/>
                             </Link>
                             <p>{item.description}</p>
                         </div>
@@ -49,7 +50,7 @@ const NewsFeed = () => {
                 })}
 
             </div>
-            <Sidebar />
+            <Sidebar/>
         </div>
     );
 };

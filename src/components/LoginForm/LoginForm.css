@@ -1,6 +1,4 @@
 .login-form-container {
-    border-radius: 10px;
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
     max-width: 1600px;
     margin: 20px auto 100px;
     display: flex;
@@ -8,12 +6,14 @@
     align-items: center;
     justify-content: flex-start;
     min-height: 100vh;
-    background-color: #ecf0f1;
+    background-color: transparent;
     color: #333;
 }
+
 .wrapper-form {
     width: 400px;
     background: #ffffff;
+    /*background: transparent;*/
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -42,13 +42,12 @@
     margin-bottom: 0.5rem;
     color: #333;
 }
+
 .droup-button {
     display: flex;
-    /*justify-content: center;*/
     align-items: center;
     margin: 50px auto 0;
 }
-
 
 .form-field {
     width: 95%;
@@ -64,15 +63,17 @@
     outline: none;
     box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.2);
 }
+
 .form-button {
     margin-left: 0;
 }
+
 .form-link {
     display: flex;
     justify-content: center;
-    /*align-items: start;*/
     flex-direction: column;
 }
+
 .form-link a {
     color: #3498db;
     text-decoration: none;
@@ -89,10 +90,12 @@
     .form {
         width: 95%;
     }
+
     .wrapper-form {
         max-width: 350px;
         margin: 20px;
     }
+
     .form-link a {
         margin-top: 6px;
         font-size: 16px;

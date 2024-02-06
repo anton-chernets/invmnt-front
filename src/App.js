@@ -17,9 +17,7 @@ import CartPage from "./pages/CartPage/CartPage";
 import PasswordReset from "./components/PasswordReset/PasswordReset";
 import SearchResults from "./components/SearchResaults/SearchResults";
 import {AuthProvider} from "./components/AuthContext/AuthContext";
-
-
-
+import SuccessPage from "./pages/SuccessPage/SuccessPage";
 
 
 function App() {
@@ -58,31 +56,27 @@ function App() {
     return (
         <AuthProvider>
             <Router>
-
                 <Header/>
-                <Routes>
-
-                <Route path="/" element={<HomePage/>}/>
-                <Route path="/shop" element={<ShopPage/>}/>
-                <Route path="/admin" element={<AdminDashboard/>}/>
-                <Route path="/admin/products" element={<ManageProducts/>}/>
-                <Route path="/admin/users" element={<ManageUsers/>}/>
-                <Route path="/login" element={<LoginForm/>}/>
-                <Route path="/register" element={<RegisterForm/>}/>
-                <Route path="/user" element={<UserProfile/>}/>
-                <Route path="/products/:productId" element={<ProductDetails/>}/>
-                <Route path="/news/:newsId" element={<NewsDetails/>}/>
-                <Route path="/checkout" element={<Checkout/>}/>
-                <Route path="/cart" element={<CartPage/>}/>
-                <Route path="/passwordreset" element={<PasswordReset/>}/>
-                <Route path="/search" element={<SearchResults/>}/>
-            </Routes>
-
-            <Footer/>
-
-        </Router>
-</AuthProvider>
-
+                    <Routes>
+                        <Route path="/" element={<HomePage/>}/>
+                        <Route path="/shop" element={<ShopPage/>}/>
+                        <Route path="/admin" element={<AdminDashboard/>}/>
+                        <Route path="/admin/products" element={<ManageProducts/>}/>
+                        <Route path="/admin/users" element={<ManageUsers/>}/>
+                        <Route path="/login" element={<LoginForm/>}/>
+                        <Route path="/register" element={<RegisterForm/>}/>
+                        <Route path="/user" element={<UserProfile/>}/>
+                        <Route path="/products/:productId" element={<ProductDetails/>}/>
+                        <Route path="/news/:newsId" element={<NewsDetails/>}/>
+                        <Route path="/checkout" element={<Checkout/>}/>
+                        <Route path="/cart" element={<CartPage/>}/>
+                        <Route path="/passwordreset" element={<PasswordReset/>}/>
+                        <Route path="/search" element={<SearchResults/>}/>
+                        <Route path="/success" element={<SuccessPage />} />
+                    </Routes>
+                <Footer/>
+            </Router>
+        </AuthProvider>
     );
 }
 

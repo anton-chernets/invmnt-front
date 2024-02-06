@@ -1,9 +1,16 @@
+
 body {
   margin: 0;
   font-family: 'Helvetica',
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-image: url('../src/img/bg.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+
 }
 
 code {
@@ -19,7 +26,7 @@ button {
   padding: 0 30px;
   margin: 10px;
   border: none;
-  background: linear-gradient(45deg, #37474f, #414141);
+  background: linear-gradient(45deg, #37474f, #566ea6);
   color: white;
   font-size: 16px;
   font-weight: 600;
@@ -34,12 +41,12 @@ button {
 }
 
 button:hover {
-  background: linear-gradient(45deg, #b6b6b6, #111111);
+  background: linear-gradient(45deg, #b6b6b6, #469187);
   box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2);
 }
 
 button:active {
-  background: linear-gradient(45deg, #4d4d4d, #2c2c2c);
+  background: linear-gradient(45deg, #4d4d4d, #488080);
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   transform: translateY(2px);
 }

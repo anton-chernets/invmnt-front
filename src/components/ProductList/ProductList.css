@@ -3,13 +3,13 @@
     flex-wrap: wrap;
     gap: 20px;
     justify-content: center;
-    max-width: 1500px;
+    max-width: 1400px;
     margin: 20px auto 0;
 }
 
 .product-wrapper > div {
     flex: 0 1 calc(50% - 20px);
-    border: 1px solid #eee;
+    border: 1px solid #2f85cc;
     border-radius: 10px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     padding: 20px;
