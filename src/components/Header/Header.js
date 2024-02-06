@@ -17,7 +17,7 @@ const Header = () => {
 
 
 
-    const [isLoadingRates, setIsLoadingRates] = useState(false);
+    const [isLoadingRates] = useState(false);
     const [isSearching, setIsSearching] = useState(false);
 
     const [rates, setRates] = useState([]);
