@@ -160,14 +160,16 @@ const Header = () => {
                         )}
                     </div>
                 </div>
-                <div className='ticker-wrap'>
+
+            </div>
+            <div className='ticker-wrap'>
                 <div className="ticker">
                     {rates.map(([currency, rate], index) => (
                         <div key={index} className="ticker__item">
                             {currency}: {rate.toFixed(2)}
                         </div>
                     ))}
-                </div></div>
+                </div>
             </div>
         </header>
     );

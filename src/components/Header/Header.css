@@ -101,7 +101,7 @@
     overflow: hidden;
     background-color: white; /* Ваш колір фону */
     width: 100%;
-    margin: 0 auto;
+    margin: 0 ;
 }
 
 .ticker {
