@@ -6,6 +6,7 @@
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
+    "axios": "^1.6.7",
     "chart.js": "^4.4.1",
     "react": "^18.2.0",
     "react-chartjs-2": "^5.2.0",
@@ -23,7 +24,6 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
-
   "eslintConfig": {
     "extends": [
       "react-app",
@@ -44,6 +44,7 @@
   },
   "devDependencies": {
     "@babel/plugin-proposal-private-property-in-object": "^7.21.11"
-  }
+  },
+  "proxy": "https://min-api.cryptocompare.com"
 
 }

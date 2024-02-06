@@ -1,39 +1,57 @@
-import React, {useState, useEffect, useContext} from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import './Header.css';
 import logoImage from '../../img/Untitled.png';
-import {AuthContext} from "../AuthContext/AuthContext";
+import { AuthContext } from "../AuthContext/AuthContext";
+import axios from 'axios';
 
 const Header = () => {
     const navigate = useNavigate();
-
     const location = useLocation();
-
     const { isAuthenticated, setIsAuthenticated } = useContext(AuthContext);
     const [isMenuOpen, setIsMenuOpen] = useState(false);
-    // const [isLoggedIn, setIsLoggedIn] = useState(false);
-    // const [isAdmin, setIsAdmin] = useState(false);
 
     const [query, setQuery] = useState('');
     const [searchResults, setSearchResults] = useState([]);
 
-    const [rates, setRates] = useState([]);
 
-    const API_KEY = 'b711ef9539457b4879560e7e'; // Замініть на ваш ключ API
-    const URL = `https://v6.exchangerate-api.com/v6/${API_KEY}/latest/UAH`;
+
+
+    const [isLoadingRates, setIsLoadingRates] = useState(false);
+    const [isSearching, setIsSearching] = useState(false);
+
+    const [rates, setRates] = useState([]);
+    const [isLoading, setIsLoading] = useState(false);
+    const [error, setError] = useState(null);
+
+
+
 
     useEffect(() => {
-        const fetchRates = async () => {
-            const response = await fetch(URL);
-            const data = await response.json();
-            console.log(data)
-            setRates(Object.entries(data.conversion_rates).slice(0, 50));
+        const fetchData = async () => {  // Объявляем асинхронную функцию внутри useEffect
+            setIsLoading(true);
+            const API_KEY = '89477152f7a313f13d6ddb636a5f04d247904bdb1d77162546010c3cecadb2d1'; // Замените на ваш ключ API
+            const url = `/data/pricemulti?fsyms=BTC,USD,EUR,GBP,JPY,CAD,AUD,CHF,CNY,SEK,NZD,ETH,LTC,XRP,BCH,ADA,DOT,XLM,LINK,DOGE,UNI,BSV,EOS,XMR,XTZ&tsyms=UAH`;
+
+
+            try {
+                const response = await axios.get(url, {
+                    headers: { 'Api-Key': API_KEY },
+                });
+                if (response.status === 200) {
+                    setRates(response.data);
+                } else {
+                    throw new Error('Error fetching data');
+                }
+            } catch (error) {
+                setError(error.message);
+            } finally {
+                setIsLoading(false);
+            }
         };
 
-        fetchRates();
-    }, [URL]);
-
-
+        fetchData();  // Вызываем асинхронную функцию
+    }, []);
 
     const toggleMenu = () => {
         setIsMenuOpen(!isMenuOpen);
@@ -41,7 +59,7 @@ const Header = () => {
 
     const handleLogout = () => {
         localStorage.removeItem('authToken');
-        setIsAuthenticated(false); // Оновіть стан аутентифікації
+        setIsAuthenticated(false);
         navigate('/');
     };
 
@@ -50,14 +68,6 @@ const Header = () => {
     const shouldShowAuthButtons = () => {
         return !isAuthenticated && !hideAuthButtonsPaths.includes(location.pathname);
     };
-
-    // const shouldShowAdminButton = () => {
-    //     return isAuthenticated; // Упростіть цю логіку, якщо роль 'admin' вже врахована в `isAuthenticated`
-    // };
-
-    // const goToAdminPanel = () => {
-    //     navigate('/admin');
-    // };
 
     const goToUserProfile = () => {
         navigate('/user');
@@ -70,7 +80,6 @@ const Header = () => {
     const goToRegister = () => {
         navigate('/register');
     };
-
 
     const handleSearchChange = (e) => {
         const newQuery = e.target.value;
@@ -89,24 +98,23 @@ const Header = () => {
     };
 
     const fetchSearchResults = async (query) => {
+        setIsSearching(true);
         try {
             const response = await fetch(`/api/search?q=${encodeURIComponent(query)}`);
             const data = await response.json();
             setSearchResults(data);
         } catch (error) {
             console.error('Error fetching data:', error);
+        } finally {
+            setIsSearching(false);
         }
     };
 
-
     return (
         <header className="header">
-
-            {/* Підключення Font Awesome для іконки меню */}
-            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css"/>
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" />
             <div className="header-top">
                 <div className="wrap">
-                    {/* Кнопка для відкриття меню на мобільних пристроях */}
                     <button onClick={toggleMenu} className="button-menu">
                         <i className="fas fa-bars"></i> Меню
                     </button>
@@ -120,17 +128,13 @@ const Header = () => {
                     </nav>
                 </div>
             </div>
-
-            {/* Нижній блок для кнопок авторизації, пошуку та інших контролів */}
             <div className="header-bottom">
                 <div className="wrap">
                     <div className="header-logo">
                         <Link to="/">
-                            <img src={logoImage} alt="Investment"/><b>Investment</b>
+                            <img src={logoImage} alt="Investment" /><b>Investment</b>
                         </Link>
-
                     </div>
-
                     <form onSubmit={handleSearchSubmit} className="search-form">
                         <input
                             type="text"
@@ -152,28 +156,36 @@ const Header = () => {
                         )}
                         {isAuthenticated && (
                             <>
-                                {/*{shouldShowAdminButton() &&*/}
-                                {/*    <button onClick={goToAdminPanel} className="button">Адмін</button>*/}
                                 <button onClick={goToUserProfile} className="button">Кабінет</button>
                                 <button onClick={handleLogout} className="button">Вийти</button>
                             </>
                         )}
                     </div>
                 </div>
-
             </div>
-            <div className='ticker-wrap'>
-                <div className="ticker">
-                    {rates.map(([currency, rate], index) => (
-                        <div key={index} className="ticker__item">
-                            {currency}: {rate.toFixed(2)}
+            {isLoadingRates ? (
+                <div className="loading">Загрузка курсов...</div>
+            ) : (
+                <div className='ticker-wrap'>
+                    {isLoading ? (
+                        <div>Loading...</div>
+                    ) : error ? (
+                        <div>Error: {error}</div>
+                    ) : (
+                        <div className="ticker">
+                            {Object.entries(rates).map(([key, value]) => (
+                                <div key={key} className="crypto-rate">
+                                    <h2>{key}</h2>
+                                    <p>{value.UAH} UAH</p>
+                                </div>
+                            ))}
                         </div>
-                    ))}
+                    )}
                 </div>
-            </div>
+            )}
+            {isSearching && <div className="loading">Поиск...</div>}
         </header>
     );
 };
 
 export default Header;
-
