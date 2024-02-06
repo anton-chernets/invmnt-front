@@ -54,15 +54,22 @@ const UserProfile = () => {
         }
     };
 
-    const handleDeleteAccount = async () => {
-        if (window.confirm('Ви впевнені, що хочете видалити свій акаунт?')) {
-            try {
-                // Видалення акаунта користувача
-            } catch (error) {
-                console.error('Error deleting account:', error);
-            }
-        }
-    };
+    // const handleDeleteAccount = async () => {
+    //     if (window.confirm('Ви впевнені, що хочете видалити свій акаунт?')) {
+    //         try {
+    //             const response = await fetch('http://95.217.181.158/api/user/remove', {
+    //                 method: 'DELETE',
+    //                 headers: {
+    //                     'Content-Type': 'application/json',
+    //                     'Authorization': `Bearer ${token}`
+    //                 },
+    //                 body: JSON.stringify()
+    //             });
+    //         } catch (error) {
+    //             console.error('Error deleting account:', error);
+    //         }
+    //     }
+    // };
 
     // Додаємо пропущені функції
     const removeFromCart = async (productId) => {
@@ -146,7 +153,7 @@ const UserProfile = () => {
                         />
                         <button type="submit">Оновити дані</button>
                     </form>
-                    <button onClick={handleDeleteAccount} className="delete-account">Видалити акаунт</button>
+                    {/*<button onClick={handleDeleteAccount} className="delete-account">Видалити акаунт</button>*/}
                 </div>
             </div>
         </div>

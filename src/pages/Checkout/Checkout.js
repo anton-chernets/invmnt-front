@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './Checkout.css';
-// import useFetchUser from '../../components/FetchUser/FetchUser';
 
 const CheckoutPage = ({ cart, setCart }) => {
     const [totalPrice, setTotalPrice] = useState(0);

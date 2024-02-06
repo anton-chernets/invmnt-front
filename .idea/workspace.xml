@@ -6,26 +6,10 @@
   <component name="ChangeListManager">
     <list default="true" id="9e423c87-fcc7-4ec7-9b14-5c2d8e0e0ee0" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/Header/Header.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Header/Header.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/LoginForm/LoginForm.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/LoginForm/LoginForm.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/NewsFeed/NewsFeed.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/NewsFeed/NewsFeed.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/NewsFeed/NewsFeed.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/NewsFeed/NewsFeed.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/PasswordReset/PasswordReset.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/PasswordReset/PasswordReset.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/PrivateRoute/PrivateRoute.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/ProductList/ProductList.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/ProductList/ProductList.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/RegisterForm/RegisterForm.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/RegisterForm/RegisterForm.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/SearchResaults/SearchResults.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/SearchResaults/SearchResults.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Sidebar/Sidebar.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Sidebar/Sidebar.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/CartPage/CartPage.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/CartPage/CartPage.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Header/Header.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Header/Header.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/pages/Checkout/Checkout.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Checkout/Checkout.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/HomePage/HomePage.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/HomePage/HomePage.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/HomePage/HomePage.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/HomePage/HomePage.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/ShopPage/ShopPage.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/ShopPage/ShopPage.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/UserProfile/UserProfile.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/UserProfile/UserProfile.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/admin/AdminDashboard/AdminDashboard.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/admin/AdminDashboard/AdminDashboard.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/UserProfile/UserProfile.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/UserProfile/UserProfile.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -120,7 +104,7 @@
       <workItem from="1706945995596" duration="13555000" />
       <workItem from="1707041747421" duration="25328000" />
       <workItem from="1707134409772" duration="13927000" />
-      <workItem from="1707216243243" duration="7972000" />
+      <workItem from="1707216243243" duration="14583000" />
     </task>
     <servers />
   </component>

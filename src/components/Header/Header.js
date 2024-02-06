@@ -17,8 +17,22 @@ const Header = () => {
     const [query, setQuery] = useState('');
     const [searchResults, setSearchResults] = useState([]);
 
+    const [rates, setRates] = useState([]);
+
+    const API_KEY = 'b711ef9539457b4879560e7e'; // Замініть на ваш ключ API
+    const URL = `https://v6.exchangerate-api.com/v6/${API_KEY}/latest/USD`;
+
     useEffect(() => {
-    }, []);
+        const fetchRates = async () => {
+            const response = await fetch(URL);
+            const data = await response.json();
+            setRates(Object.entries(data.conversion_rates).slice(0, 10));
+        };
+
+        fetchRates();
+    }, [URL]);
+
+
 
     const toggleMenu = () => {
         setIsMenuOpen(!isMenuOpen);
@@ -83,6 +97,7 @@ const Header = () => {
         }
     };
 
+
     return (
         <header className="header">
 
@@ -138,12 +153,20 @@ const Header = () => {
                             <>
                                 {/*{shouldShowAdminButton() &&*/}
                                 {/*    <button onClick={goToAdminPanel} className="button">Адмін</button>*/}
-                                    <button onClick={goToUserProfile} className="button">Кабінет</button>
-                                    <button onClick={handleLogout} className="button">Вийти</button>
+                                <button onClick={goToUserProfile} className="button">Кабінет</button>
+                                <button onClick={handleLogout} className="button">Вийти</button>
                             </>
                         )}
                     </div>
                 </div>
+                <div className='ticker-wrap'>
+                <div className="ticker">
+                    {rates.map(([currency, rate], index) => (
+                        <div key={index} className="ticker__item">
+                            {currency}: {rate.toFixed(2)}
+                        </div>
+                    ))}
+                </div></div>
             </div>
         </header>
     );
