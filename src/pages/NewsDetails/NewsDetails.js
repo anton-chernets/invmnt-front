@@ -33,7 +33,7 @@ function NewsDetails() {
   }
 
     return (
-        <div className="news-container">
+        <div className="news-container-detail">
                 <div className="news-details">
 
                 <h1>{newsItem.title}</h1>

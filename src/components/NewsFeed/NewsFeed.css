@@ -1,9 +1,7 @@
 .news-item {
     background-color: #ececec;
-    /*background-color: transparent;*/
     padding: 15px;
     margin: 0 10px 10px;
-
     border-radius: 10px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     transition: transform 0.3s ease;
@@ -71,6 +69,7 @@
         width: 100%;
         margin-top: 10px;
         padding: 15px;
+
     }
 
     .news-item {
@@ -80,7 +79,7 @@
     }
 
     .news-items {
-        max-width: 100%;
+        width: 100%;
         padding-left: 0;
 
     }

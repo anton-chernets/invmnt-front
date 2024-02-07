@@ -1,7 +1,7 @@
 .scroll-to-top {
     position: fixed;
     bottom: 2rem;
-    right: 2rem;
+    right: 50px;
     background-color: #3498db; /* Or any color that matches your design */
     color: white;
     padding: 0.5rem 1rem;
@@ -15,4 +15,11 @@
 
 .scroll-to-top:hover {
     opacity: 1; /* Fully opaque on hover */
+}
+@media (max-width: 1000px) {
+    .scroll-to-top button {
+        position: fixed;
+        bottom: 2rem;
+        right: 50px;
+    }
 }

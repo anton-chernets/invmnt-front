@@ -7,6 +7,7 @@
     left: 0;
     bottom: 0;
     width: 100%;
+    max-width: 1400px;
     height: 25px;
 }
 
@@ -14,4 +15,10 @@
     margin: 0;
     font-size: 1em;
     padding: 5px 0 0;
+}
+@media (max-width: 915px) {
+    .footer {
+        width: 100%;
+        max-width: 915px;
+    }
 }

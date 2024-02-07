@@ -135,13 +135,8 @@
     .header {
         width: 100%;
     }
-    /*.header-top {*/
-    /*    max-width: 100%;*/
-    /*    align-items: center;*/
-    /*    padding-left: 35%;*/
-    /*}*/
     .header-bottom {
-        height: 120px;
+        height: 130px;
         width: 100%;
         padding-top: 10px;
     }
