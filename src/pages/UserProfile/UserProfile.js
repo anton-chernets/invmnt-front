@@ -1,17 +1,16 @@
-import React, { useState } from 'react';
+import React, {useContext, useState} from 'react';
 import './UserProfile.css';
 import useFetchUser from '../../components/FetchUser/FetchUser';
 import { useNavigate } from 'react-router-dom';
-// import { AuthContext } from "../../components/AuthContext/AuthContext";
+import { AuthContext } from "../../components/AuthContext/AuthContext";
 
 
 const UserProfile = () => {
     const token = localStorage.getItem('authToken');
     const { user, setUser, loading, error } = useFetchUser(token);
     const navigate = useNavigate();
-    // const { isAuthenticated, setIsAuthenticated } = useContext(AuthContext);
+    const { setIsAuthenticated } = useContext(AuthContext);
     console.log(user)
-
     // const [newEmail, setNewEmail] = useState(user?.email || '');
     const [newPassword, setNewPassword] = useState('');
 
@@ -78,9 +77,10 @@ const UserProfile = () => {
 
                     // Очистка токена авторизации, так как аккаунт более не существует
                     localStorage.removeItem('authToken');
+                    setIsAuthenticated(false);
 
                     // Переадресация пользователя на главную страницу или страницу входа
-                    navigate('/login');
+                    navigate('/');
                 } else {
                     // Если сервер вернул ошибку
                     throw new Error('Помилка при видаленні акаунту.');
