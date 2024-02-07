@@ -13,7 +13,7 @@ const UserProfile = () => {
 
     const [newPassword, setNewPassword] = useState('');
     const [newName, setNewName] = useState(user?.name || '');
-    const isAdmin = user && user.name === 'Admin';
+    const isAdmin = user && user.roles.includes('Admin');
     console.log(user)
 
     const handlePasswordChange = (e) => setNewPassword(e.target.value);
