@@ -17,7 +17,7 @@ const UserProfile = () => {
     // const handleEmailChange = (e) => setNewEmail(e.target.value);
     const handlePasswordChange = (e) => setNewPassword(e.target.value);
     const [newName, setNewName] = useState(user?.name || '');
-
+    const isAdmin = user && user.role === 'admin';
     const handleNameChange = (e) => {
         setNewName(e.target.value);
     };
@@ -175,7 +175,11 @@ const UserProfile = () => {
                         />
                         <button type="submit">Оновити дані</button>
                     </form>
-                    <button onClick={handleDeleteAccount} className="delete-account">Видалити акаунт</button>
+                    {!isAdmin && (
+                        <button onClick={handleDeleteAccount} className="delete-account">
+                            Видалити акаунт
+                        </button>
+                    )}
                 </div>
             </div>
         </div>

@@ -8,22 +8,19 @@ import axios from 'axios';
 const Header = () => {
     const navigate = useNavigate();
     const location = useLocation();
-    const { isAuthenticated, setIsAuthenticated } = useContext(AuthContext);
+    const { user, isAuthenticated, setIsAuthenticated } = useContext(AuthContext);
     const [isMenuOpen, setIsMenuOpen] = useState(false);
-
     const [query, setQuery] = useState('');
     const [searchResults, setSearchResults] = useState([]);
-
-
-
-
     const [isLoadingRates] = useState(false);
     const [isSearching, setIsSearching] = useState(false);
-
     const [rates, setRates] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState(null);
 
+
+    // Функция для проверки, является ли пользователь администратором
+    const isAdmin = user && user.role === 'admin';
 
 
 
@@ -80,6 +77,9 @@ const Header = () => {
     const goToRegister = () => {
         navigate('/register');
     };
+    const goToAdmin = () => {
+        navigate('/admin')
+    }
 
     const handleSearchChange = (e) => {
         const newQuery = e.target.value;
@@ -156,8 +156,10 @@ const Header = () => {
                         )}
                         {isAuthenticated && (
                             <>
+                                {isAdmin && <button onClick={goToAdmin} className="button">Admin</button>}
                                 <button onClick={goToUserProfile} className="button">Кабінет</button>
                                 <button onClick={handleLogout} className="button">Вийти</button>
+
                             </>
                         )}
                     </div>
