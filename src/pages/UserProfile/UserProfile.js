@@ -9,15 +9,14 @@ const UserProfile = () => {
     const token = localStorage.getItem('authToken');
     const { user, setUser, loading, error } = useFetchUser(token);
     const navigate = useNavigate();
-    const { setIsAuthenticated } = useContext(AuthContext);
-    console.log(user)
-    // const [newEmail, setNewEmail] = useState(user?.email || '');
-    const [newPassword, setNewPassword] = useState('');
+    const { isAuthenticated, setIsAuthenticated } = useContext(AuthContext);
 
-    // const handleEmailChange = (e) => setNewEmail(e.target.value);
-    const handlePasswordChange = (e) => setNewPassword(e.target.value);
+    const [newPassword, setNewPassword] = useState('');
     const [newName, setNewName] = useState(user?.name || '');
-    const isAdmin = user && user.role === 'admin';
+    const isAdmin = user && user.name === 'Admin';
+    console.log(user)
+
+    const handlePasswordChange = (e) => setNewPassword(e.target.value);
     const handleNameChange = (e) => {
         setNewName(e.target.value);
     };

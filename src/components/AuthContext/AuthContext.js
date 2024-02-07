@@ -6,12 +6,30 @@ export const AuthProvider = ({ children }) => {
     const [isAuthenticated, setIsAuthenticated] = useState(false);
     const [user, setUser] = useState(null);
 
-    useEffect(() => {
+    // Функція для отримання даних користувача
+    const fetchUserDetails = async () => {
         const token = localStorage.getItem('authToken');
         if (token) {
-            setIsAuthenticated(true);
-            // тут можна додати виклик до сервера, щоб отримати дані користувача
+            try {
+                // Запит до API для отримання даних про користувача
+                const response = await fetch('http://95.217.181.158/api/user', {
+                    headers: {
+                        'Authorization': `Bearer ${token}`
+                    }
+                });
+                const data = await response.json();
+                if (data && data.data) {
+                    setUser(data.data); // Зберігаємо інформацію про користувача
+                    setIsAuthenticated(true);
+                }
+            } catch (error) {
+                console.error('Не вдалося отримати дані користувача', error);
+            }
         }
+    };
+
+    useEffect(() => {
+        fetchUserDetails();
     }, []);
 
     return (
