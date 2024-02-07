@@ -20,7 +20,7 @@ const Header = () => {
 
 
     // Функция для проверки, является ли пользователь администратором
-    const isAdmin = user && user.roles && user.roles.includes('Admin');
+    const isAdmin = user && user.roles.includes('Admin');
 
 
 
