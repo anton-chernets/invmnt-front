@@ -5,8 +5,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9e423c87-fcc7-4ec7-9b14-5c2d8e0e0ee0" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/Header/Header.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Header/Header.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/ProductList/ProductList.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/ProductList/ProductList.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/Checkout/Checkout.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Checkout/Checkout.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/pages/UserProfile/UserProfile.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/UserProfile/UserProfile.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/admin/ManageOrders/ManageOrders.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/admin/ManageOrders/ManageOrders.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/admin/ManageProducts/ManageProducts.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/admin/ManageProducts/ManageProducts.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -102,7 +107,7 @@
       <workItem from="1707041747421" duration="25328000" />
       <workItem from="1707134409772" duration="13927000" />
       <workItem from="1707216243243" duration="23702000" />
-      <workItem from="1707242541306" duration="26455000" />
+      <workItem from="1707242541306" duration="31627000" />
     </task>
     <servers />
   </component>
