@@ -2,15 +2,16 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import './NewsFeed.css';
 import Sidebar from "../Sidebar/Sidebar";
+import defaultImage from '../../img/image_2024-02-07_10-47-09.png';
+
 
 
 const NewsFeed = () => {
 
-    const [news, setNews] = useState([]); // <-- 'setNews' might be used or might need to be removed.
+    const [news, setNews] = useState([]);
 
     useEffect(() => {
-        const apiKey = '85f5aebd9d3d4d74a93715856a5a5693';
-        const url = `/v2/top-headlines?country=us&apiKey=${apiKey}`;
+        const url = 'http://95.217.181.158/api/articles';
 
 
         fetch(url)
@@ -21,10 +22,10 @@ const NewsFeed = () => {
                 return response.json();
             })
             .then(data => {
-                if (data?.articles && Array.isArray(data.articles)) {
-                    setNews(data.articles);
+                if (data?.data && Array.isArray(data.data)) {
+                    setNews(data.data);
                 } else {
-                    console.error('Field "articles" is missing from the response');
+                    console.error('Field "data" is missing from the response');
                 }
             })
             .catch(error => console.error('Error:', error));
@@ -33,23 +34,18 @@ const NewsFeed = () => {
         <div className="news-container">
 
             <div className="news-items">
-                <div className="news-header">
-
-                </div>
-                {news.map((item, index) => {
-                    const key = `${item.title}-${item.publishedAt}-${index}`;
+                {news.map((item) => {
+                    const imageUrl = item.images && item.images.length > 0 ? item.images[0] : defaultImage;
                     return (
-                        <div className="news-item" key={key}>
-                            <Link to={`/news/${index}`} style={{textDecoration: 'none'}}>
+                        <div className="news-item" key={item.id}>
+                            <Link to={`/news/${item.id}`} style={{textDecoration: 'none'}}>
                                 <h2>{item.title}</h2>
-                                {/* Відображення зображення новини */}
-                                <img src={item.urlToImage} alt={item.title} className="news-image"/>
+                                <img src={imageUrl} alt={item.title || 'Default'} className="news-image"/>
+                                <p>{item.description}</p>
                             </Link>
-                            <p>{item.description}</p>
                         </div>
                     );
                 })}
-
             </div>
             <Sidebar/>
         </div>
