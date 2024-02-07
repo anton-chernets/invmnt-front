@@ -156,16 +156,9 @@ const Header = () => {
                         )}
                         {isAuthenticated && (
                             <>
-
-                                {/*{isAdmin && (*/}
-                                {/*    <button onClick={goToAdmin} className="delete-account">*/}
-                                {/*        Admin*/}
-                                {/*    </button>*/}
-                                {/*)}*/}
                                 {isAdmin && <button onClick={goToAdmin} className="button">Admin</button>}
                                 <button onClick={goToUserProfile} className="button">Кабінет</button>
                                 <button onClick={handleLogout} className="button">Вийти</button>
-
                             </>
                         )}
                     </div>

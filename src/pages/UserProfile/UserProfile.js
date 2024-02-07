@@ -9,7 +9,7 @@ const UserProfile = () => {
     const token = localStorage.getItem('authToken');
     const { user, setUser, loading, error } = useFetchUser(token);
     const navigate = useNavigate();
-    const { isAuthenticated, setIsAuthenticated } = useContext(AuthContext);
+    const { setIsAuthenticated } = useContext(AuthContext);
 
     const [newPassword, setNewPassword] = useState('');
     const [newName, setNewName] = useState(user?.name || '');
