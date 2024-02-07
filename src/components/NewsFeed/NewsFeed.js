@@ -20,10 +20,12 @@ const NewsFeed = () => {
                     throw new Error(`HTTP error! Status: ${response.status}`);
                 }
                 return response.json();
+
             })
             .then(data => {
                 if (data?.data && Array.isArray(data.data)) {
                     setNews(data.data);
+                    console.log(data)
                 } else {
                     console.error('Field "data" is missing from the response');
                 }
