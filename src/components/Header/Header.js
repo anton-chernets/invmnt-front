@@ -31,7 +31,7 @@ const Header = () => {
         const fetchData = async () => {  // Объявляем асинхронную функцию внутри useEffect
             setIsLoading(true);
             const API_KEY = '89477152f7a313f13d6ddb636a5f04d247904bdb1d77162546010c3cecadb2d1'; // Замените на ваш ключ API
-            const url = `/data/pricemulti?fsyms=BTC,USD,EUR,GBP,JPY,CAD,AUD,CHF,CNY,SEK,NZD,ETH,LTC,XRP,BCH,ADA,DOT,XLM,LINK,DOGE,UNI,BSV,EOS,XMR,XTZ&tsyms=UAH`;
+            const url = `https://min-api.cryptocompare.com/data/pricemulti?fsyms=BTC,USD,EUR,GBP,JPY,CAD,AUD,CHF,CNY,SEK,NZD,ETH,LTC,XRP,BCH,ADA,DOT,XLM,LINK,DOGE,UNI,BSV,EOS,XMR,XTZ&tsyms=UAH`;
 
 
             try {
