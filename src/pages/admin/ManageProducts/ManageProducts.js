@@ -2,36 +2,49 @@ import React, { useEffect, useState } from 'react';
 import './ManageProducts.css';
 import ProductList from "../../../components/ProductList/ProductList";
 
+
+
 const ManageProducts = () => {
     const [products, setProducts] = useState([]);
-    const [newProduct, setNewProduct] = useState({ name: '', description: '', price: 0, image: '' });
+    const [newProduct, setNewProduct] = useState({ name: '', description: '', price: 0 });
+    const token = localStorage.getItem('authToken'); // Assuming you store the token in localStorage
 
-    const handleAddProduct = async (product) => {
-        // Here you would send a POST request to your API to add a product
-        const response = await fetch('/api/products', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(product),
-        });
+    const handleAddProduct = async (productData) => {
+        try {
+            const response = await fetch('http://95.217.181.158/api/products/store', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`
+                },
+                body: JSON.stringify({
+                    title: productData.name,
+                    description: productData.description,
+                    price: productData.price
+                }),
+            });
 
-        if (response.ok) {
+            if (!response.ok) {
+                // Check if the response content type is JSON
+                const contentType = response.headers.get('content-type');
+                if (contentType && contentType.includes('application/json')) {
+                    const errorData = await response.json();
+                    throw new Error(errorData.message || 'There was an error adding the product.');
+                } else {
+                    // Handle non-JSON error response
+                    throw new Error('Server error: ' + response.statusText);
+                }
+            }
+
             const addedProduct = await response.json();
-            setProducts([...products, addedProduct]);
+            setProducts([...products, addedProduct.data]);
+            setNewProduct({ name: '', description: '', price: 0 }); // Reset form
+        } catch (error) {
+            console.error('Error adding product:', error);
+            alert('Error adding product: ' + error.message);
         }
     };
 
-    const handleDeleteProduct = async (productId) => {
-        // Here you would send a DELETE request to your API to delete a product
-        const response = await fetch(`/api/products/${productId}`, {
-            method: 'DELETE',
-        });
-
-        if (response.ok) {
-            setProducts(products.filter(product => product.id !== productId));
-        }
-    };
 
     const handleInputChange = (e) => {
         setNewProduct({ ...newProduct, [e.target.name]: e.target.value });
@@ -40,23 +53,24 @@ const ManageProducts = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
         handleAddProduct(newProduct);
-        setNewProduct({ name: '', description: '', price: 0, image: '' }); // Reset form
     };
 
     useEffect(() => {
-        // Fetch the list of products from your API
         const fetchProducts = async () => {
-            const response = await fetch('/api/products');
-            if (!response.ok) {
-                throw new Error('Failed to fetch products');
+            try {
+                const response = await fetch('http://95.217.181.158/api/products');
+                if (!response.ok) {
+                    throw new Error('Failed to fetch products');
+                }
+                const products = await response.json();
+                setProducts(products);
+            } catch (error) {
+                console.error('Error loading products:', error);
+                // Handle error loading products
             }
-            const products = await response.json();
-            setProducts(products);
         };
 
-        fetchProducts().catch(error => {
-            console.error('Error loading products:', error);
-        });
+        fetchProducts();
     }, []);
 
     return (
@@ -86,20 +100,10 @@ const ManageProducts = () => {
                     onChange={handleInputChange}
                     required
                 />
-                <input
-                    name="image"
-                    type="text"
-                    placeholder="URL зображення"
-                    value={newProduct.image}
-                    onChange={handleInputChange}
-                    required
-                />
                 <button type="submit" className="add-button">Додати товар</button>
             </form>
-            <ProductList
-                products={products}
-                onDeleteProduct={handleDeleteProduct}
-            />
+            {/*<ProductList products={products} />*/}
+            <ProductList/>
         </div>
     );
 };

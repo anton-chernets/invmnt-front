@@ -14,21 +14,22 @@ const CheckoutPage = ({ cart, setCart }) => {
     }, [cart]);
 
     const handleCheckout = async () => {
-        // Перевірка на наявність товарів у корзині
+        // Check if the cart is empty
         if (cart.length === 0) {
             alert("Ваша корзина порожня!");
             return;
         }
 
-        // Підготовка даних для відправки
+        // Prepare the data for the API call
         const orderData = {
-            items: cart,
-            total: totalPrice,
-            // Додайте інші необхідні дані, якщо потрібно
+            products: cart.map(item => ({
+                id: item.id,
+                quantity: item.quantity
+            }))
         };
 
         try {
-            // Відправка POST-запиту до API
+            // Send POST request to API
             const response = await fetch('http://95.217.181.158/api/checkout', {
                 method: 'POST',
                 headers: {
@@ -39,15 +40,15 @@ const CheckoutPage = ({ cart, setCart }) => {
             });
 
             if (!response.ok) {
-                // Якщо відповідь не OK, вивести помилку
+                // If the response is not OK, throw an error
                 const errorData = await response.json();
                 throw new Error(errorData.message || 'Помилка під час оформлення замовлення');
             }
 
-            // Очищення корзини після успішного оформлення замовлення
+            // Clear the cart after successful order
             setCart([]);
 
-            // Перехід на сторінку успіху або показ сповіщення про успішне оформлення замовлення
+            // Redirect to success page or show success message
             navigate('/success');
             alert('Ваше замовлення успішно оформлено!');
         } catch (error) {
