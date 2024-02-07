@@ -16,18 +16,31 @@ const ShopPage = () => {
 
     useEffect(() => {
         setLoading(true);
-        fetch('https://fakestoreapi.com/products')
-            .then(response => response.json())
+        // Використовуємо URL вашого API для отримання продуктів
+        const url = 'http://95.217.181.158/api/products';
+
+        fetch(url)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`HTTP error! Status: ${response.status}`);
+                }
+                return response.json();
+            })
             .then(data => {
-                setProducts(data);
-                setLoading(false);
+                if (data?.data && Array.isArray(data.data)) {
+                    setProducts(data.data); // Оновлюємо стан продуктів даними з API
+                    setLoading(false);
+                } else {
+                    throw new Error('Unexpected response from the API');
+                }
             })
             .catch(error => {
-                console.error('Ошибка:', error);
+                console.error('Error fetching products:', error);
                 setError(error);
                 setLoading(false);
             });
     }, []);
+
 
     // Handlers for actions in ProductList
     const onAddToCart = (product) => {

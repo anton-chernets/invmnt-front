@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import "./NewsDetails.css";
 import defaultImage from '../../img/image_2024-02-07_10-47-09.png';
+import Sidebar from "../../components/Sidebar/Sidebar";
 
 
 function NewsDetails() {
@@ -32,16 +33,21 @@ function NewsDetails() {
   }
 
     return (
-        <div className="news-details">
+        <div className="news-container">
+                <div className="news-details">
 
-            <h1>{newsItem.title}</h1>
-            <img src={newsItem.images && newsItem.images.length > 0 ? newsItem.images[0] : defaultImage}
-                 alt={newsItem.title} className='news-img'/>
+                <h1>{newsItem.title}</h1>
+                <img src={newsItem.images && newsItem.images.length > 0 ? newsItem.images[0] : defaultImage}
+                     alt={newsItem.title} className='news-img'/>
 
-            <p>{newsItem.description}</p>
-            <p>{newsItem.content}</p>
-            {/* Відображення деталей новини */}
+                <p>{newsItem.description}</p>
+                <p>{newsItem.content}</p>
+                {/* Відображення деталей новини */}
+
+                </div>
+            <Sidebar />
         </div>
+
     );
 }
 
