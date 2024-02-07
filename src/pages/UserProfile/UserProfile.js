@@ -1,10 +1,15 @@
 import React, { useState } from 'react';
 import './UserProfile.css';
 import useFetchUser from '../../components/FetchUser/FetchUser';
+import { useNavigate } from 'react-router-dom';
+// import { AuthContext } from "../../components/AuthContext/AuthContext";
+
 
 const UserProfile = () => {
     const token = localStorage.getItem('authToken');
     const { user, setUser, loading, error } = useFetchUser(token);
+    const navigate = useNavigate();
+    // const { isAuthenticated, setIsAuthenticated } = useContext(AuthContext);
     console.log(user)
 
     // const [newEmail, setNewEmail] = useState(user?.email || '');
@@ -54,22 +59,39 @@ const UserProfile = () => {
         }
     };
 
-    // const handleDeleteAccount = async () => {
-    //     if (window.confirm('Ви впевнені, що хочете видалити свій акаунт?')) {
-    //         try {
-    //             const response = await fetch('http://95.217.181.158/api/user/remove', {
-    //                 method: 'DELETE',
-    //                 headers: {
-    //                     'Content-Type': 'application/json',
-    //                     'Authorization': `Bearer ${token}`
-    //                 },
-    //                 body: JSON.stringify()
-    //             });
-    //         } catch (error) {
-    //             console.error('Error deleting account:', error);
-    //         }
-    //     }
-    // };
+    const handleDeleteAccount = async () => {
+        if (window.confirm('Ви впевнені, що хочете видалити свій акаунт?')) {
+            try {
+                const response = await fetch('http://95.217.181.158/api/remove', {
+                    method: 'DELETE',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${token}`
+                    },
+                    // Тело запроса не нужно, если мы не передаем данные
+                });
+
+                // Проверка успешности ответа
+                if (response.ok) {
+                    // Операция удаления прошла успешно
+                    alert('Ваш акаунт успішно видалено.');
+
+                    // Очистка токена авторизации, так как аккаунт более не существует
+                    localStorage.removeItem('authToken');
+
+                    // Переадресация пользователя на главную страницу или страницу входа
+                    navigate('/login');
+                } else {
+                    // Если сервер вернул ошибку
+                    throw new Error('Помилка при видаленні акаунту.');
+                }
+            } catch (error) {
+                console.error('Error deleting account:', error);
+                alert(error.toString());
+            }
+        }
+    };
+
 
     // Додаємо пропущені функції
     const removeFromCart = async (productId) => {
@@ -153,7 +175,7 @@ const UserProfile = () => {
                         />
                         <button type="submit">Оновити дані</button>
                     </form>
-                    {/*<button onClick={handleDeleteAccount} className="delete-account">Видалити акаунт</button>*/}
+                    <button onClick={handleDeleteAccount} className="delete-account">Видалити акаунт</button>
                 </div>
             </div>
         </div>
