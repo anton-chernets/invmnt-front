@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 // import { useNavigate } from 'react-router-dom';
 import './ProductList.css';
 import CartPage from "../../pages/CartPage/CartPage";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faShoppingCart } from '@fortawesome/free-solid-svg-icons';
 
 const ProductList = () => {
     // const navigate = useNavigate();
@@ -65,9 +67,8 @@ const ProductList = () => {
 
     return (
         <div>
-
             <button onClick={() => setShowCart(!showCart)} className="cart-button">
-                {showCart ? 'Hide Cart' : 'Show Cart'}
+                <FontAwesomeIcon icon={faShoppingCart} className="icon-spacing"/> Кошик
             </button>
             {showCart && <CartPage cart={cart} setCart={setCart}/>}
             <h2>Товари</h2>
@@ -78,7 +79,6 @@ const ProductList = () => {
                     <p>Price: ${product.price}</p>
                 </div>
             ))}
-
         </div>
     );
 };

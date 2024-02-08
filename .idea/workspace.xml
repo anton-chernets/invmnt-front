@@ -6,7 +6,12 @@
   <component name="ChangeListManager">
     <list default="true" id="9e423c87-fcc7-4ec7-9b14-5c2d8e0e0ee0" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Header/Header.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Header/Header.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/ProductList/ProductList.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/ProductList/ProductList.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/ProductList/ProductList.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/ProductList/ProductList.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/ShopPage/ShopPage.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/ShopPage/ShopPage.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/pages/ShopPage/ShopPage.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/ShopPage/ShopPage.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -104,7 +109,7 @@
       <workItem from="1707134409772" duration="13927000" />
       <workItem from="1707216243243" duration="23702000" />
       <workItem from="1707242541306" duration="31944000" />
-      <workItem from="1707387944945" duration="847000" />
+      <workItem from="1707387944945" duration="3027000" />
     </task>
     <servers />
   </component>
