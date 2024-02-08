@@ -1,9 +1,10 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useContext } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import './Header.css';
 import logoImage from '../../img/Untitled.png';
 import { AuthContext } from "../AuthContext/AuthContext";
-import axios from 'axios';
+// import axios from 'axios';
+import Ticker from "../Ticker/Ticker";
 
 const Header = () => {
     const navigate = useNavigate();
@@ -14,9 +15,9 @@ const Header = () => {
     const [searchResults, setSearchResults] = useState([]);
     const [isLoadingRates] = useState(false);
     const [isSearching, setIsSearching] = useState(false);
-    const [rates, setRates] = useState([]);
-    const [isLoading, setIsLoading] = useState(false);
-    const [error, setError] = useState(null);
+    // const [rates, setRates] = useState([]);
+    const [isLoading] = useState(false);
+    const [error] = useState(null);
 
 
     // Функция для проверки, является ли пользователь администратором
@@ -24,31 +25,31 @@ const Header = () => {
 
 
 
-    useEffect(() => {
-        const fetchData = async () => {  // Объявляем асинхронную функцию внутри useEffect
-            setIsLoading(true);
-            const API_KEY = '89477152f7a313f13d6ddb636a5f04d247904bdb1d77162546010c3cecadb2d1'; // Замените на ваш ключ API
-            const url = `https://min-api.cryptocompare.com/data/pricemulti?fsyms=BTC,USD,EUR,GBP,JPY,CAD,AUD,CHF,CNY,SEK,NZD,ETH,LTC,XRP,BCH,ADA,DOT,XLM,LINK,DOGE,UNI,BSV,EOS,XMR,XTZ&tsyms=UAH`;
-
-
-            try {
-                const response = await axios.get(url, {
-                    headers: { 'Api-Key': API_KEY },
-                });
-                if (response.status === 200) {
-                    setRates(response.data);
-                } else {
-                    throw new Error('Error fetching data');
-                }
-            } catch (error) {
-                setError(error.message);
-            } finally {
-                setIsLoading(false);
-            }
-        };
-
-        fetchData();  // Вызываем асинхронную функцию
-    }, []);
+    // useEffect(() => {
+    //     const fetchData = async () => {  // Объявляем асинхронную функцию внутри useEffect
+    //         setIsLoading(true);
+    //         const API_KEY = '89477152f7a313f13d6ddb636a5f04d247904bdb1d77162546010c3cecadb2d1'; // Замените на ваш ключ API
+    //         const url = `https://min-api.cryptocompare.com/data/pricemulti?fsyms=BTC,USD,EUR,GBP,JPY,CAD,AUD,CHF,CNY,SEK,NZD,ETH,LTC,XRP,BCH,ADA,DOT,XLM,LINK,DOGE,UNI,BSV,EOS,XMR,XTZ&tsyms=UAH`;
+    //
+    //
+    //         try {
+    //             const response = await axios.get(url, {
+    //                 headers: { 'Api-Key': API_KEY },
+    //             });
+    //             if (response.status === 200) {
+    //                 setRates(response.data);
+    //             } else {
+    //                 throw new Error('Error fetching data');
+    //             }
+    //         } catch (error) {
+    //             setError(error.message);
+    //         } finally {
+    //             setIsLoading(false);
+    //         }
+    //     };
+    //
+    //     fetchData();  // Вызываем асинхронную функцию
+    // }, []);
 
     const toggleMenu = () => {
         setIsMenuOpen(!isMenuOpen);
@@ -173,14 +174,15 @@ const Header = () => {
                     ) : error ? (
                         <div>Error: {error}</div>
                     ) : (
-                        <div className="ticker">
-                            {Object.entries(rates).map(([key, value]) => (
-                                <div key={key} className="crypto-rate">
-                                    <h2>{key}</h2>
-                                    <p>{value.UAH} UAH</p>
-                                </div>
-                            ))}
-                        </div>
+                        <Ticker />
+                        // <div className="ticker">
+                        //     {Object.entries(rates).map(([key, value]) => (
+                        //         <div key={key} className="crypto-rate">
+                        //             <h2>{key}</h2>
+                        //             <p>{value.UAH} UAH</p>
+                        //         </div>
+                        //     ))}
+                        // </div>
                     )}
                 </div>
             )}
