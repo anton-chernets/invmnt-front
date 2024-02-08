@@ -21,9 +21,7 @@
     /*margin-bottom: 20px;*/
     text-align: center;
 }
-.cart-button {
-    margin: 10px 0 10px 1260px;
-}
+
 
 @media (max-width: 1000px) {
     .cart-button {

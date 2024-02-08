@@ -6,7 +6,7 @@ import ProductList from "../../../components/ProductList/ProductList";
 
 const ManageProducts = () => {
     const [products, setProducts] = useState([]);
-    const [newProduct, setNewProduct] = useState({ name: '', description: '', price: 0 });
+    const [newProduct, setNewProduct] = useState({ title: '', description: '', price: 0 });
     const token = localStorage.getItem('authToken'); // Assuming you store the token in localStorage
 
     const handleAddProduct = async (productData) => {
@@ -18,7 +18,7 @@ const ManageProducts = () => {
                     'Authorization': `Bearer ${token}`
                 },
                 body: JSON.stringify({
-                    title: productData.name,
+                    title: productData.title,
                     description: productData.description,
                     price: productData.price
                 }),
@@ -47,7 +47,7 @@ const ManageProducts = () => {
 
 
     const handleInputChange = (e) => {
-        setNewProduct({ ...newProduct, [e.target.name]: e.target.value });
+        setNewProduct({ ...newProduct, [e.target.title]: e.target.value });
     };
 
     const handleSubmit = (e) => {
@@ -78,7 +78,7 @@ const ManageProducts = () => {
             <h1>Керування Товарами</h1>
             <form onSubmit={handleSubmit} className="add-product-form">
                 <input
-                    name="name"
+                    name="title"
                     type="text"
                     placeholder="Назва товару"
                     value={newProduct.name}
@@ -102,8 +102,8 @@ const ManageProducts = () => {
                 />
                 <button type="submit" className="add-button">Додати товар</button>
             </form>
-            {/*<ProductList products={products} />*/}
-            <ProductList/>
+            <ProductList products={products} />
+            {/*<ProductList/>*/}
         </div>
     );
 };

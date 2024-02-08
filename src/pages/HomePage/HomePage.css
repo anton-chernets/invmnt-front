@@ -17,8 +17,8 @@
 }
 .scroll-to-top {
     position: fixed;
-    bottom: 100px;
-    right: 50px;
+    bottom: 30px;
+    right: 20px;
     color: white;
 
     border-radius: 3px;
@@ -36,5 +36,10 @@
 @media (max-width: 768px) {
     .home-page {
         flex-direction: column;
+    }
+    .scroll-to-top {
+        position: fixed;
+        bottom: 20px;
+        right: 8px;
     }
 }

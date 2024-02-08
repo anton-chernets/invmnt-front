@@ -4,6 +4,7 @@ import './ProductList.css';
 import CartPage from "../../pages/CartPage/CartPage";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faShoppingCart } from '@fortawesome/free-solid-svg-icons';
+import defaultImage from '../../img/image_2024-02-07_10-47-09.png';
 
 const ProductList = () => {
     // const navigate = useNavigate();
@@ -71,14 +72,16 @@ const ProductList = () => {
                 <FontAwesomeIcon icon={faShoppingCart} className="icon-spacing"/> Кошик
             </button>
             {showCart && <CartPage cart={cart} setCart={setCart}/>}
-            <h2>Товари</h2>
-            {products && products.map(product => (
-                <div key={product.id}>
-                    <h3>{product.name}</h3>
-                    <p>{product.description}</p>
-                    <p>Price: ${product.price}</p>
-                </div>
-            ))}
+            <div className="products-container">
+                {products && products.map(product => (
+                    <div key={product.id} className="product-item-list">
+                        <h3>{product.title}</h3>
+                        <img src={product.imageUrl || defaultImage} alt={product.title} className="product-image"/>
+                        <p>{product.description}</p>
+                        <p>Price: ${product.price}</p>
+                    </div>
+                ))}
+            </div>
         </div>
     );
 };

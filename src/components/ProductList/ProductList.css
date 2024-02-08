@@ -45,6 +45,53 @@
     margin-right: 5px;
 }
 
+.products-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* Creates two columns of equal width */
+    gap: 1rem; /* Adjust the gap between the columns as needed */
+    padding: 1rem; /* Adjust the padding as needed */
+}
+.product-image {
+    width: 100%; /* Makes the image responsive */
+    height: auto; /* Maintain aspect ratio */
+    object-fit: cover; /* Cover the area without stretching the image */
+    border-radius: 5px; /* Optional: if you want rounded corners on images */
+    margin-bottom: 1rem; /* Space between image and product title */
+}
+
+/* Individual product styling */
+.product-item-list {
+    border: 1px solid #ccc; /* Optional border */
+    padding: 1rem; /* Adjust the padding as needed */
+    border-radius: 10px; /* Optional rounded corners */
+    margin-bottom: 1rem; /* Space between product items */
+    background-color: white;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}
+.cart-button {
+    margin: 0 0 20px 89%;
+}
+
+/* Add responsive behavior */
+@media (max-width: 768px) {
+    .cart-button {
+        margin: 0 0 20px 75%;
+    }
+    .products-container {
+        grid-template-columns: 1fr; /* Stack the products in one column on smaller screens */
+    }
+}
+
+
+
+.icon-spacing {
+    margin-right: 5px; /* Space between the icon and text */
+}
+
+
 @media (max-width: 768px) {
     .product-wrapper {
         width: 100%;
