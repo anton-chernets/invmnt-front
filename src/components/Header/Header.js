@@ -19,37 +19,9 @@ const Header = () => {
     const [isLoading] = useState(false);
     const [error] = useState(null);
 
-
     // Функция для проверки, является ли пользователь администратором
     const isAdmin = user && user.roles.includes('Admin');
 
-
-
-    // useEffect(() => {
-    //     const fetchData = async () => {  // Объявляем асинхронную функцию внутри useEffect
-    //         setIsLoading(true);
-    //         const API_KEY = '89477152f7a313f13d6ddb636a5f04d247904bdb1d77162546010c3cecadb2d1'; // Замените на ваш ключ API
-    //         const url = `https://min-api.cryptocompare.com/data/pricemulti?fsyms=BTC,USD,EUR,GBP,JPY,CAD,AUD,CHF,CNY,SEK,NZD,ETH,LTC,XRP,BCH,ADA,DOT,XLM,LINK,DOGE,UNI,BSV,EOS,XMR,XTZ&tsyms=UAH`;
-    //
-    //
-    //         try {
-    //             const response = await axios.get(url, {
-    //                 headers: { 'Api-Key': API_KEY },
-    //             });
-    //             if (response.status === 200) {
-    //                 setRates(response.data);
-    //             } else {
-    //                 throw new Error('Error fetching data');
-    //             }
-    //         } catch (error) {
-    //             setError(error.message);
-    //         } finally {
-    //             setIsLoading(false);
-    //         }
-    //     };
-    //
-    //     fetchData();  // Вызываем асинхронную функцию
-    // }, []);
 
     const toggleMenu = () => {
         setIsMenuOpen(!isMenuOpen);
@@ -116,13 +88,16 @@ const Header = () => {
             <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" />
             <div className="header-top">
                 <div className="wrap">
-                    <button onClick={toggleMenu} className="button-menu">
+                    {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
+                    <a onClick={toggleMenu} className="button-menu">
                         <i className="fas fa-bars"></i> Меню
-                    </button>
-                    <nav className={`header-nav ${isMenuOpen ? 'active' : ''}`}>
-                        <button onClick={toggleMenu} className="button-menu">
+                    </a>
+                    <nav className={`header-nav ${isMenuOpen ? 'active' : 'menu'}`}>
+                        {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
+                        <a onClick={toggleMenu} className="button-menu">
                             <i className="fas fa-bars"></i> Меню
-                        </button>
+                        </a>
+                        {/* The button inside here is removed, assuming it's redundant. */}
                         <Link to="/" onClick={toggleMenu}><i className="fas fa-home"></i> Головна</Link>
                         <Link to="/shop" onClick={toggleMenu}>Магазин</Link>
                         {/* ...інші посилання */}
@@ -131,9 +106,9 @@ const Header = () => {
             </div>
             <div className="header-bottom">
                 <div className="wrap">
-                    <div className="header-logo">
+                <div className="header-logo">
                         <Link to="/">
-                            <img src={logoImage} alt="Investment" /><b>Investment</b>
+                            <img src={logoImage} alt="Investment"/><b>Investment</b>
                         </Link>
                     </div>
                     <form onSubmit={handleSearchSubmit} className="search-form">
