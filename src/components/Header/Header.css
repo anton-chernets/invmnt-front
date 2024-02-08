@@ -258,7 +258,7 @@
         background: #000;
         z-index: 1000;
         overflow: hidden;
-        transition: max-height 1s ease-in-out;
+        transition: max-height 2s ease-in-out;
         max-height: 0;
 
     }
