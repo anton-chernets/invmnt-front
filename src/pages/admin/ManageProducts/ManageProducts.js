@@ -1,20 +1,42 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './ManageProducts.css';
 import ProductList from "../../../components/ProductList/ProductList";
 
 
 
 const ManageProducts = () => {
-    // const [products, setProducts] = useState([]);
+    const [products, setProducts] = useState([]);
+
     const [newProduct, setNewProduct] = useState({
         title: '',
         description: '',
         price: 0,
         stock: 0, // Added stock field
-        // image: null,
-        // imageUrl: ''
+        // image: null, // Uncomment if you need to handle image upload
+        // imageUrl: '' // Uncomment if you need to handle imageUrl
     });
     const token = localStorage.getItem('authToken'); // Assuming you store the token in localStorage
+
+    useEffect(() => {
+        const fetchProducts = async () => {
+            try {
+                const response = await fetch('http://95.217.181.158/api/products');
+                if (!response.ok) {
+                    throw new Error(`Failed to fetch products: ${response.status}`);
+                }
+                const data = await response.json();
+                // Assuming the data is in an array format inside a 'data' property
+                if (!data || !data.data || !Array.isArray(data.data)) {
+                    throw new Error('Fetched data is not in expected format');
+                }
+                setProducts(data.data); // If the array is within a 'data' property
+            } catch (error) {
+                console.error('Error loading products:', error);
+            }
+        };
+
+        fetchProducts();
+    }, []);
 
     const handleAddProduct = async (productData) => {
         const payload = {
@@ -40,9 +62,10 @@ const ManageProducts = () => {
                 throw new Error('Server responded with status: ' + response.status);
             }
 
-            // const data = await response.json();
+            const newProduct = await response.json();
+            setProducts(prevProducts => [...prevProducts, newProduct]); // Update the state with the new product
 
-            // setProducts(prevProducts => Array.isArray(prevProducts) ? [...prevProducts, data] : [data]);
+            // Reset form fields after successful product addition
             setNewProduct({
                 title: '',
                 description: '',
@@ -56,6 +79,15 @@ const ManageProducts = () => {
         }
     };
 
+    // const createProduct = async (productData) => {
+    //     // Omit the image data and send the rest of the product data
+    //     // ...
+    // };
+    //
+    // const uploadProductImage = async (image, productId) => {
+    //     // Use a different API endpoint to upload the image
+    //     // ...
+    // };
     const handleInputChange = (e) => {
         const { name, value } = e.target;
         setNewProduct({ ...newProduct, [name]: name === 'price' || name === 'stock' ? parseFloat(value) : value });
@@ -65,14 +97,17 @@ const ManageProducts = () => {
 
         e.preventDefault();
         handleAddProduct(newProduct).then(() => {
+            // Reset the form only if the product was added successfully
             setNewProduct({
                 title: '',
                 description: '',
                 price: 0,
-                stock: 0,
+                // image: null
             });
         });
     };
+
+
 
     return (
         <div className="manage-products">
@@ -82,7 +117,7 @@ const ManageProducts = () => {
                     name="title"
                     type="text"
                     placeholder="Назва товару"
-                    value={newProduct.title}
+                    value={newProduct.title} // Changed from name to title
                     onChange={handleInputChange}
                     required
                 />
@@ -119,7 +154,7 @@ const ManageProducts = () => {
                 {/*/>*/}
                 <button type="submit" className="add-button">Додати товар</button>
             </form>
-            <ProductList />
+            <ProductList products={products}/>
             {/*<ProductList/>*/}
         </div>
     );
