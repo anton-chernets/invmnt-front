@@ -13,8 +13,8 @@ const UserProfile = () => {
 
     const [newPassword, setNewPassword] = useState('');
     const [newName, setNewName] = useState(user?.name || '');
-    const isAdmin = user && user.roles.includes('Admin');
-    console.log(user)
+
+    const { isAdmin } = useContext(AuthContext);
 
     const handlePasswordChange = (e) => setNewPassword(e.target.value);
     const handleNameChange = (e) => {

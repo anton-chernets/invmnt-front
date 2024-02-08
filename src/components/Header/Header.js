@@ -9,7 +9,7 @@ import Ticker from "../Ticker/Ticker";
 const Header = () => {
     const navigate = useNavigate();
     const location = useLocation();
-    const { user, isAuthenticated, setIsAuthenticated } = useContext(AuthContext);
+    const { isAuthenticated, setIsAuthenticated } = useContext(AuthContext);
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [query, setQuery] = useState('');
     const [searchResults, setSearchResults] = useState([]);
@@ -20,7 +20,8 @@ const Header = () => {
     const [error] = useState(null);
 
     // Функция для проверки, является ли пользователь администратором
-    const isAdmin = user && user.roles.includes('Admin');
+
+    const { isAdmin } = useContext(AuthContext);
 
 
     const toggleMenu = () => {
@@ -51,7 +52,7 @@ const Header = () => {
         navigate('/register');
     };
     const goToAdmin = () => {
-        navigate('/admin')
+        navigate('/admin');
     }
 
     const handleSearchChange = (e) => {

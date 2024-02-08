@@ -6,24 +6,30 @@ export const AuthProvider = ({ children }) => {
     const [isAuthenticated, setIsAuthenticated] = useState(false);
     const [user, setUser] = useState(null);
 
-    // Функція для отримання даних користувача
+    // Helper function to check if the user has an Admin role
+    const isAdmin = () => {
+        console.log(user.name)
+        return user && user.role.includes("Admin");
+    };
+
+    // Function to fetch user details
     const fetchUserDetails = async () => {
         const token = localStorage.getItem('authToken');
         if (token) {
             try {
-                // Запит до API для отримання даних про користувача
                 const response = await fetch('http://95.217.181.158/api/user', {
                     headers: {
                         'Authorization': `Bearer ${token}`
                     }
                 });
                 const data = await response.json();
+
                 if (data && data.data) {
-                    setUser(data.data); // Зберігаємо інформацію про користувача
+                    setUser(data.data); // Store user information
                     setIsAuthenticated(true);
                 }
             } catch (error) {
-                console.error('Не вдалося отримати дані користувача', error);
+                console.error('Failed to fetch user details', error);
             }
         }
     };
@@ -33,7 +39,7 @@ export const AuthProvider = ({ children }) => {
     }, []);
 
     return (
-        <AuthContext.Provider value={{ isAuthenticated, setIsAuthenticated, user, setUser }}>
+        <AuthContext.Provider value={{ isAuthenticated, setIsAuthenticated, user, setUser, isAdmin }}>
             {children}
         </AuthContext.Provider>
     );

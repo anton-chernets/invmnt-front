@@ -45,6 +45,7 @@ const LoginForm = () => {
                 localStorage.setItem('authToken', data.data.access_token);
                 setIsAuthenticated(true);
                 navigate('/');
+                // window.location.reload();
             } else {
                 alert('Помилка аутентифікації: ' + data.message);
             }
