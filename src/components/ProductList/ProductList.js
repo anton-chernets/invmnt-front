@@ -1,33 +1,19 @@
-import React, {useEffect, useState} from 'react';
-// import { Link, useNavigate } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+// import { useNavigate } from 'react-router-dom';
 import './ProductList.css';
+import CartPage from "../../pages/CartPage/CartPage";
 
 const ProductList = () => {
     // const navigate = useNavigate();
-
-    // const handleAddToCart = (product) => {
-    //     onAddToCart(product);
-    // };
-    //
-    // const handleBuy = () => {
-    //     console.log('Buying', cart);
-    //     setTimeout(() => {
-    //         console.log('Purchase successful');
-    //         navigate('/shop'); // Navigate back to the shop or to '/confirmation' if you have a confirmation page
-    //     }, 2000);
-    // };
     const [products, setProducts] = useState([]);
-    // const [cart, setCart] = useState([]); // Add local cart state (replace with your actual cart state logic)
+    const [cart, setCart] = useState([]);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
-    // const navigate = useNavigate();
-    // const [showCart, setShowCart] = useState(false);
+    const [showCart, setShowCart] = useState(false);
 
     useEffect(() => {
         setLoading(true);
-        // Використовуємо URL вашого API для отримання продуктів
         const url = 'http://95.217.181.158/api/products';
-
         fetch(url)
             .then(response => {
                 if (!response.ok) {
@@ -37,7 +23,7 @@ const ProductList = () => {
             })
             .then(data => {
                 if (data?.data && Array.isArray(data.data)) {
-                    setProducts(data.data); // Оновлюємо стан продуктів даними з API
+                    setProducts(data.data);
                     setLoading(false);
                 } else {
                     throw new Error('Unexpected response from the API');
@@ -50,8 +36,6 @@ const ProductList = () => {
             });
     }, []);
 
-
-    // Handlers for actions in ProductList
     // const onAddToCart = (product) => {
     //     setCart(currentCart => {
     //         const isProductInCart = currentCart.find(item => item.id === product.id);
@@ -68,25 +52,24 @@ const ProductList = () => {
     // const onBuyNow = (product) => {
     //     onAddToCart(product);
     //     navigate('/checkout');
-    //     console.log('Proceeding to checkout with product:', product);
     // };
-
-    const onDeleteProduct = (productId) => {
-        // Assuming you have a state for products and a method to update it
-        setProducts(currentProducts => {
-            // Remove the product from the products array
-            return currentProducts.filter(product => product.id !== productId);
-        });
-
-        console.log('Product deleted:', productId);
-        // Optionally, sync with backend here
-    };
+    //
+    // const onDeleteProduct = (productId) => {
+    //     setProducts(currentProducts => {
+    //         return currentProducts.filter(product => product.id !== productId);
+    //     });
+    // };
 
     if (loading) return <p>Loading...</p>;
     if (error) return <p>Error: {error.message}</p>;
 
     return (
         <div>
+
+            <button onClick={() => setShowCart(!showCart)} className="cart-button">
+                {showCart ? 'Hide Cart' : 'Show Cart'}
+            </button>
+            {showCart && <CartPage cart={cart} setCart={setCart}/>}
             <h2>Товари</h2>
             {products && products.map(product => (
                 <div key={product.id}>
@@ -95,6 +78,7 @@ const ProductList = () => {
                     <p>Price: ${product.price}</p>
                 </div>
             ))}
+
         </div>
     );
 };
