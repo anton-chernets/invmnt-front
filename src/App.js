@@ -67,12 +67,15 @@ function App() {
                     <meta property="og:title" content="Investment"/>
                     <meta property="og:description" content="Інвестиції: види інвестицій"/>
                     <meta property="og:url" content="https://invmnt.site/"/>
-                    <meta name="google-adsense-account" content="ca-pub-9704083006647691"/>
+                    {/*<meta name="google-adsense-account" content="ca-pub-9704083006647691"/>*/}
+                    <script async
+                            src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9704083006647691"
+                            crossOrigin="anonymous"></script>
                 </Helmet>
                 <Header/>
                 <Routes>
-                <Route path="/" element={<HomePage/>}/>
-                        <Route path="/shop" element={<ShopPage/>}/>
+                    <Route path="/" element={<HomePage/>}/>
+                    <Route path="/shop" element={<ShopPage/>}/>
                         <Route path="/admin" element={<AdminDashboard/>}/>
                         <Route path="/admin/products" element={<ManageProducts/>}/>
                         {/*<Route path="/admin/users" element={<ManageUsers/>}/>*/}
