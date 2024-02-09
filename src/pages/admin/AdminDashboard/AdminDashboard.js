@@ -5,6 +5,9 @@ import ManageProducts from "../ManageProducts/ManageProducts";
 import ManageOrders from "../ManageOrders/ManageOrders";
 import UserMessages from "../UserMessages/UserMessages";
 import SiteStats from "../SiteStats/SiteStats";
+import ManageNews from "../ManageNews/ManageNews";
+
+
 
 
 const AdminDashboard = () => {
@@ -20,6 +23,8 @@ const AdminDashboard = () => {
         switch (activeSection) {
             // case 'users':
             //     return <ManageUsers />;
+            case 'news':
+                return <ManageNews />;
             case 'products':
                 return <ManageProducts />;
             case 'orders':
@@ -40,16 +45,22 @@ const AdminDashboard = () => {
         <div className='admin-dashboard'>
             <div className="sidebar-panel">
                 {/*<button onClick={() => handleSectionClick('users')} className="button-admin">Керування користувачами</button>*/}
-                <button onClick={() => handleSectionClick('products')} className="button-admin">Керування товарами</button>
-                <button onClick={() => handleSectionClick('orders')} className="button-admin">Управління замовленнями</button>
-                <button onClick={() => handleSectionClick('messages')} className="button-admin">Повідомлення користувачів</button>
+                <button onClick={() => handleSectionClick('products')} className="button-admin">Керування товарами
+                </button>
+                <button onClick={() => handleSectionClick('news')} className="button-admin">Керування новинами
+                </button>
+                <button onClick={() => handleSectionClick('orders')} className="button-admin">Управління замовленнями
+                </button>
+                <button onClick={() => handleSectionClick('messages')} className="button-admin">Повідомлення
+                    користувачів
+                </button>
                 <button onClick={() => handleSectionClick('stats')} className="button-admin">Статистика сайту</button>
             </div>
             <div className="content">
                 {renderContent()}
             </div>
         </div>
-        
+
     );
 };
 
