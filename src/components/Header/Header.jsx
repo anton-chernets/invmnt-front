@@ -1,10 +1,42 @@
-import React, { useState, useContext } from 'react';
+import React, {useState, useContext, useEffect} from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import './Header.css';
 import logoImage from '../../img/Untitled.png';
 import { AuthContext } from "../AuthContext/AuthContext";
 // import axios from 'axios';
 import Ticker from "../Ticker/Ticker";
+
+const useFetchSearchResults = (query, setResults, setIsSearching) => {
+    useEffect(() => {
+        const fetchSearchResults = async () => {
+            if (query.length > 2) {
+                setIsSearching(true);
+                try {
+                    const response = await fetch(`/api/search?q=${encodeURIComponent(query)}`);
+                    if (!response.ok) {
+                        throw new Error('Помилка виконання запиту до API');
+                    }
+                    const data = await response.json();
+
+                    if (data.length === 0) {
+                        // Якщо результати відсутні, можна встановити певний стан або відобразити повідомлення
+                        setResults([]);
+                        alert('Результати не знайдені. Спробуйте інший запит.');
+                    } else {
+                        setResults(data);
+                    }
+                } catch (error) {
+                    console.error('Error fetching data:', error);
+                    alert('Сталася помилка при пошуку. Будь ласка, спробуйте пізніше.');
+                } finally {
+                    setIsSearching(false);
+                }
+            }
+        };
+
+        fetchSearchResults();
+    }, [query, setResults, setIsSearching]);
+};
 
 const Header = () => {
     const navigate = useNavigate();
@@ -15,14 +47,16 @@ const Header = () => {
     const [searchResults, setSearchResults] = useState([]);
     const [isLoadingRates] = useState(false);
     const [isSearching, setIsSearching] = useState(false);
-    // const [rates, setRates] = useState([]);
     const [isLoading] = useState(false);
     const [error] = useState(null);
-
-    // Функция для проверки, является ли пользователь администратором
-
+    useFetchSearchResults(query, setSearchResults, setIsSearching);
 
 
+
+    const handleSearchChange = (e) => {
+        const newQuery = e.target.value;
+        setQuery(newQuery);
+    };
 
     const toggleMenu = () => {
         setIsMenuOpen(!isMenuOpen);
@@ -54,34 +88,9 @@ const Header = () => {
     const goToAdmin = () => {
         navigate('/admin');
     }
-
-    const handleSearchChange = (e) => {
-        const newQuery = e.target.value;
-        setQuery(newQuery);
-        if (newQuery.length > 2) {
-            fetchSearchResults(newQuery);
-        } else {
-            setSearchResults([]);
-        }
-    };
-
     const handleSearchSubmit = (event) => {
         event.preventDefault();
-        fetchSearchResults(query);
         navigate('/search', { state: { query, searchResults } });
-    };
-
-    const fetchSearchResults = async (query) => {
-        setIsSearching(true);
-        try {
-            const response = await fetch(`/api/search?q=${encodeURIComponent(query)}`);
-            const data = await response.json();
-            setSearchResults(data);
-        } catch (error) {
-            console.error('Error fetching data:', error);
-        } finally {
-            setIsSearching(false);
-        }
     };
 
     return (

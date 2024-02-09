@@ -10,11 +10,8 @@ const UserProfile = () => {
     const { user, setUser, loading, error } = useFetchUser(token);
     const navigate = useNavigate();
     const { setIsAuthenticated, isAdmin } = useContext(AuthContext);
-
     const [newPassword, setNewPassword] = useState('');
     const [newName, setNewName] = useState(user?.name || '');
-
-    // const { isAdmin } = useContext(AuthContext);
 
     const handlePasswordChange = (e) => setNewPassword(e.target.value);
     const handleNameChange = (e) => {
@@ -71,14 +68,9 @@ const UserProfile = () => {
 
                 // Проверка успешности ответа
                 if (response.ok) {
-                    // Операция удаления прошла успешно
                     alert('Ваш акаунт успішно видалено.');
-
-                    // Очистка токена авторизации, так как аккаунт более не существует
                     localStorage.removeItem('authToken');
                     setIsAuthenticated(false);
-
-                    // Переадресация пользователя на главную страницу или страницу входа
                     navigate('/');
                 } else {
                     // Если сервер вернул ошибку
@@ -91,15 +83,13 @@ const UserProfile = () => {
         }
     };
 
-
-    // Додаємо пропущені функції
     const removeFromCart = async (productId) => {
         try {
             const response = await fetch(`http://95.217.181.158/api/cart/${productId}`, {
                 method: 'DELETE',
                 headers: {
                     'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${token}`, // Тут використовуємо збережений токен
+                    'Authorization': `Bearer ${token}`,
                 },
             });
 
@@ -107,13 +97,12 @@ const UserProfile = () => {
                 throw new Error('Failed to remove product from cart');
             }
 
-            // Оновлення стану кошика після успішного видалення товару на сервері
             setUser(prevUser => ({
                 ...prevUser,
                 cart: prevUser.cart.filter(item => item.id !== productId)
             }));
 
-            // Оповіщення користувача про успішне видалення товару
+
             alert('Product removed from cart');
         } catch (error) {
             console.error('Error removing product from cart:', error);
@@ -180,13 +169,6 @@ const UserProfile = () => {
                             Видалити акаунт
                         </button>
                     )}
-                    {/*{isAuthenticated && !isAdmin && (*/}
-                    {/*    <>*/}
-                    {/*        <button onClick={handleDeleteAccount} className="delete-account">*/}
-                    {/*            Видалити акаунт*/}
-                    {/*        </button>*/}
-                    {/*    </>*/}
-                    {/*)}*/}
                 </div>
             </div>
         </div>

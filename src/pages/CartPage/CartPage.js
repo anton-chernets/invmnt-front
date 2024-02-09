@@ -1,37 +1,26 @@
-import React from 'react';
-import { useNavigate } from 'react-router-dom';
-
+import React, {} from 'react';
+// import { AuthContext } from '../../components/AuthContext/AuthContext'; // Замініть на ваш шлях до AuthContext
 import './CartPage.css'
-// import productList from "../../components/ProductList/ProductList";
+import defaultImage from '../../img/image_2024-02-07_10-47-09.png';
 
-const CartPage = ({ cart, setCart }) => {
-    const navigate = useNavigate();
+const CartPage = ({ cart = [], setCart }) => {
+    // const { user } = useContext(AuthContext); // Використовуємо контекст для отримання інформації про користувача
 
-    // Function to handle removing items from the cart
+    // Розрахунок загальної суми
+    const totalPrice = cart.reduce((total, item) => {
+        // Переконайтеся, що ціна є числом
+        const price = parseFloat(item.price);
+        return typeof price === 'number' ? total + price * item.quantity : total;
+    }, 0);
+
+    // Функція для видалення товару з кошика
     const handleRemoveFromCart = (productId) => {
-        setCart(currentCart => currentCart.filter(item => item.id !== productId));
+        setCart(cart.filter(item => item.id !== productId));
     };
 
-    // Calculate the total price
-    const totalPrice = cart.reduce((total, item) => total + item.price * item.quantity, 0);
-
-    // Function to handle buying items
+    // Функція для обробки покупки
     const handleBuy = () => {
-        // Here you would typically handle the buying process by sending a request to your server
-        console.log('Buying', cart);
-
-        // Simulating a server response delay with setTimeout
-        setTimeout(() => {
-            // Mock server response after 2 seconds
-            console.log('Purchase successful');
-
-            // Clear the cart after purchase
-            setCart([]);
-
-            // Navigate to a confirmation page or back to the shop
-            // navigate('/confirmation'); // Uncomment this line if you have a confirmation page
-            navigate('/shop'); // Navigate back to the shop after purchase
-        }, 2000);
+        // ... Код для обробки покупки
     };
 
     return (
@@ -43,11 +32,11 @@ const CartPage = ({ cart, setCart }) => {
                         {cart.map(item => (
                             <div key={item.id} className="cart-item">
                                 <h3>{item.title}</h3>
-                                <p>Ціна: ${item.price}</p>
+                                <p>Ціна: ${parseFloat(item.price).toFixed(2)}</p>
                                 <div className="img-item">
-                                <img src={item.image} alt="" />
+                                    <img src={item.image || defaultImage} alt={item.title} />
                                 </div>
-                                {/*<p>Quantity: {item.quantity}</p>*/}
+                                <p>Кількість: {item.quantity}</p>
                                 <button onClick={() => handleRemoveFromCart(item.id)} className='in-cart-button'>Видалити</button>
                             </div>
                         ))}
