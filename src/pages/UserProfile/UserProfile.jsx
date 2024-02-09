@@ -9,7 +9,7 @@ const UserProfile = () => {
     const token = localStorage.getItem('authToken');
     const { user, setUser, loading, error } = useFetchUser(token);
     const navigate = useNavigate();
-    const { setIsAuthenticated } = useContext(AuthContext);
+    const { setIsAuthenticated, isAdmin } = useContext(AuthContext);
 
     const [newPassword, setNewPassword] = useState('');
     const [newName, setNewName] = useState(user?.name || '');
@@ -175,10 +175,17 @@ const UserProfile = () => {
                         />
                         <button type="submit">Оновити дані</button>
                     </form>
-                    {/*{!isAdmin && (*/}
+                    {!isAdmin && (
                         <button onClick={handleDeleteAccount} className="delete-account">
                             Видалити акаунт
                         </button>
+                    )}
+                    {/*{isAuthenticated && !isAdmin && (*/}
+                    {/*    <>*/}
+                    {/*        <button onClick={handleDeleteAccount} className="delete-account">*/}
+                    {/*            Видалити акаунт*/}
+                    {/*        </button>*/}
+                    {/*    </>*/}
                     {/*)}*/}
                 </div>
             </div>
