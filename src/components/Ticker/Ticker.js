@@ -5,13 +5,14 @@ const Ticker = () => {
     const [rates, setRates] = useState([]);
 
     useEffect(() => {
-        // Replace with your currency rates API endpoint
-        const apiURL = 'https://api.exchangeratesapi.io/latest?base=UAH';
+        // Replace 'YOUR_APP_ID' with the actual App ID you received from Open Exchange Rates
+        const apiURL = 'https://openexchangerates.org/api/latest.json?app_id=3d26a24c79e14a37b66a2fd3215abdba';
 
         const fetchRates = async () => {
             try {
                 const response = await fetch(apiURL);
                 const data = await response.json();
+                // Assuming you want to display rates based on USD as base
                 setRates(Object.entries(data.rates));
             } catch (error) {
                 console.error('Error fetching currency rates:', error);

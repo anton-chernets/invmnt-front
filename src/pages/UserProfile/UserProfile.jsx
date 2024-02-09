@@ -14,7 +14,7 @@ const UserProfile = () => {
     const [newPassword, setNewPassword] = useState('');
     const [newName, setNewName] = useState(user?.name || '');
 
-    const { isAdmin } = useContext(AuthContext);
+    // const { isAdmin } = useContext(AuthContext);
 
     const handlePasswordChange = (e) => setNewPassword(e.target.value);
     const handleNameChange = (e) => {
@@ -125,7 +125,8 @@ const UserProfile = () => {
     if (loading) return <div>Loading...</div>;
     if (error) return <div>Error: {error}</div>;
     if (!user) return <div>No user data available</div>;
-
+    console.log(user.name)
+    console.log(user.role)
     return (
         <div className="user-profile">
             <h1>Особистий кабінет</h1>
@@ -174,11 +175,11 @@ const UserProfile = () => {
                         />
                         <button type="submit">Оновити дані</button>
                     </form>
-                    {!isAdmin && (
+                    {/*{!isAdmin && (*/}
                         <button onClick={handleDeleteAccount} className="delete-account">
                             Видалити акаунт
                         </button>
-                    )}
+                    {/*)}*/}
                 </div>
             </div>
         </div>

@@ -9,7 +9,7 @@ import Ticker from "../Ticker/Ticker";
 const Header = () => {
     const navigate = useNavigate();
     const location = useLocation();
-    const { isAuthenticated, setIsAuthenticated } = useContext(AuthContext);
+    const { isAuthenticated, setIsAuthenticated, isAdmin, isUser } = useContext(AuthContext);
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [query, setQuery] = useState('');
     const [searchResults, setSearchResults] = useState([]);
@@ -21,7 +21,7 @@ const Header = () => {
 
     // Функция для проверки, является ли пользователь администратором
 
-    const { isAdmin } = useContext(AuthContext);
+
 
 
     const toggleMenu = () => {
@@ -131,13 +131,21 @@ const Header = () => {
                                 <button onClick={goToRegister} className="button">Зареєструватися</button>
                             </>
                         )}
-                        {isAuthenticated && (
+                        {isAuthenticated && isAdmin && (
                             <>
-                                {isAdmin && <button onClick={goToAdmin} className="button">Admin</button>}
+                                <button onClick={goToAdmin} className="button">Admin</button>
                                 <button onClick={goToUserProfile} className="button">Кабінет</button>
                                 <button onClick={handleLogout} className="button">Вийти</button>
                             </>
                         )}
+                        {isAuthenticated && isUser && (
+                            <>
+                                <button onClick={goToUserProfile} className="button">Кабінет</button>
+                                <button onClick={handleLogout} className="button">Вийти</button>
+                            </>
+                        )}
+
+                        {/*{isAuthenticated && <button onClick={handleLogout}>Logout</button>}*/}
                     </div>
                 </div>
             </div>

@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { Helmet } from 'react-helmet';
 import Header from './components/Header/Header';
 import Footer from './components/Footer/Footer';
 import HomePage from './pages/HomePage/HomePage';
@@ -43,6 +44,7 @@ function App() {
         const metaTag = document.createElement('meta');
         metaTag.name = 'robots';
         metaTag.content = 'noindex, nofollow';
+
         document.head.appendChild(metaTag);
 
         // Функция очистки, удаляющая добавленные элементы
@@ -56,9 +58,20 @@ function App() {
     return (
         <AuthProvider>
             <Router>
+                <Helmet>
+                    <meta charSet="utf-8"/>
+                    <title>Investment</title>
+                    <meta name="keywords" content="інвестиції, крипта, ації, валюта, обмін валют, гроші"/>
+                    <meta name="description" content="Інвестиції: види інвестицій"/>
+                    <meta property="og:locale" content="uk_UA"/>
+                    <meta property="og:title" content="Investment"/>
+                    <meta property="og:description" content="Інвестиції: види інвестицій"/>
+                    <meta property="og:url" content="https://invmnt.site/"/>
+                    <meta name="google-adsense-account" content="ca-pub-9704083006647691"/>
+                </Helmet>
                 <Header/>
-                    <Routes>
-                        <Route path="/" element={<HomePage/>}/>
+                <Routes>
+                <Route path="/" element={<HomePage/>}/>
                         <Route path="/shop" element={<ShopPage/>}/>
                         <Route path="/admin" element={<AdminDashboard/>}/>
                         <Route path="/admin/products" element={<ManageProducts/>}/>
