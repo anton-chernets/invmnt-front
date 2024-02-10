@@ -3,7 +3,7 @@ import './NewsItem.css';
 import defaultImage from '../../img/image_2024-02-07_10-47-09.png';
 
 // Встановлення максимальної висоти для прев'ю
-const MAX_PREVIEW_HEIGHT = '100px';
+const MAX_PREVIEW_HEIGHT = '85px';
 
 export const NewsItem = ({ id, title, description, imageUrl }) => {
     const [isExpanded, setIsExpanded] = useState(false);
