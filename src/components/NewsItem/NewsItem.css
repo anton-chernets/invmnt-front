@@ -7,7 +7,7 @@
     flex-basis: calc(50% - 20px);
     max-width: calc(50% - 20px);
     box-sizing: border-box;
-    min-height: 200px;
+    /*min-height: 500px;*/
     max-height: 100%;
     transition: max-height 0.5s ease, transform 1s ease;
     overflow: hidden;
@@ -24,6 +24,15 @@
     height: 30px;
     cursor: pointer; /* It's good to add a cursor to indicate it's clickable */
 }
+.news-description {
+    /* Your existing styles */
+    max-height: 4.5em; /* Set max-height to show preview (3 lines) */
+    overflow: hidden; /* Hide the overflowed content */
+    text-overflow: ellipsis; /* Add ellipsis to overflowed content */
+}
+.news-item.expanded .news-description {
+    max-height: none; /* When expanded, show all content */
+}
 
 .news-item:hover {
     transform: scale(1.02);
@@ -33,7 +42,20 @@
     color: #000000;
     margin: 0 0 10px 0;
 }
+.news-item .content.expanded {
+    max-height: none; /* Встановлення максимальної висоти на "none", щоб вміст міг розгорнутися повністю */
+}
 
+.news-item .content {
+    max-height: 100px; /* Початкова максимальна висота для прев'ю */
+    overflow: hidden;
+    transition: max-height 0.5s ease;
+}
+
+/* Додайте цей клас для контенту, який повинен розгортатися */
+.news-item .content.expanded {
+    max-height: none; /* Видаляємо обмеження по висоті, коли контент розгорнуто */
+}
 /* Text of news */
 .news-item p {
     color: #333;
