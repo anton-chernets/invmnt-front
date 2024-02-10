@@ -1,0 +1,66 @@
+.news-item {
+    background-color: #ececec;
+    padding: 15px;
+    margin: 0 10px 10px;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    flex-basis: calc(50% - 20px);
+    max-width: calc(50% - 20px);
+    box-sizing: border-box;
+    min-height: 200px;
+    max-height: 100%;
+    transition: max-height 0.5s ease, transform 1s ease;
+    overflow: hidden;
+}
+
+.content {
+    overflow: hidden;
+    transition: max-height 0.5s ease;
+}
+
+.toggle-content-btn {
+    background: transparent;
+    margin: 0 auto;
+    height: 30px;
+    cursor: pointer; /* It's good to add a cursor to indicate it's clickable */
+}
+
+.news-item:hover {
+    transform: scale(1.02);
+}
+
+.news-item h3 {
+    color: #000000;
+    margin: 0 0 10px 0;
+}
+
+/* Text of news */
+.news-item p {
+    color: #333;
+    line-height: 1.6;
+    margin: 0;
+}
+@media (max-width: 1024px) {
+    .news-item {
+        flex: 0 0 calc(50% - 20px);
+    }
+}
+@media (max-width: 768px) {
+
+    .news-item {
+        flex: 0 0 100%;
+        max-width: 100%;
+        margin: 0 auto;
+        margin-bottom: 20px;
+    }
+
+    .news-items {
+        width: 100%;
+        padding-left: 0;
+
+    }
+    .news-container {
+        flex-direction: column;
+        width: 100%;
+    }
+}

@@ -25,5 +25,9 @@
 /* You may want to ensure that the ticker takes up the full width of the container */
 .ticker {
     width: 100%;
+
     /* Other styles */
+}
+.ticker-wrap {
+    height: 30px;
 }
