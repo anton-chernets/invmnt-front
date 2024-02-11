@@ -1,61 +1,51 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import './ProductDetails.css'
+import './ProductDetails.css';
 
 function ProductDetails() {
-  const { productId } = useParams();
-  const [product, setProduct] = useState(null);
-  const [isAddedToCart, setIsAddedToCart] = useState(false); // Стан для відслідковування, чи товар доданий у кошик
+    const { productId } = useParams();
+    const [product, setProduct] = useState(null);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
 
-  
-  const onAddToCart = (product) => {
-    // Логіка додавання товару у кошик
-    console.log("Додано у кошик:", product.title);
-    setIsAddedToCart(true); // Встановлюємо стан у true, коли товар доданий у кошик
-  };
+    useEffect(() => {
+        const fetchProduct = async () => {
+            try {
+                const response = await fetch(`http://95.217.181.158/api/products/${productId}`);
+                if (!response.ok) {
+                    throw new Error(`HTTP error! Status: ${response.status}`);
+                }
+                const data = await response.json();
+                setProduct(data.data);
+            } catch (error) {
+                setError(error.message);
+            } finally {
+                setLoading(false);
+            }
+        };
 
-  const onDeleteFromCart = () => {
-    // Логіка видалення товару з кошика
-    console.log("Видалено з кошика:", product.title);
-    setIsAddedToCart(false); // Встановлюємо стан у false, коли товар видалено з кошика
-  };
-
-  const onBuyNow = (product) => {
-    // Додайте логіку покупки товару відразу
-    console.log("Куплено:", product.title);
-  };
+        fetchProduct();
+    }, [productId]);
 
 
-  useEffect(() => {
-    // Тут має бути запит до вашого API за деталями товару
-    fetch(`https://fakestoreapi.com/products/${productId}`)
-        .then(response => response.json())
-        .then(data => setProduct(data));
-  }, [productId]);
 
-  if (!product) {
-    return <div className="loading-message">Завантаження деталей товару...</div>;
-  }
 
-  return (
-    <div className="product-details">
-      <h1>{product.title}</h1>
-      <img src={product.image} alt={product.title} className="product-image" />
-      <p>{product.description}</p>
-      <p><strong>Ціна:</strong> ${product.price}</p>
-      <div className="product-actions">
-        {!isAddedToCart && (
-          <button onClick={() => onAddToCart(product)}>Додати у кошик</button>
-        )}
-        {isAddedToCart && (
-          <>
-            <button onClick={() => onBuyNow(product)}>Купити</button>
-            <button onClick={() => onDeleteFromCart(product.id)}>Видалити з кошика</button>
-          </>
-        )}
-      </div>
-    </div>
-  );
+    if (loading) return <p>Loading...</p>;
+    if (error) return <p>Error: {error}</p>;
+    if (!product) return <p>Product not found</p>;
+
+
+    const productDetails = product[0];
+
+    return (
+        <div className="product-details">
+            <h2>{productDetails.title}</h2>
+            <img src={productDetails.images[0]} alt={productDetails.title} />
+            <p>{productDetails.description}</p>
+            <p>Price: ${productDetails.price}</p>
+
+        </div>
+    );
 }
 
 export default ProductDetails;

@@ -19,6 +19,7 @@ import PasswordReset from "./components/PasswordReset/PasswordReset";
 import SearchResults from "./components/SearchResaults/SearchResults";
 import {AuthProvider} from "./components/AuthContext/AuthContext";
 import SuccessPage from "./pages/SuccessPage/SuccessPage";
+import ProductList from "./components/ProductList/ProductList";
 
 
 function App() {
@@ -73,16 +74,17 @@ function App() {
                     {/*        crossOrigin="anonymous"></script>*/}
                 </Helmet>
                 <Header/>
-                <Routes>
-                    <Route path="/" element={<HomePage/>}/>
-                    <Route path="/shop" element={<ShopPage/>}/>
+                    <Routes>
+                        <Route path="/" element={<HomePage/>}/>
+                        <Route path="/shop" element={<ShopPage/>}/>
                         <Route path="/admin" element={<AdminDashboard/>}/>
                         <Route path="/admin/products" element={<ManageProducts/>}/>
                         {/*<Route path="/admin/users" element={<ManageUsers/>}/>*/}
                         <Route path="/login" element={<LoginForm/>}/>
                         <Route path="/register" element={<RegisterForm/>}/>
                         <Route path="/user" element={<UserProfile/>}/>
-                        <Route path="/products/:productId" element={<ProductDetails/>}/>
+                        <Route path="/products" element={<ProductList />} />
+                        <Route path="/products/:productId" element={<ProductDetails />} />
                         <Route path="/news/:newsId" element={<NewsDetails/>}/>
                         <Route path="/checkout" element={<Checkout/>}/>
                         <Route path="/cart" element={<CartPage/>}/>

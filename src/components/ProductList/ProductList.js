@@ -1,5 +1,5 @@
 import React, {useContext, useEffect, useState} from 'react';
-import { useNavigate } from 'react-router-dom';
+import {Link, useNavigate} from 'react-router-dom';
 import './ProductList.css';
 import CartPage from "../../pages/CartPage/CartPage";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -15,6 +15,8 @@ const ProductList = () => {
     const [error, setError] = useState(null);
     const [showCart, setShowCart] = useState(false);
     const { user } = useContext(AuthContext); // Отримання даних про користувача з контексту
+
+
 
 
     // Перевірка, чи є користувач адміністратором
@@ -109,12 +111,13 @@ const ProductList = () => {
                 </button>
             )}
             {showCart && isUser && <CartPage cart={cart} setCart={setCart} />}
-
             <div className="products-container">
                 {products.map(product => (
                     <div key={product.id} className="product-item-list">
-                        <h3>{product.title}</h3>
-                        <img src={product.images[0] || defaultImage} alt={product.title} className="product-image"/>
+                        <Link to={`/products/${product.id}`} style={{ textDecoration: 'none' }}>
+                            <h3>{product.title}</h3>
+                            <img src={product.images[0] || defaultImage} alt={product.title} className="product-image"/>
+                        </Link>
                         <p>{product.description}</p>
                         <p>Price: ${product.price}</p>
                         {isAdmin && (

@@ -3,6 +3,7 @@ import './NewsItem.css';
 import defaultImage from '../../img/image_2024-02-07_10-47-09.png';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAngleDown, faAngleUp } from '@fortawesome/free-solid-svg-icons';
+import {Link} from "react-router-dom";
 
 const NewsItem = ({ id, title, description, imageUrl }) => {
     const [isExpanded, setIsExpanded] = useState(false);
@@ -22,8 +23,10 @@ const NewsItem = ({ id, title, description, imageUrl }) => {
 
     return (
         <div className={`news-item ${isExpanded ? 'expanded' : ''}`}>
-            <h2>{title}</h2>
-            <img src={imageUrl || defaultImage} alt={title || 'Default'} className="news-image" />
+            <Link to={`/news/${id}`} style={{ textDecoration: 'none' }}>
+                <h2>{title}</h2>
+                <img src={imageUrl || defaultImage} alt={title || 'Default'} className="news-image" />
+            </Link>
             <div ref={contentRef} className="content">
                 <p>{description}</p>
             </div>
