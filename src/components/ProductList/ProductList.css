@@ -74,12 +74,71 @@
 
 }
 .cart-button {
-    margin: 0 0 20px 89%;
+    margin: 0 auto;
+}
+
+.form-manager {
+    width: 80%;
+    max-width: 1350px;
+    margin: 20px auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+}
+
+.form-manager div {
+    margin-bottom: 10px;
+}
+
+.form-manager label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.form-manager input[type="text"],
+.form-manager input[type="number"],
+.form-manager textarea {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box; /* Makes sure padding does not affect the overall width */
+}
+
+.form-manager textarea {
+    resize: vertical; /* Allows vertical resizing, might be useful for description */
+}
+
+.form-manager button[type="submit"],
+.form-manager button[type="button"] {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-right: 10px;
+}
+
+.form-manager button[type="submit"] {
+    background-color: #4CAF50;
+    color: white;
+}
+
+.form-manager button[type="button"] {
+    background-color: #f44336;
+    color: white;
+}
+
+/* Add some hover effects for buttons */
+.form-manager button[type="submit"]:hover,
+.form-manager button[type="button"]:hover {
+    opacity: 0.9;
 }
 
 @media (max-width: 768px) {
     .cart-button {
-        margin: 0 0 20px 75%;
+        margin: 0 auto;
     }
     .products-container {
         grid-template-columns: 1fr;

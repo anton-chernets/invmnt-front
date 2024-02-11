@@ -84,7 +84,7 @@ function App() {
                         <Route path="/register" element={<RegisterForm/>}/>
                         <Route path="/user" element={<UserProfile/>}/>
                         <Route path="/products" element={<ProductList />} />
-                        <Route path="/products/:productId" element={<ProductDetails />} />
+                        <Route path="/products/show/:productId" element={<ProductDetails />} />
                         <Route path="/news/:newsId" element={<NewsDetails/>}/>
                         <Route path="/checkout" element={<Checkout/>}/>
                         <Route path="/cart" element={<CartPage/>}/>

@@ -25,12 +25,12 @@
 
 @media (max-width: 1000px) {
     .cart-button {
-        margin: 10px 10px 10px 750px;
+        margin: 0 auto;
     }
 }
 @media (max-width: 768px) {
     .cart-button {
-        margin: 10px 10px 10px 67%;
+        margin: 0 auto;
     }
     .shop-page {
         width: 100%;

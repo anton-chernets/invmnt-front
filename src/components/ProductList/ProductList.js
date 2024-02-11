@@ -1,5 +1,5 @@
-import React, {useContext, useEffect, useState} from 'react';
-import {Link, useNavigate} from 'react-router-dom';
+import React, { useContext, useEffect, useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import './ProductList.css';
 import CartPage from "../../pages/CartPage/CartPage";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -14,7 +14,9 @@ const ProductList = () => {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
     const [showCart, setShowCart] = useState(false);
-    const { user } = useContext(AuthContext); // Отримання даних про користувача з контексту
+    const { user } = useContext(AuthContext);
+    const token = localStorage.getItem('authToken'); // Retrieve the authToken from localStorage
+    const [editingProduct, setEditingProduct] = useState(null);
 
 
 
@@ -95,9 +97,50 @@ const ProductList = () => {
             console.error('Error deleting product:', error);
         }
     };
+    const handleSaveChanges = async (e) => {
+        e.preventDefault();
+        await handleUpdateProduct(editingProduct);
+        // After updating, you might want to clear the editing state or give some feedback to the user
+    };
+    const handleUpdateProduct = async (updatedProductData) => {
+        const payload = {
+            title: updatedProductData.title,
+            description: updatedProductData.description,
+            stock: updatedProductData.stock,
+            price: updatedProductData.price,
+        };
 
-    const onEditProduct = (productId) => {
-        // ...логіка редагування продукту
+        try {
+            const response = await fetch(`http://95.217.181.158/api/products/update/${updatedProductData.id}`, {
+                method: 'POST',
+                headers: {
+                    'Authorization': `Bearer ${token}`,
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(payload),
+            });
+
+            if (!response.ok) {
+                throw new Error('Server responded with status: ' + response.status);
+            }
+
+            const updatedProduct = await response.json();
+            setProducts(prevProducts => prevProducts.map(p => p.id === updatedProduct.id ? updatedProduct : p));
+        } catch (error) {
+            console.error('Error updating product:', error);
+            alert('Error updating product: ' + error.message);
+        }
+        setEditingProduct(null);
+    };
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        setEditingProduct((prev) => ({
+            ...prev,
+            [name]: value,
+        }));
+    };
+    const startEditingProduct = (product) => {
+        setEditingProduct(product);
     };
 
     if (loading) return <p>Loading...</p>;
@@ -114,7 +157,7 @@ const ProductList = () => {
             <div className="products-container">
                 {products.map(product => (
                     <div key={product.id} className="product-item-list">
-                        <Link to={`/products/${product.id}`} style={{ textDecoration: 'none' }}>
+                        <Link to={`/products/show/${product.id}`} style={{ textDecoration: 'none' }}>
                             <h3>{product.title}</h3>
                             <img src={product.images[0] || defaultImage} alt={product.title} className="product-image"/>
                         </Link>
@@ -123,7 +166,68 @@ const ProductList = () => {
                         {isAdmin && (
                             <>
                                 <button onClick={() => onDeleteProduct(product.id)}>Видалити</button>
-                                <button onClick={() => onEditProduct(product.id)}>Редагувати</button>
+
+                                {editingProduct && editingProduct.id === product.id ? (
+                                    <form onSubmit={handleSaveChanges} className='form-manager'>
+                                        <div>
+                                            <label htmlFor="title">Title:</label>
+                                            <input
+                                                id="title"
+                                                name="title"
+                                                type="text"
+                                                value={editingProduct.title}
+                                                onChange={handleChange}
+                                                required
+                                            />
+                                        </div>
+                                        <div>
+                                            <label htmlFor="description">Description:</label>
+                                            <textarea
+                                                id="description"
+                                                name="description"
+                                                value={editingProduct.description}
+                                                onChange={handleChange}
+                                                required
+                                            />
+                                        </div>
+                                        <div>
+                                            <label htmlFor="price">Price:</label>
+                                            <input
+                                                id="price"
+                                                name="price"
+                                                type="number"
+                                                value={editingProduct.price}
+                                                onChange={handleChange}
+                                                required
+                                            />
+                                        </div>
+                                        <div>
+                                            <label htmlFor="stock">Stock:</label>
+                                            <input
+                                                id="stock"
+                                                name="stock"
+                                                type="number"
+                                                value={editingProduct.stock}
+                                                onChange={handleChange}
+                                                required
+                                            />
+                                        </div>
+                                        <div>
+                                            <label htmlFor="image">Image URL:</label>
+                                            <input
+                                                id="image"
+                                                name="image"
+                                                type="text"
+                                                value={editingProduct.image}
+                                                onChange={handleChange}
+                                            />
+                                        </div>
+                                        <button type="submit">Save Changes</button>
+                                        <button type="button" onClick={() => setEditingProduct(null)}>Cancel</button>
+                                    </form>
+                                ) : (
+                                    <button onClick={() => startEditingProduct(product)}>Редагувати</button>
+                                )}
                             </>
                         )}
                         {isUser && (
@@ -137,6 +241,7 @@ const ProductList = () => {
             </div>
         </div>
     );
+
 };
 
 export default ProductList;

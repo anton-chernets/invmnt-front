@@ -111,16 +111,17 @@ const ManageNews = () => {
 
     return (
         <div className="manage-news">
-            <h1>Керування новинами</h1>
+
             {/* Форма для додавання або редагування новин */}
-            <form onSubmit={editMode ? () => handleEditNews(currentNews.id) : handleAddNews}>
+            <form onSubmit={editMode ? () => handleEditNews(currentNews.id) : handleAddNews} className='form-manager'>
+                <h1>Керування новинами</h1>
                 <input
-                    type="text"
-                    placeholder="Назва новини"
-                    value={currentNews.title}
-                    onChange={(e) => setCurrentNews({...currentNews, title: e.target.value})}
-                    required
-                />
+                type="text"
+                placeholder="Назва новини"
+                value={currentNews.title}
+                onChange={(e) => setCurrentNews({...currentNews, title: e.target.value})}
+                required
+            />
                 <textarea
                     placeholder="Контент новини"
                     value={currentNews.content}

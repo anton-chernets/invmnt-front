@@ -3,7 +3,7 @@ import './UserProfile.css';
 import useFetchUser from '../../components/FetchUser/FetchUser';
 import { useNavigate } from 'react-router-dom';
 import { AuthContext } from "../../components/AuthContext/AuthContext";
-
+import CartPage from '../CartPage/CartPage';
 
 const UserProfile = () => {
     const token = localStorage.getItem('authToken');
@@ -83,39 +83,11 @@ const UserProfile = () => {
         }
     };
 
-    const removeFromCart = async (productId) => {
-        try {
-            const response = await fetch(`http://95.217.181.158/api/cart/${productId}`, {
-                method: 'DELETE',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${token}`,
-                },
-            });
-
-            if (!response.ok) {
-                throw new Error('Failed to remove product from cart');
-            }
-
-            setUser(prevUser => ({
-                ...prevUser,
-                cart: prevUser.cart.filter(item => item.id !== productId)
-            }));
-
-
-            alert('Product removed from cart');
-        } catch (error) {
-            console.error('Error removing product from cart:', error);
-            alert('Failed to remove product from cart');
-        }
-    };
-
 
     if (loading) return <div>Loading...</div>;
     if (error) return <div>Error: {error}</div>;
     if (!user) return <div>No user data available</div>;
-    console.log(user.name)
-    console.log(user.role)
+
     return (
         <div className="user-profile">
             <h1>Особистий кабінет</h1>
@@ -126,22 +98,7 @@ const UserProfile = () => {
                         <p><b>Email:</b> {user?.email || 'No email provided'}</p>
                     </div>
                     <div className="user-cart">
-                        {user.cart && user.cart.length > 0 ? (
-                            <>
-                                <h2>Кошик</h2>
-                                <ul>
-                                    {user.cart.map(item => (
-                                        <li key={item.id}>
-                                            {item.title} - Ціна: {item.price}
-
-                                            <button onClick={() => removeFromCart(item.id)}>Видалити з кошика</button>
-                                        </li>
-                                    ))}
-                                </ul>
-                            </>
-                        ) : (
-                            <p>Кошик пустий.</p>
-                        )}
+                        {user && <CartPage cart={user.cart} setCart={(updatedCart) => setUser({...user, cart: updatedCart})} />}
                     </div>
                 </div>
 

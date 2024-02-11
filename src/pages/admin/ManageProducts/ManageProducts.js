@@ -79,15 +79,7 @@ const ManageProducts = () => {
         }
     };
 
-    // const createProduct = async (productData) => {
-    //     // Omit the image data and send the rest of the product data
-    //     // ...
-    // };
-    //
-    // const uploadProductImage = async (image, productId) => {
-    //     // Use a different API endpoint to upload the image
-    //     // ...
-    // };
+
     const handleInputChange = (e) => {
         const { name, value } = e.target;
         setNewProduct({ ...newProduct, [name]: name === 'price' || name === 'stock' ? parseFloat(value) : value });
@@ -154,6 +146,7 @@ const ManageProducts = () => {
                 {/*/>*/}
                 <button type="submit" className="add-button">Додати товар</button>
             </form>
+
             <ProductList products={products}/>
             {/*<ProductList/>*/}
         </div>
