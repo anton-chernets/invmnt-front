@@ -16,6 +16,7 @@ const ProductList = () => {
     const [showCart, setShowCart] = useState(false);
     const { user } = useContext(AuthContext); // Отримання даних про користувача з контексту
 
+
     // Перевірка, чи є користувач адміністратором
     const isAdmin = user && user.role === 'Admin';
     // Перевірка, чи є користувач залогінений (не адмін)
@@ -102,10 +103,13 @@ const ProductList = () => {
 
     return (
         <div>
-            <button onClick={() => setShowCart(!showCart)} className="cart-button">
-                <FontAwesomeIcon icon={faShoppingCart} className="icon-spacing"/> Кошик
-            </button>
-            {showCart && <CartPage cart={cart} setCart={setCart}/>}
+            {isUser && (
+                <button onClick={() => setShowCart(!showCart)} className="cart-button">
+                    <FontAwesomeIcon icon={faShoppingCart} className="icon-spacing" /> Кошик
+                </button>
+            )}
+            {showCart && isUser && <CartPage cart={cart} setCart={setCart} />}
+
             <div className="products-container">
                 {products.map(product => (
                     <div key={product.id} className="product-item-list">
