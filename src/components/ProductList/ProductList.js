@@ -31,16 +31,12 @@ const ProductList = () => {
                 return response.json();
             })
             .then(data => {
-                if (data?.data && Array.isArray(data.data)) {
-                    setProducts(data.data);
-                    setLoading(false);
-                } else {
-                    throw new Error('Unexpected response from the API');
-                }
+                setProducts(data.data || []);
             })
             .catch(error => {
-                console.error('Error fetching products:', error);
                 setError(error);
+            })
+            .finally(() => {
                 setLoading(false);
             });
     }, []);
@@ -111,10 +107,10 @@ const ProductList = () => {
             </button>
             {showCart && <CartPage cart={cart} setCart={setCart}/>}
             <div className="products-container">
-                {products && products.map(product => (
+                {products.map(product => (
                     <div key={product.id} className="product-item-list">
                         <h3>{product.title}</h3>
-                        <img src={product.imageUrl || defaultImage} alt={product.title} className="product-image"/>
+                        <img src={product.images[0] || defaultImage} alt={product.title} className="product-image"/>
                         <p>{product.description}</p>
                         <p>Price: ${product.price}</p>
                         {isAdmin && (
