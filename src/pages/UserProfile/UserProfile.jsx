@@ -25,7 +25,6 @@ const UserProfile = () => {
         };
 
         try {
-
             const response = await fetch('http://95.217.181.158/api/user/update', {
                 method: 'PUT',
                 headers: {
@@ -40,7 +39,6 @@ const UserProfile = () => {
                 const errorData = await response.json();
                 throw new Error(errorData.message || 'Failed to update profile');
             }
-
 
             const data = await response.json();
             setUser(data);
@@ -63,7 +61,6 @@ const UserProfile = () => {
                         'Content-Type': 'application/json',
                         'Authorization': `Bearer ${token}`
                     },
-                    // Тело запроса не нужно, если мы не передаем данные
                 });
 
                 // Проверка успешности ответа
