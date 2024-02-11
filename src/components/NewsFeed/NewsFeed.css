@@ -8,10 +8,6 @@
     display: block;
 }
 
-
-
-
-
 .news-container {
     display: flex;
     flex-wrap: wrap;
@@ -48,6 +44,7 @@
         flex: 0 0 100%;
         max-width: 100%;
         margin: 0 auto;
+
     }
 
     .news-items {
