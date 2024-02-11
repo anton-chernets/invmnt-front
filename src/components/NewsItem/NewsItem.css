@@ -1,37 +1,40 @@
 .news-item {
     background-color: #ececec;
     padding: 15px;
-    margin: 0 10px 10px;
+    margin: 10px;
     border-radius: 5px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    flex-basis: calc(50% - 20px);
-    max-width: calc(50% - 20px);
     box-sizing: border-box;
-    /*height: 500px;*/
-    max-height: 100%;
-    transition: max-height 0.5s ease, transform 1s ease;
+    transition: transform 1s ease;
     overflow: hidden;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    flex: 1 1 calc(50% - 20px); /* Ensures items have equal width */
+    min-height: 500px; /* Ensures a minimum height */
 }
 
 .content {
     overflow: hidden;
     transition: max-height 0.5s ease;
+    position: relative;
 }
 
 .toggle-content-btn {
-    background: transparent;
-    margin: 0 auto;
+    background: #b9b9b9;
     height: 30px;
-    cursor: pointer; /* It's good to add a cursor to indicate it's clickable */
+    cursor: pointer;
+    border-radius: 30px;
+    border: none;
+    color: white;
+    padding: 0 15px;
+    width: 150px;
+    margin: 10px auto 0; /* Centers button and adds space from content */
 }
-.news-description {
-    /* Your existing styles */
-    max-height: 4.5em; /* Set max-height to show preview (3 lines) */
-    overflow: hidden; /* Hide the overflowed content */
-    text-overflow: ellipsis; /* Add ellipsis to overflowed content */
-}
-.news-item.expanded .news-description {
-    max-height: none; /* When expanded, show all content */
+
+.news-item.expanded .content {
+    max-height: none; /* Allows content to expand fully */
 }
 
 .news-item:hover {
@@ -40,49 +43,44 @@
 
 .news-item h3 {
     color: #000000;
-    margin: 0 0 10px 0;
-}
-.news-item .content.expanded {
-    max-height: none; /* Встановлення максимальної висоти на "none", щоб вміст міг розгорнутися повністю */
+    margin-bottom: 10px;
 }
 
-.news-item .content {
-    max-height: 100px; /* Початкова максимальна висота для прев'ю */
-    overflow: hidden;
-    transition: max-height 0.5s ease;
+.news-item .content:not(.expanded)::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 4.5em; /* Matches the max-height of .news-description */
+    background: linear-gradient(to bottom, rgba(255, 255, 255, 0), #ececec 100%);
+    pointer-events: none;
 }
 
-/* Додайте цей клас для контенту, який повинен розгортатися */
-.news-item .content.expanded {
-    max-height: none; /* Видаляємо обмеження по висоті, коли контент розгорнуто */
+.news-item.expanded .content::after {
+    display: none; /* Hides the gradient on expanded items */
 }
-/* Text of news */
-.news-item p {
-    color: #333;
-    line-height: 1.6;
-    margin: 0;
+
+.news-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px; /* Sets gap between items */
 }
+
 @media (max-width: 1024px) {
     .news-item {
         flex: 0 0 calc(50% - 20px);
     }
 }
-@media (max-width: 768px) {
 
+@media (max-width: 768px) {
     .news-item {
         flex: 0 0 100%;
         max-width: 100%;
-        margin: 0 auto;
         margin-bottom: 20px;
     }
-
-    .news-items {
-        width: 100%;
-        padding-left: 0;
-
-    }
     .news-container {
+        padding: 0;
         flex-direction: column;
-        width: 100%;
     }
 }
