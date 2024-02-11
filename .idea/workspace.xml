@@ -4,7 +4,36 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9e423c87-fcc7-4ec7-9b14-5c2d8e0e0ee0" name="Changes" comment="" />
+    <list default="true" id="9e423c87-fcc7-4ec7-9b14-5c2d8e0e0ee0" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/src/components/AuthContext/AuthContext.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/AuthContext/AuthContext.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Chart/Chart.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Chart/Chart.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/FetchUser/FetchUser.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/FetchUser/FetchUser.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Footer/Footer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Footer/Footer.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/LoginForm/LoginForm.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/LoginForm/LoginForm.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/NewsFeed/NewsFeed.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/NewsFeed/NewsFeed.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/NewsItem/NewsItem.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/NewsItem/NewsItem.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/PasswordReset/PasswordReset.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/PasswordReset/PasswordReset.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/ProductList/ProductList.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/ProductList/ProductList.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/RegisterForm/RegisterForm.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/RegisterForm/RegisterForm.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/ScrollToTopButton/ScrollToTopButton.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/ScrollToTopButton/ScrollToTopButton.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/SearchResaults/SearchResults.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/SearchResaults/SearchResults.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Sidebar/Sidebar.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Sidebar/Sidebar.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Ticker/Ticker.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Ticker/Ticker.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/CartPage/CartPage.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/CartPage/CartPage.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/Checkout/Checkout.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Checkout/Checkout.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/HomePage/HomePage.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/HomePage/HomePage.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/NewsDetails/NewsDetails.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/NewsDetails/NewsDetails.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/ProductDetails/ProductDetails.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/ProductDetails/ProductDetails.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/ShopPage/ShopPage.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/ShopPage/ShopPage.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/SuccessPage/SuccessPage.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/SuccessPage/SuccessPage.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/admin/AdminDashboard/AdminDashboard.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/admin/AdminDashboard/AdminDashboard.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/admin/ManageNews/ManageNews.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/admin/ManageNews/ManageNews.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/admin/ManageOrders/ManageOrders.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/admin/ManageOrders/ManageOrders.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/admin/ManageProducts/ManageProducts.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/admin/ManageProducts/ManageProducts.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/admin/ManageUsers/ManageUsers.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/admin/ManageUsers/ManageUsers.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/admin/SiteStats/SiteStats.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/admin/SiteStats/SiteStats.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/admin/UserMessages/UserMessages.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/admin/UserMessages/UserMessages.jsx" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -120,7 +149,7 @@
       <workItem from="1707216243243" duration="23702000" />
       <workItem from="1707242541306" duration="31944000" />
       <workItem from="1707387944945" duration="27784000" />
-      <workItem from="1707483905396" duration="63944000" />
+      <workItem from="1707483905396" duration="64302000" />
     </task>
     <servers />
   </component>
