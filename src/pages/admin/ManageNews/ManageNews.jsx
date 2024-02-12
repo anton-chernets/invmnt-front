@@ -37,16 +37,15 @@ const ManageNews = () => {
 
     const uploadImageAndGetUrl = async (imageFile) => {
         const formData = new FormData();
-        formData.append('files', imageFile); // Assuming 'files' is the key expected by the server for the file upload
-
-        // Append 'id' and 'model' to formData only if they are required by your API
-        //formData.append('id', 'your_model_id'); // Replace with the actual id if needed
-        //formData.append('model', 'article'); // Replace with the actual model type if needed
+        formData.append('files', imageFile);
+        formData.append('id', 1); // Replace with actual ID if needed
+        formData.append('model', 'Article'); // Assuming 'Article' is the model type
 
         const uploadResponse = await fetch('http://95.217.181.158/api/files/upload', {
             method: 'POST',
             headers: {
                 'Authorization': `Bearer ${token}`,
+                // 'Content-Type' header should not be set manually for FormData
             },
             body: formData,
         });
@@ -56,8 +55,10 @@ const ManageNews = () => {
         }
 
         const fileData = await uploadResponse.json();
-        // Assuming the API returns the file URL in the response, replace 'path' with the actual key where the URL is provided
-        return fileData.path;
+        console.log('Upload response:', fileData); // Log the response data
+
+        // You will need to adjust the next line based on how your API returns the image URL
+        return fileData.imageUrl; // Replace with the actual key that contains the URL
     };
 
     const handleAddNews = async (event) => {
@@ -68,7 +69,7 @@ const ManageNews = () => {
             let imageUrl = currentNews.imageUrl;
 
             if (currentNews.imageFile) {
-                imageUrl = await uploadImageAndGetUrl(currentNews.imageFile); // This function uploads the image and returns the URL
+                imageUrl = await uploadImageAndGetUrl(currentNews.imageFile); // This function uploads the image
             }
 
             const payload = {
