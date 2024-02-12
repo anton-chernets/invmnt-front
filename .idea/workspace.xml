@@ -6,19 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="9e423c87-fcc7-4ec7-9b14-5c2d8e0e0ee0" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Header/Header.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Header/Header.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Header/Header.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Header/Header.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/NewsFeed/NewsFeed.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/NewsFeed/NewsFeed.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/NewsItem/NewsItem.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/NewsItem/NewsItem.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/NewsItem/NewsItem.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/NewsItem/NewsItem.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/ProductList/ProductList.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/ProductList/ProductList.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/CartPage/CartPage.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/CartPage/CartPage.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/Checkout/Checkout.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Checkout/Checkout.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/HomePage/HomePage.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/HomePage/HomePage.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/UserProfile/UserProfile.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/UserProfile/UserProfile.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/UserProfile/UserProfile.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/UserProfile/UserProfile.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Ticker/Ticker.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Ticker/Ticker.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -137,7 +125,7 @@
       <workItem from="1707242541306" duration="31944000" />
       <workItem from="1707387944945" duration="27784000" />
       <workItem from="1707483905396" duration="64302000" />
-      <workItem from="1707735626257" duration="12629000" />
+      <workItem from="1707735626257" duration="13478000" />
     </task>
     <servers />
   </component>
