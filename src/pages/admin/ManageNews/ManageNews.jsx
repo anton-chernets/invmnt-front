@@ -35,17 +35,46 @@ const ManageNews = () => {
         fetchNews();
     }, []);
 
+    const uploadImageAndGetUrl = async (imageFile) => {
+        const formData = new FormData();
+        formData.append('files', imageFile); // Assuming 'files' is the key expected by the server for the file upload
 
+        // Append 'id' and 'model' to formData only if they are required by your API
+        // formData.append('id', 'your_model_id'); // Replace with the actual id if needed
+        // formData.append('model', 'article'); // Replace with the actual model type if needed
+
+        const uploadResponse = await fetch('http://95.217.181.158/api/files/upload', {
+            method: 'POST',
+            headers: {
+                'Authorization': `Bearer ${token}`,
+            },
+            body: formData,
+        });
+
+        if (!uploadResponse.ok) {
+            throw new Error(`HTTP error! Status: ${uploadResponse.status}`);
+        }
+
+        const fileData = await uploadResponse.json();
+        // Assuming the API returns the file URL in the response, replace 'path' with the actual key where the URL is provided
+        return fileData.path;
+    };
 
     const handleAddNews = async (event) => {
         event.preventDefault();
         setLoading(true);
 
         try {
+            let imageUrl = currentNews.imageUrl;
+
+            if (currentNews.imageFile) {
+                imageUrl = await uploadImageAndGetUrl(currentNews.imageFile); // This function uploads the image and returns the URL
+            }
 
             const payload = {
                 title: currentNews.title,
                 description: currentNews.content,
+                imageUrl: imageUrl, // Make sure 'imageUrl' is the key your API expects for the image URL
             };
 
             const response = await fetch('http://95.217.181.158/api/articles/store', {
@@ -58,16 +87,13 @@ const ManageNews = () => {
             });
 
             if (!response.ok) {
-                const errorText = await response.text(); // Read the raw response to get the error message
-                throw new Error(`Failed to add news: ${errorText}`);
+                throw new Error(`HTTP error! Status: ${response.status}`);
             }
 
             const data = await response.json();
             setNewsList([...newsList, data]);
             setCurrentNews({ title: '', content: '', imageUrl: '', imageFile: null });
-
         } catch (error) {
-            console.error('Error adding news:', error);
             setError(error.message);
         } finally {
             setLoading(false);
