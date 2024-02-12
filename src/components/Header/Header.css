@@ -218,7 +218,7 @@
         justify-content: center;
         width: 100%;
         padding: 0;
-        height: 210px;
+        height: 220px;
     }
     .button-menu {
         display: block;
@@ -232,13 +232,11 @@
         display: flex;
         flex-direction: column;
         align-items: center;
-        /*max-height: 100%;*/
         height: 240px;
         position: relative;
         z-index: 10;
         background-color: transparent;
         width: 100%;
-        /*padding: 10px 20px;*/
     }
 
     .header-top {
