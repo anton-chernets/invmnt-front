@@ -35,44 +35,45 @@ const ManageNews = () => {
         fetchNews();
     }, []);
 
+
+
     const handleAddNews = async (event) => {
         event.preventDefault();
         setLoading(true);
 
-        const payload = {
-            title: currentNews.title,
-            description: currentNews.content,
-            imageUrl: currentNews.imageUrl,
-        };
-
         try {
+
+            const payload = {
+                title: currentNews.title,
+                description: currentNews.content,
+            };
+
             const response = await fetch('http://95.217.181.158/api/articles/store', {
                 method: 'POST',
                 headers: {
+                    'Authorization': `Bearer ${token}`,
                     'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${token}`
                 },
-                body: JSON.stringify(payload)
+                body: JSON.stringify(payload),
             });
 
             if (!response.ok) {
-                const errorData = await response.json();
-                throw new Error(errorData.message || 'Failed to add news');
+                const errorText = await response.text(); // Read the raw response to get the error message
+                throw new Error(`Failed to add news: ${errorText}`);
             }
 
             const data = await response.json();
-            if (data.data) {
-                setNewsList([...newsList, data.data]);
-                setCurrentNews({ title: '', content: '', imageUrl: '' }); // Reset the form
-            } else {
-                throw new Error('Unexpected response from the server');
-            }
+            setNewsList([...newsList, data]);
+            setCurrentNews({ title: '', content: '', imageUrl: '', imageFile: null });
+
         } catch (error) {
-            setError(error);
+            console.error('Error adding news:', error);
+            setError(error.message);
         } finally {
             setLoading(false);
         }
     };
+
 
 
     const handleEditNews = async (newsId) => {
@@ -130,10 +131,8 @@ const ManageNews = () => {
                     required
                 />
                 <input
-                    type="text"
-                    placeholder="Image URL"
-                    value={currentNews.imageUrl}
-                    onChange={(e) => setCurrentNews({...currentNews, imageUrl: e.target.value})}
+                    type="file"
+                    onChange={(e) => setCurrentNews({...currentNews, imageFile: e.target.files[0]})}
                 />
                 <button type="submit">{editMode ? 'Update News' : 'Add News'}</button>
             </form>
