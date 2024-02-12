@@ -40,8 +40,8 @@ const ManageNews = () => {
         formData.append('files', imageFile); // Assuming 'files' is the key expected by the server for the file upload
 
         // Append 'id' and 'model' to formData only if they are required by your API
-        // formData.append('id', 'your_model_id'); // Replace with the actual id if needed
-        // formData.append('model', 'article'); // Replace with the actual model type if needed
+        //formData.append('id', 'your_model_id'); // Replace with the actual id if needed
+        //formData.append('model', 'article'); // Replace with the actual model type if needed
 
         const uploadResponse = await fetch('http://95.217.181.158/api/files/upload', {
             method: 'POST',
