@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import './ManageNews.css';
 
+
 const ManageNews = () => {
     const [newsList, setNewsList] = useState([]);
     const [editMode, setEditMode] = useState(false);
-    const [currentNews, setCurrentNews] = useState({ title: '', content: '' });
+    const [currentNews, setCurrentNews] = useState({ title: '', content: '', imageUrl: '' });
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
     const token = localStorage.getItem('authToken');
@@ -12,15 +13,13 @@ const ManageNews = () => {
     useEffect(() => {
         const fetchNews = async () => {
             setLoading(true);
-            const url = 'http://95.217.181.158/api/articles';
 
             try {
-                const response = await fetch(url);
+                const response = await fetch('http://95.217.181.158/api/articles');
                 if (!response.ok) {
                     throw new Error(`HTTP error! Status: ${response.status}`);
                 }
                 const data = await response.json();
-
                 if (data?.data && Array.isArray(data.data)) {
                     setNewsList(data.data);
                 } else {
@@ -43,7 +42,7 @@ const ManageNews = () => {
         const payload = {
             title: currentNews.title,
             description: currentNews.content,
-            // images: currentimages.images
+            imageUrl: currentNews.imageUrl,
         };
 
         try {
@@ -56,14 +55,17 @@ const ManageNews = () => {
                 body: JSON.stringify(payload)
             });
 
-            const data = await response.json();
+            if (!response.ok) {
+                const errorData = await response.json();
+                throw new Error(errorData.message || 'Failed to add news');
+            }
 
-            if (response.ok) {
+            const data = await response.json();
+            if (data.data) {
                 setNewsList([...newsList, data.data]);
-                setCurrentNews({ title: '', content: '' });
+                setCurrentNews({ title: '', content: '', imageUrl: '' }); // Reset the form
             } else {
-                // Обробка помилок, якщо API повертає відповідь зі статусом помилки
-                throw new Error(data.message || 'Не вдалося створити новину');
+                throw new Error('Unexpected response from the server');
             }
         } catch (error) {
             setError(error);
@@ -112,43 +114,48 @@ const ManageNews = () => {
     return (
         <div className="manage-news">
 
-            {/* Форма для додавання або редагування новин */}
             <form onSubmit={editMode ? () => handleEditNews(currentNews.id) : handleAddNews} className='form-manager'>
-                <h1>Керування новинами</h1>
+                <h1>{editMode ? 'Edit News' : 'Add News'}</h1>
                 <input
-                type="text"
-                placeholder="Назва новини"
-                value={currentNews.title}
-                onChange={(e) => setCurrentNews({...currentNews, title: e.target.value})}
-                required
-            />
+                    type="text"
+                    placeholder="News Title"
+                    value={currentNews.title}
+                    onChange={(e) => setCurrentNews({...currentNews, title: e.target.value})}
+                    required
+                />
                 <textarea
-                    placeholder="Контент новини"
+                    placeholder="News Content"
                     value={currentNews.content}
                     onChange={(e) => setCurrentNews({...currentNews, content: e.target.value})}
                     required
                 />
-                {/*<input*/}
-                {/*    type="text"*/}
-                {/*    placeholder="URL зображення"*/}
-                {/*    value={currentNews.imageUrl}*/}
-                {/*    onChange={(e) => setCurrentNews({...currentNews, imageUrl: e.target.value})}*/}
-                {/*/>*/}
-                <button type="submit">{editMode ? 'Редагувати' : 'Додати'}</button>
+                <input
+                    type="text"
+                    placeholder="Image URL"
+                    value={currentNews.imageUrl}
+                    onChange={(e) => setCurrentNews({...currentNews, imageUrl: e.target.value})}
+                />
+                <button type="submit">{editMode ? 'Update News' : 'Add News'}</button>
             </form>
 
             {/* Список усіх новин */}
             <div className="news-list">
+
+
                 {newsList.map((newsItem) => (
                     <div key={newsItem.id} className="news-item">
                         <h3>{newsItem.title}</h3>
-                        <p>{newsItem.content}</p>
+                        {newsItem.imageUrl &&
+                            <img src={newsItem.imageUrl} alt={newsItem.title} className="news-image"/>}
+                        <p>{newsItem.description}</p>
+
+
                         <button onClick={() => {
                             setEditMode(true);
                             setCurrentNews(newsItem);
-                        }}>Редагувати
+                        }}>Edit
                         </button>
-                        <button onClick={() => handleDeleteNews(newsItem.id)}>Видалити</button>
+                        <button onClick={() => handleDeleteNews(newsItem.id)}>Delete</button>
                     </div>
                 ))}
             </div>
