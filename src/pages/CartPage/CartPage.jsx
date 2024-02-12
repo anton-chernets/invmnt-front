@@ -1,26 +1,53 @@
 import React, {} from 'react';
-// import { AuthContext } from '../../components/AuthContext/AuthContext'; // Замініть на ваш шлях до AuthContext
 import './CartPage.css'
 import defaultImage from '../../img/image_2024-02-07_10-47-09.png';
 
-const CartPage = ({ cart = [], setCart }) => {
-    // const { user } = useContext(AuthContext); // Використовуємо контекст для отримання інформації про користувача
 
-    // Розрахунок загальної суми
+
+const CartPage = ({ cart = [], setCart }) => {
+    const token = localStorage.getItem('authToken');
+
     const totalPrice = cart.reduce((total, item) => {
-        // Переконайтеся, що ціна є числом
+
         const price = parseFloat(item.price);
         return typeof price === 'number' ? total + price * item.quantity : total;
     }, 0);
 
-    // Функція для видалення товару з кошика
+
     const handleRemoveFromCart = (productId) => {
-        setCart(cart.filter(item => item.id !== productId));
+        const updatedCart = cart.filter(item => item.id !== productId);
+        setCart(updatedCart);
+        localStorage.setItem('cart', JSON.stringify(updatedCart)); // Save the updated cart to localStorage
     };
 
-    // Функція для обробки покупки
-    const handleBuy = () => {
-        // ... Код для обробки покупки
+    const handleBuy = async () => {
+        try {
+            const response = await fetch('http://95.217.181.158/api/checkout', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`,
+                },
+                body: JSON.stringify({ products: cart.map(item => ({ id: item.id, quantity: item.quantity })) }),
+            });
+
+            if (!response.ok) {
+                const errorData = await response.json();
+                console.error('Checkout failed:', errorData);
+                alert('Помилка під час оформлення покупки: ' + (errorData.message || 'Не вдалось виконати покупку'));
+                return;
+            }
+
+            const result = await response.json();
+            console.log('Checkout successful', result);
+            alert('Покупка успішно оформлена!');
+            setCart([]);
+            // Тут можна додати перенаправлення або оновлення сторінки
+            // window.location.href = '/thank-you'; // Перенаправлення на сторінку подяки
+        } catch (error) {
+            console.error('Checkout error:', error);
+            alert('Помилка під час оформлення покупки: ' + error.message);
+        }
     };
 
     return (

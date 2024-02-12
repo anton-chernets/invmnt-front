@@ -13,7 +13,7 @@ const NewsItem = ({ id, title, description, imageUrl }) => {
         if (isExpanded) {
             contentRef.current.style.maxHeight = `${contentRef.current.scrollHeight}px`;
         } else {
-            contentRef.current.style.maxHeight = '55px'; // Set to '0px' to hide content
+            contentRef.current.style.maxHeight = '55px';
         }
     }, [isExpanded]);
 

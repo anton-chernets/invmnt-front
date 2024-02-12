@@ -48,10 +48,8 @@
 .delete-account {
     width: 100px;
     height: 50px;
-    margin-left: 88%;
+    margin: 0 auto;
     background: #c82333;
-    margin-top: 150px;
-
 }
 .wrapper-inner {
     border-radius: 10px;

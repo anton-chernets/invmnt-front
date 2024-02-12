@@ -80,6 +80,11 @@ const UserProfile = () => {
         }
     };
 
+    const [cart, setCart] = useState(() => {
+        // Get the cart from localStorage and parse it or default to an empty array
+        const savedCart = localStorage.getItem('cart');
+        return savedCart ? JSON.parse(savedCart) : [];
+    });
 
     if (loading) return <div>Loading...</div>;
     if (error) return <div>Error: {error}</div>;
@@ -95,7 +100,7 @@ const UserProfile = () => {
                         <p><b>Email:</b> {user?.email || 'No email provided'}</p>
                     </div>
                     <div className="user-cart">
-                        {user && <CartPage cart={user.cart} setCart={(updatedCart) => setUser({...user, cart: updatedCart})} />}
+                        {user && <CartPage cart={cart} setCart={setCart} />}
                     </div>
                 </div>
 

@@ -1,41 +1,28 @@
-import React, {useState, useContext, useEffect} from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import './Header.css';
 import logoImage from '../../img/Untitled.png';
 import { AuthContext } from "../AuthContext/AuthContext";
-// import axios from 'axios';
 import Ticker from "../Ticker/Ticker";
 
-const useFetchSearchResults = (query, setResults, setIsSearching) => {
+const useFetchSearchResults = (query, setResults) => {
     useEffect(() => {
-        const fetchSearchResults = async () => {
-            if (query.length > 2) {
-                setIsSearching(true);
+        if (query.length > 2) {
+            (async () => {
                 try {
                     const response = await fetch(`/api/search?q=${encodeURIComponent(query)}`);
                     if (!response.ok) {
-                        throw new Error('Помилка виконання запиту до API');
+                        throw new Error('Network response was not ok');
                     }
                     const data = await response.json();
-
-                    if (data.length === 0) {
-                        // Якщо результати відсутні, можна встановити певний стан або відобразити повідомлення
-                        setResults([]);
-                        alert('Результати не знайдені. Спробуйте інший запит.');
-                    } else {
-                        setResults(data);
-                    }
+                    setResults(data.length ? data : 'No results found.');
                 } catch (error) {
                     console.error('Error fetching data:', error);
-                    alert('Сталася помилка при пошуку. Будь ласка, спробуйте пізніше.');
-                } finally {
-                    setIsSearching(false);
+                    setResults('Error during fetch.');
                 }
-            }
-        };
-
-        fetchSearchResults();
-    }, [query, setResults, setIsSearching]);
+            })();
+        }
+    }, [query, setResults]);
 };
 
 const Header = () => {
@@ -156,9 +143,7 @@ const Header = () => {
 
                         {/*{isAuthenticated && <button onClick={handleLogout}>Logout</button>}*/}
                     </div>
-                </div>
-            </div>
-            {isLoadingRates ? (
+                </div>{isLoadingRates ? (
                 <div className="loading">Загрузка курсов...</div>
             ) : (
                 <div className='ticker-wrap'>
@@ -179,6 +164,8 @@ const Header = () => {
                     )}
                 </div>
             )}
+            </div>
+
             {isSearching && <div className="loading">Поиск...</div>}
         </header>
     );

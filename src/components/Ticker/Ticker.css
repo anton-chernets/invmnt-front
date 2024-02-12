@@ -12,7 +12,7 @@
 .ticker-content {
     display: flex; /* changed to flex to ensure items are aligned in a row */
     animation: scroll-left 290s linear infinite; /* Adjust the time as needed */
-    background-color: white;
+    background-color: #b9b9b9;
 }
 
 /* Ensure that the animation keeps running smoothly without jumps */

@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import './ProductList.css';
 import CartPage from "../../pages/CartPage/CartPage";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -8,61 +8,66 @@ import defaultImage from '../../img/image_2024-02-07_10-47-09.png';
 import { AuthContext } from '../AuthContext/AuthContext';
 
 const ProductList = () => {
-    const navigate = useNavigate();
     const [products, setProducts] = useState([]);
-    const [cart, setCart] = useState([]);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
     const [showCart, setShowCart] = useState(false);
     const { user } = useContext(AuthContext);
     const token = localStorage.getItem('authToken'); // Retrieve the authToken from localStorage
     const [editingProduct, setEditingProduct] = useState(null);
-
-
-
-
-    // Перевірка, чи є користувач адміністратором
     const isAdmin = user && user.role === 'Admin';
-    // Перевірка, чи є користувач залогінений (не адмін)
     const isUser = user && user.role === 'customer';
-    useEffect(() => {
+    const [cart, setCart] = useState(() => {
+        const savedCart = localStorage.getItem('cart');
+        return savedCart ? JSON.parse(savedCart) : [];
+    });
+
+
+
+
+
+
+        useEffect(() => {
         setLoading(true);
-        const url = 'http://95.217.181.158/api/products';
-        fetch(url)
+        fetch('http://95.217.181.158/api/products')
             .then(response => {
                 if (!response.ok) {
                     throw new Error(`HTTP error! Status: ${response.status}`);
                 }
                 return response.json();
             })
-            .then(data => {
-                setProducts(data.data || []);
-            })
-            .catch(error => {
-                setError(error);
-            })
-            .finally(() => {
-                setLoading(false);
-            });
+            .then(data => setProducts(data.data || []))
+            .catch(error => setError(error.toString()))
+            .finally(() => setLoading(false));
     }, []);
+
+    useEffect(() => {
+
+        localStorage.setItem('cart', JSON.stringify(cart));
+    }, [cart]);
+
 
     const onAddToCart = (product) => {
         setCart(currentCart => {
-            const isProductInCart = currentCart.find(item => item.id === product.id);
-            if (isProductInCart) {
-                return currentCart.map(item =>
-                    item.id === product.id ? { ...item, quantity: item.quantity + 1 } : item
+            const productIndex = currentCart.findIndex(item => item.id === product.id);
+            let newCart;
+
+            if (productIndex !== -1) {
+                // Product already in cart, update the quantity
+                newCart = currentCart.map((item, index) =>
+                    index === productIndex ? { ...item, quantity: item.quantity + 1 } : item
                 );
+            } else {
+                // Product not in cart, add as a new item
+                newCart = [...currentCart, { ...product, quantity: 1 }];
             }
-            return [...currentCart, { ...product, quantity: 1 }];
+
+            localStorage.setItem('cart', JSON.stringify(newCart)); // Update localStorage with the new cart
+            return newCart;
         });
-        console.log('Product added to cart:', product);
     };
 
-    const onBuyNow = (product) => {
-        onAddToCart(product);
-        navigate('/checkout');
-    };
+
 
     const onDeleteProduct = async (productId) => {
         const authToken = localStorage.getItem('authToken');
@@ -145,6 +150,41 @@ const ProductList = () => {
 
     if (loading) return <p>Loading...</p>;
     if (error) return <p>Error: {error.message}</p>;
+
+    async function onBuyNow(product) {
+
+        const orderDetails = {
+            products: [
+                {
+                    id: product.id,
+                    quantity: 1,
+                },
+            ],
+        };
+
+        try {
+            const response = await fetch('http://95.217.181.158/api/checkout', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`, // Make sure the token is accessible here
+                },
+                body: JSON.stringify(orderDetails),
+            });
+
+            if (!response.ok) {
+                throw new Error(`HTTP error! Status: ${response.status}`);
+            }
+
+            const data = await response.json();
+
+            console.log('Order created successfully:', data);
+            alert('Thank you for your purchase!');
+        } catch (error) {
+            console.error('Checkout failed:', error);
+            alert('An error occurred during checkout. Please try again.');
+        }
+    }
 
     return (
         <div>
