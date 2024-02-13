@@ -18,7 +18,7 @@
     display: flex;
     flex-grow: 2;
     justify-content: space-around;
-    padding: 0 20px;
+    padding: 0 20px 20px;
     margin: 0 auto;
 }
 .header-logo a {
@@ -31,12 +31,17 @@
     margin-left: 30px;
 }
 .header-logo {
-    display: block;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
     margin-top: 10px;
     font-size: 30px;
+
 }
 .header-logo b{
     margin-left: 15px;
+    font-size: 40px;
+
 }
 .header-nav a {
     color: white;
@@ -69,7 +74,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    max-width: 700px;
+    max-width: 500px;
 }
 
 .search-input {
@@ -86,24 +91,24 @@
 .button-menu {
     display: none;
 }
-/* Keyframes for the scrolling effect */
+
 @keyframes scroll-left {
     0% {
         transform: translateX(0);
     }
     100% {
-        transform: translateX(-50%);
+        transform: translateX(calc(-100% / 2));
     }
 }
-
 
 .ticker-content {
     display: flex;
     flex-direction: row;
-    animation: scroll-left 120s linear infinite;
+    animation: scroll-left 250s linear infinite;
     background-color: transparent;
     white-space: nowrap;
     font-size: 15px;
+
 }
 
 .ticker-item {
@@ -114,18 +119,25 @@
 
 .ticker {
     width: 100%;
+    max-width: 100%;
+    display: flex;
+    flex-direction: row;
+    margin: 0 auto;
     background-color: rgba(203, 202, 202, 0);
     border-top: 1px solid black;
     border-bottom: 1px solid black;
     overflow: hidden;
     height: 18px;
 }
+
 .ticker-item img {
     margin-top: 1px;
     width: 20px;
     height: 16px;
     margin-right: 2px;
 }
+
+
 
 
 @media (max-width: 768px) {

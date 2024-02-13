@@ -22,12 +22,7 @@ const ProductList = () => {
         return savedCart ? JSON.parse(savedCart) : [];
     });
 
-
-
-
-
-
-        useEffect(() => {
+    useEffect(() => {
         setLoading(true);
         fetch('http://95.217.181.158/api/products')
             .then(response => {
@@ -253,14 +248,14 @@ const ProductList = () => {
                                             />
                                         </div>
                                         <div>
-                                            <label htmlFor="image">Image URL:</label>
-                                            <input
-                                                id="image"
-                                                name="image"
-                                                type="text"
-                                                value={editingProduct.image}
-                                                onChange={handleChange}
-                                            />
+                                            {/*<label htmlFor="image">Image URL:</label>*/}
+                                            {/*<input*/}
+                                            {/*    id="image"*/}
+                                            {/*    name="image"*/}
+                                            {/*    type="text"*/}
+                                            {/*    value={editingProduct.image}*/}
+                                            {/*    onChange={handleChange}*/}
+                                            {/*/>*/}
                                         </div>
                                         <button type="submit">Save Changes</button>
                                         <button type="button" onClick={() => setEditingProduct(null)}>Cancel</button>
