@@ -38,8 +38,6 @@ const Header = () => {
     const [error] = useState(null);
     useFetchSearchResults(query, setSearchResults, setIsSearching);
 
-
-
     const handleSearchChange = (e) => {
         const newQuery = e.target.value;
         setQuery(newQuery);
@@ -84,7 +82,6 @@ const Header = () => {
         <header className="header">
             <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" />
             <div className="header-top">
-                <div className="wrap">
                     {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
                     <a onClick={toggleMenu} className="button-menu">
                         <i className="fas fa-bars"></i> Меню
@@ -94,15 +91,12 @@ const Header = () => {
                         <a onClick={toggleMenu} className="button-menu">
                             <i className="fas fa-bars"></i> Меню
                         </a>
-                        {/* The button inside here is removed, assuming it's redundant. */}
                         <Link to="/" onClick={toggleMenu}><i className="fas fa-home"></i> Головна</Link>
                         <Link to="/shop" onClick={toggleMenu}>Магазин</Link>
                         {/* ...інші посилання */}
                     </nav>
-                </div>
             </div>
             <div className="header-bottom">
-                <div className="wrap">
                 <div className="header-logo">
                         <Link to="/">
                             <img src={logoImage} alt="Investment"/><b>Investment</b>
@@ -140,33 +134,9 @@ const Header = () => {
                                 <button onClick={handleLogout} className="button">Вийти</button>
                             </>
                         )}
-
-                        {/*{isAuthenticated && <button onClick={handleLogout}>Logout</button>}*/}
                     </div>
-                </div>{isLoadingRates ? (
-                <div className="loading">Загрузка курсов...</div>
-            ) : (
-                <div className='ticker-wrap'>
-                    {isLoading ? (
-                        <div>Loading...</div>
-                    ) : error ? (
-                        <div>Error: {error}</div>
-                    ) : (
-                        <Ticker />
-                        // <div className="ticker">
-                        //     {Object.entries(rates).map(([key, value]) => (
-                        //         <div key={key} className="crypto-rate">
-                        //             <h2>{key}</h2>
-                        //             <p>{value.UAH} UAH</p>
-                        //         </div>
-                        //     ))}
-                        // </div>
-                    )}
                 </div>
-            )}
-            </div>
-
-            {isSearching && <div className="loading">Поиск...</div>}
+            <Ticker />
         </header>
     );
 };

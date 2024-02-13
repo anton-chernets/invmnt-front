@@ -3,7 +3,7 @@ import './UserProfile.css';
 import useFetchUser from '../../components/FetchUser/FetchUser';
 import { useNavigate } from 'react-router-dom';
 import { AuthContext } from "../../components/AuthContext/AuthContext";
-import CartPage from '../CartPage/CartPage';
+import CartPage from '../../components/CartPage/CartPage';
 
 const UserProfile = () => {
     const token = localStorage.getItem('authToken');

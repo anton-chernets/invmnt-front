@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './SiteStats.css';
-import VisitorChart from '../../../components/Chart/Chart';
+import VisitorChart from '../Chart/Chart';
 
 const SiteStats = ({ visitorData }) => { // Removed stats from props to avoid naming collision
     const [stats, setStats] = useState({

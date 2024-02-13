@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import './ProductList.css';
-import CartPage from "../../pages/CartPage/CartPage";
+import CartPage from "../CartPage/CartPage";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faShoppingCart } from '@fortawesome/free-solid-svg-icons';
 import defaultImage from '../../img/image_2024-02-07_10-47-09.png';

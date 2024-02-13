@@ -4,7 +4,7 @@ import ManageProducts from "../ManageProducts/ManageProducts";
 // import ManageUsers from "../ManageUsers/ManageUsers";
 import ManageOrders from "../ManageOrders/ManageOrders";
 import UserMessages from "../UserMessages/UserMessages";
-import SiteStats from "../SiteStats/SiteStats";
+import SiteStats from "../../../components/SiteStats/SiteStats";
 import ManageNews from "../ManageNews/ManageNews";
 
 

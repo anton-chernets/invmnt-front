@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import './Ticker.css';
 
 const Ticker = () => {
     const [rates, setRates] = useState([]);
