@@ -22,13 +22,20 @@ const Ticker = () => {
     return (
         <div className="ticker">
             <div className="ticker-content">
-                {rates.map((rate) => (
-                    <div key={rate.r030} className="ticker-item">
-                        {/* Ensure that the image source path is correct */}
-                        <img src={`${process.env.PUBLIC_URL}/img-ticker/${rate.cc}.png`} alt={rate.txt}/>
-                        {rate.txt} (UAH = {rate.rate.toFixed(2)} {rate.cc})
-                    </div>
-                ))}
+
+                    {rates.concat(rates).map((rate, index) => ( // Удваиваем массив rates
+                        <div key={index} className="ticker-item">
+                            <img src={`${process.env.PUBLIC_URL}/img-ticker/${rate.cc}.png`} alt={rate.txt}/>
+                            {rate.txt} (UAH = {rate.rate.toFixed(2)} {rate.cc})
+                        </div>
+                    ))}
+
+                {/*{rates.concat(rates).map((rate, index) => ( // Удваиваем массив rates*/}
+                {/*    <div key={index} className="ticker-item">*/}
+                {/*        <img src={`${process.env.PUBLIC_URL}/img-ticker/${rate.cc}.png`} alt={rate.txt}/>*/}
+                {/*        {rate.txt} (UAH = {rate.rate.toFixed(2)} {rate.cc})*/}
+                {/*    </div>*/}
+                {/*))}*/}
             </div>
         </div>
     );
