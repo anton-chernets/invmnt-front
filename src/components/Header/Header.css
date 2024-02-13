@@ -114,7 +114,7 @@
 
 .ticker {
     width: 100%;
-    background-color: #cbcaca;
+    background-color: rgba(203, 202, 202, 0);
     border-top: 1px solid black;
     border-bottom: 1px solid black;
     overflow: hidden;
