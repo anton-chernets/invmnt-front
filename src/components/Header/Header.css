@@ -100,7 +100,7 @@
 .ticker-content {
     display: flex;
     flex-direction: row;
-    animation: scroll-left 19s linear infinite;
+    animation: scroll-left 120s linear infinite;
     background-color: transparent;
     white-space: nowrap;
     font-size: 15px;
@@ -114,7 +114,7 @@
 
 .ticker {
     width: 100%;
-    background-color: white;
+    background-color: #cbcaca;
     border-top: 1px solid black;
     border-bottom: 1px solid black;
     overflow: hidden;
@@ -124,7 +124,7 @@
     margin-top: 1px;
     width: 20px;
     height: 16px;
-    margin-right: 1px;
+    margin-right: 2px;
 }
 
 
