@@ -135,8 +135,21 @@ const Header = () => {
                             </>
                         )}
                     </div>
+                </div>{isLoadingRates ? (
+                <div className="loading">Загрузка курсов...</div>
+            ) : (
+                <div className='ticker-wrap'>
+                    {isLoading ? (
+                        <div>Loading...</div>
+                    ) : error ? (
+                        <div>Error: {error}</div>
+                    ) : (
+                        <Ticker />
+                    )}
                 </div>
-            <Ticker />
+            )}
+
+            {isSearching && <div className="loading">Поиск...</div>}
         </header>
     );
 };
