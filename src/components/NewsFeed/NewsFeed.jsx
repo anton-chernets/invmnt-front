@@ -1,7 +1,4 @@
 import React, { useState, useEffect } from 'react';
-
-import './NewsFeed.css';
-import Sidebar from "../Sidebar/Sidebar";
 import defaultImage from '../../img/image_2024-02-07_10-47-09.png';
 import NewsItem from "../NewsItem/NewsItem";
 
@@ -37,7 +34,6 @@ const NewsFeed = () => {
                     />
                 ))}
             </div>
-            <Sidebar />
         </div>
     );
 };

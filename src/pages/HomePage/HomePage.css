@@ -3,13 +3,9 @@
     max-width: 1400px;
     margin: 20px auto 100px;
     display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: flex-start;
-    min-height: 100vh;
+    flex-grow: 1;
     background-color: transparent;
 }
-
 .home-page h1 {
     color: #2c3e50;
     font-size: 2.5em;
@@ -20,18 +16,74 @@
     bottom: 30px;
     right: 20px;
     color: white;
-
     border-radius: 3px;
     cursor: pointer;
     opacity: 1;
     transition: opacity 0.3s;
     z-index: 1200;
 }
-
 .scroll-to-top:hover {
     opacity: 1;
 }
-
+.sidebar {
+    display: flex;
+    margin-bottom: 50px;
+    border-radius: 10px;
+    height: max-content;
+    order: 2;
+    max-width: 500px;
+    margin-left: 20px;
+}
+.binance-img {
+    width: 100%;
+    max-width: 330px;
+    height: auto;
+    border-radius: 10px;
+    box-shadow: 0 8px 8px rgba(0, 0, 0, 0.1);
+}
+.news-image {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    object-position: center;
+    display: block;
+}
+.news-container {
+    width: 100%;
+    max-width: 1100px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 20px;
+}
+.news-items {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-items: flex-start;
+    flex-grow: 2;
+    margin-bottom: 20px;
+    background-color: transparent;
+}
+.news-header {
+    width: 100%;
+    text-align: center;
+}
+.scroll-to-top {
+    position: fixed;
+    bottom: 2rem;
+    right: 50px;
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 3px;
+    cursor: pointer;
+    opacity: 1;
+    transition: opacity 0.3s;
+    z-index: 1200;
+}
+.scroll-to-top:hover {
+    opacity: 1;
+}
 
 @media (max-width: 768px) {
     .home-page {
@@ -41,5 +93,22 @@
         position: fixed;
         bottom: 20px;
         right: 8px;
+    }
+    .sidebar {
+        max-width: 100%;
+        margin: 0 auto 50px;
+    }
+    .news-item {
+        flex: 0 0 100%;
+        max-width: 100%;
+        margin: 0 auto 20px;
+    }
+    .news-items {
+        width: 100%;
+        padding-left: 0;
+    }
+    .news-container {
+        flex-direction: column;
+        width: 100%;
     }
 }

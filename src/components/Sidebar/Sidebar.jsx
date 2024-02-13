@@ -1,5 +1,4 @@
 import React from 'react';
-import './Sidebar.css'; // Путь к файлу стилей для Sidebar
 import binanceImage from '../../img/binance.jpeg'; // Путь к изображению
 
 const Sidebar = () => {
