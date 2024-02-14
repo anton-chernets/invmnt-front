@@ -20,7 +20,7 @@ code {
 
 button {
   display: flex;
-  justify-content: center;
+  justify-content: space-around;
   align-items: center;
   height: 40px;
   padding: 0 30px;

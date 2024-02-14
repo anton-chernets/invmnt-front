@@ -54,13 +54,8 @@
 .header-controls {
     display: flex;
     justify-content: space-between;
+    flex-direction: row;
     margin-top: 10px;
-}
-.button-group {
-    position: relative;
-    right: 20px;
-    top: 50%;
-    transform: translateY(-50%);
 }
 
 .menu-button {

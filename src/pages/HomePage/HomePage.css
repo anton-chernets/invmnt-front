@@ -36,7 +36,7 @@
 }
 .binance-img {
     width: 100%;
-    max-width: 330px;
+    max-width: 410px;
     height: auto;
     border-radius: 10px;
     box-shadow: 0 8px 8px rgba(0, 0, 0, 0.1);
@@ -98,6 +98,7 @@
         max-width: 100%;
         margin: 0 auto 50px;
     }
+
     .news-item {
         flex: 0 0 100%;
         max-width: 100%;
