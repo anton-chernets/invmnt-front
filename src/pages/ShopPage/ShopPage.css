@@ -4,55 +4,20 @@
     margin: 0 auto 100px;
     display: flex;
     flex-direction: column;
-    /*align-items: center;*/
-    /*justify-content: center;*/
     min-height: 100vh;
-    /*background-color: #ecf0f1;*/
     background-color: transparent;
-    /*color: #333;*/
-    /*border-radius: 10px;*/
-    /*box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);*/
 }
 
 .shop-page h1 {
     color: #2c3e50;
     font-size: 2.5em;
-
     margin: 10px 10px ;
-    /*margin-bottom: 20px;*/
     text-align: center;
 }
 
 
-@media (max-width: 1000px) {
-    .cart-button {
-        margin: 0 auto;
-    }
-}
 @media (max-width: 768px) {
-    .cart-button {
-        margin: 0 auto;
-    }
     .shop-page {
-        width: 100%;
-    }
 
-}
-@media (max-width: 740px) {
-    .shop-page {
-        width: 98%;
-        margin-left: 0;
-        margin-right: 0;
-    }
-
-}
-@media (max-width: 430px) {
-    .shop-page {
-        width: 100%;
-    }
-}
-@media (max-width: 360px) {
-    .shop-page {
-        width: 100%;
     }
 }

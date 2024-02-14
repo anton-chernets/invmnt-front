@@ -26,16 +26,11 @@ const Ticker = () => {
                     {rates.concat(rates).map((rate, index) => ( // Удваиваем массив rates
                         <div key={index} className="ticker-item">
                             <img src={`${process.env.PUBLIC_URL}/img-ticker/${rate.cc}.png`} alt={rate.txt}/>
-                            {rate.txt} (UAH = {rate.rate.toFixed(2)} {rate.cc})
+                            {rate.txt} (1 UAH = {rate.rate.toFixed(2)} {rate.cc})
                         </div>
                     ))}
 
-                {/*{rates.concat(rates).map((rate, index) => ( // Удваиваем массив rates*/}
-                {/*    <div key={index} className="ticker-item">*/}
-                {/*        <img src={`${process.env.PUBLIC_URL}/img-ticker/${rate.cc}.png`} alt={rate.txt}/>*/}
-                {/*        {rate.txt} (UAH = {rate.rate.toFixed(2)} {rate.cc})*/}
-                {/*    </div>*/}
-                {/*))}*/}
+
             </div>
         </div>
     );
