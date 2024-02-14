@@ -205,7 +205,7 @@ const ProductList = () => {
                                 {editingProduct && editingProduct.id === product.id ? (
                                     <form onSubmit={handleSaveChanges} className='form-manager'>
                                         <div>
-                                            <label htmlFor="title">Title:</label>
+                                            <label htmlFor="title">Назва товару:</label>
                                             <input
                                                 id="title"
                                                 name="title"
@@ -216,7 +216,7 @@ const ProductList = () => {
                                             />
                                         </div>
                                         <div>
-                                            <label htmlFor="description">Description:</label>
+                                            <label htmlFor="description">Опис:</label>
                                             <textarea
                                                 id="description"
                                                 name="description"
@@ -226,7 +226,7 @@ const ProductList = () => {
                                             />
                                         </div>
                                         <div>
-                                            <label htmlFor="price">Price:</label>
+                                            <label htmlFor="price">Ціна:</label>
                                             <input
                                                 id="price"
                                                 name="price"
@@ -237,7 +237,7 @@ const ProductList = () => {
                                             />
                                         </div>
                                         <div>
-                                            <label htmlFor="stock">Stock:</label>
+                                            <label htmlFor="stock">Запас:</label>
                                             <input
                                                 id="stock"
                                                 name="stock"
@@ -257,8 +257,8 @@ const ProductList = () => {
                                             {/*    onChange={handleChange}*/}
                                             {/*/>*/}
                                         </div>
-                                        <button type="submit">Save Changes</button>
-                                        <button type="button" onClick={() => setEditingProduct(null)}>Cancel</button>
+                                        <button type="submit">Зберегти зміни</button>
+                                        <button type="button" onClick={() => setEditingProduct(null)}>Скасувати</button>
                                     </form>
                                 ) : (
                                     <button onClick={() => startEditingProduct(product)}>Редагувати</button>
