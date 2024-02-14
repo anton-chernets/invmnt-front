@@ -35,47 +35,65 @@ const ManageNews = () => {
         fetchNews();
     }, []);
 
-    const uploadImageAndGetUrl = async (imageFile) => {
-        const formData = new FormData();
-        formData.append('files', imageFile);
-        formData.append('id', 1); // Replace with actual ID if needed
-        formData.append('model', 'Article'); // Assuming 'Article' is the model type
-
-        const uploadResponse = await fetch('http://95.217.181.158/api/files/upload', {
-            method: 'POST',
-            headers: {
-                'Authorization': `Bearer ${token}`,
-                // 'Content-Type' header should not be set manually for FormData
-            },
-            body: formData,
-        });
-
-        if (!uploadResponse.ok) {
-            throw new Error(`HTTP error! Status: ${uploadResponse.status}`);
+    async function uploadImage(imageFile) {
+        if (!imageFile) {
+            return null;
         }
 
-        const fileData = await uploadResponse.json();
-        console.log('Upload response:', fileData); // Log the response data
+        const formData = new FormData();
+        formData.append('files', imageFile);
+        formData.append('id', '1');
+        formData.append('model', 'Article');
 
-        // You will need to adjust the next line based on how your API returns the image URL
-        return fileData.imageUrl; // Replace with the actual key that contains the URL
-    };
+        try {
+            const uploadResponse = await fetch('http://95.217.181.158/api/files/upload', {
+                method: 'POST',
+                headers: {
+                    'Authorization': `Bearer ${token}`,
+                    'Content-Type': 'multipart/form-data'
+                },
+                body: formData,
+            });
+
+            if (!uploadResponse.ok) {
+                throw new Error(`HTTP error! Status: ${uploadResponse.status}`);
+            }
+
+            const responseBody = await uploadResponse.text();
+            try {
+
+                const responseJson = JSON.parse(responseBody);
+
+                console.log('Upload response:', responseJson);
+
+                return responseJson.data;
+            } catch (jsonError) {
+
+                console.error('Response is not valid JSON:', responseBody);
+                throw jsonError;
+            }
+        } catch (error) {
+            console.error('Upload failed:', error);
+            throw error;
+        }
+    }
+
+
 
     const handleAddNews = async (event) => {
         event.preventDefault();
         setLoading(true);
 
         try {
-            let imageUrl = currentNews.imageUrl;
-
+            let imageId = null;
             if (currentNews.imageFile) {
-                imageUrl = await uploadImageAndGetUrl(currentNews.imageFile); // This function uploads the image
+                imageId = await uploadImage(currentNews.imageFile); // Загрузка изображения и получение его ID
             }
 
             const payload = {
                 title: currentNews.title,
                 description: currentNews.content,
-                imageUrl: imageUrl, // Make sure 'imageUrl' is the key your API expects for the image URL
+                imageId: imageId, // Используется ID изображения
             };
 
             const response = await fetch('http://95.217.181.158/api/articles/store', {
@@ -93,7 +111,7 @@ const ManageNews = () => {
 
             const data = await response.json();
             setNewsList([...newsList, data]);
-            setCurrentNews({ title: '', content: '', imageUrl: '', imageFile: null });
+            setCurrentNews({ title: '', content: '', imageUrl: '', imageFile: null }); // Сброс текущей новости
         } catch (error) {
             setError(error.message);
         } finally {
@@ -104,7 +122,6 @@ const ManageNews = () => {
 
 
     const handleEditNews = async (newsId) => {
-        // Функція для редагування новини
     };
 
     const handleDeleteNews = async (newsId) => {
@@ -127,7 +144,6 @@ const ManageNews = () => {
                 setNewsList(prevNewsList => prevNewsList.filter(news => news.id !== newsId));
                 console.log('News deleted successfully');
             } else {
-                // Обробка ситуації, коли новина не видалена
                 console.error('Failed to delete the news');
             }
         } catch (error) {
