@@ -22,8 +22,7 @@ const Ticker = () => {
     return (
         <div className="ticker">
             <div className="ticker-content">
-
-                    {rates.concat(rates).map((rate, index) => ( // Удваиваем массив rates
+                    {rates.concat(rates).map((rate, index) => (
                         <div key={index} className="ticker-item">
                             <img src={`${process.env.PUBLIC_URL}/img-ticker/${rate.cc}.png`} alt={rate.txt}/>
                             {rate.txt} (1 UAH = {rate.rate.toFixed(2)} {rate.cc})
