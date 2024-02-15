@@ -85,7 +85,7 @@ const LoginForm = () => {
                         Показати пароль
                     </label>
                     <div className="droup-button">
-                        <button className="form-button" type="submit">Увійти</button>
+                        <button className="custom-btn btn-7" type="submit"><span>Увійти</span></button>
                         <div className="form-link">
                             <a href="/register">Зареєструватись</a>
                             <a href="/passwordreset">Забули пароль</a>

@@ -74,10 +74,17 @@
 .register-form-link:hover {
     text-decoration: underline;
 }
-
+.droup-button {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
 /* Адаптивность для мобильных устройств */
 @media (max-width: 768px) {
     .register-form-container {
         margin: 1rem auto;
+    }
+    .wrapper-form {
+        padding-right: 30px;
     }
 }

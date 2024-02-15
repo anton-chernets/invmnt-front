@@ -55,7 +55,7 @@
     display: flex;
     justify-content: space-between;
     flex-direction: row;
-    margin-top: 10px;
+    margin-top: 15px;
 }
 
 .menu-button {
@@ -64,12 +64,12 @@
 
 .search-form {
     width: 100%;
-    margin-top: 10px;
     margin-left: 20px;
     display: flex;
     align-items: center;
     justify-content: space-between;
     max-width: 500px;
+    margin-top: 13px;
 }
 
 .search-input {
@@ -103,7 +103,6 @@
     background-color: transparent;
     white-space: nowrap;
     font-size: 15px;
-
 }
 
 .ticker-item {
@@ -149,6 +148,7 @@
     .header-controls {
         margin-top: 0;
         justify-content: space-around;
+        width: 98%;
     }
     .header-top {
         height: 50px;
@@ -206,7 +206,13 @@
     .header-nav a:last-child {
         border-bottom: none;
     }
-
+    .search-input {
+        width: 80%;
+        margin-right: 10px;
+    }
+    .search-form {
+        width: 90%;
+    }
     /*.header-logo {*/
     /*    width: 100%;*/
 

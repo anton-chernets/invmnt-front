@@ -184,9 +184,9 @@ const ProductList = () => {
     return (
         <div>
             {isUser && (
-                <button onClick={() => setShowCart(!showCart)} className="cart-button">
+                <button onClick={() => setShowCart(!showCart)} className="custom-btn btn-7"><span>
                     <FontAwesomeIcon icon={faShoppingCart} className="icon-spacing" /> Кошик
-                </button>
+                </span></button>
             )}
             {showCart && isUser && <CartPage cart={cart} setCart={setCart} />}
             <div className="products-container">
@@ -200,7 +200,7 @@ const ProductList = () => {
                         <p>Price: ${product.price}</p>
                         {isAdmin && (
                             <>
-                                <button onClick={() => onDeleteProduct(product.id)}>Видалити</button>
+                                <button className="custom-btn btn-7" onClick={() => onDeleteProduct(product.id)}><span>Видалити</span></button>
 
                                 {editingProduct && editingProduct.id === product.id ? (
                                     <form onSubmit={handleSaveChanges} className='form-manager'>
@@ -257,18 +257,18 @@ const ProductList = () => {
                                             {/*    onChange={handleChange}*/}
                                             {/*/>*/}
                                         </div>
-                                        <button type="submit">Зберегти зміни</button>
-                                        <button type="button" onClick={() => setEditingProduct(null)}>Скасувати</button>
+                                        <button type="submit" className="custom-btn btn-7"><span>Зберегти зміни</span></button>
+                                        <button type="button" className="custom-btn btn-7" onClick={() => setEditingProduct(null)}><span>Скасувати</span></button>
                                     </form>
                                 ) : (
-                                    <button onClick={() => startEditingProduct(product)}>Редагувати</button>
+                                    <button className="custom-btn btn-7" onClick={() => startEditingProduct(product)}><span>Редагувати</span></button>
                                 )}
                             </>
                         )}
                         {isUser && (
                             <>
-                                <button onClick={() => onAddToCart(product)}>У кошик</button>
-                                <button onClick={() => onBuyNow(product)}>Придбати</button>
+                                <button className="custom-btn btn-7" onClick={() => onAddToCart(product)}><span>У кошик</span></button>
+                                <button className="custom-btn btn-7" onClick={() => onBuyNow(product)}><span>Придбати</span></button>
                             </>
                         )}
                     </div>

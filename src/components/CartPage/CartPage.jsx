@@ -64,13 +64,13 @@ const CartPage = ({ cart = [], setCart }) => {
                                     <img src={item.image || defaultImage} alt={item.title} />
                                 </div>
                                 <p>Кількість: {item.quantity}</p>
-                                <button onClick={() => handleRemoveFromCart(item.id)} className='in-cart-button'>Видалити</button>
+                                <button onClick={() => handleRemoveFromCart(item.id)} className="custom-btn btn-7"><span>Видалити</span></button>
                             </div>
                         ))}
                     </div>
                     <div className="cart-summary">
                         <p>Загальна сума: ${totalPrice.toFixed(2)}</p>
-                        <button onClick={handleBuy} className='in-cart-button'>Придбати</button>
+                        <button onClick={handleBuy} className="custom-btn btn-7"><span>Придбати</span></button>
                     </div>
                 </>
             ) : (

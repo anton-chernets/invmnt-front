@@ -123,8 +123,8 @@ const RegisterForm = () => {
                     {/*    </div>*/}
                     {/*</div>*/}
                     <div className="droup-button">
-                        <button type="submit" className="register-form-button">Зареєструватись</button>
-                        <button onClick={goToLogin} className="register-form-button">Вхід</button>
+                        <button type="submit" className="custom-btn btn-7"><span>Зареєструватись</span></button>
+                        <button onClick={goToLogin} className="custom-btn btn-7"><span>Вхід</span></button>
                     </div>
                 </form>
             </div>

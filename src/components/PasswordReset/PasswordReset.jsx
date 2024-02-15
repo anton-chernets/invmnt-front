@@ -30,8 +30,8 @@ const PasswordReset = () => {
                         required
                     />
                     <div className="droup-button">
-                        <button type="submit">Відновити пароль</button>
-                        <button type="button" onClick={handleGoBack}>Назад</button>
+                        <button type="submit" className="custom-btn btn-7"><span>Відновити пароль</span></button>
+                        <button type="button" className="custom-btn btn-7" onClick={handleGoBack}><span>Назад</span></button>
                     </div>
                 </form>
             </div>

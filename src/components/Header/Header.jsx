@@ -110,28 +110,31 @@ const Header = () => {
                             placeholder="Пошук..."
                             className="search-input"
                         />
-                        <button type="submit" className="search-button">
-                            <i className="fas fa-search"></i>
+                        {/* className="search-button" */}
+                        <button type="submit" className="custom-btn btn-7">
+                        <span><i className="fas fa-search"></i></span>
                         </button>
                     </form>
                     <div className='header-controls'>
                         {shouldShowAuthButtons() && (
                             <>
-                                <button onClick={goToLogin} className="button">Вхід</button>
-                                <button onClick={goToRegister} className="button">Зареєструватися</button>
+                                <button className="custom-btn btn-7" onClick={goToLogin}><span>Вхід</span></button>
+                                <button className="custom-btn btn-7" onClick={goToRegister}><span>Зареєструватися</span></button>
                             </>
                         )}
                         {isAuthenticated && isAdmin && (
                             <>
-                                <button onClick={goToAdmin} className="button">Admin</button>
-                                <button onClick={goToUserProfile} className="button">Кабінет</button>
-                                <button onClick={handleLogout} className="button">Вийти</button>
+                                <button className="custom-btn btn-7" onClick={goToAdmin}><span>Admin</span></button>
+                                <button className="custom-btn btn-7" onClick={goToUserProfile}><span>Кабінет</span></button>
+                                <button className="custom-btn btn-7" onClick={handleLogout}><span>Вийти</span></button>
+
+                                
                             </>
                         )}
                         {isAuthenticated && isUser && (
                             <>
-                                <button onClick={goToUserProfile} className="button">Кабінет</button>
-                                <button onClick={handleLogout} className="button">Вийти</button>
+                                <button className="custom-btn btn-7" onClick={goToUserProfile}><span>Кабінет</span></button>
+                                <button className="custom-btn btn-7" onClick={handleLogout}><span>Вийти</span></button>
                             </>
                         )}
                     </div>
