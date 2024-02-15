@@ -177,7 +177,7 @@ const ManageNews = () => {
                     type="file"
                     onChange={(e) => setCurrentNews({...currentNews, imageFile: e.target.files[0]})}
                 />
-                <button type="submit">{editMode ? 'Update News' : 'Add News'}</button>
+                <button className="custom-btn btn-7" type="submit"><span>{editMode ? 'Update News' : 'Add News'}</span></button>
             </form>
 
             {/* Список усіх новин */}
@@ -192,12 +192,12 @@ const ManageNews = () => {
                         <p>{newsItem.description}</p>
 
 
-                        <button onClick={() => {
+                        <button className="custom-btn btn-7" onClick={() => {
                             setEditMode(true);
                             setCurrentNews(newsItem);
-                        }}>Edit
+                        }}><span>Edit</span>
                         </button>
-                        <button onClick={() => handleDeleteNews(newsItem.id)}>Delete</button>
+                        <button className="custom-btn btn-7" onClick={() => handleDeleteNews(newsItem.id)}><span>Delete</span></button>
                     </div>
                 ))}
             </div>

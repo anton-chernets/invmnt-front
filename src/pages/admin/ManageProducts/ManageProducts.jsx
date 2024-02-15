@@ -144,7 +144,7 @@ const ManageProducts = () => {
                 {/*    onChange={handleInputChange}*/}
                 {/*    required*/}
                 {/*/>*/}
-                <button type="submit" className="add-button">Додати товар</button>
+                <button type="submit" className="custom-btn btn-7"><span>Додати товар</span></button>
             </form>
 
             <ProductList products={products}/>

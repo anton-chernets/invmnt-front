@@ -164,3 +164,9 @@ background: linear-gradient(0deg, rgb(36, 36, 36) 0%, rgb(88, 88, 88) 100%);
 .btn-7 span:hover:after {
   width: 100%;
 }
+
+@media (max-width: 768px) {
+  .custom-btn {
+    width: 100%;
+  }
+}

@@ -45,16 +45,16 @@ const AdminDashboard = () => {
         <div className='admin-dashboard'>
             <div className="sidebar-panel">
                 {/*<button onClick={() => handleSectionClick('users')} className="button-admin">Керування користувачами</button>*/}
-                <button onClick={() => handleSectionClick('products')} className="button-admin">Керування товарами
+                <button onClick={() => handleSectionClick('products')} className="custom-btn btn-7"><span>Керування товарами</span>
                 </button>
-                <button onClick={() => handleSectionClick('news')} className="button-admin">Керування новинами
+                <button onClick={() => handleSectionClick('news')} className="custom-btn btn-7"><span>Керування новинами</span>
                 </button>
-                <button onClick={() => handleSectionClick('orders')} className="button-admin">Управління замовленнями
+                <button onClick={() => handleSectionClick('orders')} className="custom-btn btn-7"><span>Управління замовленнями</span>
                 </button>
-                <button onClick={() => handleSectionClick('messages')} className="button-admin">Повідомлення
-                    користувачів
+                <button onClick={() => handleSectionClick('messages')} className="custom-btn btn-7"><span>Повідомлення
+                    користувачів</span>
                 </button>
-                <button onClick={() => handleSectionClick('stats')} className="button-admin">Статистика сайту</button>
+                <button onClick={() => handleSectionClick('stats')} className="custom-btn btn-7"><span>Статистика сайту</span></button>
             </div>
             <div className="content">
                 {renderContent()}

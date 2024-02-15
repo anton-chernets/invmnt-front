@@ -90,15 +90,15 @@ const ManageUsers = () => {
                     onChange={handleInputChange}
                 />
                 <button type="submit"
-                        className="button-user">{selectedUser && selectedUser.id ? 'Оновити' : 'Додати користувача'}</button>
+                        className="custom-btn btn-7"><span>{selectedUser && selectedUser.id ? 'Оновити' : 'Додати користувача'}</span></button>
 
             </form>
             <ul>
                 {users.map(user => (
                     <li key={user.id}>
                         {user.name} - {user.email}
-                        <button onClick={() => handleEditUser(user)} className="button-user">Редагувати</button>
-                        <button onClick={() => handleDeleteUser(user.id)} className="button-user">Видалити</button>
+                        <button onClick={() => handleEditUser(user)} className="custom-btn btn-7"><span>Редагувати</span></button>
+                        <button onClick={() => handleDeleteUser(user.id)} className="custom-btn btn-7"><span>Видалити</span></button>
                     </li>
                 ))}
             </ul>
@@ -112,9 +112,8 @@ const ManageUsers = () => {
                             {/* Додайте інші деталі, якщо необхідно */}
                         </div>
                         <div className="user-actions">
-                            <button onClick={() => handleEditUser(user)} className="button-edit">Редагувати</button>
-                            <button onClick={() => handleDeleteUser(user.id)} className="button-delete">Видалити
-                            </button>
+                            <button onClick={() => handleEditUser(user)} className="custom-btn btn-7"><span>Редагувати</span></button>
+                            <button onClick={() => handleDeleteUser(user.id)} className="custom-btn btn-7"><span>Видалити</span></button>
                         </div>
                     </li>
                 ))}

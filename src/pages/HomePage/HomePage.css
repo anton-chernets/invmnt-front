@@ -12,6 +12,7 @@
     margin-bottom: 20px;
 }
 .scroll-to-top {
+    width: 100px;
     position: fixed;
     bottom: 30px;
     right: 20px;
