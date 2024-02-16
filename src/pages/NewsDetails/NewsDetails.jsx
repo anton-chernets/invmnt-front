@@ -36,7 +36,7 @@ function NewsDetails() {
         <div className="news-container-detail">
                 <div className="news-details">
 
-                <h1>{newsItem.title}</h1>
+                <h3>{newsItem.title}</h3>
                 <img src={newsItem.images && newsItem.images.length > 0 ? newsItem.images[0] : defaultImage}
                      alt={newsItem.title} className='news-img'/>
 

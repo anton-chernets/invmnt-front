@@ -1,7 +1,7 @@
 .home-page {
     width: 100%;
     max-width: 1400px;
-    margin: 20px auto 100px;
+    margin: 10px auto 100px;
     display: flex;
     flex-grow: 1;
     background-color: transparent;
@@ -25,6 +25,23 @@
 }
 .scroll-to-top:hover {
     opacity: 1;
+}
+/* .background-image-container {
+    background-image: url('/src/img/Screenshot_141.png');
+    background-size: cover;
+    background-position: center;
+    height: 400px;
+    width: 105%;
+    padding-bottom: 30px;
+    box-shadow: 0 8px 6px -6px #ce2812;
+} */
+.site-wrapper {
+    width: 100%;
+    min-height: 100vh; /* This makes sure that the wrapper stretches to at least the full height of the viewport */
+    box-shadow: 0 0 10px rgba(to top 247, 45, 45, 0.5); /* Adjust the color and spread as needed */
+    margin: auto; /* This will not be visible due to the shadow but it's good practice */
+    position: relative; 
+    z-index: 1;
 }
 .sidebar {
     display: flex;
@@ -87,8 +104,12 @@
 }
 
 @media (max-width: 768px) {
+    .background-image-container {
+        display: none;
+    }
     .home-page {
         flex-direction: column;
+        margin: 0 auto 100px;
     }
     .scroll-to-top {
         position: fixed;

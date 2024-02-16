@@ -1,8 +1,9 @@
 .news-item {
     background-color: #ececec;
     padding: 15px;
-
-    margin: 0 10px 10px;
+    margin: 0 auto;
+    margin-left: 10px;
+    margin-bottom: 10px;
     border-radius: 5px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     box-sizing: border-box;
@@ -23,7 +24,7 @@
 }
 
 .toggle-content-btn {
-    background: #b9b9b9;
+    background: #8a8a8a;
     height: 30px;
     cursor: pointer;
     border-radius: 30px;
@@ -71,6 +72,7 @@
 @media (max-width: 1024px) {
     .news-item {
         flex: 0 0 calc(50% - 20px);
+        margin-top: 10px;
     }
 }
 

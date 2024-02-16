@@ -66,37 +66,43 @@ const ProductList = () => {
 
     const onDeleteProduct = async (productId) => {
         const authToken = localStorage.getItem('authToken');
-
+        
+        // Check if authToken exists before making the request
         if (!authToken) {
             console.error('Unauthorized: No auth token');
             return;
         }
-
-        try {
-            const response = await fetch(`http://95.217.181.158/api/products/remove`, {
-                method: 'DELETE',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${authToken}`
-                },
-                body: JSON.stringify({id: productId})
-            });
-
-            const data = await response.json();
-
-            if (response.ok) {
-                // Успішне видалення продукту, оновлюємо стан
-                setProducts(currentProducts => currentProducts.filter(product => product.id !== productId));
-                console.log('Product removed successfully:', data);
-            } else {
-                // Обробка помилок від сервера
-                throw new Error(data.message || 'Failed to delete product');
+    
+        // Confirm with the user before deleting
+        if (window.confirm('Ви впевнені, що хочете видалити товар?')) {
+            try {
+                const response = await fetch(`http://95.217.181.158/api/products/remove`, {
+                    method: 'DELETE',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${authToken}`
+                    },
+                    body: JSON.stringify({id: productId})
+                });
+    
+                // It's better to check response.ok before trying to parse the response body
+                if (response.ok) {
+                    const data = await response.json();
+                    // Successful deletion of the product, update the state
+                    setProducts(currentProducts => currentProducts.filter(product => product.id !== productId));
+                    console.log('Product removed successfully:', data);
+                } else {
+                    // If response is not ok, you could still try to read the response body for error details
+                    const errorData = await response.json();
+                    throw new Error(errorData.message || 'Failed to delete product');
+                }
+            } catch (error) {
+                // Handle errors in connecting to the server or others
+                console.error('Error deleting product:', error);
             }
-        } catch (error) {
-            // Обробка помилок відсутності зв'язку з сервером або інших
-            console.error('Error deleting product:', error);
         }
     };
+    
     const handleSaveChanges = async (e) => {
         e.preventDefault();
         await handleUpdateProduct(editingProduct);

@@ -84,11 +84,12 @@
     justify-content: space-between;
     flex-direction: column;
     width: 100%;
-    max-width: 1350px;
+    max-width: 1400px;
     padding-top: 10px;
     padding-right: 5px;
     padding-left: 5px;
     margin: 0 auto;
+    margin-top: 10px;
     border: 1px solid #ccc;
     border-radius: 5px;
     background-color: #f9f9f9;
@@ -107,7 +108,7 @@
 .form-manager input[type="text"],
 .form-manager input[type="number"],
 .form-manager textarea {
-    width: 100%;
+    width: 99%;
     padding: 8px;
     border: 1px solid #ccc;
     border-radius: 4px;
@@ -118,14 +119,6 @@
     resize: vertical; /* Allows vertical resizing, might be useful for description */
 }
 
-.form-manager button[type="submit"],
-.form-manager button[type="button"] {
-    padding: 10px 20px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    margin-right: 10px;
-}
 
 .form-manager button[type="submit"] {
     background-color: #4CAF50;

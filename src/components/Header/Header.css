@@ -124,7 +124,7 @@
     border-bottom: 1px solid black;
     overflow: hidden;
     height: 18px;
-    margin: 0 auto 20px;
+    margin: 0 auto;
 }
 
 .ticker-item img {

@@ -121,7 +121,7 @@ const UserProfile = () => {
                             value={newPassword}
                             onChange={handlePasswordChange}
                         />
-                        <button className="custom-btn btn-7" type="submit"><spam>Оновити дані</spam></button>
+                        <button className="custom-btn btn-7" type="submit"><span>Оновити дані</span></button>
                     </form>
                     {!isAdmin && (
                         <button onClick={handleDeleteAccount} className="delete-account">

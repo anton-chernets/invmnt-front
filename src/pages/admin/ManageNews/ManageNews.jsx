@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import './ManageNews.css';
 
 
 const ManageNews = () => {
@@ -125,6 +124,7 @@ const ManageNews = () => {
     };
 
     const handleDeleteNews = async (newsId) => {
+        if (window.confirm('Ви впевнені, що хочете видалити новину?')) {
         try {
             const response = await fetch(`http://95.217.181.158/api/articles/remove`, {
                 method: 'DELETE',
@@ -149,6 +149,7 @@ const ManageNews = () => {
         } catch (error) {
             console.error('Error:', error);
         }
+    }
     };
 
 
