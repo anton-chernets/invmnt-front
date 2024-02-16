@@ -124,7 +124,7 @@ const ManageNews = () => {
     };
 
     const handleDeleteNews = async (newsId) => {
-        if (window.confirm('Ви впевнені, що хочете видалити новину?')) {
+        if (window.confirm('Ви впевнені, що хочете видалити статтю?')) {
         try {
             const response = await fetch(`http://95.217.181.158/api/articles/remove`, {
                 method: 'DELETE',
