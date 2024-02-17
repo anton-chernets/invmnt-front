@@ -20,6 +20,7 @@ import SearchResults from "./components/SearchResaults/SearchResults";
 import {AuthProvider} from "./components/AuthContext/AuthContext";
 import SuccessPage from "./pages/SuccessPage/SuccessPage";
 import ProductList from "./components/ProductList/ProductList";
+import { ThemeProvider } from './components/ThemeContext/ThemeContext';
 
 
 function App() {
@@ -58,6 +59,7 @@ function App() {
 
     return (
         <AuthProvider>
+            <ThemeProvider>
             <Router>
                 <Helmet>
                     <meta charSet="utf-8"/>
@@ -94,6 +96,7 @@ function App() {
                     </Routes>
                 <Footer/>
             </Router>
+            </ThemeProvider>
         </AuthProvider>
     );
 }

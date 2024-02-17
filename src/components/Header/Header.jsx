@@ -5,6 +5,7 @@ import logoImage from '../../img/Untitled.png';
 import { AuthContext } from "../AuthContext/AuthContext";
 import Ticker from "../Ticker/Ticker";
 
+
 const useFetchSearchResults = (query, setResults) => {
     useEffect(() => {
         if (query.length > 2) {
@@ -96,8 +97,11 @@ const Header = () => {
                         <Link to="/shop" onClick={toggleMenu}>Магазин</Link>
                         {/* ...інші посилання */}
                     </nav>
+                    
+                    
             </div>
             <div className="header-bottom">
+                
                 <div className="header-logo">
                         <Link to="/">
                             <img src={logoImage} alt="Investment"/><b>Investment</b>

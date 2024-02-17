@@ -4,6 +4,7 @@ import useFetchUser from '../../components/FetchUser/FetchUser';
 import { useNavigate } from 'react-router-dom';
 import { AuthContext } from "../../components/AuthContext/AuthContext";
 import CartPage from '../../components/CartPage/CartPage';
+import ThemeToggle from "../../components/ThemeToggle/ThemeToggle"; // Import the ThemeToggle component
 
 const UserProfile = () => {
     const token = localStorage.getItem('authToken');
@@ -92,7 +93,6 @@ const UserProfile = () => {
 
     return (
         <div className="user-profile">
-            <h1>Особистий кабінет</h1>
             <div className="wrapper-inner">
                 <div className="user-info">
                     <div className="user-contacts">
@@ -123,10 +123,12 @@ const UserProfile = () => {
                         />
                         <button className="custom-btn btn-7" type="submit"><span>Оновити дані</span></button>
                     </form>
+                    <ThemeToggle />
                     {!isAdmin && (
                         <button onClick={handleDeleteAccount} className="delete-account">
                             Видалити акаунт
                         </button>
+
                     )}
                 </div>
             </div>
