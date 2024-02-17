@@ -125,6 +125,7 @@
     overflow: hidden;
     height: 18px;
     margin: 0 auto;
+    color: rgb(27, 27, 27);
 }
 
 .ticker-item img {
