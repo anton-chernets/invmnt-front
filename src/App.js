@@ -63,7 +63,7 @@ function App() {
             <Router>
                 <Helmet>
                     <meta charSet="utf-8"/>
-                    <title>Investment</title>
+                    <title>Інвестиції</title>
                     <meta name="keywords" content="інвестиції, крипта, ації, валюта, обмін валют, гроші"/>
                     <meta name="description" content="Інвестиції: види інвестицій"/>
                     <meta property="og:locale" content="uk_UA"/>
