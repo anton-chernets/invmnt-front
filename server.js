@@ -1,0 +1,40 @@
+const express = require('express');
+const https = require('https');
+const fs = require('fs');
+const app = express();
+
+// Путь к вашим сертификатам и ключу
+const privateKey = fs.readFileSync('ssl/key/key.pem', 'utf8');
+const certificate = fs.readFileSync('ssl/crt/invmnt_site.crt', 'utf8');
+//  цепочка сертификатов в отдельном файле
+const ca = fs.readFileSync('ssl/crt/invmnt_site.ca-bundle', 'utf8');
+
+const credentials = { key: privateKey, cert: certificate, ca: ca };
+
+app.use(express.static('build/')); // Служить файлами из папки build, если это SPA на React
+
+https.createServer(credentials, app).listen(443, () => {
+  console.log('HTTPS Server running on port 443');
+});
+
+// const express = require('express');
+// const app = express();
+// const https = require('https');
+// const fs = require('fs');
+
+// const host = '127.0.0.1';
+// const port = 7000;
+
+// https
+//     .createServer(
+//         {
+//             key: fs.readFileSync('ssl/key/key.pem'),
+//             cert: fs.readFileSync('ssl/crt/combined.crt'),
+//         },
+//         app
+//     )
+//     .listen(port, host, function () {
+//         console.log(
+//             `Server listens https://${host}:${port}`
+//         );
+//     });
