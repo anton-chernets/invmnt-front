@@ -16,9 +16,9 @@ const CartPage = ({ cart = [], setCart }) => {
 
     const handleRemoveFromCart = (productId) => {
         if (window.confirm('Ви впевнені, що хочете видалити товар?')) {
-        const updatedCart = cart.filter(item => item.id !== productId);
-        setCart(updatedCart);
-        localStorage.setItem('cart', JSON.stringify(updatedCart)); // Save the updated cart to localStorage
+            const updatedCart = cart.filter(item => item.id !== productId);
+            setCart(updatedCart);
+            localStorage.setItem('cart', JSON.stringify(updatedCart)); // Save the updated cart to localStorage
         }
     };
 

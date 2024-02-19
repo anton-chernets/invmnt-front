@@ -45,11 +45,14 @@
 }
 .sidebar {
     display: flex;
+    justify-content: center;
+    flex-direction: column;
     margin-bottom: 50px;
     border-radius: 10px;
     height: max-content;
     order: 2;
-    max-width: 500px;
+    width: 100%;
+    max-width: 320px;
     margin-left: 20px;
 }
 .binance-img {
@@ -58,7 +61,14 @@
     height: auto;
     border-radius: 10px;
     box-shadow: 0 8px 8px rgba(0, 0, 0, 0.1);
+
 }
+.adsbygoogle {
+    min-width: 320px; /* Минимальная ширина */
+    min-height: 100px; /* Минимальная высота */
+    display: block;
+  }
+  
 .news-image {
     width: 100%;
     height: auto;
