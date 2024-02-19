@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import { Helmet } from 'react-helmet';
+import { Helmet, HelmetProvider } from 'react-helmet-async'; 
 import Header from './components/Header/Header';
 import Footer from './components/Footer/Footer';
 import HomePage from './pages/HomePage/HomePage';
@@ -58,6 +58,7 @@ function App() {
     }, []);
 
     return (
+        <HelmetProvider>
         <AuthProvider>
             <ThemeProvider>
             <Router>
@@ -97,6 +98,7 @@ function App() {
             </Router>
             </ThemeProvider>
         </AuthProvider>
+        </HelmetProvider>
     );
 }
 
