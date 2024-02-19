@@ -1,15 +1,11 @@
-/* global adsbygoogle */
-
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect } from 'react';
 
 const AdComponent = () => {
-    const adRef = useRef();
-
     useEffect(() => {
         try {
-          (window.adsbygoogle = window.adsbygoogle || []).push({});
+            (window.adsbygoogle = window.adsbygoogle || []).push({});
         } catch (error) {
-          console.error('Error loading adsbygoogle script:', error);
+            console.error('Error loading adsbygoogle script:', error);
         }
     }, []);
 

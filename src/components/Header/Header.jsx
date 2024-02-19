@@ -84,15 +84,14 @@ const Header = () => {
         <header className="header">
             <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" />
             <div className="header-top">
-                    {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
-                    <a onClick={toggleMenu} className="button-menu">
+                    
+                    <button onClick={toggleMenu} className="button-menu">
                         <i className="fas fa-bars"></i> Меню
-                    </a>
+                    </button>
                     <nav className={`header-nav ${isMenuOpen ? 'active' : 'menu'}`}>
-                        {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
-                        <a onClick={toggleMenu} className="button-menu">
+                        <button onClick={toggleMenu} className="button-menu">
                             <i className="fas fa-bars"></i> Меню
-                        </a>
+                        </button>
                         <Link to="/" onClick={toggleMenu}><i className="fas fa-home"></i> Головна</Link>
                         <Link to="/shop" onClick={toggleMenu}>Магазин</Link>
                         {/* ...інші посилання */}

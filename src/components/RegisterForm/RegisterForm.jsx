@@ -69,7 +69,7 @@ const RegisterForm = () => {
             <div className="wrapper-form">
                 <form onSubmit={handleSubmit} className="form-field-reg">
                     <h2 className="register-form-title">Реєстрація</h2>
-
+    
                     <div className="form-group">
                         <label htmlFor="username">Ім'я користувача:</label>
                         <input
@@ -98,38 +98,24 @@ const RegisterForm = () => {
                         />
                         <div className="show-password">
                             <input
+                                id="showPassword"
                                 type="checkbox"
                                 checked={showPassword}
                                 onChange={togglePasswordVisibility}
                             />
-                            <label>Показати пароль</label>
+                            <label htmlFor="showPassword">Показати пароль</label>
                         </div>
                     </div>
-                    {/*<div className="form-group">*/}
-                    {/*    <label htmlFor="confirmPassword">Підтвердіть пароль:</label>*/}
-                    {/*    <input*/}
-                    {/*        id="confirmPassword"*/}
-                    {/*        type={showConfirmPassword ? "text" : "password"}*/}
-                    {/*        value={confirmPassword}*/}
-                    {/*        onChange={(e) => setConfirmPassword(e.target.value)}*/}
-                    {/*    />*/}
-                    {/*    <div className="show-password">*/}
-                    {/*        <input*/}
-                    {/*            type="checkbox"*/}
-                    {/*            checked={showConfirmPassword}*/}
-                    {/*            onChange={toggleConfirmPasswordVisibility}*/}
-                    {/*        />*/}
-                    {/*        <label htmlFor="confirmPassword-checkbox">Показати пароль</label>*/}
-                    {/*    </div>*/}
-                    {/*</div>*/}
+                    
                     <div className="droup-button">
                         <button type="submit" className="custom-btn btn-7"><span>Зареєструватись</span></button>
-                        <button onClick={goToLogin} className="custom-btn btn-7"><span>Вхід</span></button>
+                        <button type="button" onClick={goToLogin} className="custom-btn btn-7"><span>Вхід</span></button>
                     </div>
                 </form>
             </div>
         </div>
     );
+    
 };
 
 export default RegisterForm;
