@@ -56,17 +56,6 @@ const caBundle = fs.readFileSync(path.join(__dirname, 'ssl', 'crt', 'invmnt_site
 const credentials = { key: privateKey, cert: certificate, ca: caBundle };
 
 https.createServer(credentials, app).listen(443, () => {
-  console.log('HTTPS Server running on port 443');
-});
-
-// Redirect from HTTP to HTTPS
-const http = require('http');
-http.createServer((req, res) => {
-  res.writeHead(301, { "Location": "https://" + req.headers['host'] + req.url });
-  res.end();
-}).listen(80);
-
-https.createServer(credentials, app).listen(443, () => {
     console.log('HTTPS Server running on port 443');
   }).on('error', (e) => {
     console.error('Failed to start server', e);
