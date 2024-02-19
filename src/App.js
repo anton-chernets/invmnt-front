@@ -72,9 +72,7 @@ function App() {
                     <meta property="og:url" content="https://invmnt.site/"/>
                     <meta name="google-adsense-account" content="ca-pub-9704083006647691"/>
                     
-                    {/*<script async*/}
-                    {/*        src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9704083006647691"*/}
-                    {/*        crossOrigin="anonymous"></script>*/}
+                     
                 </Helmet>
                 <Header/>
                     <Routes>

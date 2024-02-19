@@ -45,7 +45,7 @@
 }
 .sidebar {
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
     flex-direction: column;
     margin-bottom: 50px;
     border-radius: 10px;
@@ -63,11 +63,11 @@
     box-shadow: 0 8px 8px rgba(0, 0, 0, 0.1);
 
 }
-.adsbygoogle {
+/* .adsbygoogle {
     min-width: 320px; /* Минимальная ширина */
-    min-height: 100px; /* Минимальная высота */
-    display: block;
-  }
+    /* min-height: 100px; Минимальная высота */
+    /* display: block; */
+  /* } */
   
 .news-image {
     width: 100%;

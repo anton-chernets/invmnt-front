@@ -2,10 +2,13 @@ import React, { useEffect } from 'react';
 
 const AdComponent = () => {
     useEffect(() => {
-        try {
-            (window.adsbygoogle = window.adsbygoogle || []).push({});
-        } catch (error) {
-            console.error('Error loading adsbygoogle script:', error);
+        if (window.adsbygoogle && !window.adsbygoogleLoaded) {
+            window.adsbygoogleLoaded = true; // Mark as loaded to avoid future loads
+            try {
+                (window.adsbygoogle = window.adsbygoogle || []).push({});
+            } catch (error) {
+                console.error('Error loading adsbygoogle script:', error);
+            }
         }
     }, []);
 
