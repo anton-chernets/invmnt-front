@@ -65,3 +65,16 @@ http.createServer((req, res) => {
   res.writeHead(301, { "Location": "https://" + req.headers['host'] + req.url });
   res.end();
 }).listen(80);
+
+https.createServer(credentials, app).listen(443, () => {
+    console.log('HTTPS Server running on port 443');
+  }).on('error', (e) => {
+    console.error('Failed to start server', e);
+  });
+  
+  http.createServer((req, res) => {
+    res.writeHead(301, { "Location": "https://" + req.headers['host'] + req.url });
+    res.end();
+  }).listen(80).on('error', (e) => {
+    console.error('Failed to start HTTP server', e);
+  });

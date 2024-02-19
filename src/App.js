@@ -69,7 +69,7 @@ function App() {
                     <meta property="og:locale" content="uk_UA"/>
                     <meta property="og:title" content="Інвестиції"/>
                     <meta property="og:description" content="Інвестиції: види інвестицій"/>
-                    <meta property="og:url" content="https://invmnt.site/"/>
+                    <meta property="og:url" content="http://invmnt.site/"/>
                     <meta name="google-adsense-account" content="ca-pub-9704083006647691"/>
                     
                      
