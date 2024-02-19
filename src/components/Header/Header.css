@@ -183,13 +183,14 @@
         left: 0;
         display: block;
         background: black;
-        color: #000000;
+        color: #ffffff;
         padding: 10px 20px;
         font-size: 25px;
         cursor: pointer;
         margin-left: 10px;
-        height: 22px;
+        height: 40px;
         text-decoration: none;
+        border: none;
     }
 
     .header-nav a {
