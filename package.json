@@ -61,5 +61,5 @@
     "@babel/register": "^7.23.7",
     "eslint-plugin-jsx-a11y": "^6.8.0"
   },
-  "proxy": "http://95.217.181.158"
+  "proxy": "https://95.217.181.158"
 }
