@@ -1,7 +1,7 @@
-import React, {  } from 'react';
-// useState, useRef, useEffect
-import './NewsItem.css';
-import defaultImage from '../../img/image_2024-02-07_10-47-09.png';
+// import React, {useState, useRef, useEffect  } from 'react';
+
+// import './NewsItem.css';
+// import defaultImage from '../../img/image_2024-02-07_10-47-09.png';
 // import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 // import { faAngleDown, faAngleUp } from '@fortawesome/free-solid-svg-icons';
 // import {Link} from "react-router-dom";
@@ -46,14 +46,49 @@ import defaultImage from '../../img/image_2024-02-07_10-47-09.png';
 //     );
 // };
 
+
+import React, { useState, useRef, useEffect } from 'react';
+import './NewsItem.css';
+import defaultImage from '../../img/image_2024-02-07_10-47-09.png';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faAngleDown, faAngleUp } from '@fortawesome/free-solid-svg-icons';
+
 const NewsItem = ({ title, description, imageUrl }) => {
-    return (
-      <div className="news-item">
-        <img src={imageUrl || defaultImage} alt={title} className="news-image" />
-        <h3 className="news-title">{title}</h3>
-        <p className="news-description">{description}</p>
-      </div>
-    );
+  const [isExpanded, setIsExpanded] = useState(false);
+  const contentRef = useRef(null);
+
+  useEffect(() => {
+    if (contentRef.current) { // Ensure contentRef.current is not null
+      if (isExpanded) {
+        contentRef.current.style.maxHeight = `${contentRef.current.scrollHeight}px`;
+      } else {
+        contentRef.current.style.maxHeight = '55px';
+      }
+    }
+  }, [isExpanded]);
+
+  const toggleExpand = () => {
+    setIsExpanded(!isExpanded);
   };
+
+  return (
+    <div className={`news-item ${isExpanded ? 'expanded' : ''}`}>
+      <img src={imageUrl || defaultImage} alt={title} className="news-image" />
+      <h3 className="news-title">{title}</h3>
+      <div ref={contentRef} className="news-description">{description}</div>
+      <button onClick={toggleExpand} className="toggle-content-btn">
+        {isExpanded ? (
+          <>
+            Згорнути <FontAwesomeIcon icon={faAngleUp} />
+          </>
+        ) : (
+          <>
+            Розгорнути <FontAwesomeIcon icon={faAngleDown} />
+          </>
+        )}
+      </button>
+    </div>
+  );
+};
 
 export default NewsItem;
