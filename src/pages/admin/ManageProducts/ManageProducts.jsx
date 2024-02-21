@@ -20,7 +20,7 @@ const ManageProducts = () => {
     useEffect(() => {
         const fetchProducts = async () => {
             try {
-                const response = await fetch('http://95.217.181.158/api/products');
+                const response = await fetch('https://apinvmnt.site/api/products');
                 if (!response.ok) {
                     throw new Error(`Failed to fetch products: ${response.status}`);
                 }
@@ -47,7 +47,7 @@ const ManageProducts = () => {
         };
 
         try {
-            const response = await fetch('http://95.217.181.158/api/products/store', {
+            const response = await fetch('https://apinvmnt.site/api/products/store', {
                 method: 'POST',
                 headers: {
                     'Authorization': `Bearer ${token}`,

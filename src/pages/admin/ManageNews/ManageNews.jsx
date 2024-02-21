@@ -95,7 +95,7 @@ const ManageNews = () => {
                 imageId: imageId, // Используется ID изображения
             };
 
-            const response = await fetch('http://95.217.181.158/api/articles/store', {
+            const response = await fetch('https://apinvmnt.site/api/articles/store', {
                 method: 'POST',
                 headers: {
                     'Authorization': `Bearer ${token}`,

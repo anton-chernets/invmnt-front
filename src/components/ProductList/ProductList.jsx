@@ -76,7 +76,7 @@ const ProductList = () => {
         // Confirm with the user before deleting
         if (window.confirm('Ви впевнені, що хочете видалити товар?')) {
             try {
-                const response = await fetch(`http://95.217.181.158/api/products/remove`, {
+                const response = await fetch(`https://apinvmnt.site/api/products/remove`, {
                     method: 'DELETE',
                     headers: {
                         'Content-Type': 'application/json',
@@ -117,7 +117,7 @@ const ProductList = () => {
         };
 
         try {
-            const response = await fetch(`http://95.217.181.158/api/products/update/${updatedProductData.id}`, {
+            const response = await fetch(`https://apinvmnt.site/api/products/update/${updatedProductData.id}`, {
                 method: 'POST',
                 headers: {
                     'Authorization': `Bearer ${token}`,
@@ -164,7 +164,7 @@ const ProductList = () => {
         };
 
         try {
-            const response = await fetch('http://95.217.181.158/api/checkout', {
+            const response = await fetch('https://apinvmnt.site/api/checkout', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
