@@ -26,7 +26,7 @@ const UserProfile = () => {
         };
 
         try {
-            const response = await fetch('http://95.217.181.158/api/user/update', {
+            const response = await fetch('https://apinvmnt.site/api/user/update', {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
@@ -56,7 +56,7 @@ const UserProfile = () => {
     const handleDeleteAccount = async () => {
         if (window.confirm('Ви впевнені, що хочете видалити свій акаунт?')) {
             try {
-                const response = await fetch('http://95.217.181.158/api/remove', {
+                const response = await fetch('https://apinvmnt.site/api/remove', {
                     method: 'DELETE',
                     headers: {
                         'Content-Type': 'application/json',

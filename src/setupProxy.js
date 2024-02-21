@@ -10,10 +10,11 @@ module.exports = function(app) {
         })
     );
     app.use(
-        '/v2', // Если ваш запрос начинается с "/v2", он будет перенаправлен на News API
+        '/newsapi',
         createProxyMiddleware({
-            target: 'https://newsapi.org',
-            changeOrigin: true,
+          target: 'https://newsapi.org',
+          changeOrigin: true,
+          pathRewrite: { '^/newsapi': '' }, // Optional: rewrite path
         })
-    );
+      );
 };

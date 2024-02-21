@@ -10,7 +10,7 @@ const CheckoutPage = ({ cart, setCart }) => {
 
     const fetchOrders = useCallback(async () => {
         try {
-            const response = await fetch('http://95.217.181.158/api/orders', {
+            const response = await fetch('https://apinvmnt.site/api/orders', {
                 method: 'GET',
                 headers: {
                     'Authorization': `Bearer ${token}`,
@@ -45,7 +45,7 @@ const CheckoutPage = ({ cart, setCart }) => {
         };
 
         try {
-            const response = await fetch('http://95.217.181.158/api/checkout', {
+            const response = await fetch('https://apinvmnt.site/api/checkout', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

@@ -31,7 +31,7 @@ const LoginForm = () => {
         };
 
         try {
-            const response = await fetch('http://95.217.181.158/api/login', {
+            const response = await fetch('https://apinvmnt.site/api/login', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

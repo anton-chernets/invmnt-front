@@ -24,7 +24,7 @@ const ProductList = () => {
 
     useEffect(() => {
         setLoading(true);
-        fetch('http://95.217.181.158/api/products')
+        fetch('https://apinvmnt.site/api/products')
             .then(response => {
                 if (!response.ok) {
                     throw new Error(`HTTP error! Status: ${response.status}`);

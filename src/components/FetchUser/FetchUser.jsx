@@ -15,7 +15,7 @@ const useFetchUser = (token) => {
 
             setLoading(true);
             try {
-                const response = await fetch('http://95.217.181.158/api/user', {
+                const response = await fetch('https://apinvmnt.site/api/user', {
                     headers: {
                         'Content-Type': 'application/json',
                         'Authorization': `Bearer ${token}`,

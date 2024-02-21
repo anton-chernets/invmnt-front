@@ -24,7 +24,7 @@ const CartPage = ({ cart = [], setCart }) => {
 
     const handleBuy = async () => {
         try {
-            const response = await fetch('http://95.217.181.158/api/checkout', {
+            const response = await fetch('https://apinvmnt.site/api/checkout', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

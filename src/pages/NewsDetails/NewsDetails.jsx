@@ -11,7 +11,7 @@ function NewsDetails() {
 
     useEffect(() => {
         // Отримуємо весь список новин
-        const url = `http://95.217.181.158/api/articles`;
+        const url = `https://apinvmnt.site/api/articles`;
 
         fetch(url)
             .then(response => response.json())

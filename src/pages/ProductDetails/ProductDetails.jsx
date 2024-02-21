@@ -11,7 +11,7 @@ function ProductDetails() {
     useEffect(() => {
         const fetchProduct = async () => {
             try {
-                const response = await fetch(`http://95.217.181.158/api/products/show/${productId}`);
+                const response = await fetch(`https://apinvmnt.site/api/products/show/${productId}`);
                 if (!response.ok) {
                     throw new Error(`HTTP error! Status: ${response.status}`);
                 }

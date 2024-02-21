@@ -11,7 +11,7 @@ export const AuthProvider = ({ children }) => {
             const token = localStorage.getItem('authToken');
             if (token) {
                 try {
-                    const response = await fetch('http://95.217.181.158/api/user', {
+                    const response = await fetch('https://apinvmnt.site/api/user', {
                         headers: {
                             'Authorization': `Bearer ${token}`
                         }

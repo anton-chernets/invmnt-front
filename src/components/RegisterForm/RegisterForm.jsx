@@ -41,7 +41,7 @@ const RegisterForm = () => {
             password: password,
         };
 
-        fetch('http://95.217.181.158/api/register', {
+        fetch('https://apinvmnt.site/api/register', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
