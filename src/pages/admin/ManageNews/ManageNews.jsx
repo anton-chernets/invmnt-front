@@ -14,7 +14,7 @@ const ManageNews = () => {
             setLoading(true);
 
             try {
-                const response = await fetch('http://95.217.181.158/api/articles');
+                const response = await fetch('https://apinvmnt.site/api/articles');
                 if (!response.ok) {
                     throw new Error(`HTTP error! Status: ${response.status}`);
                 }
@@ -45,7 +45,7 @@ const ManageNews = () => {
         formData.append('model', 'Article');
 
         try {
-            const uploadResponse = await fetch('http://95.217.181.158/api/files/upload', {
+            const uploadResponse = await fetch('https://apinvmnt.site/api/files/upload', {
                 method: 'POST',
                 headers: {
                     'Authorization': `Bearer ${token}`,
