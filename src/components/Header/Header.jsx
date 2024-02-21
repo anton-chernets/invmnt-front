@@ -52,7 +52,7 @@ const Header = () => {
         localStorage.removeItem('authToken');
         setIsAuthenticated(false);
         navigate('/');
-        window.location.reload();
+        // window.location.reload();
     };
 
     const hideAuthButtonsPaths = ['/login', '/register', '/passwordreset'];
