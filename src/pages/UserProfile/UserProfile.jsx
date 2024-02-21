@@ -13,6 +13,7 @@ const UserProfile = () => {
     const { setIsAuthenticated, isAdmin } = useContext(AuthContext);
     const [newPassword, setNewPassword] = useState('');
     const [newName, setNewName] = useState(user?.name || '');
+    const [showPassword, setShowPassword] = useState(false);
 
     const handlePasswordChange = (e) => setNewPassword(e.target.value);
     const handleNameChange = (e) => {
@@ -81,6 +82,10 @@ const UserProfile = () => {
         }
     };
 
+    const togglePasswordVisibility = () => {
+        setShowPassword(!showPassword);
+    };
+
     const [cart, setCart] = useState(() => {
         // Get the cart from localStorage and parse it or default to an empty array
         const savedCart = localStorage.getItem('cart');
@@ -115,12 +120,21 @@ const UserProfile = () => {
                             onChange={handleNameChange}
                         />
                         <label htmlFor="newPassword">Новий Пароль:</label>
+                    <input
+                        id="newPassword"
+                        type={showPassword ? "text" : "password"} // Тип поля изменяется в зависимости от showPassword
+                        value={newPassword}
+                        onChange={handlePasswordChange}
+                    />
+                    <div className="show-password">
                         <input
-                            id="newPassword"
-                            type="password"
-                            value={newPassword}
-                            onChange={handlePasswordChange}
+                            id="showPassword"
+                            type="checkbox"
+                            checked={showPassword}
+                            onChange={togglePasswordVisibility} // Переключатель видимости пароля
                         />
+                        <label htmlFor="showPassword">Показати пароль</label>
+                        </div>
                         <button className="custom-btn btn-7" type="submit"><span>Оновити дані</span></button>
                     </form>
                     <ThemeToggle />
