@@ -10,9 +10,7 @@ import Sidebar from "../../components/Sidebar/Sidebar";
 
 const HomePage = () => {
     return (
-    
         <div className="site-wrapper">
-            
             <div className="background-image-container"></div> {/* Background image container */}
             <div className="home-page"> {/* Start home-page content */}
                 <div className="scroll-to-top">

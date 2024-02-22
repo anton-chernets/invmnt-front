@@ -79,6 +79,7 @@ const ManageNews = () => {
 
 
 
+
     const handleAddNews = async (event) => {
         event.preventDefault();
         setLoading(true);
@@ -199,6 +200,7 @@ const ManageNews = () => {
                         }}><span>Edit</span>
                         </button>
                         <button className="custom-btn btn-7" onClick={() => handleDeleteNews(newsItem.id)}><span>Delete</span></button>
+                        
                     </div>
                 ))}
             </div>

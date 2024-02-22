@@ -1,13 +1,15 @@
 .footer {
     display: flex;
     justify-content: center;
+    align-items: center;
     background-color: #000;
     color: white;
     text-align: center;
     width: 100%;
-    max-width: 1400%;
-    height: 25px;
-}
+    height: 26px;
+    margin-top: auto;
+  }
+  
 
 .footer p {
     margin: 0;

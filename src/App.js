@@ -21,6 +21,7 @@ import {AuthProvider} from "./components/AuthContext/AuthContext";
 import SuccessPage from "./pages/SuccessPage/SuccessPage";
 import ProductList from "./components/ProductList/ProductList";
 import { ThemeProvider } from './components/ThemeContext/ThemeContext';
+import './App.css';
 
 
 function App() {
@@ -58,8 +59,11 @@ function App() {
     }, []);
 
     return (
+        
         <HelmetProvider>
+            
         <AuthProvider>
+            
             <ThemeProvider>
             <Router>
                 <Helmet>
@@ -94,11 +98,18 @@ function App() {
                         <Route path="/search" element={<SearchResults/>}/>
                         <Route path="/success" element={<SuccessPage />} />
                     </Routes>
-                <Footer/>
+                
             </Router>
+            
             </ThemeProvider>
+            
+                <Footer />
+            
         </AuthProvider>
+                    
         </HelmetProvider>
+        
+        
     );
 }
 
