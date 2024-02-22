@@ -13,10 +13,13 @@
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
-    flex: 1 1 calc(50% - 20px); /* Ensures items have equal width */
-    min-height: 500px; /* Ensures a minimum height */
+    flex: 0 1 calc(50% - 20px);
+    min-height: 500px;
 }
-
+.form-manager input {
+    margin-top: 10px;
+    padding: 10px;
+}
 .content {
     overflow: hidden;
     transition: max-height 0.5s ease;

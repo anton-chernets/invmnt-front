@@ -5,7 +5,7 @@ import ManageProducts from "../ManageProducts/ManageProducts";
 import ManageOrders from "../ManageOrders/ManageOrders";
 import UserMessages from "../UserMessages/UserMessages";
 import SiteStats from "../../../components/SiteStats/SiteStats";
-import ResComponent from "../../../components/ResComponent/ResComponent";
+import ResComponent from "../../../components/TrashedNews/TrashedNews";
 import ManageNews from "../ManageNews/ManageNews";
 import TrashedProducts from '../../../components/TrashedProducts/TrashedProducts';
 

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import defaultImage from '../../../img/image_2024-02-07_10-47-09.png';
 
 
 const ManageNews = () => {
@@ -175,7 +176,7 @@ const ManageNews = () => {
                     onChange={(e) => setCurrentNews({...currentNews, content: e.target.value})}
                     required
                 />
-                <input
+                <input 
                     type="file"
                     onChange={(e) => setCurrentNews({...currentNews, imageFile: e.target.files[0]})}
                 />
@@ -184,23 +185,24 @@ const ManageNews = () => {
 
             {/* Список усіх новин */}
             <div className="news-list">
-
-
-                {newsList.map((newsItem) => (
-                    <div key={newsItem.id} className="news-item">
-                        <h3>{newsItem.title}</h3>
-                        {newsItem.imageUrl &&
-                            <img src={newsItem.imageUrl} alt={newsItem.title} className="news-image"/>}
-                        <p>{newsItem.description}</p>
+                    {newsList.map((newsItem) => (
+                        <div key={newsItem.id} className="news-item">
+                            <h3>{newsItem.title}</h3>
+                        <img
+                        src={newsItem.urlToImage || defaultImage}
+                        alt={newsItem.title || 'Default'}
+                        className="news-image-trash"
+          />
+          <p>{newsItem.description}</p>
 
 
                         <button className="custom-btn btn-7" onClick={() => {
                             setEditMode(true);
                             setCurrentNews(newsItem);
-                        }}><span>Edit</span>
+                        }}><span>Редагувати</span>
                         </button>
-                        <button className="custom-btn btn-7" onClick={() => handleDeleteNews(newsItem.id)}><span>Delete</span></button>
-                        
+                        <button className="custom-btn btn-7" onClick={() => handleDeleteNews(newsItem.id)}><span>Видалити</span>
+                            </button>
                     </div>
                 ))}
             </div>

@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react';
+import './TrashedNews.css'
+import defaultImage from '../../img/image_2024-02-07_10-47-09.png';
 
 const TrashedNews = () => {
     const [trashedArticles, setTrashedArticles] = useState([]);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
-    const token = localStorage.getItem('authToken'); // Assuming the token is stored in localStorage
+    const token = localStorage.getItem('authToken');
 
     useEffect(() => {
         setLoading(true);
@@ -51,7 +53,6 @@ const TrashedNews = () => {
 
             const result = await response.json();
             if (result.success) {
-                // Remove the restored article from the trashed list
                 setTrashedArticles(trashedArticles.filter(news => news.id !== newsId));
                 alert('Article restored successfully');
             } else {
@@ -69,13 +70,22 @@ const TrashedNews = () => {
 
     return (
         <div className="trashed-news-container">
-            <h1>Trashed News</h1>
+            <h1>Видалені новини</h1>
             {trashedArticles.length > 0 ? (
                 trashedArticles.map(article => (
                     <div key={article.id} className="trashed-article">
-                        <h3>{article.title}</h3>
-                        <p>{article.description}</p>
-                        <button className="custom-btn btn-7" onClick={() => restoreArticle(article.id)}><span>Відновлення</span></button>
+                        <div className='news-title'>
+                            <h3>{article.title}</h3>
+                        </div>
+                        <div className='product-img'>
+                            <img src={article.urlToImage || defaultImage} alt={article.title || 'Default'} className="news-image-trash" />
+                        </div>
+                        <div className='product-discription'>
+                            <p>{article.description}</p>
+                        </div>
+                        <div className='product-title'>
+                            <button className="custom-btn btn-7" onClick={() => restoreArticle(article.id)}><span>Відновлення</span></button>
+                        </div>
                     </div>
                 ))
             ) : (

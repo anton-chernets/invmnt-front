@@ -27,6 +27,12 @@
     width: 45%;
     flex-direction: row;
 }
+.news-item {
+    width: 100%;
+    max-width: 1400px;
+    margin-left: 0;
+    transition: none;
+}
 
 .content {
     width: 100%;

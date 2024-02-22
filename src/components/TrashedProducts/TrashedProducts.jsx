@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from 'react';
+import './TrashedProducts.css'
+import defaultImage from '../../img/image_2024-02-07_10-47-09.png';
 
 const TrashedProducts = () => {
     const [trashedProducts, setTrashedProducts] = useState([]);
@@ -75,9 +77,18 @@ const TrashedProducts = () => {
             {trashedProducts.length > 0 ? (
                 trashedProducts.map(product => (
                     <div key={product.id} className="trashed-product">
-                        <h3>{product.name}</h3>
-                        <p>{product.description}</p>
-                        <button className="custom-btn btn-7" onClick={() => restoreProduct(product.id)}><span>Відновити</span></button>
+                        <div className='product-title'>
+                            <h3>{product.title}</h3>
+                        </div>
+                        <div className='product-img'>
+                            <img src={product.images[0] || defaultImage} alt={product.title} className="product-image-trash"/>
+                        </div>
+                        <div className='product-discription'>
+                            <p>{product.description}</p>
+                        </div>
+                        <div>
+                            <button className="custom-btn btn-7" onClick={() => restoreProduct(product.id)}><span>Відновити</span></button>
+                        </div>
                     </div>
                 ))
             ) : (

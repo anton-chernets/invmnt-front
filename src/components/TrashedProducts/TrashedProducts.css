@@ -1,0 +1,81 @@
+.trashed-products-container {
+    width: 100%;
+    max-width: 1358px;
+    margin: 10px auto; /* Центрування контейнера */
+    padding: 20px;
+    display: flex;
+    justify-content: center; /* Центрування дочірніх елементів по горизонталі */
+    flex-direction: column;
+    /* border: 1px solid black; */
+    border-radius: 10px; /* Закруглені кути */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    background-color: #fff; /* Білий фон для контейнера */
+}
+
+.trashed-product {
+    border-bottom: 1px solid #eee; /* Роздільник між товарними пунктами */
+    padding: 10px 0; /* Простір зверху та знизу для кожного товару */
+    display: flex;
+    align-items: left; /* Вертикальне вирівнювання */
+    justify-content: space-between;
+    flex-direction: row; /* Розподіл елементів на всю доступну ширину */
+}
+.product-image-trash {
+    width: 150px;
+    padding: 10px;
+}
+.product-title {
+    width: 100%;
+    max-width: 200px;
+}
+.product-discription {
+    width: 100%;
+    max-width: 600px;
+}
+
+.trashed-product h3 {
+    margin: 0;
+    color: #333; /* Темно-сірий колір тексту */
+    font-size: 1.2em; /* Збільшення розміру шрифту */
+}
+
+.trashed .product p {
+color: #666;
+margin: 5px 0;
+}
+
+
+
+/* Додайте медіа-запити для адаптивного дизайну */
+@media (max-width: 768px) {
+.trashed-products-container {
+    padding: 0;
+}
+.trashed-product {
+    text-align: center;
+    width: 100%;
+    flex-direction: column;
+    justify-content: center;
+}
+.product-image-trash {
+    justify-content: center;
+    width: 80%;
+    margin: 0 auto;
+}
+.custom-btn {
+    margin-top: 10px;
+    width: 80%;
+    margin: 10px auto;
+}
+.trashed-product h3 {
+    font-size: 1em; /* Зменшення розміру шрифту на мобільних пристроях */
+}
+h1 {
+    text-align: center;
+}
+.product-title {
+    width: 100%;
+    max-width: 200px;
+    margin: 0 auto;
+}
+}

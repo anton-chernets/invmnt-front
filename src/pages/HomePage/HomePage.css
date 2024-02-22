@@ -3,7 +3,6 @@
     max-width: 1400px;
     margin: 10px auto 100px;
     display: flex;
-    flex-grow: 1;
     background-color: transparent;
 }
 .home-page h1 {
