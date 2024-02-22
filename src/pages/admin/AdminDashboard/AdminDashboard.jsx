@@ -7,6 +7,7 @@ import UserMessages from "../UserMessages/UserMessages";
 import SiteStats from "../../../components/SiteStats/SiteStats";
 import ResComponent from "../../../components/ResComponent/ResComponent";
 import ManageNews from "../ManageNews/ManageNews";
+import TrashedProducts from '../../../components/TrashedProducts/TrashedProducts';
 
 
 
@@ -36,6 +37,9 @@ const AdminDashboard = () => {
                 return <SiteStats />;
             case 'trashed':
                 return <ResComponent />;
+            case 'producttrashed':
+                return <TrashedProducts />;
+            
             
             // Додайте інші case для інших секцій
             default:
@@ -49,6 +53,8 @@ const AdminDashboard = () => {
             <div className="sidebar-panel">
                 {/*<button onClick={() => handleSectionClick('users')} className="button-admin">Керування користувачами</button>*/}
                 <button onClick={() => handleSectionClick('products')} className="custom-btn btn-7"><span>Керування товарами</span>
+                </button>
+                <button onClick={() => handleSectionClick('producttrashed')} className="custom-btn btn-7"><span>Видалені товари</span>
                 </button>
                 <button onClick={() => handleSectionClick('news')} className="custom-btn btn-7"><span>Керування новинами</span>
                 </button>
