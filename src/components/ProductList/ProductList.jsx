@@ -188,7 +188,7 @@ const ProductList = () => {
     }
 
     return (
-        <div>
+        <div className='wrapper-product'>
             {isUser && (
                 <button onClick={() => setShowCart(!showCart)} className="custom-btn btn-7"><span>
                     <FontAwesomeIcon icon={faShoppingCart} className="icon-spacing" /> Кошик

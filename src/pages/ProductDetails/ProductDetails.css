@@ -1,8 +1,9 @@
 .product-details {
-  max-width: 1400px;
-    margin: 50px auto 100px;
+    width: 100%;
+    max-width: 1400px;
     display: flex;
     flex-direction: column;
+    margin: 10px auto;
     align-items: center;
     min-height: 100vh;
     background-color: #ecf0f1;
