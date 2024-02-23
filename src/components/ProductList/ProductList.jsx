@@ -212,31 +212,29 @@ const ProductList = () => {
     return (
         <div className='wrapper-product'>
             {isUser && (
-                <button onClick={() => setShowCart(!showCart)} className="custom-btn btn-7"><span>
-                    <FontAwesomeIcon icon={faShoppingCart} className="icon-spacing" /> Кошик
-                </span></button>
+                <button onClick={() => setShowCart(!showCart)} className="custom-btn btn-7">
+                    <span><FontAwesomeIcon icon={faShoppingCart} className="icon-spacing" /> Кошик</span>
+                </button>
             )}
             {showCart && isUser && <CartPage cart={cart} setCart={setCart} />}
             <div className="products-container">
                 {products.map(product => (
                     <div key={product.id} className="product-item-list">
-                        <Link to={`/products/show/${product.id}`} style={{ textDecoration: 'none' }}>
-                            <div className='product-titles'><h3>{product.title}</h3></div>
+                        <Link to={`/products/show/${product.id}`} style={{  textDecoration: 'none' }}>
+                            <h3>{product.title}</h3>
                         </Link>
-                        
-                        <div className='product-img'><img src={product.images[0] || defaultImage} alt={product.title} className="product-image"/>
-                        
-                        <div className='product-dir'><p>{product.description}</p>
-                        <div className='price-product'><p>Price: ${product.price}</p></div>
+                        <div className='img-dis'>
+                        <img src={product.images[0] || defaultImage} alt={product.title} className="product-image"/>
+                        <p>{product.description}</p>
+                        </div>
+                        <p>Ціна: ${product.price}</p>
                         <div className='product-but'>
-                        
-                        {isAdmin && (
-                            <>
-                                <button className="custom-btn btn-7" onClick={() => onDeleteProduct(product.id)}><span>Видалити</span></button>
-
-                                {editingProduct && editingProduct.id === product.id ? (
-                                    <form onSubmit={handleSaveChanges} className='form-manager'>
-                                        <div>
+                            {isAdmin && (
+                                <>
+                                    <button className="custom-btn btn-7" onClick={() => onDeleteProduct(product.id)}>Видалити</button>
+                                    {editingProduct && editingProduct.id === product.id ? (
+                                        <form onSubmit={handleSaveChanges} className='form-manager'>
+                                            <div>
                                             <label htmlFor="title">Назва товару:</label>
                                             <input
                                                 id="title"
@@ -289,34 +287,32 @@ const ProductList = () => {
                                             {/*    onChange={handleChange}*/}
                                             {/*/>*/}
                                         </div>
-                                        <button type="submit" className="custom-btn btn-7"><span>Зберегти зміни</span></button>
-                                        <button type="button" className="custom-btn btn-7" onClick={() => setEditingProduct(null)}><span>Скасувати</span></button>
-                                    </form>
-                                ) : (
-                                    <button className="custom-btn btn-7" onClick={() => startEditingProduct(product)}><span>Редагувати</span></button>
-                                )}
-                            </>
-                        )}
-                        {isUser && (
-                            <>
-                                <button className="custom-btn btn-7" onClick={() => onAddToCart(product)}><span>У кошик</span></button>
-                                <button className="custom-btn btn-7" onClick={() => handleBuyNowClick(product)}><span>Придбати</span></button>
-                            </>
-                        )}
-                        {!user && (
-                            <>
-                                <button className="custom-btn btn-7" onClick={handleAddToCartClick}><span>У кошик</span></button>
-                                <button className="custom-btn btn-7" onClick={handleBuyNowClick}><span>Придбати</span></button>
-
-                            </>
-                        )}
-                        </div></div></div>
+                                        </form>
+                                    ) : (
+                                        <button className="custom-btn btn-7" onClick={() => startEditingProduct(product)}>Редагувати</button>
+                                    )}
+                                </>
+                            )}
+                            {isUser && (
+                                <>
+                                    <button className="custom-btn btn-7" onClick={() => onAddToCart(product)}>У кошик</button>
+                                    <button className="custom-btn btn-7" onClick={() => handleBuyNowClick(product)}>Придбати</button>
+                                </>
+                            )}
+                            {!user && (
+                                <>
+                                    <button className="custom-btn btn-7" onClick={() => handleAddToCartClick(product)}>У кошик</button>
+                                    <button className="custom-btn btn-7" onClick={() => handleBuyNowClick(product)}>Придбати</button>
+                                </>
+                            )}
+                        </div>
                     </div>
                 ))}
             </div>
         </div>
     );
-
+                        
+                        
 };
 
 export default ProductList;

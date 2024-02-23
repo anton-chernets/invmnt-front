@@ -20,7 +20,16 @@
     flex-direction: column;
     align-items: center;
 }
-
+.product-dir {
+    overflow-wrap: break-word;
+    /* Ви можете також додати відступ знизу, щоб текст не торкався кнопок */
+    margin-bottom: 10px;
+}
+.product-description {
+    overflow-wrap: break-word;
+    /* Ви можете також додати відступ знизу, щоб текст не торкався кнопок */
+    margin-bottom: 10px;
+}
 .product-wrapper > div img {
     width: 100%;
     max-width: 100%;
@@ -68,23 +77,22 @@
     flex-direction: column;
     }
 .product-item-list {
-    width: 100%;
-    max-width: 700px;
     border: 1px solid #ccc;
     border-radius: 10px;
-    margin-bottom: 1rem;
     background-color: white;
-    /* display: flex; */
-    flex-direction: row;
-    /* align-items: center; */
-    text-align: center;
-    height: auto;
-    min-height: 300px;
-}
-.product-item-list a{
     display: flex;
     flex-direction: column;
-    justify-content: flex-start;
+    justify-content: space-between;
+    align-items: flex-start; 
+    padding: 10px;
+    min-height: 300px;
+}
+.product-item-list p{
+    font-size: 20px;
+   
+}
+.product-item-list a{
+    font-size: 30px;
 }
 .product-titles {
     width: 100%;
@@ -94,19 +102,36 @@
     display: flex;
     flex-direction: row;
     transition: transform 0.3s ease-in-out;
-  max-width: 100%; /* Максимальна ширина картинки */
-  max-height: 100%; /* Максимальна висота картинки */
-  align-self: center;
+    width: 100%;
+    max-width: 100%;
+    align-self: center;
+}
+.img-dis {
+    display: flex;
+    flex-direction: row;
+}
+.product-item-list .product-img .product-description{
+    flex-direction: row;
+}
+
+.product-description {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 3; /* Number of lines to show */
+    -webkit-box-orient: vertical;
 }
 .product-img img {
     margin-left: 5px;
 }
 .product-image:hover {
-    transform: scale(2.8); /* Збільшення картинки */
+    transform: scale(2.8);
+    transition: 0.5s;
   z-index: 2000; /* Піднімаємо картинку над іншими елементами */
   position: absolute; /* Абсолютне позиціонування для картинки при наведенні */
   margin-left: 150px;
   margin-top: 50px;
+  
   }
 .product-dir {
     display: flex;
@@ -117,27 +142,18 @@
     display: flex;
     flex-direction: column;
 }
-/* .product-item-list {
-    border: 1px solid #ccc;
-    border-radius: 10px;
-    margin-bottom: 1rem;
-    background-color: white;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    text-align: center;
-    padding: 20px; /* Додано відступ для внутрішнього контенту */
-/* } */
-
-
 .cart-button {
     display: flex;
     justify-content: right;
-    /*margin: 0 auto 20px;*/
     margin-left: 0;
 }
 .product-but {
-    margin-top: auto   ;
+    align-self: flex-end;
+    margin-top: auto;
+    /* Додайте відступ зверху, щоб кнопки не прилипали до тексту */
+    margin-top: 10px;
+    margin-right: 10px;
+    
 }
 
 .form-manager {
@@ -237,6 +253,13 @@
         position: static !important;
         margin-left: 5px;
   margin-top: 0;
+    }
+    .product-but {
+        display: flex;
+        flex-direction: row;
+        width: 97%;
+        justify-content: center;
+
     }
       
 }
