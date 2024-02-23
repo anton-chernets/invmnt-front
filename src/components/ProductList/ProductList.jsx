@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import './ProductList.css';
 import CartPage from "../CartPage/CartPage";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -8,6 +8,7 @@ import defaultImage from '../../img/image_2024-02-07_10-47-09.png';
 import { AuthContext } from '../AuthContext/AuthContext';
 
 const ProductList = () => {
+    const navigate = useNavigate();
     const [products, setProducts] = useState([]);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
@@ -18,8 +19,12 @@ const ProductList = () => {
     const isAdmin = user && user.role === 'Admin';
     const isUser = user && user.role === 'customer';
     const [cart, setCart] = useState(() => {
-        const savedCart = localStorage.getItem('cart');
-        return savedCart ? JSON.parse(savedCart) : [];
+    const savedCart = localStorage.getItem('cart');
+
+    
+    
+
+    return savedCart ? JSON.parse(savedCart) : [];
     });
 
     useEffect(() => {
@@ -46,6 +51,12 @@ const ProductList = () => {
         setCart(currentCart => {
             const productIndex = currentCart.findIndex(item => item.id === product.id);
             let newCart;
+            if (!user) {
+                // Якщо користувач не залогінений, перенаправляємо на сторінку логіну
+                navigate('/login');
+            } else {
+                onAddToCart(product);
+            }
 
             if (productIndex !== -1) {
                 // Product already in cart, update the quantity
@@ -147,6 +158,15 @@ const ProductList = () => {
     };
     const startEditingProduct = (product) => {
         setEditingProduct(product);
+    };
+
+    const handleBuyNowClick = (product) => {
+        if (!user) {
+            // Якщо користувач не залогінений, перенаправляємо на сторінку логіну
+            navigate('/login');
+        } else {
+            onBuyNow(product);
+        }
     };
 
     if (loading) return <p>Loading...</p>;
@@ -274,9 +294,15 @@ const ProductList = () => {
                         {isUser && (
                             <>
                                 <button className="custom-btn btn-7" onClick={() => onAddToCart(product)}><span>У кошик</span></button>
-                                <button className="custom-btn btn-7" onClick={() => onBuyNow(product)}><span>Придбати</span></button>
+                                <button className="custom-btn btn-7" onClick={() => handleBuyNowClick(product)}><span>Придбати</span></button>
                             </>
                         )}
+                        <button className="custom-btn btn-7" onClick={() => onAddToCart(product)}>
+                <span>У кошик</span>
+            </button>
+            <button className="custom-btn btn-7" onClick={() => handleBuyNowClick(product)}>
+                <span>Придбати</span>
+            </button>
                     </div>
                 ))}
             </div>

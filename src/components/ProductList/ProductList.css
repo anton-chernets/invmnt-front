@@ -62,16 +62,10 @@
 .wrapper-product { 
     width: 100%;
     max-width: 1400px;
-    
-    
-    
-    
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
     flex-direction: column;
-    
-    align-items: start;
-}
+    }
 .product-item-list {
     width: 100%;
     max-width: 1400px;
