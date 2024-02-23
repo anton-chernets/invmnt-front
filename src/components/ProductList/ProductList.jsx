@@ -49,7 +49,8 @@ const ProductList = () => {
     
 
     const onAddToCart = (product) => {
-        setCart(currentCart => {
+        
+            setCart(currentCart => {
             const productIndex = currentCart.findIndex(item => item.id === product.id);
             let newCart;
 
@@ -222,10 +223,13 @@ const ProductList = () => {
                         <Link to={`/products/show/${product.id}`} style={{ textDecoration: 'none' }}>
                             <div className='product-titles'><h3>{product.title}</h3></div>
                         </Link>
+                        
                         <div className='product-img'><img src={product.images[0] || defaultImage} alt={product.title} className="product-image"/>
+                        
                         <div className='product-dir'><p>{product.description}</p>
                         <div className='price-product'><p>Price: ${product.price}</p></div>
                         <div className='product-but'>
+                        
                         {isAdmin && (
                             <>
                                 <button className="custom-btn btn-7" onClick={() => onDeleteProduct(product.id)}><span>Видалити</span></button>
