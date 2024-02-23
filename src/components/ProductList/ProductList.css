@@ -196,6 +196,7 @@
     .product-item-list {
         width: 100%;
         align-items: center;
+        flex-direction: column;
         padding: 0;
     }
     .product-item-list a {
@@ -208,6 +209,12 @@
         width: 80%;
         /* margin: 10px auto; */
         
+    }
+    .product-img {
+        flex-direction: column;
+    }
+    .product-img img{
+        width: 100%;
     }
     .wrapper-product {
         justify-content: center;
