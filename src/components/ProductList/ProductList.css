@@ -86,6 +86,7 @@
     align-items: flex-start; 
     padding: 10px;
     min-height: 300px;
+    text-align: center;
 }
 .product-item-list p{
     font-size: 20px;
@@ -97,6 +98,7 @@
 .product-titles {
     width: 100%;
     max-width: 700px;
+    
 }
 .product-img {
     display: flex;
@@ -110,6 +112,7 @@
     display: flex;
     flex-direction: row;
 }
+
 .product-item-list .product-img .product-description{
     flex-direction: row;
 }
