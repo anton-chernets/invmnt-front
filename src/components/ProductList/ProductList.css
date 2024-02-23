@@ -93,11 +93,22 @@
 .product-img {
     display: flex;
     flex-direction: row;
-    
+    transition: transform 0.3s ease-in-out;
+  max-width: 100%; /* Максимальна ширина картинки */
+  max-height: 100%; /* Максимальна висота картинки */
+  align-self: center;
 }
 .product-img img {
     margin-left: 5px;
+    
 }
+.product-image:hover {
+    transform: scale(2.8); /* Збільшення картинки */
+  z-index: 2000; /* Піднімаємо картинку над іншими елементами */
+  position: absolute; /* Абсолютне позиціонування для картинки при наведенні */
+  margin-left: 150px;
+  margin-top: 50px;
+  }
 .product-dir {
     display: flex;
     flex-direction: column;
