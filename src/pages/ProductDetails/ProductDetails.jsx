@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import './ProductDetails.css';
 
 function ProductDetails() {
@@ -7,6 +7,7 @@ function ProductDetails() {
     const [product, setProduct] = useState(null);
     const [loading, setLoading] = useState(true); // Define loading state here
     const [error, setError] = useState(null);
+    const navigate = useNavigate();
 
     useEffect(() => {
         const fetchProduct = async () => {
@@ -27,6 +28,10 @@ function ProductDetails() {
         fetchProduct();
     }, [productId]);
 
+    const goBack = () => {
+        navigate(-1); // Перенаправлення назад
+    };
+
     // Conditional rendering based on the loading state
     if (loading) return <p>Loading...</p>;
     if (error) return <p>Error: {error}</p>;
@@ -41,7 +46,10 @@ function ProductDetails() {
             <img src={productDetails.images[0]} alt={productDetails.title} />
             <p>{productDetails.description}</p>
             <p>Price: ${productDetails.price}</p>
+            <button onClick={goBack} className="custom-btn btn-7"><span>Назад</span></button>
+
         </div>
+
     );
 }
 

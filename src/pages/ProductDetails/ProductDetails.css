@@ -3,22 +3,17 @@
     max-width: 1400px;
     display: flex;
     flex-direction: column;
-    margin: 10px auto;
+    margin: 20px auto;
     align-items: center;
     min-height: 100vh;
     background-color: #ecf0f1;
     color: #333;
-
+    padding: 20px;
     border-radius: 10px;
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
 }
 
-/* Стилі для зображення товару */
-.product-image {
-    max-width: 100%;
-    height: auto;
-    margin-bottom: 20px;
-}
+
 
 /* Стилі для тексту опису товару */
 .product-details p {
@@ -43,10 +38,10 @@
   
   /* Адаптивність: налаштування для мобільних пристроїв */
 @media (max-width: 768px) {
-    .details-container {
-      margin: 10px;
-      padding: 10px;
-    }
+  .product-details {
+    text-align: center;
+    width: 90%;
+  }
     
     .details-title {
       font-size: 1.5rem;
@@ -55,4 +50,9 @@
     .details-content {
       font-size: 0.9rem;
     }
+    .product-details img {
+      width: 100%;
+      height: auto;
+      margin-bottom: 20px;
+  }
   }

@@ -40,10 +40,8 @@
 
 .news-container-detail {
     display: flex;
-    justify-content: flex-start; /* Центруємо контент по горизонталі */
-
-    flex-direction: row; /* Ставимо елементи у вертикальний стек */
-    height: 100vh; /* Задаємо висоту контейнера, щоб він займав увесь екран */
+    justify-content: flex-start; 
+    flex-direction: row; 
     padding: 20px;
     background: transparent;
     width: 100%;

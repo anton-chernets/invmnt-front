@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import "./NewsDetails.css";
 import defaultImage from '../../img/image_2024-02-07_10-47-09.png';
 import Sidebar from "../../components/Sidebar/Sidebar";
@@ -8,6 +8,7 @@ import Sidebar from "../../components/Sidebar/Sidebar";
 function NewsDetails() {
   const { newsId } = useParams();
   const [newsItem, setNewsItem] = useState(null);
+  const navigate = useNavigate();
 
     useEffect(() => {
         // Отримуємо весь список новин
@@ -31,7 +32,9 @@ function NewsDetails() {
   if (!newsItem) {
     return <div className="loading-message">Новина не знайдена або завантаження деталей новини...</div>;
   }
-
+  const goBack = () => {
+    navigate(-1); // Перенаправлення назад
+};
     return (
         <div className="news-container-detail">
                 <div className="news-details">
@@ -42,7 +45,7 @@ function NewsDetails() {
 
                 <p>{newsItem.description}</p>
                 <p>{newsItem.content}</p>
-                {/* Відображення деталей новини */}
+                <button onClick={goBack} className="custom-btn btn-7"><span>Назад</span></button>
 
                 </div>
             <Sidebar />
