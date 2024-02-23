@@ -46,17 +46,12 @@ const ProductList = () => {
         localStorage.setItem('cart', JSON.stringify(cart));
     }, [cart]);
 
+    
 
     const onAddToCart = (product) => {
         setCart(currentCart => {
             const productIndex = currentCart.findIndex(item => item.id === product.id);
             let newCart;
-            if (!user) {
-                // Якщо користувач не залогінений, перенаправляємо на сторінку логіну
-                navigate('/login');
-            } else {
-                onAddToCart(product);
-            }
 
             if (productIndex !== -1) {
                 // Product already in cart, update the quantity
@@ -73,7 +68,13 @@ const ProductList = () => {
         });
     };
 
-
+    const handleAddToCartClick = (product) => {
+        if (!user) {
+          navigate('/login');
+        } else {
+          onAddToCart(product);
+        }
+      };
 
     const onDeleteProduct = async (productId) => {
         const authToken = localStorage.getItem('authToken');
@@ -297,12 +298,14 @@ const ProductList = () => {
                                 <button className="custom-btn btn-7" onClick={() => handleBuyNowClick(product)}><span>Придбати</span></button>
                             </>
                         )}
-                        <button className="custom-btn btn-7" onClick={() => onAddToCart(product)}>
-                <span>У кошик</span>
-            </button>
-            <button className="custom-btn btn-7" onClick={() => handleBuyNowClick(product)}>
-                <span>Придбати</span>
-            </button>
+                        {!user && (
+                            <>
+                                <button className="custom-btn btn-7" onClick={handleAddToCartClick}><span>У кошик</span></button>
+                                <button className="custom-btn btn-7" onClick={handleBuyNowClick}><span>Придбати</span></button>
+
+                            </>
+                        )}
+                        
                     </div>
                 ))}
             </div>
