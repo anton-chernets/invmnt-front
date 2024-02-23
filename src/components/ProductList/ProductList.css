@@ -254,7 +254,7 @@
         transform: none !important;
         transition: none !important; /* Прибрати анімацію */
         position: static !important;
-        margin-left: 5px;
+        margin-left: 0;
   margin-top: 0;
     }
     .product-but {
