@@ -87,4 +87,8 @@
     .wrapper-form {
         padding-right: 30px;
     }
+    .droup-button {
+        width: 100%;
+        margin-left: 15px;
+    }
 }
