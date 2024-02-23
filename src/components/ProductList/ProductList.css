@@ -100,7 +100,6 @@
 }
 .product-img img {
     margin-left: 5px;
-    
 }
 .product-image:hover {
     transform: scale(2.8); /* Збільшення картинки */
@@ -221,15 +220,25 @@
         /* margin: 10px auto; */
         
     }
-    .product-img {
-        flex-direction: column;
-    }
-    .product-img img{
-        width: 100%;
-    }
+    
+    
     .wrapper-product {
         justify-content: center;
     }
+    .product-img {
+        width: 100%;
+        /* Вимкнення анімацій та трансформацій */
+        transition: none !important; /* Прибрати анімацію */
+        transform: none !important; /* Прибрати трансформацію */
+    }
+    .product-image:hover {
+        transform: none !important;
+        transition: none !important; /* Прибрати анімацію */
+        position: static !important;
+        margin-left: 5px;
+  margin-top: 0;
+    }
+      
 }
 
 

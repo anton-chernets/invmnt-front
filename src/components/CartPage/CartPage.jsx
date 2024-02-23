@@ -5,51 +5,51 @@ import defaultImage from '../../img/image_2024-02-07_10-47-09.png';
 
 
 const CartPage = ({ cart = [], setCart }) => {
-    const token = localStorage.getItem('authToken');
+    // const token = localStorage.getItem('authToken');
 
-    const totalPrice = cart.reduce((total, item) => {
+    const totalPrice = cart.reduce((total, product) => {
 
-        const price = parseFloat(item.price);
-        return typeof price === 'number' ? total + price * item.quantity : total;
+        const price = parseFloat(product.price);
+        return typeof price === 'number' ? total + price * product.quantity : total;
     }, 0);
 
 
     const handleRemoveFromCart = (productId) => {
         if (window.confirm('Ви впевнені, що хочете видалити товар?')) {
-            const updatedCart = cart.filter(item => item.id !== productId);
+            const updatedCart = cart.filter(product => product.id !== productId);
             setCart(updatedCart);
             localStorage.setItem('cart', JSON.stringify(updatedCart)); // Save the updated cart to localStorage
         }
     };
 
     const handleBuy = async () => {
-        try {
-            const response = await fetch('https://apinvmnt.site/api/checkout', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${token}`,
-                },
-                body: JSON.stringify({ products: cart.map(item => ({ id: item.id, quantity: item.quantity })) }),
-            });
+        // try {
+        //     const response = await fetch('https://apinvmnt.site/api/checkout', {
+        //         method: 'POST',
+        //         headers: {
+        //             'Content-Type': 'application/json',
+        //             'Authorization': `Bearer ${token}`,
+        //         },
+        //         body: JSON.stringify({ products: cart.map(item => ({ id: product.id, quantity: product.quantity })) }),
+        //     });
 
-            if (!response.ok) {
-                const errorData = await response.json();
-                console.error('Checkout failed:', errorData);
-                alert('Помилка під час оформлення покупки: ' + (errorData.message || 'Не вдалось виконати покупку'));
-                return;
-            }
+        //     if (!response.ok) {
+        //         const errorData = await response.json();
+        //         console.error('Checkout failed:', errorData);
+        //         alert('Помилка під час оформлення покупки: ' + (errorData.message || 'Не вдалось виконати покупку'));
+        //         return;
+        //     }
 
-            const result = await response.json();
-            console.log('Checkout successful', result);
-            alert('Покупка успішно оформлена!');
-            setCart([]);
-            // Тут можна додати перенаправлення або оновлення сторінки
-            // window.location.href = '/thank-you'; // Перенаправлення на сторінку подяки
-        } catch (error) {
-            console.error('Checkout error:', error);
-            alert('Помилка під час оформлення покупки: ' + error.message);
-        }
+        //     const result = await response.json();
+        //     console.log('Checkout successful', result);
+        //     alert('Покупка успішно оформлена!');
+        //     setCart([]);
+        //     // Тут можна додати перенаправлення або оновлення сторінки
+        //     // window.location.href = '/thank-you'; // Перенаправлення на сторінку подяки
+        // } catch (error) {
+        //     console.error('Checkout error:', error);
+        //     alert('Помилка під час оформлення покупки: ' + error.message);
+        // }
     };
 
     return (
@@ -58,16 +58,16 @@ const CartPage = ({ cart = [], setCart }) => {
             {cart.length > 0 ? (
                 <>
                     <div className="cart-items">
-                        {cart.map(item => (
-                            <div key={item.id} className="cart-item">
-                                <h3>{item.title}</h3>
-                                <p>Ціна: ${parseFloat(item.price).toFixed(2)}</p>
-                                <div className="img-item">
-                                    <img src={item.image || defaultImage} alt={item.title} />
-                                </div>
-                                <p>Кількість: {item.quantity}</p>
-                                <button onClick={() => handleRemoveFromCart(item.id)} className="custom-btn btn-7"><span>Видалити</span></button>
+                    {cart.map(product => (
+                        <div key={product.id} className="cart-item">
+                            <h3>{product.title}</h3>
+                            <p>Ціна: ${parseFloat(product.price).toFixed(2)}</p>
+                            <div className="img-item">
+                            <img src={product.images[0] || defaultImage} alt={product.title} className="cart-item-image" />
                             </div>
+                            <p>Кількість: {product.quantity}</p>
+                            <button onClick={() => handleRemoveFromCart(product.id)} className="custom-btn btn-7"><span>Видалити</span></button>
+                        </div>
                         ))}
                     </div>
                     <div className="cart-summary">
