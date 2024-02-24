@@ -20,12 +20,10 @@ const ProductList = () => {
     const isUser = user && user.role === 'customer';
     const [cart, setCart] = useState(() => {
     const savedCart = localStorage.getItem('cart');
-
     
-    
-
     return savedCart ? JSON.parse(savedCart) : [];
     });
+    const [clickedProductId, setClickedProductId] = useState(null);
 
     useEffect(() => {
         setLoading(true);
@@ -46,8 +44,10 @@ const ProductList = () => {
         localStorage.setItem('cart', JSON.stringify(cart));
     }, [cart]);
 
+    const handleImageClick = (productId) => {
+        setClickedProductId(clickedProductId === productId ? null : productId);
+    };
     
-
     const onAddToCart = (product) => {
         
             setCart(currentCart => {
@@ -224,7 +224,11 @@ const ProductList = () => {
                             <h3>{product.title}</h3>
                         </Link>
                         <div className='img-dis'>
-                        <img src={product.images[0] || defaultImage} alt={product.title} className="product-image"/>
+                        <button className="image-button" aria-label="Expand Image" onClick={() => handleImageClick(product.id)} style={{ background: 'none', border: 'none', padding: 0 }}>
+                                <img src={product.images[0] || defaultImage} alt={product.title}
+                                    className={`product-img ${clickedProductId === product.id ? "clicked" : ""}`} />
+                            </button>
+                            
                         <p>{product.description}</p>
                         </div>
                         <p>Ціна: ${product.price}</p>
