@@ -1,7 +1,6 @@
 .product-wrapper {
     display: flex;
     flex-wrap: wrap;
-    /*gap: 20px;*/
     justify-content: center;
     max-width: 1400px;
     margin: 20px auto 0;
@@ -12,7 +11,6 @@
     border: 1px solid #2f85cc;
     border-radius: 10px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    /*padding: 20px;*/
     margin-bottom: 10px;
     background: white;
     box-sizing: border-box;
@@ -22,12 +20,10 @@
 }
 .product-dir {
     overflow-wrap: break-word;
-    /* Ви можете також додати відступ знизу, щоб текст не торкався кнопок */
     margin-bottom: 10px;
 }
 .product-description {
     overflow-wrap: break-word;
-    /* Ви можете також додати відступ знизу, щоб текст не торкався кнопок */
     margin-bottom: 10px;
 }
 .product-wrapper > div img {
@@ -98,16 +94,8 @@
 .product-titles {
     width: 100%;
     max-width: 700px;
-    
 }
-.product-img {
-    display: flex;
-    flex-direction: row;
-    transition: transform 0.3s ease-in-out;
-    width: 100%;
-    max-width: 100%;
-    align-self: center;
-}
+
 .img-dis {
     display: flex;
     flex-direction: row;
@@ -121,21 +109,32 @@
     overflow: hidden;
     text-overflow: ellipsis;
     display: -webkit-box;
-    -webkit-line-clamp: 3; /* Number of lines to show */
+    -webkit-line-clamp: 3;
     -webkit-box-orient: vertical;
 }
 .product-img img {
     margin-left: 5px;
 }
-.product-image:hover {
-    transform: scale(2.8);
-    transition: 0.5s;
-  z-index: 2000; /* Піднімаємо картинку над іншими елементами */
-  position: absolute; /* Абсолютне позиціонування для картинки при наведенні */
-  margin-left: 150px;
-  margin-top: 50px;
-  
+
+.product-img {
+    display: block;
+    max-width: 100%;
+    height: auto; 
+    transition: transform 1s ease;
+    cursor: pointer;
+    
   }
+  
+  .product-img.clicked {
+    transform: scale(6);
+    z-index: 10000;
+    position: relative;
+    top: 0;
+    left: 0;
+    width: 100%;
+    margin-top: 150px;
+  }
+
 .product-dir {
     display: flex;
     flex-direction: column;
@@ -153,7 +152,6 @@
 .product-but {
     align-self: flex-end;
     margin-top: auto;
-    /* Додайте відступ зверху, щоб кнопки не прилипали до тексту */
     margin-top: 10px;
     margin-right: 10px;
     
@@ -192,11 +190,11 @@
     padding: 8px;
     border: 1px solid #ccc;
     border-radius: 4px;
-    box-sizing: border-box; /* Makes sure padding does not affect the overall width */
+    box-sizing: border-box;
 }
 
 .form-manager textarea {
-    resize: vertical; /* Allows vertical resizing, might be useful for description */
+    resize: vertical;
 }
 
 
@@ -210,7 +208,6 @@
     color: white;
 }
 
-/* Add some hover effects for buttons */
 .form-manager button[type="submit"]:hover,
 .form-manager button[type="button"]:hover {
     opacity: 0.9;
@@ -244,19 +241,7 @@
     .wrapper-product {
         justify-content: center;
     }
-    .product-img {
-        width: 100%;
-        /* Вимкнення анімацій та трансформацій */
-        transition: none !important; /* Прибрати анімацію */
-        transform: none !important; /* Прибрати трансформацію */
-    }
-    .product-image:hover {
-        transform: none !important;
-        transition: none !important; /* Прибрати анімацію */
-        position: static !important;
-        margin-left: 0;
-  margin-top: 0;
-    }
+    
     .product-but {
         display: flex;
         flex-direction: row;
@@ -264,7 +249,14 @@
         justify-content: center;
 
     }
-      
+    .product-img.clicked {
+        transform: none;
+        transition: none;
+        margin-top: 0;
+    }
+    .product-img {
+        transition: none;
+    }
 }
 
 
