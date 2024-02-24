@@ -231,7 +231,7 @@ const ProductList = () => {
                         <div className='product-but'>
                             {isAdmin && (
                                 <>
-                                    <button className="custom-btn btn-7" onClick={() => onDeleteProduct(product.id)}>Видалити</button>
+                                    <button className="custom-btn btn-7" onClick={() => onDeleteProduct(product.id)}><span>Видалити</span></button>
                                     {editingProduct && editingProduct.id === product.id ? (
                                         <form onSubmit={handleSaveChanges} className='form-manager'>
                                             <div>
@@ -289,20 +289,20 @@ const ProductList = () => {
                                         </div>
                                         </form>
                                     ) : (
-                                        <button className="custom-btn btn-7" onClick={() => startEditingProduct(product)}>Редагувати</button>
+                                        <button className="custom-btn btn-7" onClick={() => startEditingProduct(product)}><span>Редагувати</span></button>
                                     )}
                                 </>
                             )}
                             {isUser && (
                                 <>
-                                    <button className="custom-btn btn-7" onClick={() => onAddToCart(product)}>У кошик</button>
-                                    <button className="custom-btn btn-7" onClick={() => handleBuyNowClick(product)}>Придбати</button>
+                                    <button className="custom-btn btn-7" onClick={() => onAddToCart(product)}><span>У кошик</span></button>
+                                    <button className="custom-btn btn-7" onClick={() => handleBuyNowClick(product)}><span>Придбати</span></button>
                                 </>
                             )}
                             {!user && (
                                 <>
-                                    <button className="custom-btn btn-7" onClick={() => handleAddToCartClick(product)}>У кошик</button>
-                                    <button className="custom-btn btn-7" onClick={() => handleBuyNowClick(product)}>Придбати</button>
+                                    <button className="custom-btn btn-7" onClick={() => handleAddToCartClick(product)}><span>У кошик</span></button>
+                                    <button className="custom-btn btn-7" onClick={() => handleBuyNowClick(product)}><span>Придбати</span></button>
                                 </>
                             )}
                         </div>
