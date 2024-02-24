@@ -126,12 +126,12 @@
   }
   
   .product-img.clicked {
-    transform: scale(6);
+    transform: scale(5);
     z-index: 10000;
     position: relative;
     top: 0;
     left: 0;
-    width: 100%;
+    width: 60%;
     margin-top: 150px;
   }
 
@@ -253,6 +253,7 @@
         transform: none;
         transition: none;
         margin-top: 0;
+        width: 100%;
     }
     .product-img {
         transition: none;
