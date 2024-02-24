@@ -13,7 +13,12 @@
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
 }
 
-
+.details-but {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  width: 80%;
+}
 
 /* Стилі для тексту опису товару */
 .product-details p {
@@ -54,5 +59,11 @@
       width: 100%;
       height: auto;
       margin-bottom: 20px;
+  }
+  .details-but {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 80%;
   }
   }

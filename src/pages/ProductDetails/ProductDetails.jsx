@@ -1,13 +1,16 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import './ProductDetails.css';
+import { AuthContext } from '../../components/AuthContext/AuthContext';
 
 function ProductDetails() {
     const { productId } = useParams();
     const [product, setProduct] = useState(null);
-    const [loading, setLoading] = useState(true); // Define loading state here
+    const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
     const navigate = useNavigate();
+    const { user } = useContext(AuthContext); // Use AuthContext
+    const isUser = user && user.role === 'customer';
 
     useEffect(() => {
         const fetchProduct = async () => {
@@ -32,6 +35,27 @@ function ProductDetails() {
         navigate(-1); // Перенаправлення назад
     };
 
+    const onAddToCart = (product) => {
+        // Define how to add product to cart
+    };
+
+    const handleAddToCartClick = (product) => {
+        if (!user) {
+            navigate('/login');
+        } else {
+            onAddToCart(product);
+        }
+    };
+
+    const handleBuyNowClick = (product) => {
+        if (!user) {
+            navigate('/login');
+        } else {
+            // Define buy now functionality
+        }
+    };
+
+
     // Conditional rendering based on the loading state
     if (loading) return <p>Loading...</p>;
     if (error) return <p>Error: {error}</p>;
@@ -47,9 +71,21 @@ function ProductDetails() {
             <p>{productDetails.description}</p>
             <p>Price: ${productDetails.price}</p>
             <button onClick={goBack} className="custom-btn btn-7"><span>Назад</span></button>
-
+            <div className='details-but'>
+            {isUser && (
+                <>
+                    <button className="custom-btn btn-7" onClick={() => onAddToCart(product)}><span>У кошик</span></button>
+                    <button className="custom-btn btn-7" onClick={() => handleBuyNowClick(product)}><span>Придбати</span></button>
+                </>
+            )}
+            {!user && (
+                <>
+                    <button className="custom-btn btn-7" onClick={() => handleAddToCartClick(product)}><span>У кошик</span></button>
+                    <button className="custom-btn btn-7" onClick={() => handleBuyNowClick(product)}><span>Придбати</span></button>
+                </>
+            )}
         </div>
-
+        </div>
     );
 }
 
