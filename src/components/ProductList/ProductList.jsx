@@ -14,7 +14,7 @@ const ProductList = () => {
     const [error, setError] = useState(null);
     const [showCart, setShowCart] = useState(false);
     const { user } = useContext(AuthContext);
-    const token = localStorage.getItem('authToken'); // Retrieve the authToken from localStorage
+    const token = localStorage.getItem('authToken');
     const [editingProduct, setEditingProduct] = useState(null);
     const isAdmin = user && user.role === 'Admin';
     const isUser = user && user.role === 'customer';
@@ -24,6 +24,9 @@ const ProductList = () => {
     return savedCart ? JSON.parse(savedCart) : [];
     });
     const [clickedProductId, setClickedProductId] = useState(null);
+
+    const [quantities, setQuantities] = useState({});
+    
 
     useEffect(() => {
         setLoading(true);
@@ -47,46 +50,38 @@ const ProductList = () => {
     const handleImageClick = (productId) => {
         setClickedProductId(clickedProductId === productId ? null : productId);
     };
-    
-    const onAddToCart = (product) => {
-        
-            setCart(currentCart => {
-            const productIndex = currentCart.findIndex(item => item.id === product.id);
-            let newCart;
 
+    const onAddToCart = (product) => {
+        setCart(currentCart => {
+            const productIndex = currentCart.findIndex(item => item.id === product.id);
+            const quantityToAdd = quantities[product.id] || 1; // Get the quantity to add, defaulting to 1 if not specified
+    
+            let newCart;
             if (productIndex !== -1) {
-                // Product already in cart, update the quantity
+                // Product is already in the cart, update its quantity
                 newCart = currentCart.map((item, index) =>
-                    index === productIndex ? { ...item, quantity: item.quantity + 1 } : item
+                    index === productIndex ? { ...item, quantity: item.quantity + quantityToAdd } : item
                 );
             } else {
-                // Product not in cart, add as a new item
-                newCart = [...currentCart, { ...product, quantity: 1 }];
+                // Product is not in the cart, add it with the specified quantity
+                newCart = [...currentCart, { ...product, quantity: quantityToAdd }];
             }
-
-            localStorage.setItem('cart', JSON.stringify(newCart)); // Update localStorage with the new cart
-            return newCart;
+    
+            localStorage.setItem('cart', JSON.stringify(newCart)); // Save the updated cart to localStorage
+            return newCart; // Update the cart state
         });
     };
 
-    const handleAddToCartClick = (product) => {
-        if (!user) {
-          navigate('/login');
-        } else {
-          onAddToCart(product);
-        }
-      };
+    
 
     const onDeleteProduct = async (productId) => {
         const authToken = localStorage.getItem('authToken');
         
-        // Check if authToken exists before making the request
         if (!authToken) {
             console.error('Unauthorized: No auth token');
             return;
         }
     
-        // Confirm with the user before deleting
         if (window.confirm('Ви впевнені, що хочете видалити товар?')) {
             try {
                 const response = await fetch(`https://apinvmnt.site/api/products/remove`, {
@@ -98,10 +93,8 @@ const ProductList = () => {
                     body: JSON.stringify({id: productId})
                 });
     
-                // It's better to check response.ok before trying to parse the response body
                 if (response.ok) {
                     const data = await response.json();
-                    // Successful deletion of the product, update the state
                     setProducts(currentProducts => currentProducts.filter(product => product.id !== productId));
                     console.log('Product removed successfully:', data);
                 } else {
@@ -110,7 +103,6 @@ const ProductList = () => {
                     throw new Error(errorData.message || 'Failed to delete product');
                 }
             } catch (error) {
-                // Handle errors in connecting to the server or others
                 console.error('Error deleting product:', error);
             }
         }
@@ -119,7 +111,6 @@ const ProductList = () => {
     const handleSaveChanges = async (e) => {
         e.preventDefault();
         await handleUpdateProduct(editingProduct);
-        // After updating, you might want to clear the editing state or give some feedback to the user
     };
     const handleUpdateProduct = async (updatedProductData) => {
         const payload = {
@@ -162,45 +153,57 @@ const ProductList = () => {
         setEditingProduct(product);
     };
 
-    const handleBuyNowClick = (product) => {
-        if (!user) {
-            // Якщо користувач не залогінений, перенаправляємо на сторінку логіну
-            navigate('/login');
-        } else {
-            onBuyNow(product);
-        }
-    };
+    
 
     if (loading) return <p>Loading...</p>;
     if (error) return <p>Error: {error.message}</p>;
 
-    async function onBuyNow(product) {
+    const handleAddToCartClick = (product) => {
+        if (!user) {
+          navigate('/login');
+        } else {
+          onAddToCart(product);
+        }
+      };
+    
+      const handleBuyNowClick = (product) => {
+        if (!user) {
+            navigate('/login');
+        } else {
+            // Retrieve the quantity for the product
+            const quantity = quantities[product.id] || 1; // Default to 1 if not specified
+            onBuyNow(product, quantity); // Pass the quantity to onBuyNow
+        }
+    };
 
+    async function onBuyNow(product, quantity) {
+        // Ensure a valid quantity is always passed
+        const quantityToBuy = quantity || 1;
+    
         const orderDetails = {
             products: [
                 {
                     id: product.id,
-                    quantity: 1,
+                    quantity: quantityToBuy,
                 },
             ],
         };
-
+    
         try {
             const response = await fetch('https://apinvmnt.site/api/checkout', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${token}`, // Make sure the token is accessible here
+                    'Authorization': `Bearer ${token}`,
                 },
                 body: JSON.stringify(orderDetails),
             });
-
+    
             if (!response.ok) {
                 throw new Error(`HTTP error! Status: ${response.status}`);
             }
-
+    
             const data = await response.json();
-
             console.log('Order created successfully:', data);
             alert('Thank you for your purchase!');
         } catch (error) {
@@ -208,6 +211,7 @@ const ProductList = () => {
             alert('An error occurred during checkout. Please try again.');
         }
     }
+    
 
     return (
         <div className='wrapper-product'>
@@ -299,12 +303,34 @@ const ProductList = () => {
                             )}
                             {isUser && (
                                 <>
+                                <div className='quantity'>
+                            <label htmlFor={`quantity-${product.id}`}>Кількість:</label>
+                            <input
+                                type="number"
+                                id={`quantity-${product.id}`}
+                                value={quantities[product.id] || 1}
+                                onChange={(e) => setQuantities({ ...quantities, [product.id]: Math.max(1, parseInt(e.target.value, 10)) })}
+                                min="1"
+                                style={{ width: '60px' }}
+                            />
+                        </div>
                                     <button className="custom-btn btn-7" onClick={() => onAddToCart(product)}><span>У кошик</span></button>
                                     <button className="custom-btn btn-7" onClick={() => handleBuyNowClick(product)}><span>Придбати</span></button>
                                 </>
                             )}
                             {!user && (
                                 <>
+                                <div>
+                            <label htmlFor={`quantity-${product.id}`}>Кількість:</label>
+                            <input
+                                type="number"
+                                id={`quantity-${product.id}`}
+                                value={quantities[product.id] || 1}
+                                onChange={(e) => setQuantities({ ...quantities, [product.id]: Math.max(1, parseInt(e.target.value, 10)) })}
+                                min="1"
+                                style={{ width: '60px' }}
+                            />
+                        </div>
                                     <button className="custom-btn btn-7" onClick={() => handleAddToCartClick(product)}><span>У кошик</span></button>
                                     <button className="custom-btn btn-7" onClick={() => handleBuyNowClick(product)}><span>Придбати</span></button>
                                 </>

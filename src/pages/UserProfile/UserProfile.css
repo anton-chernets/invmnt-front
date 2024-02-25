@@ -20,6 +20,19 @@
     width: 80%;
 
 }
+.order-item {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    border-bottom:1px solid #333;
+    /* padding-bottom: 5px; */
+    
+}
+.order-product-item p {
+    margin: 0;
+    padding: 2px;
+}
+
 .user-contacts {
     border-radius: 10px;
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);

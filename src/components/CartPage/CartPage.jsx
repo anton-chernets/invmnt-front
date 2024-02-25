@@ -1,11 +1,17 @@
-import React, {} from 'react';
+import React, {useContext} from 'react';
 import './CartPage.css'
 import defaultImage from '../../img/image_2024-02-07_10-47-09.png';
+import { AuthContext } from '../AuthContext/AuthContext';
+import { useNavigate } from 'react-router-dom';
+
 
 
 
 const CartPage = ({ cart = [], setCart }) => {
-    // const token = localStorage.getItem('authToken');
+    const token = localStorage.getItem('authToken');
+    const { user } = useContext(AuthContext);
+    const navigate = useNavigate();
+
 
     const totalPrice = cart.reduce((total, product) => {
 
@@ -22,59 +28,71 @@ const CartPage = ({ cart = [], setCart }) => {
         }
     };
 
-    const handleBuy = async () => {
-        // try {
-        //     const response = await fetch('https://apinvmnt.site/api/checkout', {
-        //         method: 'POST',
-        //         headers: {
-        //             'Content-Type': 'application/json',
-        //             'Authorization': `Bearer ${token}`,
-        //         },
-        //         body: JSON.stringify({ products: cart.map(item => ({ id: product.id, quantity: product.quantity })) }),
-        //     });
-
-        //     if (!response.ok) {
-        //         const errorData = await response.json();
-        //         console.error('Checkout failed:', errorData);
-        //         alert('Помилка під час оформлення покупки: ' + (errorData.message || 'Не вдалось виконати покупку'));
-        //         return;
-        //     }
-
-        //     const result = await response.json();
-        //     console.log('Checkout successful', result);
-        //     alert('Покупка успішно оформлена!');
-        //     setCart([]);
-        //     // Тут можна додати перенаправлення або оновлення сторінки
-        //     // window.location.href = '/thank-you'; // Перенаправлення на сторінку подяки
-        // } catch (error) {
-        //     console.error('Checkout error:', error);
-        //     alert('Помилка під час оформлення покупки: ' + error.message);
-        // }
+    const handleBuyNowClick = () => {
+        if (!user) {
+            navigate('/login');
+        } else {
+            onBuyNow();
+        }
     };
+
+    async function onBuyNow() {
+        const orderDetails = {
+            products: cart.map(({ id, quantity }) => ({
+                id,
+                quantity,
+            })),
+        };
+
+        try {
+            const response = await fetch('https://apinvmnt.site/api/checkout', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`,
+                },
+                body: JSON.stringify(orderDetails),
+            });
+
+            if (!response.ok) {
+                throw new Error(`HTTP error! Status: ${response.status}`);
+            }
+
+            const data = await response.json();
+
+            console.log('Order created successfully:', data);
+            alert('Thank you for your purchase!');
+            setCart([]); // Clear cart after purchase
+            localStorage.removeItem('cart'); // Clear cart in localStorage
+        } catch (error) {
+            console.error('Checkout failed:', error);
+            alert('An error occurred during checkout. Please try again.');
+        }
+    }
 
     return (
         <div className="cart-page">
             <h1>Ваш кошик</h1>
             {cart.length > 0 ? (
                 <>
-                    <div className="cart-items">
+                <div className="cart-items">
                     {cart.map(product => (
                         <div key={product.id} className="cart-item">
                             <h3>{product.title}</h3>
                             <p>Ціна: ${parseFloat(product.price).toFixed(2)}</p>
                             <div className="img-item">
-                            <img src={product.images[0] || defaultImage} alt={product.title} className="cart-item-image" />
+                                <img src={product.images[0] || defaultImage} alt={product.title} className="cart-item-image" />
                             </div>
                             <p>Кількість: {product.quantity}</p>
                             <button onClick={() => handleRemoveFromCart(product.id)} className="custom-btn btn-7"><span>Видалити</span></button>
                         </div>
-                        ))}
-                    </div>
-                    <div className="cart-summary">
-                        <p>Загальна сума: ${totalPrice.toFixed(2)}</p>
-                        <button onClick={handleBuy} className="custom-btn btn-7"><span>Придбати</span></button>
-                    </div>
-                </>
+                    ))}
+                </div>
+                <div className="cart-summary">
+                    <p>Загальна сума: ${totalPrice.toFixed(2)}</p>
+                    <button className="custom-btn btn-7" onClick={handleBuyNowClick}><span>Придбати всі</span></button>
+                </div>
+            </>
             ) : (
                 <p>Ваш кошик пустий.</p>
             )}

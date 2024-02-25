@@ -1,24 +1,53 @@
-import React, {useContext, useState} from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import './UserProfile.css';
 import useFetchUser from '../../components/FetchUser/FetchUser';
 import { useNavigate } from 'react-router-dom';
 import { AuthContext } from "../../components/AuthContext/AuthContext";
 import CartPage from '../../components/CartPage/CartPage';
-import ThemeToggle from "../../components/ThemeToggle/ThemeToggle"; // Import the ThemeToggle component
+import ThemeToggle from "../../components/ThemeToggle/ThemeToggle";
+// import defaultImage from '../../img/image_2024-02-07_10-47-09.png';
 
 const UserProfile = () => {
-    const token = localStorage.getItem('authToken');
-    const { user, setUser, loading, error } = useFetchUser(token);
     const navigate = useNavigate();
     const { setIsAuthenticated, isAdmin } = useContext(AuthContext);
+    const { user, setUser, loading: userLoading, error: userError } = useFetchUser(localStorage.getItem('authToken'));
     const [newPassword, setNewPassword] = useState('');
     const [newName, setNewName] = useState(user?.name || '');
     const [showPassword, setShowPassword] = useState(false);
+    const [loadingOrders, setLoadingOrders] = useState(true);
+    const [errorOrders, setErrorOrders] = useState(null);
+    const [orders, setOrders] = useState([]);
+    const token = localStorage.getItem('authToken');
+
+    useEffect(() => {
+        const fetchOrders = async () => {
+            const token = localStorage.getItem('authToken');
+            if (token) {
+                try {
+                    const response = await fetch('https://apinvmnt.site/api/orders', {
+                        headers: {
+                            'Authorization': `Bearer ${token}`
+                        }
+                    });
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! Status: ${response.status}`);
+                    }
+                    const data = await response.json();
+                    setOrders(data.data || []);
+                } catch (error) {
+                    setErrorOrders(error.message);
+                } finally {
+                    setLoadingOrders(false);
+                }
+            }
+        };
+        fetchOrders();
+    }, [user]);
 
     const handlePasswordChange = (e) => setNewPassword(e.target.value);
-    const handleNameChange = (e) => {
-        setNewName(e.target.value);
-    };
+    const handleNameChange = (e) => setNewName(e.target.value);
+
+
     const handleUpdateProfile = async (e) => {
         e.preventDefault();
 
@@ -92,9 +121,12 @@ const UserProfile = () => {
         return savedCart ? JSON.parse(savedCart) : [];
     });
 
-    if (loading) return <div>Loading...</div>;
-    if (error) return <div>Error: {error}</div>;
-    if (!user) return <div>No user data available</div>;
+    // if (loading) return <div>Loading...</div>;
+    // if (error) return <div>Error: {error}</div>;
+    // if (!user) return <div>No user data available</div>;
+    if (userLoading) return <div>Loading...</div>; // Replace `loading` with `userLoading`
+    if (userError) return <div>Error: {userError}</div>; // Replace `error` with `userError`
+
 
     return (
         <div className="user-profile">
@@ -107,6 +139,33 @@ const UserProfile = () => {
                     <div className="user-cart">
                         {user && <CartPage cart={cart} setCart={setCart} />}
                     </div>
+                    <div className="user-orders">
+                    <h3>Ваші Замовлення</h3>
+                    {loadingOrders ? <p>Loading orders...</p> : null}
+                    {errorOrders ? <p>Error loading orders: {errorOrders}</p> : null}
+                    {orders.length > 0 ? (
+    orders.map((order) => (
+    <div key={order.created_at} className='order-item'>
+        {/* <p>Order ID: {order.id}</p> */}
+        {/* <p>Total Price: {order.total_price}</p> */}
+        <p>Дата Замовлення: {new Date(order.created_at).toLocaleString()}</p>
+        <div className='line-items'>
+        {order.line_items && order.line_items.map((item, index) => (
+    <div key={`${order.id}-${item.product_info.id}-${index}`} className='order-product-item'>
+                <p>{item.product_info.title}</p>
+                <p>{item.product_info.description}</p>
+                <p>Кількість: {item.quantity}</p>
+                <p>Ціна: {item.price}</p>
+                {/* <img src={item.product_info.images ? item.product_info.images[0] || defaultImage : defaultImage} alt={item.product_info.title} className="cart-item-image" /> */}
+            </div>
+        ))}
+        </div>
+    </div>
+    ))
+) : (
+    <p>No orders found.</p>
+)}
+                </div>
                 </div>
 
                 <div className="user-setting">

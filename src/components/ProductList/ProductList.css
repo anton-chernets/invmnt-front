@@ -73,6 +73,7 @@
     flex-direction: column;
     }
 .product-item-list {
+    position: relative;
     border: 1px solid #ccc;
     border-radius: 10px;
     background-color: white;
@@ -150,13 +151,19 @@
     margin-left: 0;
 }
 .product-but {
+    display: flex;
     align-self: flex-end;
     margin-top: auto;
     margin-top: 10px;
     margin-right: 10px;
+    flex-direction: row;
+    align-items: center;
     
 }
 
+.quantity {
+    margin-right: 5px;
+}
 .form-manager {
     display: flex;
     justify-content: space-between;
@@ -233,6 +240,7 @@
     .custom-btn {
         align-items: center;
         width: 80%;
+
         /* margin: 10px auto; */
         
     }
@@ -245,7 +253,7 @@
     .product-but {
         display: flex;
         flex-direction: row;
-        width: 97%;
+        width: 80%;
         justify-content: center;
 
     }
