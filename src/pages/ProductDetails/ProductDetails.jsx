@@ -7,20 +7,23 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faShoppingCart } from '@fortawesome/free-solid-svg-icons';
 
 function ProductDetails() {
-  const { productId } = useParams();
-  const [product, setProduct] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
-  const navigate = useNavigate();
-  const { user } = useContext(AuthContext); // Use AuthContext
-  const isUser = user && user.role === 'customer';
-  const token = localStorage.getItem('authToken'); // Retrieve the authToken from localStorage
-  const [showCart, setShowCart] = useState(false);
+    const [quantities, setQuantities] = useState({});
+    const { productId } = useParams();
+    const [product, setProduct] = useState(null);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
+    const navigate = useNavigate();
+    const { user } = useContext(AuthContext);
+    const isUser = user && user.role === 'customer';
+    const token = localStorage.getItem('authToken');
+    const [showCart, setShowCart] = useState(false);
 
-  const [cart, setCart] = useState(() => {
-    const savedCart = localStorage.getItem('cart');
-    return savedCart ? JSON.parse(savedCart) : [];
-  });
+    const [cart, setCart] = useState(() => {
+        const savedCart = localStorage.getItem('cart');
+        return savedCart ? JSON.parse(savedCart) : [];
+    });
+  
+
 
     useEffect(() => {
         const fetchProduct = async () => {
@@ -30,7 +33,7 @@ function ProductDetails() {
               throw new Error(`HTTP error! Status: ${response.status}`);
             }
             const data = await response.json();
-            setProduct(data.data); // Assuming the API response has a 'data' field which contains the product details
+            setProduct(data.data);
           } catch (error) {
             setError(error.message);
           } finally {
@@ -42,29 +45,28 @@ function ProductDetails() {
       }, [productId]);
 
     const goBack = () => {
-        navigate(-1); // Перенаправлення назад
+        navigate(-1);
     };
 
     const onAddToCart = (product) => {
-        
         setCart(currentCart => {
-        const productIndex = currentCart.findIndex(item => item.id === product.id);
-        let newCart;
+            const productIndex = currentCart.findIndex(item => item.id === product.id);
+            const quantityToAdd = quantities[product.id] || 1; 
+    
+            let newCart;
+            if (productIndex !== -1) {
+                newCart = currentCart.map((item, index) =>
+                    index === productIndex ? { ...item, quantity: item.quantity + quantityToAdd } : item
+                );
+            } else {
+                newCart = [...currentCart, { ...product, quantity: quantityToAdd }];
+            }
+    
+            localStorage.setItem('cart', JSON.stringify(newCart));
+            return newCart;
+        });
+    };
 
-        if (productIndex !== -1) {
-            // Product already in cart, update the quantity
-            newCart = currentCart.map((item, index) =>
-                index === productIndex ? { ...item, quantity: item.quantity + 1 } : item
-            );
-        } else {
-            // Product not in cart, add as a new item
-            newCart = [...currentCart, { ...product, quantity: 1 }];
-        }
-
-        localStorage.setItem('cart', JSON.stringify(newCart)); // Update localStorage with the new cart
-        return newCart;
-    });
-};
 
 const handleAddToCartClick = (product) => {
     if (!user) {
@@ -76,21 +78,20 @@ const handleAddToCartClick = (product) => {
 
   const handleBuyNowClick = (product) => {
     if (!user) {
-        // Якщо користувач не залогінений, перенаправляємо на сторінку логіну
-        navigate('/login');
+      navigate('/login');
     } else {
-        onBuyNow(product);
+      const quantityToBuy = quantities[product.id] || 1;
+      onBuyNow(product, quantityToBuy);
     }
-};
-async function onBuyNow(product) {
-
+  };
+  async function onBuyNow(product, quantity) {
     const orderDetails = {
-        products: [
-            {
-                id: product.id,
-                quantity: 1,
-            },
-        ],
+      products: [
+        {
+          id: product.id,
+          quantity: quantity,
+        },
+      ],
     };
 
     try {
@@ -98,7 +99,7 @@ async function onBuyNow(product) {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
-                'Authorization': `Bearer ${token}`, // Make sure the token is accessible here
+                'Authorization': `Bearer ${token}`,
             },
             body: JSON.stringify(orderDetails),
         });
@@ -117,12 +118,10 @@ async function onBuyNow(product) {
     }
 }
 
-    // Conditional rendering based on the loading state
     if (loading) return <p>Loading...</p>;
     if (error) return <p>Error: {error}</p>;
     if (!product) return <p>Product not found</p>;
 
-    // Assuming your API returns an object and not an array for a single product
     const productDetails = product;
 
     return (
@@ -133,19 +132,6 @@ async function onBuyNow(product) {
                         <span><FontAwesomeIcon icon={faShoppingCart} className="icon-spacing" /> Кошик</span>
                         </button>
                         {showCart && isUser && <CartPage cart={cart} setCart={setCart} />}
-                        {/* {showCart && (
-                            <div className="cart-details">
-                                {cart.length > 0 ? (
-                                    <ul>
-                                        {cart.map(item => (
-                                            <li key={item.id}>{item.title} - Кількість: {item.quantity}</li>
-                                        ))}
-                                    </ul>
-                                ) : (
-                                    <p>Your cart is empty.</p>
-                                )}
-                            </div>
-                        )} */}
                     </>
                 )}
         <div className="product-details">        
@@ -158,12 +144,34 @@ async function onBuyNow(product) {
                 
                 {isUser && (
                     <>
+                    <div className='quantity'>
+                            <label htmlFor={`quantity-${product.id}`}>Кількість:</label>
+                            <input
+                                type="number"
+                                id={`quantity-${product.id}`}
+                                value={quantities[product.id] || 1}
+                                onChange={(e) => setQuantities({ ...quantities, [product.id]: Math.max(1, parseInt(e.target.value, 10)) })}
+                                min="1"
+                                style={{ width: '60px' }}
+                            />
+                        </div>
                         <button className="custom-btn btn-7" onClick={() => onAddToCart(product)}><span>У кошик</span></button>
                         <button className="custom-btn btn-7" onClick={() => handleBuyNowClick(product)}><span>Придбати</span></button>
                     </>
                 )}
                 {!user && (
                     <>
+                    <div className='quantity'>
+                            <label htmlFor={`quantity-${product.id}`}>Кількість:</label>
+                            <input
+                                type="number"
+                                id={`quantity-${product.id}`}
+                                value={quantities[product.id] || 1}
+                                onChange={(e) => setQuantities({ ...quantities, [product.id]: Math.max(1, parseInt(e.target.value, 10)) })}
+                                min="1"
+                                style={{ width: '60px' }}
+                            />
+                        </div>
                         <button className="custom-btn btn-7" onClick={() => handleAddToCartClick(product)}><span>У кошик</span></button>
                         <button className="custom-btn btn-7" onClick={() => handleBuyNowClick(product)}><span>Придбати</span></button>
                     </>

@@ -18,7 +18,9 @@
   flex-direction: row;
   justify-content: center;
   width: 80%;
+  align-items: center;
 }
+
 .details-wrap {
   width: 100%;
   max-width: 1400px;

@@ -121,11 +121,9 @@ const UserProfile = () => {
         return savedCart ? JSON.parse(savedCart) : [];
     });
 
-    // if (loading) return <div>Loading...</div>;
-    // if (error) return <div>Error: {error}</div>;
-    // if (!user) return <div>No user data available</div>;
-    if (userLoading) return <div>Loading...</div>; // Replace `loading` with `userLoading`
-    if (userError) return <div>Error: {userError}</div>; // Replace `error` with `userError`
+    
+    if (userLoading) return <div>Loading...</div>;
+    if (userError) return <div>Error: {userError}</div>;
 
 
     return (
@@ -144,21 +142,18 @@ const UserProfile = () => {
                     {loadingOrders ? <p>Loading orders...</p> : null}
                     {errorOrders ? <p>Error loading orders: {errorOrders}</p> : null}
                     {orders.length > 0 ? (
-    orders.map((order) => (
-    <div key={order.created_at} className='order-item'>
-        {/* <p>Order ID: {order.id}</p> */}
-        {/* <p>Total Price: {order.total_price}</p> */}
-        <p>Дата Замовлення: {new Date(order.created_at).toLocaleString()}</p>
-        <div className='line-items'>
-        {order.line_items && order.line_items.map((item, index) => (
-    <div key={`${order.id}-${item.product_info.id}-${index}`} className='order-product-item'>
-                <p>{item.product_info.title}</p>
-                <p>{item.product_info.description}</p>
-                <p>Кількість: {item.quantity}</p>
-                <p>Ціна: {item.price}</p>
-                {/* <img src={item.product_info.images ? item.product_info.images[0] || defaultImage : defaultImage} alt={item.product_info.title} className="cart-item-image" /> */}
-            </div>
-        ))}
+                    orders.map((order) => (
+                    <div key={order.created_at} className='order-item'>
+                        <p>Дата Замовлення: {new Date(order.created_at).toLocaleString()}</p>
+                        <div className='line-items'>
+                        {order.line_items && order.line_items.map((item, index) => (
+                    <div key={`${order.id}-${item.product_info.id}-${index}`} className='order-product-item'>
+                        <p>{item.product_info.title}</p>
+                        <p>{item.product_info.description}</p>
+                        <p>Кількість: {item.quantity}</p>
+                        <p>Ціна: {item.price}</p>
+                    </div>
+                ))}
         </div>
     </div>
     ))
@@ -181,7 +176,7 @@ const UserProfile = () => {
                         <label htmlFor="newPassword">Новий Пароль:</label>
                     <input
                         id="newPassword"
-                        type={showPassword ? "text" : "password"} // Тип поля изменяется в зависимости от showPassword
+                        type={showPassword ? "text" : "password"}
                         value={newPassword}
                         onChange={handlePasswordChange}
                     />
@@ -190,7 +185,7 @@ const UserProfile = () => {
                             id="showPassword"
                             type="checkbox"
                             checked={showPassword}
-                            onChange={togglePasswordVisibility} // Переключатель видимости пароля
+                            onChange={togglePasswordVisibility}
                         />
                         <label htmlFor="showPassword">Показати пароль</label>
                         </div>

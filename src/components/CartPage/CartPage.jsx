@@ -6,7 +6,6 @@ import { useNavigate } from 'react-router-dom';
 
 
 
-
 const CartPage = ({ cart = [], setCart }) => {
     const token = localStorage.getItem('authToken');
     const { user } = useContext(AuthContext);
@@ -24,26 +23,26 @@ const CartPage = ({ cart = [], setCart }) => {
         if (window.confirm('Ви впевнені, що хочете видалити товар?')) {
             const updatedCart = cart.filter(product => product.id !== productId);
             setCart(updatedCart);
-            localStorage.setItem('cart', JSON.stringify(updatedCart)); // Save the updated cart to localStorage
+            localStorage.setItem('cart', JSON.stringify(updatedCart));
         }
     };
 
-    const handleBuyNowClick = () => {
+    const handleBuyNowClick = async () => {
         if (!user) {
             navigate('/login');
         } else {
-            onBuyNow();
+            await onBuyNow();
         }
     };
-
+    
     async function onBuyNow() {
         const orderDetails = {
-            products: cart.map(({ id, quantity }) => ({
-                id,
-                quantity,
+            products: cart.map(item => ({
+                id: item.id,
+                quantity: item.quantity,
             })),
         };
-
+    
         try {
             const response = await fetch('https://apinvmnt.site/api/checkout', {
                 method: 'POST',
@@ -53,22 +52,22 @@ const CartPage = ({ cart = [], setCart }) => {
                 },
                 body: JSON.stringify(orderDetails),
             });
-
+    
             if (!response.ok) {
                 throw new Error(`HTTP error! Status: ${response.status}`);
             }
-
+    
             const data = await response.json();
-
             console.log('Order created successfully:', data);
             alert('Thank you for your purchase!');
-            setCart([]); // Clear cart after purchase
-            localStorage.removeItem('cart'); // Clear cart in localStorage
+            setCart([]); 
+            localStorage.removeItem('cart'); 
         } catch (error) {
             console.error('Checkout failed:', error);
             alert('An error occurred during checkout. Please try again.');
         }
     }
+    
 
     return (
         <div className="cart-page">
