@@ -25,13 +25,13 @@ const SearchResults = () => {
                         title={result.title}
                         description={result.description}
                         imageUrl={result.imageUrl}
-                        showImage={false} // Set this to false to hide the image
+                        showImage={false}
                     />
                 ))
             ) : (
                 <div className="search-results-no-results">
                     Немає результатів для відображення.
-                <button onClick={goBack} className="custom-btn btn-7"><span>Назад</span></button>
+                {/* <button onClick={goBack} className="custom-btn btn-7"><span>Назад</span></button> */}
                 </div>
                 
             )}
