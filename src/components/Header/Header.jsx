@@ -11,17 +11,23 @@ const useFetchSearchResults = (query, setResults) => {
         if (query.length > 2) {
             (async () => {
                 try {
-                    const response = await fetch(`/api/search?q=${encodeURIComponent(query)}`);
+                    // Update the endpoint to match the provided API documentation
+                    const response = await fetch(`https://apinvmnt.site/api/articles/search?needle=${encodeURIComponent(query)}`);
                     if (!response.ok) {
                         throw new Error('Network response was not ok');
                     }
                     const data = await response.json();
-                    setResults(data.length ? data : 'No results found.');
+                    // Check if the data has a 'data' field and it's an array, otherwise set as an empty array
+                    setResults(Array.isArray(data.data) ? data.data : []);
                 } catch (error) {
                     console.error('Error fetching data:', error);
-                    setResults('Error during fetch.');
+                    // Use an empty array to represent an error state
+                    setResults([]);
                 }
             })();
+        } else {
+            // If the query is too short, reset the results
+            setResults([]);
         }
     }, [query, setResults]);
 };

@@ -11,10 +11,11 @@
 }
 
 .search-results-title {
-    margin: 0 auto auto;
+    margin: 0 auto;
     color: #333;
     font-size: 24px;
 }
+
 
 .search-results-list {
     list-style: none;
@@ -40,3 +41,27 @@
 .search-results-list-item-title:hover {
     text-decoration: underline;
 }
+
+
+/* You can also directly target the news items here */
+.search-results-container .news-item {
+    /* Update individual news item styles */
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 15px;
+    margin-bottom: 15px;
+    min-height: 0;
+}
+
+.search-results-container .news-item h3 {
+    /* Update title styles in the news item */
+    color: #007bff;
+    font-size: 25px;
+}
+
+.search-results-container .news-item .content {
+    /* Update content styles in the news item */
+    color: #666;
+    font-size: 0.9rem;
+}
+
+/* Add more styles as needed */

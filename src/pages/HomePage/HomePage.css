@@ -36,9 +36,9 @@
 } */
 .site-wrapper {
     width: 100%;
-    min-height: 100vh; /* This makes sure that the wrapper stretches to at least the full height of the viewport */
+    min-height: 100vh; 
     box-shadow: 0 0 10px rgba(to top 247, 45, 45, 0.5); /* Adjust the color and spread as needed */
-    margin: auto; /* This will not be visible due to the shadow but it's good practice */
+    /* margin: auto; */
     position: relative; 
     z-index: 1;
 }
