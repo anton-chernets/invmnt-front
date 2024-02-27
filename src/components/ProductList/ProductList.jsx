@@ -23,7 +23,7 @@ const ProductList = () => {
     
     return savedCart ? JSON.parse(savedCart) : [];
     });
-    const [clickedProductId, setClickedProductId] = useState(null);
+    
 
     const [quantities, setQuantities] = useState({});
     
@@ -47,9 +47,7 @@ const ProductList = () => {
         localStorage.setItem('cart', JSON.stringify(cart));
     }, [cart]);
 
-    const handleImageClick = (productId) => {
-        setClickedProductId(clickedProductId === productId ? null : productId);
-    };
+    
 
     const onAddToCart = (product) => {
         setCart(currentCart => {
@@ -224,19 +222,15 @@ const ProductList = () => {
             <div className="products-container">
                 {products.map(product => (
                     <div key={product.id} className="product-item-list">
-                        <div>
+                        <div className='img-dis'>
                         <Link to={`/products/show/${product.id}`} style={{  textDecoration: 'none' }}>
+                                <img src={product.images[0] || defaultImage} alt={product.title}
+                                    className={`product-img`} />
+                            
+                            
                             <h3>{product.title}</h3>
                         </Link>
-                        </div>
-                        <div className='img-dis'>
-                        <button className="image-button" aria-label="Expand Image" onClick={() => handleImageClick(product.id)} style={{ background: 'none', border: 'none', padding: 0 }}>
-                                <img src={product.images[0] || defaultImage} alt={product.title}
-                                    className={`product-img ${clickedProductId === product.id ? "clicked" : ""}`} />
-                            </button>
-                            
-                        <p>{product.description}</p>
-                        </div>
+                        </div><p>{product.description}</p>
                         <p>Ціна: ${product.price}</p>
                         <div className='product-but'>
                             {isAdmin && (
