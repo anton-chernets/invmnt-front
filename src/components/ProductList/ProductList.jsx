@@ -224,9 +224,11 @@ const ProductList = () => {
             <div className="products-container">
                 {products.map(product => (
                     <div key={product.id} className="product-item-list">
+                        <div>
                         <Link to={`/products/show/${product.id}`} style={{  textDecoration: 'none' }}>
                             <h3>{product.title}</h3>
                         </Link>
+                        </div>
                         <div className='img-dis'>
                         <button className="image-button" aria-label="Expand Image" onClick={() => handleImageClick(product.id)} style={{ background: 'none', border: 'none', padding: 0 }}>
                                 <img src={product.images[0] || defaultImage} alt={product.title}
@@ -340,6 +342,7 @@ const ProductList = () => {
                 ))}
             </div>
         </div>
+        
     );
                         
                         
