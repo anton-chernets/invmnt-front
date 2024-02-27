@@ -4,13 +4,14 @@ import './SearchResult.css'
 
 const SearchResults = ({ results }) => {
     const navigate = useNavigate();
-
-    if (!results || results.length === 0) {
-        return <div className="loading">Немає результатів пошуку.</div>;
-    }
-    
     const goHome = () => {
         navigate('/');
+    };
+    if (!results || results.length === 0) {
+        return (
+        <div className="search-results">Немає результатів пошуку.
+        <button onClick={goHome} className="custom-btn btn-7"><span>Назад</span></button>
+        </div>);
     };
     
     return (
