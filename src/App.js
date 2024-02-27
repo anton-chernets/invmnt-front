@@ -12,15 +12,16 @@ import LoginForm from './components/LoginForm/LoginForm';
 import RegisterForm from './components/RegisterForm/RegisterForm';
 import UserProfile from "./pages/UserProfile/UserProfile";
 import ProductDetails from './pages/ProductDetails/ProductDetails';
-import NewsDetails from './pages/NewsDetails/NewsDetails';
+import ArticleDetails from './pages/ArticleDetails/ArticleDetails';
 import Checkout from './components/Checkout/Checkout';
 import CartPage from "./components/CartPage/CartPage";
 import PasswordReset from "./components/PasswordReset/PasswordReset";
-import SearchResults from "./components/SearchResaults/SearchResults";
 import {AuthProvider} from "./components/AuthContext/AuthContext";
 import SuccessPage from "./pages/SuccessPage/SuccessPage";
 import ProductList from "./components/ProductList/ProductList";
 import { ThemeProvider } from './components/ThemeContext/ThemeContext';
+import SearchResultsPage from './components/SearchResultsPage/SearchResultsPage';
+
 import './App.css';
 
 
@@ -90,12 +91,14 @@ function App() {
                         <Route path="/register" element={<RegisterForm/>}/>
                         <Route path="/user" element={<UserProfile/>}/>
                         <Route path="/products" element={<ProductList />} />
+                        <Route path="/search/articles/show/:articleId" element={<ArticleDetails />} />
+                        <Route path="/search/products/show/:productId" element={<ProductDetails />} />
+                        <Route path="/articles/show/:articleId" element={<ArticleDetails />} />
                         <Route path="/products/show/:productId" element={<ProductDetails />} />
-                        <Route path="/news/:newsId" element={<NewsDetails/>}/>
                         <Route path="/checkout" element={<Checkout/>}/>
                         <Route path="/cart" element={<CartPage/>}/>
                         <Route path="/passwordreset" element={<PasswordReset/>}/>
-                        <Route path="/search" element={<SearchResults/>}/>
+                        <Route path="/search" element={<SearchResultsPage />} />
                         <Route path="/success" element={<SuccessPage />} />
                     </Routes>
                 

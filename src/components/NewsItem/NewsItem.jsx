@@ -24,7 +24,7 @@ const NewsItem = ({ id, title, description, imageUrl, showImage = true }) => {
 
     return (
         <div className={`news-item ${isExpanded ? 'expanded' : ''}`}>
-            <Link to={`/news/${id}`} style={{ textDecoration: 'none' }}>
+            <Link to={`/articles/show/${id}`} style={{ textDecoration: 'none' }}>
                 <h3>{title}</h3>
                 {showImage && (
                     <img src={imageUrl || defaultImage} alt={title || 'Default'} className="news-image" />

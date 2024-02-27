@@ -1,4 +1,4 @@
-import React from "react";
+import React, {} from 'react';
 import './HomePage.css';
 import NewsFeed from '../../components/NewsFeed/NewsFeed';
 import ScrollToTopButton from "../../components/ScrollToTopButton/ScrollToTopButton";
@@ -8,7 +8,10 @@ import Sidebar from "../../components/Sidebar/Sidebar";
 
 
 
+
 const HomePage = () => {
+    
+    
     return (
         <div className="site-wrapper">
             <div className="background-image-container"></div> {/* Background image container */}

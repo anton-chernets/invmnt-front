@@ -1,4 +1,4 @@
-.search-results-container {
+.search-results {
     max-width: 1400px;
     margin: 20px auto 100px;
     display: flex;
@@ -10,10 +10,8 @@
     padding: 20px;
 }
 
-.search-results-title {
-    margin: 0 auto;
-    color: #333;
-    font-size: 24px;
+.search-results {
+    font-size: 30px;
 }
 
 

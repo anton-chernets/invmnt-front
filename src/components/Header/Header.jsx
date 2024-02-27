@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from 'react';
+import React, { useState, useContext } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import './Header.css';
 import logoImage from '../../img/Untitled.png';
@@ -6,49 +6,32 @@ import { AuthContext } from "../AuthContext/AuthContext";
 import Ticker from "../Ticker/Ticker";
 
 
-const useFetchSearchResults = (query, setResults) => {
-    useEffect(() => {
-        if (query.length > 2) {
-            (async () => {
-                try {
-                    // Update the endpoint to match the provided API documentation
-                    const response = await fetch(`https://apinvmnt.site/api/articles/search?needle=${encodeURIComponent(query)}`);
-                    if (!response.ok) {
-                        throw new Error('Network response was not ok');
-                    }
-                    const data = await response.json();
-                    // Check if the data has a 'data' field and it's an array, otherwise set as an empty array
-                    setResults(Array.isArray(data.data) ? data.data : []);
-                } catch (error) {
-                    console.error('Error fetching data:', error);
-                    // Use an empty array to represent an error state
-                    setResults([]);
-                }
-            })();
-        } else {
-            // If the query is too short, reset the results
-            setResults([]);
-        }
-    }, [query, setResults]);
-};
-
-const Header = () => {
+const Header = ( ) => {
     const navigate = useNavigate();
     const location = useLocation();
     const { isAuthenticated, setIsAuthenticated, isAdmin, isUser } = useContext(AuthContext);
     const [isMenuOpen, setIsMenuOpen] = useState(false);
-    const [query, setQuery] = useState('');
-    const [searchResults, setSearchResults] = useState([]);
+    
+    
     const [isLoadingRates] = useState(false);
-    const [isSearching, setIsSearching] = useState(false);
+    
     const [isLoading] = useState(false);
     const [error] = useState(null);
-    useFetchSearchResults(query, setSearchResults, setIsSearching);
+    
+    const [query, setQuery] = useState('');
+    // const [searchResults, setSearchResults] = useState([]);
+    const [isSearching] = useState(false);
 
     const handleSearchChange = (e) => {
-        const newQuery = e.target.value;
-        setQuery(newQuery);
+        setQuery(e.target.value);
     };
+    
+
+    const handleSearchSubmit = (e) => {
+        e.preventDefault();
+        navigate(`/search?needle=${encodeURIComponent(query)}`);
+      };
+    
 
     const toggleMenu = () => {
         setIsMenuOpen(!isMenuOpen);
@@ -81,10 +64,6 @@ const Header = () => {
     const goToAdmin = () => {
         navigate('/admin');
     }
-    const handleSearchSubmit = (event) => {
-        event.preventDefault();
-        navigate('/search', { state: { query, searchResults } });
-    };
 
     return (
         <header className="header">
@@ -120,9 +99,8 @@ const Header = () => {
                             placeholder="Пошук..."
                             className="search-input"
                         />
-                        {/* className="search-button" */}
                         <button type="submit" className="custom-btn btn-7">
-                        <span><i className="fas fa-search"></i></span>
+                            <span><i className="fas fa-search"></i></span>
                         </button>
                     </form>
                     <div className='header-controls'>
