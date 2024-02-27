@@ -31,12 +31,6 @@
         <priority>0.2</priority>
     </url>
     <url>
-        <loc>https://invmnt.site/news/</loc>
-        <lastmod>2024-01-01</lastmod>
-        <changefreq>monthly</changefreq>
-        <priority>0.7</priority>
-    </url>
-    <url>
         <loc>https://invmnt.site/search</loc>
         <lastmod>2024-01-01</lastmod>
         <changefreq>monthly</changefreq>
