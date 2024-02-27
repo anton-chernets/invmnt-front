@@ -50,13 +50,30 @@
 .add-product-form .add-button:hover {
     background-color: #4cae4c;
 }
-
-/* ProductList component specific styles if needed */
-.product-list {
-    /* ... */
+.editen-prod {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+}
+.edit-product-form {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    max-width: 1400px;
+    /* padding: 20px; */
+    background-color: white;
+    margin-bottom: 10px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    height: 150px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+.edit-product-form input{
+    margin-left: 20px;
+    padding: 10px;
 }
 
-/* Product item styles */
 .product-item {
     background: white;
     padding: 15px;

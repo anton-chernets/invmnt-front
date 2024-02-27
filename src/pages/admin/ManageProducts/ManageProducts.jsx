@@ -6,6 +6,11 @@ import ProductList from "../../../components/ProductList/ProductList";
 
 const ManageProducts = () => {
     const [products, setProducts] = useState([]);
+    const [editingProductId, setEditingProductId] = useState(null);
+
+// const startEditing = (productId) => {
+//     setEditingProductId(productId);
+// };
 
     const [newProduct, setNewProduct] = useState({
         title: '',
@@ -37,6 +42,34 @@ const ManageProducts = () => {
 
         fetchProducts();
     }, []);
+
+    const saveProductChanges = async (updatedProduct) => {
+        try {
+            const response = await fetch(`https://apinvmnt.site/api/products/update/${updatedProduct.id}`, {
+                method: 'POST', // Or 'PUT' if your API requires it for updates
+                headers: {
+                    'Authorization': `Bearer ${token}`,
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    title: updatedProduct.title,
+                    description: updatedProduct.description,
+                    price: updatedProduct.price,
+                    stock: updatedProduct.stock
+                }),
+            });
+    
+            if (!response.ok) {
+                throw new Error(`HTTP error! Status: ${response.status}`);
+            }
+    
+            const result = await response.json();
+            setProducts(prevProducts => prevProducts.map(p => p.id === result.data.id ? result.data : p));
+            setEditingProductId(null); // Reset editing state
+        } catch (error) {
+            console.error('Error updating product:', error);
+        }
+    };
 
     const handleAddProduct = async (productData) => {
         const payload = {
@@ -84,6 +117,29 @@ const ManageProducts = () => {
         const { name, value } = e.target;
         setNewProduct({ ...newProduct, [name]: name === 'price' || name === 'stock' ? parseFloat(value) : value });
     };
+    const handleDeleteProduct = async (productId) => {
+        if (!window.confirm('Are you sure you want to delete this product?')) return;
+    
+        try {
+            const response = await fetch(`https://apinvmnt.site/api/products/remove`, {
+                method: 'DELETE',
+                headers: {
+                    'Authorization': `Bearer ${token}`,
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ id: productId }),
+            });
+    
+            if (!response.ok) {
+                const errorData = await response.json();
+                throw new Error(errorData.message || 'Failed to delete product');
+            }
+    
+            setProducts(prevProducts => prevProducts.filter(p => p.id !== productId));
+        } catch (error) {
+            console.error('Error deleting product:', error);
+        }
+    };
 
     const handleSubmit = (e) => {
 
@@ -99,7 +155,30 @@ const ManageProducts = () => {
         });
     };
 
+    const EditProductForm = ({ product, onSave }) => {
+        const [formData, setFormData] = useState(product);
 
+        const handleChange = (e) => {
+            const { name, value } = e.target;
+            setFormData({ ...formData, [name]: value });
+        };
+
+        const handleSubmit = (e) => {
+            e.preventDefault();
+            onSave(formData);
+        };
+
+        return (
+            <form onSubmit={handleSubmit} className="edit-product-form">
+                <input name="title" value={formData.title} onChange={handleChange} placeholder="Назва" />
+                <textarea name="description" value={formData.description} onChange={handleChange} placeholder="Опис" />
+                <input name="price" type="number" value={formData.price} onChange={handleChange} placeholder="Ціна" />
+                <input name="stock" type="number" value={formData.stock} onChange={handleChange} placeholder="Кількість на складі" />
+                <button type="submit"className="custom-btn btn-7"><span>Зберегти зміни</span></button>
+            </form>
+        );
+    };
+    
 
     return (
         <div className="manage-products">
@@ -136,17 +215,23 @@ const ManageProducts = () => {
                     onChange={handleInputChange}
                     required
                 />
-                {/*<input*/}
-                {/*    name="imageUrl"*/}
-                {/*    type="text"*/}
-                {/*    placeholder="URL зображення товару"*/}
-                {/*    value={newProduct.imageUrl || ''}*/}
-                {/*    onChange={handleInputChange}*/}
-                {/*    required*/}
-                {/*/>*/}
                 <button type="submit" className="custom-btn btn-7"><span>Додати товар</span></button>
             </form>
+            <div className='editen-prod'>
+            {products.map((product) => (
+                editingProductId === product.id ? (
+                    <EditProductForm key={product.id} product={product} onSave={saveProductChanges} />
+                ) : (
+                    // Render product item with an edit button
+                    <div key={product.id} className="product-item">
+                        <h3>{product.title}</h3>
+                        {/* Other product details */}
+                        <button onClick={() => setEditingProductId(product.id)}className="custom-btn btn-7"><span>Редагувати</span></button>
+                        <button onClick={() => handleDeleteProduct(product.id)}className="custom-btn btn-7"><span>Delete</span></button>
 
+                    </div>
+                )
+            ))}</div>
             <ProductList products={products}/>
             {/*<ProductList/>*/}
         </div>
