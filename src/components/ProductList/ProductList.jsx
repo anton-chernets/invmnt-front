@@ -48,6 +48,8 @@ const ProductList = () => {
     }, [cart]);
 
     
+    
+
 
     const onAddToCart = (product) => {
         setCart(currentCart => {

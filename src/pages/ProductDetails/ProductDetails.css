@@ -46,6 +46,10 @@
     margin-bottom: 20px;
     color: #333;
 }
+.product-details img {
+  width: 100%;
+  
+}
 
 /* Стилі для повідомлення про завантаження */
 .loading-message {

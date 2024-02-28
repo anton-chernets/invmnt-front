@@ -8,19 +8,14 @@ const ManageProducts = () => {
     const [products, setProducts] = useState([]);
     const [editingProductId, setEditingProductId] = useState(null);
 
-// const startEditing = (productId) => {
-//     setEditingProductId(productId);
-// };
-
     const [newProduct, setNewProduct] = useState({
         title: '',
         description: '',
         price: 0,
-        stock: 0, // Added stock field
-        // image: null, // Uncomment if you need to handle image upload
-        // imageUrl: '' // Uncomment if you need to handle imageUrl
+        stock: 0,
+        image: null, // For image file
     });
-    const token = localStorage.getItem('authToken'); // Assuming you store the token in localStorage
+    const token = localStorage.getItem('authToken');
 
     useEffect(() => {
         const fetchProducts = async () => {
@@ -30,16 +25,14 @@ const ManageProducts = () => {
                     throw new Error(`Failed to fetch products: ${response.status}`);
                 }
                 const data = await response.json();
-                // Assuming the data is in an array format inside a 'data' property
                 if (!data || !data.data || !Array.isArray(data.data)) {
                     throw new Error('Fetched data is not in expected format');
                 }
-                setProducts(data.data); // If the array is within a 'data' property
+                setProducts(data.data);
             } catch (error) {
                 console.error('Error loading products:', error);
             }
         };
-
         fetchProducts();
     }, []);
 
@@ -71,52 +64,92 @@ const ManageProducts = () => {
         }
     };
 
-    const handleAddProduct = async (productData) => {
-        const payload = {
+
+    const handleAddProduct = async (productData, file) => {
+        // First, create the product and get the product ID from the response
+        const productPayload = {
             title: productData.title,
             description: productData.description,
             stock: productData.stock,
             price: productData.price,
         };
-
+    
         try {
-            const response = await fetch('https://apinvmnt.site/api/products/store', {
+            const productResponse = await fetch('https://apinvmnt.site/api/products/store', {
                 method: 'POST',
                 headers: {
                     'Authorization': `Bearer ${token}`,
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify(payload),
+                body: JSON.stringify(productPayload),
             });
-
-            if (!response.ok) {
-                const text = await response.text();
-                console.error('Response Text:', text);
-                throw new Error('Server responded with status: ' + response.status);
+    
+            if (!productResponse.ok) {
+                throw new Error('Product creation failed');
             }
-
-            const newProduct = await response.json();
-            setProducts(prevProducts => [...prevProducts, newProduct]); // Update the state with the new product
-
-            // Reset form fields after successful product addition
+    
+            const productData = await productResponse.json();
+            const productId = productData.data.id; // Assuming the product ID is in the 'id' field of the 'data' object
+    
+            // Then, if there's a file, upload it with the product ID
+            if (file && productId) {
+                const formData = new FormData();
+                formData.append('id', productId); // Use the product ID from the product creation response
+                formData.append('model', 'Product')
+                formData.append('files', file);
+    
+                const fileUploadResponse = await fetch('https://apinvmnt.site/api/files/upload', {
+                    method: 'POST',
+                    headers: {
+                        'Authorization': `Bearer ${token}`,
+                        // 'Content-Type' header is not needed with FormData
+                    },
+                    body: formData,
+                });
+    
+                if (!fileUploadResponse.ok) {
+                    throw new Error(`File upload failed with status: ${fileUploadResponse.status}`);
+                }
+    
+                const fileUploadData = await fileUploadResponse.json();
+                if (!fileUploadData.success) {
+                    throw new Error('File upload did not return success status');
+                }
+                // Handle the response, such as updating state or UI
+            }
+    
+            // Update the product list state with the new product
+            setProducts(prevProducts => [...prevProducts, productData.data]);
+    
+            // Reset the newProduct state to clear the form
             setNewProduct({
                 title: '',
                 description: '',
                 price: 0,
                 stock: 0,
+                image: null,
             });
-
+    
         } catch (error) {
-            console.error('Error adding product:', error);
-            alert('Error adding product: ' + error.message);
+            console.error('Error in product creation or file upload:', error);
         }
     };
 
-
     const handleInputChange = (e) => {
-        const { name, value } = e.target;
-        setNewProduct({ ...newProduct, [name]: name === 'price' || name === 'stock' ? parseFloat(value) : value });
+        const { name, value, type, files } = e.target;
+        if (type === 'file') {
+            setNewProduct({ ...newProduct, image: files[0] });
+        } else {
+            setNewProduct({ ...newProduct, [name]: name === 'price' || name === 'stock' ? parseFloat(value) : value });
+        }
     };
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        handleAddProduct(newProduct, newProduct.image);
+    };
+
+    
     const handleDeleteProduct = async (productId) => {
         if (!window.confirm('Are you sure you want to delete this product?')) return;
     
@@ -141,19 +174,7 @@ const ManageProducts = () => {
         }
     };
 
-    const handleSubmit = (e) => {
-
-        e.preventDefault();
-        handleAddProduct(newProduct).then(() => {
-            // Reset the form only if the product was added successfully
-            setNewProduct({
-                title: '',
-                description: '',
-                price: 0,
-                // image: null
-            });
-        });
-    };
+    
 
     const EditProductForm = ({ product, onSave }) => {
         const [formData, setFormData] = useState(product);
@@ -214,6 +235,12 @@ const ManageProducts = () => {
                     value={newProduct.stock || 0}
                     onChange={handleInputChange}
                     required
+                />
+                <input
+                    name="image"
+                    type="file"
+                    onChange={handleInputChange}
+                    // Remove the required attribute if the image is not mandatory for product creation
                 />
                 <button type="submit" className="custom-btn btn-7"><span>Додати товар</span></button>
             </form>
