@@ -43,7 +43,7 @@ const AdminDashboard = () => {
             
             // Додайте інші case для інших секцій
             default:
-                return <ManageProducts />;
+                return <ManageNews />;
         }
     };
 

@@ -1,214 +1,269 @@
 import React, { useState, useEffect } from 'react';
-import defaultImage from '../../../img/image_2024-02-07_10-47-09.png';
-
 
 const ManageNews = () => {
-    const [newsList, setNewsList] = useState([]);
-    const [editMode, setEditMode] = useState(false);
-    const [currentNews, setCurrentNews] = useState({ title: '', content: '', imageUrl: '' });
-    const [loading, setLoading] = useState(false);
-    const [, setError] = useState(null);
+    const [articles, setArticles] = useState([]);
+    const [editingArticleId, setEditingArticleId] = useState(null);
+
+    const [newArticles, setNewArticles] = useState({
+        title: '',
+        description: '',
+        // image: null, // For image file
+    });
+
     const token = localStorage.getItem('authToken');
 
     useEffect(() => {
-        const fetchNews = async () => {
-            setLoading(true);
-
+        const fetchArticles = async () => {
             try {
                 const response = await fetch('https://apinvmnt.site/api/articles');
                 if (!response.ok) {
-                    throw new Error(`HTTP error! Status: ${response.status}`);
+                    throw new Error(`Failed to fetch articles: ${response.status}`);
                 }
                 const data = await response.json();
-                if (data?.data && Array.isArray(data.data)) {
-                    setNewsList(data.data);
-                } else {
-                    setError(new Error('Field "data" is missing from the response'));
+                if (!data || !data.data || !Array.isArray(data.data)) {
+                    throw new Error('Fetched data is not in expected format');
                 }
+                setArticles(data.data);
             } catch (error) {
-                setError(error);
-            } finally {
-                setLoading(false);
+                console.error('Error loading products:', error);
             }
         };
-
-        fetchNews();
+        fetchArticles();
     }, []);
 
-    async function uploadImage(imageFile, articleId) {
-        if (!imageFile) {
-            return null;
-        }
-    
-        const formData = new FormData();
-        formData.append('files', imageFile);
-        formData.append('id', articleId); // Now using the provided article ID
-        formData.append('model', 'Article');
+
+    const handleAddArticles = async (articlesData, file) => {
+        const articlesPayload = {
+            title: articlesData.title,
+            description: articlesData.description,
+        };
     
         try {
-            const uploadResponse = await fetch('https://apinvmnt.site/api/files/upload', {
-                method: 'POST',
-                headers: {
-                    'Authorization': `Bearer ${token}`,
-                    // Do not set 'Content-Type': 'multipart/form-data'
-                },
-                body: formData,
-            });
-    
-            if (!uploadResponse.ok) {
-                throw new Error(`HTTP error! Status: ${uploadResponse.status}`);
-            }
-    
-            const responseBody = await uploadResponse.text();
-            try {
-                const responseJson = JSON.parse(responseBody);
-                console.log('Upload response:', responseJson);
-                return responseJson.data; // Make sure the API returns the image URL or ID in 'data'
-            } catch (jsonError) {
-                console.error('Response is not valid JSON:', responseBody);
-                throw jsonError;
-            }
-        } catch (error) {
-            console.error('Upload failed:', error);
-            throw error;
-        }
-    }
-
-
-
-
-    const handleAddNews = async (event) => {
-        event.preventDefault();
-        setLoading(true);
-        
-    
-        const { imageFile, ...newsData } = currentNews; // Destructure to separate imageFile from other news data
-        try {
-            const payload = {
-                title: newsData.title,
-                description: newsData.content,
-                // Assuming no need to send imageUrl or imageFile in the payload
-            };
-    
-            const response = await fetch('https://apinvmnt.site/api/articles/store', {
+            const articlesResponse = await fetch('https://apinvmnt.site/api/articles/store', {
                 method: 'POST',
                 headers: {
                     'Authorization': `Bearer ${token}`,
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify(payload),
+                body: JSON.stringify(articlesPayload),
+            });
+            if (!articlesResponse.ok) {
+                throw new Error('Article creation failed');
+            }
+            const articleData = await articlesResponse.json();
+            const articleId = articleData.data.id;
+
+            if (file && articleId) {
+                const formData = new FormData();
+                formData.append('id', articleId); // Use the product ID from the product creation response
+                formData.append('model', 'Article')
+                formData.append('files', file);
+    
+                const fileUploadResponse = await fetch('https://apinvmnt.site/api/files/upload', {
+                    method: 'POST',
+                    headers: {
+                        'Authorization': `Bearer ${token}`,
+                        // 'Content-Type' header is not needed with FormData
+                    },
+                    body: formData,
+                });
+    
+                if (!fileUploadResponse.ok) {
+                    throw new Error(`File upload failed with status: ${fileUploadResponse.status}`);
+                }
+    
+                const fileUploadData = await fileUploadResponse.json();
+                if (!fileUploadData.success) {
+                    throw new Error('File upload did not return success status');
+                }
+                // Handle the response, such as updating state or UI
+            }
+    
+            // Update the product list state with the new product
+            setArticles(prevArticles => [...prevArticles, articleData.data]);
+    
+            // Reset the newProduct state to clear the form
+            setNewArticles({
+                title: '',
+                description: '',
+                image: null,
             });
     
-            if (!response.ok) {
-                throw new Error(`HTTP error! Status: ${response.status}`);
-            }
-    
-            const responseData = await response.json();
-            const createdArticle = responseData.data;
-    
-            let imageUrl = null;
-            if (imageFile) {
-                const uploadedImage = await uploadImage(imageFile, createdArticle.id); // Now we pass the article ID
-                imageUrl = uploadedImage.url; // Make sure your API returns the image URL here
-            }
-    
-            setNewsList([...newsList, { ...createdArticle, imageUrl }]); // Add the new article with the image URL to the news list
-            setCurrentNews({ title: '', content: '', imageUrl: '', imageFile: null }); // Reset current news state
-    
         } catch (error) {
-            setError(error.message);
-        } finally {
-            setLoading(false);
+            console.error('Error in product creation or file upload:', error);
         }
     };
 
-
-
-    const handleEditNews = async (newsId) => {
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        handleAddArticles(newArticles, newArticles.image);
     };
 
-    const handleDeleteNews = async (newsId) => {
-        if (window.confirm('Ви впевнені, що хочете видалити статтю?')) {
+    const handleInputChange = (e) => {
+        const { name, value, type, files } = e.target;
+        if (type === 'file') {
+            setNewArticles({ ...newArticles, image: files[0] });
+        } else {
+            setNewArticles({ ...newArticles, [name]: name === 'price' || name === 'stock' ? parseFloat(value) : value });
+        }
+    };
+
+    const handleDeleteArticle = async (articleId) => {
         try {
             const response = await fetch(`https://apinvmnt.site/api/articles/remove`, {
                 method: 'DELETE',
                 headers: {
+                    'Authorization': `Bearer ${token}`,
                     'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${token}`
                 },
-                body: JSON.stringify({ id: newsId }),
+                body: JSON.stringify({ id: articleId }),
             });
+            if (!response.ok) {
+                throw new Error(`Failed to delete article: ${response.status}`);
+            }
+            // If delete is successful, filter out the deleted article from the articles state
+            setArticles(prevArticles => prevArticles.filter(article => article.id !== articleId));
+        } catch (error) {
+            console.error('Error deleting article:', error);
+        }
+    };
 
+    const EditArticleForm = ({ article, onSave }) => {
+        const [formData, setFormData] = useState({...article, image: null});
+    
+        const handleChange = (e) => {
+            const { name, value, type, files } = e.target;
+            if (type === 'file') {
+                setFormData({ ...formData, image: files[0] });
+            } else {
+                setFormData({ ...formData, [name]: value });
+            }
+        };
+    
+        const handleSubmit = (e) => {
+            e.preventDefault();
+            onSave(formData);
+        };
+
+        return (
+            <form onSubmit={handleSubmit} className="edit-product-form">
+                <input name="title" value={formData.title} onChange={handleChange} placeholder="Назва" />
+                <textarea name="description" value={formData.description} onChange={handleChange} placeholder="Опис" />
+                <input
+                name="image"
+                type="file"
+                onChange={handleChange}
+            />
+                <button type="submit"className="custom-btn btn-7"><span>Зберегти зміни</span></button>
+            </form>
+        );
+    };
+
+    const saveArticleChanges = async (updatedArticle) => {
+        try {
+            const response = await fetch(`https://apinvmnt.site/api/articles/update/${updatedArticle.id}`, {
+                method: 'POST', // Or 'PUT' if your API requires it for updates
+                headers: {
+                    'Authorization': `Bearer ${token}`,
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    title: updatedArticle.title,
+                    description: updatedArticle.description,
+                }),
+            });
+    
             if (!response.ok) {
                 throw new Error(`HTTP error! Status: ${response.status}`);
             }
-
+    
             const result = await response.json();
-            if (result.success) {
-                setNewsList(prevNewsList => prevNewsList.filter(news => news.id !== newsId));
-                console.log('News deleted successfully');
-            } else {
-                console.error('Failed to delete the news');
-            }
+            setArticles(prevArticles => prevArticles.map(p => p.id === result.data.id ? result.data : p));
+            setEditingArticleId(null);
         } catch (error) {
-            console.error('Error:', error);
+            console.error('Error updating product:', error);
         }
-    }
+        if (updatedArticle.image) {
+            // Similar to handleAddProduct, upload the image file here
+            const formData = new FormData();
+            formData.append('id', updatedArticle.id); // Assuming this is the product ID
+            formData.append('model', 'Article'); // Adjust based on your API
+            formData.append('files', updatedArticle.image);
+    
+            try {
+                const fileUploadResponse = await fetch('https://apinvmnt.site/api/files/upload', {
+                    method: 'POST',
+                    headers: {
+                        'Authorization': `Bearer ${token}`,
+                        // Content-Type is not needed for FormData
+                    },
+                    body: formData,
+                });
+    
+                if (!fileUploadResponse.ok) {
+                    throw new Error(`File upload failed with status: ${fileUploadResponse.status}`);
+                }
+    
+                const fileUploadData = await fileUploadResponse.json();
+                if (!fileUploadData.success) {
+                    throw new Error('File upload did not return success status');
+                }
+                // Optionally handle the response, such as updating the UI or state
+            } catch (error) {
+                console.error('Error uploading file:', error);
+            }
+        }
     };
 
-
-    if (loading) return <div>Loading...</div>;
-    
-
     return (
-        <div className="manage-news">
-
-            <form onSubmit={editMode ? () => handleEditNews(currentNews.id) : handleAddNews} className='form-manager'>
-                <h1>{editMode ? 'Edit News' : 'Add News'}</h1>
+        <div className="manage-products">
+            <form onSubmit={handleSubmit} className="add-product-form">
                 <input
+                    id="title"
+                    name="title"
                     type="text"
-                    placeholder="News Title"
-                    value={currentNews.title}
-                    onChange={(e) => setCurrentNews({...currentNews, title: e.target.value})}
+                    className="form-control"
+                    placeholder="Enter news title"
+                    value={newArticles.title}
+                    onChange={handleInputChange}
                     required
                 />
                 <textarea
-                    placeholder="News Content"
-                    value={currentNews.content}
-                    onChange={(e) => setCurrentNews({...currentNews, content: e.target.value})}
+                    id="description"
+                    name="description"
+                    className="form-control"
+                    rows="5"
+                    placeholder="Enter news description"
+                    value={newArticles.content}
+                    onChange={handleInputChange}
                     required
                 />
-                <input 
+                <input
+                    name="image"
                     type="file"
-                    onChange={(e) => setCurrentNews({...currentNews, imageFile: e.target.files[0]})}
+                    onChange={handleInputChange}
                 />
-                <button className="custom-btn btn-7" type="submit"><span>{editMode ? 'Update News' : 'Add News'}</span></button>
+            <button type="submit" className="custom-btn btn-7"><span>Додати новину</span></button>
+
             </form>
-
-            {/* Список усіх новин */}
-            <div className="news-list">
-                    {newsList.map((newsItem) => (
-                        <div key={newsItem.id} className="news-item">
-                            <h3>{newsItem.title}</h3>
-                        <img
-                        src={newsItem.urlToImage || defaultImage}
-                        alt={newsItem.title || 'Default'}
-                        className="news-image-trash"
-          />
-          <p>{newsItem.description}</p>
-
-
-                        <button className="custom-btn btn-7" onClick={() => {
-                            setEditMode(true);
-                            setCurrentNews(newsItem);
-                        }}><span>Редагувати</span>
-                        </button>
-                        <button className="custom-btn btn-7" onClick={() => handleDeleteNews(newsItem.id)}><span>Видалити</span>
-                            </button>
+            <div className="editen-prod">
+                {articles.map(article => (
+                    editingArticleId === article.id ? (
+                        <EditArticleForm key={article.id} article={article} onSave={saveArticleChanges} />
+                    ) : (
+                    <div key={article.id} className="article">
+                        <h3>{article.title}</h3>
+                        <p>{article.description}</p>
+                        {/* Display image if it exists */}
+                        {article.image && <img src={article.image} alt={article.title} />}
+                        <button onClick={() => setEditingArticleId(article.id)}className="custom-btn btn-7"><span>Редагувати</span></button>
+                        <button className="custom-btn btn-7" onClick={() => handleDeleteArticle(article.id)}><span>Видалити новину</span></button>
                     </div>
+                    )
                 ))}
             </div>
-        </div>
+            </div>
+            
     );
 };
 

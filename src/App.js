@@ -6,7 +6,7 @@ import Footer from './components/Footer/Footer';
 import HomePage from './pages/HomePage/HomePage';
 import ShopPage from './pages/ShopPage/ShopPage';
 import AdminDashboard from './pages/admin/AdminDashboard/AdminDashboard';
-import ManageProducts from './pages/admin/ManageProducts/ManageProducts';
+// import ManageProducts from './pages/admin/ManageProducts/ManageProducts';
 // import ManageUsers from './pages/admin/ManageUsers/ManageUsers';
 import LoginForm from './components/LoginForm/LoginForm';
 import RegisterForm from './components/RegisterForm/RegisterForm';
@@ -85,7 +85,7 @@ function App() {
                         <Route path="/" element={<HomePage/>}/>
                         <Route path="/shop" element={<ShopPage/>}/>
                         <Route path="/admin" element={<AdminDashboard/>}/>
-                        <Route path="/admin/products" element={<ManageProducts/>}/>
+                        {/* <Route path="/admin/products" element={<ManageProducts/>}/> */}
                         {/*<Route path="/admin/users" element={<ManageUsers/>}/>*/}
                         <Route path="/login" element={<LoginForm/>}/>
                         <Route path="/register" element={<RegisterForm/>}/>
