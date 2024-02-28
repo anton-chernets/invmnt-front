@@ -7,7 +7,7 @@ const ManageNews = () => {
     const [editMode, setEditMode] = useState(false);
     const [currentNews, setCurrentNews] = useState({ title: '', content: '', imageUrl: '' });
     const [loading, setLoading] = useState(false);
-    const [error, setError] = useState(null);
+    const [, setError] = useState(null);
     const token = localStorage.getItem('authToken');
 
     useEffect(() => {
@@ -35,40 +35,36 @@ const ManageNews = () => {
         fetchNews();
     }, []);
 
-    async function uploadImage(imageFile) {
+    async function uploadImage(imageFile, articleId) {
         if (!imageFile) {
             return null;
         }
-
+    
         const formData = new FormData();
         formData.append('files', imageFile);
-        formData.append('id', '1');
+        formData.append('id', articleId); // Now using the provided article ID
         formData.append('model', 'Article');
-
+    
         try {
             const uploadResponse = await fetch('https://apinvmnt.site/api/files/upload', {
                 method: 'POST',
                 headers: {
                     'Authorization': `Bearer ${token}`,
-                    'Content-Type': 'multipart/form-data'
+                    // Do not set 'Content-Type': 'multipart/form-data'
                 },
                 body: formData,
             });
-
+    
             if (!uploadResponse.ok) {
                 throw new Error(`HTTP error! Status: ${uploadResponse.status}`);
             }
-
+    
             const responseBody = await uploadResponse.text();
             try {
-
                 const responseJson = JSON.parse(responseBody);
-
                 console.log('Upload response:', responseJson);
-
-                return responseJson.data;
+                return responseJson.data; // Make sure the API returns the image URL or ID in 'data'
             } catch (jsonError) {
-
                 console.error('Response is not valid JSON:', responseBody);
                 throw jsonError;
             }
@@ -84,19 +80,16 @@ const ManageNews = () => {
     const handleAddNews = async (event) => {
         event.preventDefault();
         setLoading(true);
-
+        
+    
+        const { imageFile, ...newsData } = currentNews; // Destructure to separate imageFile from other news data
         try {
-            let imageId = null;
-            if (currentNews.imageFile) {
-                imageId = await uploadImage(currentNews.imageFile); // Загрузка изображения и получение его ID
-            }
-
             const payload = {
-                title: currentNews.title,
-                description: currentNews.content,
-                imageId: imageId, // Используется ID изображения
+                title: newsData.title,
+                description: newsData.content,
+                // Assuming no need to send imageUrl or imageFile in the payload
             };
-
+    
             const response = await fetch('https://apinvmnt.site/api/articles/store', {
                 method: 'POST',
                 headers: {
@@ -105,14 +98,23 @@ const ManageNews = () => {
                 },
                 body: JSON.stringify(payload),
             });
-
+    
             if (!response.ok) {
                 throw new Error(`HTTP error! Status: ${response.status}`);
             }
-
-            const data = await response.json();
-            setNewsList([...newsList, data]);
-            setCurrentNews({ title: '', content: '', imageUrl: '', imageFile: null }); // Сброс текущей новости
+    
+            const responseData = await response.json();
+            const createdArticle = responseData.data;
+    
+            let imageUrl = null;
+            if (imageFile) {
+                const uploadedImage = await uploadImage(imageFile, createdArticle.id); // Now we pass the article ID
+                imageUrl = uploadedImage.url; // Make sure your API returns the image URL here
+            }
+    
+            setNewsList([...newsList, { ...createdArticle, imageUrl }]); // Add the new article with the image URL to the news list
+            setCurrentNews({ title: '', content: '', imageUrl: '', imageFile: null }); // Reset current news state
+    
         } catch (error) {
             setError(error.message);
         } finally {
@@ -156,7 +158,7 @@ const ManageNews = () => {
 
 
     if (loading) return <div>Loading...</div>;
-    if (error) return <div>Error: {error.message}</div>;
+    
 
     return (
         <div className="manage-news">
