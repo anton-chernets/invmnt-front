@@ -58,9 +58,39 @@ const ManageProducts = () => {
     
             const result = await response.json();
             setProducts(prevProducts => prevProducts.map(p => p.id === result.data.id ? result.data : p));
-            setEditingProductId(null); // Reset editing state
+            setEditingProductId(null);
         } catch (error) {
             console.error('Error updating product:', error);
+        }
+        if (updatedProduct.image) {
+            // Similar to handleAddProduct, upload the image file here
+            const formData = new FormData();
+            formData.append('id', updatedProduct.id); // Assuming this is the product ID
+            formData.append('model', 'Product'); // Adjust based on your API
+            formData.append('files', updatedProduct.image);
+    
+            try {
+                const fileUploadResponse = await fetch('https://apinvmnt.site/api/files/upload', {
+                    method: 'POST',
+                    headers: {
+                        'Authorization': `Bearer ${token}`,
+                        // Content-Type is not needed for FormData
+                    },
+                    body: formData,
+                });
+    
+                if (!fileUploadResponse.ok) {
+                    throw new Error(`File upload failed with status: ${fileUploadResponse.status}`);
+                }
+    
+                const fileUploadData = await fileUploadResponse.json();
+                if (!fileUploadData.success) {
+                    throw new Error('File upload did not return success status');
+                }
+                // Optionally handle the response, such as updating the UI or state
+            } catch (error) {
+                console.error('Error uploading file:', error);
+            }
         }
     };
 
@@ -177,13 +207,17 @@ const ManageProducts = () => {
     
 
     const EditProductForm = ({ product, onSave }) => {
-        const [formData, setFormData] = useState(product);
-
+        const [formData, setFormData] = useState({...product, image: null});
+    
         const handleChange = (e) => {
-            const { name, value } = e.target;
-            setFormData({ ...formData, [name]: value });
+            const { name, value, type, files } = e.target;
+            if (type === 'file') {
+                setFormData({ ...formData, image: files[0] });
+            } else {
+                setFormData({ ...formData, [name]: value });
+            }
         };
-
+    
         const handleSubmit = (e) => {
             e.preventDefault();
             onSave(formData);
@@ -195,6 +229,11 @@ const ManageProducts = () => {
                 <textarea name="description" value={formData.description} onChange={handleChange} placeholder="Опис" />
                 <input name="price" type="number" value={formData.price} onChange={handleChange} placeholder="Ціна" />
                 <input name="stock" type="number" value={formData.stock} onChange={handleChange} placeholder="Кількість на складі" />
+                <input
+                name="image"
+                type="file"
+                onChange={handleChange}
+            />
                 <button type="submit"className="custom-btn btn-7"><span>Зберегти зміни</span></button>
             </form>
         );
