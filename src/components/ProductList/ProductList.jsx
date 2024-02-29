@@ -26,21 +26,27 @@ const ProductList = () => {
     
 
     const [quantities, setQuantities] = useState({});
+    const [currentPage, setCurrentPage] = useState(1);
+    
+    const [paginationMeta, setPaginationMeta] = useState(null);
     
 
     useEffect(() => {
         setLoading(true);
-        fetch('https://apinvmnt.site/api/products')
+        fetch(`https://apinvmnt.site/api/products?page=${currentPage}`)
             .then(response => {
                 if (!response.ok) {
                     throw new Error(`HTTP error! Status: ${response.status}`);
                 }
                 return response.json();
             })
-            .then(data => setProducts(data.data || []))
+            .then(data => {
+                setProducts(data.data || []);
+                setPaginationMeta(data.meta || null); // Update this line
+            })
             .catch(error => setError(error.toString()))
             .finally(() => setLoading(false));
-    }, []);
+    }, [currentPage]);
 
     useEffect(() => {
 
@@ -129,6 +135,35 @@ const ProductList = () => {
         }
     }
     
+    const handlePageChange = (pageNumber) => {
+        if (pageNumber) {
+            setCurrentPage(pageNumber);
+            // Optionally update the URL or make a new API call here
+        }
+    };
+    const Pagination = ({ meta, onPageChange }) => {
+        if (!meta || meta.total <= meta.per_page) return null;
+    
+        const handlePageClick = (url) => {
+            // Extract the page number from the URL or simply pass the URL to a parent handler
+            const pageNumber = url ? parseInt(new URL(url).searchParams.get('page'), 10) : null;
+            onPageChange(pageNumber);
+        };
+    
+        return (
+            <div className="pagination">
+                {meta.links.map((link, index) => (
+                    <button
+                        key={index}
+                        onClick={() => handlePageClick(link.url)}
+                        disabled={!link.url || link.active}
+                        className={link.active ? 'active' : ''}
+                        dangerouslySetInnerHTML={{ __html: link.label }} // Use this to render HTML entities like &laquo; and &raquo;
+                    />
+                ))}
+            </div>
+        );
+    };
 
     return (
         <div className='wrapper-product'>
@@ -191,6 +226,9 @@ const ProductList = () => {
                     </div>
                 ))}
             </div>
+            {paginationMeta && (
+                <Pagination meta={paginationMeta} onPageChange={handlePageChange} />
+            )}
         </div>
         
     );
