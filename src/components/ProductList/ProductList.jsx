@@ -143,6 +143,10 @@ const ProductList = () => {
     
     const handlePageClick = (pageNumber) => {
         setCurrentPage(pageNumber);
+        window.scrollTo({
+          top: 0,
+          behavior: 'smooth' // Забезпечує плавну прокрутку
+        });
     };
 
     const Pagination = ({ currentPage, onPageClick, total, last_page }) => {
