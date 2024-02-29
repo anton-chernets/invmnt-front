@@ -172,7 +172,7 @@ const ProductList = () => {
             return (
             <div className="pagination">
                 <button onClick={() => onPageClick(1)} disabled={currentPage === 1}>
-                    <FontAwesomeIcon icon={faAngleLeft} /> First
+                    <FontAwesomeIcon icon={faAngleLeft} /> У Початок
                 </button>
                 <button onClick={() => onPageClick(currentPage - 1)} disabled={currentPage === 1}>
                     <FontAwesomeIcon icon={faAngleLeft} /> 
@@ -194,7 +194,7 @@ const ProductList = () => {
                         <FontAwesomeIcon icon={faAngleRight} />
                     </button>
                     <button onClick={() => onPageClick(last_page)} disabled={currentPage === last_page}>
-                        Last <FontAwesomeIcon icon={faAngleRight} />
+                        У Кінець <FontAwesomeIcon icon={faAngleRight} />
                     </button>
                 </div>
                 );
