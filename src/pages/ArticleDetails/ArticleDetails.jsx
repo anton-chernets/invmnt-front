@@ -5,7 +5,7 @@ import defaultImage from '../../img/image_2024-02-07_10-47-09.png';
 import Sidebar from "../../components/Sidebar/Sidebar";
 
 function ArticleDetails() {
-  const { articleId } = useParams();
+  const { alias } = useParams();
   const navigate = useNavigate();
   const [newsItem, setNewsItem] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -14,7 +14,7 @@ function ArticleDetails() {
   useEffect(() => {
     const fetchNewsDetail = async () => {
       try {
-        const response = await fetch(`https://apinvmnt.site/api/articles/show/${articleId}`);
+        const response = await fetch(`https://apinvmnt.site/api/articles/show/${alias}`);
         if (!response.ok) {
           throw new Error(`HTTP error! Status: ${response.status}`);
         }
@@ -29,7 +29,7 @@ function ArticleDetails() {
     };
 
     fetchNewsDetail();
-  }, [articleId, navigate]);
+  }, [alias, navigate]);
 
   if (loading) {
     return <div className="loading-message">Завантаження деталей новини...</div>;

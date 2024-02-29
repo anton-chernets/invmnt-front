@@ -6,7 +6,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAngleDown, faAngleUp } from '@fortawesome/free-solid-svg-icons';
 import {Link} from "react-router-dom";
 
-const NewsItem = ({ id, title, description, imageUrl, showImage = true }) => {
+const NewsItem = ({ id, alias, title, description, imageUrl, showImage = true }) => {
     const [isExpanded, setIsExpanded] = useState(false);
     const contentRef = useRef(null);
 
@@ -24,7 +24,7 @@ const NewsItem = ({ id, title, description, imageUrl, showImage = true }) => {
 
     return (
         <div className={`news-item ${isExpanded ? 'expanded' : ''}`}>
-            <Link to={`/articles/show/${id}`} style={{ textDecoration: 'none' }}>
+            <Link to={`/articles/show/${alias}`} style={{ textDecoration: 'none' }}>
                 {showImage && (
                     <img src={imageUrl || defaultImage} alt={title || 'Default'} className="news-image" />
                 )}

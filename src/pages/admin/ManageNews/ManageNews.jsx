@@ -7,7 +7,7 @@ const ManageNews = () => {
     const [newArticles, setNewArticles] = useState({
         title: '',
         description: '',
-        // image: null, // For image file
+        image: null, // For image file
     });
 
     const token = localStorage.getItem('authToken');

@@ -91,9 +91,11 @@ function App() {
                         <Route path="/register" element={<RegisterForm/>}/>
                         <Route path="/user" element={<UserProfile/>}/>
                         <Route path="/products" element={<ProductList />} />
-                        <Route path="/search/articles/show/:articleId" element={<ArticleDetails />} />
+                        <Route path="/search/articles/show/:alias" element={<ArticleDetails />} />
+                        {/* <Route path="/search/articles/show/:articleId" element={<ArticleDetails />} /> */}
                         <Route path="/search/products/show/:productId" element={<ProductDetails />} />
-                        <Route path="/articles/show/:articleId" element={<ArticleDetails />} />
+                        <Route path="/articles/show/:alias" element={<ArticleDetails />} />
+                        {/* <Route path="/articles/show/:articleId" element={<ArticleDetails />} /> */}
                         <Route path="/products/show/:productId" element={<ProductDetails />} />
                         <Route path="/checkout" element={<Checkout/>}/>
                         <Route path="/cart" element={<CartPage/>}/>

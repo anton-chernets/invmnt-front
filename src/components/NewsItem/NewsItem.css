@@ -25,7 +25,9 @@
     transition: max-height 0.5s ease;
     position: relative;
 }
-
+.pagination {
+    margin: 0 auto;
+}
 .toggle-content-btn {
     background: #8a8a8a;
     height: 30px;
