@@ -247,6 +247,7 @@ const ManageNews = () => {
             <button type="submit" className="custom-btn btn-7"><span>Додати новину</span></button>
 
             </form>
+            
             <div className="editen-prod">
                 {articles.map(article => (
                     editingArticleId === article.id ? (
@@ -258,7 +259,7 @@ const ManageNews = () => {
                         {/* Display image if it exists */}
                         {/* {article.image && <img src={article.image} alt={article.title} />} */}
                         <button onClick={() => setEditingArticleId(article.id)}className="custom-btn btn-7"><span>Редагувати</span></button>
-                        <button className="custom-btn btn-7" onClick={() => handleDeleteArticle(article.id)}><span>Видалити новину</span></button>
+                        <button className="custom-btn btn-7" onClick={() => handleDeleteArticle(article.id)}><span>Видалити</span></button>
                     </div>
                     )
                 ))}
