@@ -41,8 +41,8 @@ const NewsFeed = () => {
     const Pagination = ({ currentPage, onPageClick, total, last_page }) => {
         if (last_page <= 1) return null;
     
-        // Determine the range of pages to display
-        const delta = 2; // how many pages to show around the current page
+        
+        const delta = 2; 
         const range = [];
         for (let i = Math.max(2, currentPage - delta); i <= Math.min(last_page - 1, currentPage + delta); i++) {
             range.push(i);
@@ -55,64 +55,40 @@ const NewsFeed = () => {
             {
             range.push("...");
             }
-        range.unshift(1); // Always add the first page
-            if (last_page !== 1) range.push(last_page); // Add the last page if it's not the only one
+        range.unshift(1);
+            if (last_page !== 1) range.push(last_page);
             
             return (
-                <div className="pagination">
-            <button onClick={() => onPageClick(1)} disabled={currentPage === 1}>
-                <FontAwesomeIcon icon={faAngleLeft} /> First
-            </button>
-            <button onClick={() => onPageClick(currentPage - 1)} disabled={currentPage === 1}>
-                <FontAwesomeIcon icon={faAngleLeft} /> {/* Це для кнопки "Prev" */}
-            </button>
+            <div className="pagination">
+                <button onClick={() => onPageClick(1)} disabled={currentPage === 1}>
+                    <FontAwesomeIcon icon={faAngleLeft} /> First
+                </button>
+                <button onClick={() => onPageClick(currentPage - 1)} disabled={currentPage === 1}>
+                    <FontAwesomeIcon icon={faAngleLeft} /> 
+                </button>
                 {range.map((number, index) =>
                     number === "..." ? (
                 <span key={index} className="pagination-ellipsis">…</span>
                 ) : (
                     <button
-                    key={number}
-                    onClick={() => onPageClick(number)}
-                    className={currentPage === number ? 'active' : ''}
-                    >
-                    {number}
+                        key={number}
+                        onClick={() => onPageClick(number)}
+                        className={currentPage === number ? 'active' : ''}
+                        >
+                        {number}
                     </button>
-                    )
-                    )}
+                )
+            )}
                     <button onClick={() => onPageClick(currentPage + 1)} disabled={currentPage === last_page}>
-                <FontAwesomeIcon icon={faAngleRight} /> {/* Це для кнопки "Next" */}
-            </button>
-            <button onClick={() => onPageClick(last_page)} disabled={currentPage === last_page}>
-                Last <FontAwesomeIcon icon={faAngleRight} />
-            </button>
-                    </div>
-                    );
-                    };
+                        <FontAwesomeIcon icon={faAngleRight} />
+                    </button>
+                    <button onClick={() => onPageClick(last_page)} disabled={currentPage === last_page}>
+                        Last <FontAwesomeIcon icon={faAngleRight} />
+                    </button>
+                </div>
+                );
+            };
             
-
-    // const Pagination = ({ currentPage, onPageClick, last_page }) => {
-    //     if (last_page <= 1) return null;
-    
-    //     const pageNumbers = [];
-    //     for (let i = 1; i <= last_page; i++) {
-    //         pageNumbers.push(i);
-    //     }
-    //     return (
-    //         <div className="pagination">
-    //             {pageNumbers.map(number => ( 
-    //                 <button
-    //                     key={number} 
-    //                     onClick={() => onPageClick(number)} 
-    //                     disabled={currentPage === number} 
-    //                     className={currentPage === number ? 'active' : ''}
-    //                 >
-    //                     {number} 
-                        
-    //                 </button>
-    //             ))}
-    //         </div>
-    //     );
-    // };
 
     return (
         <div className="news-container">

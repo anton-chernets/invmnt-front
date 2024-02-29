@@ -5,31 +5,39 @@ import defaultImage from '../../img/image_2024-02-07_10-47-09.png';
 import Sidebar from "../../components/Sidebar/Sidebar";
 
 function ArticleDetails() {
-  const { alias } = useParams();
+  const {id, alias } = useParams();
+  console.log(`Article ID: ${id}, Alias: ${alias}`);
   const navigate = useNavigate();
   const [newsItem, setNewsItem] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  // const { identifier } = useParams();
 
   useEffect(() => {
     const fetchNewsDetail = async () => {
+      // Check if 'alias' is not null and not the string "null", otherwise use 'id'
+      let pathSegment = alias && alias !== 'null' && alias !== 'undefined' ? alias : id;
+
+      let endpoint = `https://apinvmnt.site/api/articles/show/${pathSegment}`;
+  
       try {
-        const response = await fetch(`https://apinvmnt.site/api/articles/show/${alias}`);
+        const response = await fetch(endpoint);
         if (!response.ok) {
           throw new Error(`HTTP error! Status: ${response.status}`);
         }
         const result = await response.json();
-        setNewsItem(result.data); // Тут ми звертаємося до data в об'єкті відповіді
+        
+        setNewsItem(result.data);
       } catch (err) {
-        console.error("Помилка при завантаженні новини:", err);
+        console.error("Error loading the article:", err);
         setError(err.message);
       } finally {
         setLoading(false);
       }
     };
-
+  
     fetchNewsDetail();
-  }, [alias, navigate]);
+  }, [alias, id]); 
 
   if (loading) {
     return <div className="loading-message">Завантаження деталей новини...</div>;
