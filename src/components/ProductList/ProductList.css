@@ -93,6 +93,9 @@
     flex-direction: column;
     text-align: center;
 }
+.product-item-list p{
+    font-size: small;
+}
 .img-dis a{
     margin: 0 auto;
 }
