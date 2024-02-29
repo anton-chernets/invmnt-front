@@ -26,7 +26,33 @@
     position: relative;
 }
 .pagination {
+    padding: 10px;
     margin: 0 auto;
+}
+
+.pagination button {
+    border: 1px solid #ddd;
+    padding: 5px 10px;
+    margin: 0 5px;
+    cursor: pointer;
+    background-color: #f8f8f8;
+    transition: background-color 0.3s ease;
+}
+
+.pagination button:hover {
+    background-color: #e9e9e9;
+}
+
+.pagination button.active {
+    background-color: #007bff;
+    color: white;
+    border-color: #007bff;
+}
+
+.pagination button:disabled {
+    color: #666;
+    cursor: not-allowed;
+    background-color: #f8f8f8;
 }
 .toggle-content-btn {
     background: #8a8a8a;
