@@ -6,6 +6,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faShoppingCart } from '@fortawesome/free-solid-svg-icons';
 import defaultImage from '../../img/image_2024-02-07_10-47-09.png';
 import { AuthContext } from '../AuthContext/AuthContext';
+import { faAngleLeft, faAngleRight } from '@fortawesome/free-solid-svg-icons';
+
 
 const ProductList = () => {
     const navigate = useNavigate();
@@ -23,17 +25,21 @@ const ProductList = () => {
     
     return savedCart ? JSON.parse(savedCart) : [];
     });
-    
-
-    const [quantities, setQuantities] = useState({});
     const [currentPage, setCurrentPage] = useState(1);
+    const [productsPerPage] = useState(9);
+    const [quantities, setQuantities] = useState({});
     
-    const [paginationMeta, setPaginationMeta] = useState(null);
+    const [paginationInfo, setPaginationInfo] = useState({
+        current_page: 1,
+        last_page: 1,
+        total: 1,
+        per_page: 9
+    });
     
 
     useEffect(() => {
         setLoading(true);
-        fetch(`https://apinvmnt.site/api/products?page=${currentPage}`)
+        fetch(`https://apinvmnt.site/api/products?page=${currentPage}&limit=${productsPerPage}`)
             .then(response => {
                 if (!response.ok) {
                     throw new Error(`HTTP error! Status: ${response.status}`);
@@ -42,11 +48,11 @@ const ProductList = () => {
             })
             .then(data => {
                 setProducts(data.data || []);
-                setPaginationMeta(data.meta || null); // Update this line
+                setPaginationInfo(data?.meta || {});
             })
             .catch(error => setError(error.toString()))
             .finally(() => setLoading(false));
-    }, [currentPage]);
+    }, [currentPage, productsPerPage]);
 
     useEffect(() => {
 
@@ -135,35 +141,60 @@ const ProductList = () => {
         }
     }
     
-    const handlePageChange = (pageNumber) => {
-        if (pageNumber) {
-            setCurrentPage(pageNumber);
-            // Optionally update the URL or make a new API call here
+    const handlePageClick = (pageNumber) => {
+        setCurrentPage(pageNumber);
+    };
+
+    const Pagination = ({ currentPage, onPageClick, total, last_page }) => {
+        if (last_page <= 1) return null;
+    
+        
+        const delta = 2; 
+        const range = [];
+        for (let i = Math.max(2, currentPage - delta); i <= Math.min(last_page - 1, currentPage + delta); i++) {
+            range.push(i);
         }
-    };
-    const Pagination = ({ meta, onPageChange }) => {
-        if (!meta || meta.total <= meta.per_page) return null;
     
-        const handlePageClick = (url) => {
-            // Extract the page number from the URL or simply pass the URL to a parent handler
-            const pageNumber = url ? parseInt(new URL(url).searchParams.get('page'), 10) : null;
-            onPageChange(pageNumber);
-        };
-    
-        return (
+        if (currentPage - delta > 2) {
+            range.unshift("...");
+        }
+        if (currentPage + delta < last_page)
+            {
+            range.push("...");
+            }
+        range.unshift(1);
+            if (last_page !== 1) range.push(last_page);
+            
+            return (
             <div className="pagination">
-                {meta.links.map((link, index) => (
+                <button onClick={() => onPageClick(1)} disabled={currentPage === 1}>
+                    <FontAwesomeIcon icon={faAngleLeft} /> First
+                </button>
+                <button onClick={() => onPageClick(currentPage - 1)} disabled={currentPage === 1}>
+                    <FontAwesomeIcon icon={faAngleLeft} /> 
+                </button>
+                {range.map((number, index) =>
+                    number === "..." ? (
+                <span key={index} className="pagination-ellipsis">…</span>
+                ) : (
                     <button
-                        key={index}
-                        onClick={() => handlePageClick(link.url)}
-                        disabled={!link.url || link.active}
-                        className={link.active ? 'active' : ''}
-                        dangerouslySetInnerHTML={{ __html: link.label }} // Use this to render HTML entities like &laquo; and &raquo;
-                    />
-                ))}
-            </div>
-        );
-    };
+                        key={number}
+                        onClick={() => onPageClick(number)}
+                        className={currentPage === number ? 'active' : ''}
+                        >
+                        {number}
+                    </button>
+                )
+            )}
+                    <button onClick={() => onPageClick(currentPage + 1)} disabled={currentPage === last_page}>
+                        <FontAwesomeIcon icon={faAngleRight} />
+                    </button>
+                    <button onClick={() => onPageClick(last_page)} disabled={currentPage === last_page}>
+                        Last <FontAwesomeIcon icon={faAngleRight} />
+                    </button>
+                </div>
+                );
+            };
 
     return (
         <div className='wrapper-product'>
@@ -226,9 +257,12 @@ const ProductList = () => {
                     </div>
                 ))}
             </div>
-            {paginationMeta && (
-                <Pagination meta={paginationMeta} onPageChange={handlePageChange} />
-            )}
+            <Pagination 
+                currentPage={paginationInfo.current_page} 
+                onPageClick={handlePageClick}
+                total={paginationInfo.total}
+                last_page={paginationInfo.last_page}
+            />
         </div>
         
     );

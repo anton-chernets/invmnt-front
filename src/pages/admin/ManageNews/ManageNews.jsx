@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import NewsFeed from '../../../components/NewsFeed/NewsFeed';
 
 const ManageNews = () => {
     const [articles, setArticles] = useState([]);
@@ -253,14 +254,17 @@ const ManageNews = () => {
                     ) : (
                     <div key={article.id} className="article">
                         <h3>{article.title}</h3>
-                        <p>{article.description}</p>
+                        {/* <p>{article.description}</p> */}
                         {/* Display image if it exists */}
-                        {article.image && <img src={article.image} alt={article.title} />}
+                        {/* {article.image && <img src={article.image} alt={article.title} />} */}
                         <button onClick={() => setEditingArticleId(article.id)}className="custom-btn btn-7"><span>Редагувати</span></button>
                         <button className="custom-btn btn-7" onClick={() => handleDeleteArticle(article.id)}><span>Видалити новину</span></button>
                     </div>
                     )
                 ))}
+            </div>
+            <div className='wrap-news'>
+            <NewsFeed />
             </div>
             </div>
             

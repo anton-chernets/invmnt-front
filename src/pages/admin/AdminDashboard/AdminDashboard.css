@@ -33,17 +33,32 @@
     margin-left: 0;
     transition: none;
 }
+.article {
+    display: flex;
+    flex-direction: row;
+
+}
+.article h3{
+    width: 300px;
+}
 
 .content {
     width: 100%;
     max-width: 1400px;
+}
+.wrap-news {
+    width: 100%;
 }
 
 @media (max-width: 768px) {
     .admin-dashboard {
         margin: 20px 0 0;
     }
-
+    .article {
+        display: flex;
+        flex-direction: column;
+    
+    }
     .sidebar-panel {
         flex-direction: column;
     }
