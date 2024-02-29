@@ -6,7 +6,6 @@ import Sidebar from "../../components/Sidebar/Sidebar";
 
 function ArticleDetails() {
   const {id, alias } = useParams();
-  console.log(`Article ID: ${id}, Alias: ${alias}`);
   const navigate = useNavigate();
   const [newsItem, setNewsItem] = useState(null);
   const [loading, setLoading] = useState(true);
