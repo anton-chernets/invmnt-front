@@ -116,7 +116,6 @@ const UserProfile = () => {
     };
 
     const [cart, setCart] = useState(() => {
-        // Get the cart from localStorage and parse it or default to an empty array
         const savedCart = localStorage.getItem('cart');
         return savedCart ? JSON.parse(savedCart) : [];
     });
@@ -147,22 +146,22 @@ const UserProfile = () => {
                         <p>Дата Замовлення: {new Date(order.created_at).toLocaleString()}</p>
                         <div className='line-items'>
                         {order.line_items && order.line_items.map((item, index) => (
-    item.product_info ? ( // Check if product_info exists
-        <div key={`${order.id}-${item.product_info.id}-${index}`} className='order-product-item'>
-            <p>{item.product_info.title}</p>
-            <p>{item.product_info.description}</p>
-            <p>Кількість: {item.quantity}</p>
-            <p>Ціна: {item.price}</p>
-        </div>
-    ) : null // Render nothing or a placeholder if product_info does not exist
-))}
-        </div>
-    </div>
-    ))
-) : (
-    <p>No orders found.</p>
-)}
-                </div>
+                            item.product_info ? ( // Check if product_info exists
+                                <div key={`${order.id}-${item.product_info.id}-${index}`} className='order-product-item'>
+                                    <p>{item.product_info.title}</p>
+                                    <p>{item.product_info.description}</p>
+                                    <p>Кількість: {item.quantity}</p>
+                                    <p>Ціна: {item.price}</p>
+                                </div>
+                            ) : null
+                        ))}
+                                </div>
+                            </div>
+                            ))
+                        ) : (
+                            <p>No orders found.</p>
+                        )}
+                    </div>
                 </div>
 
                 <div className="user-setting">
