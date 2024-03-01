@@ -147,13 +147,15 @@ const UserProfile = () => {
                         <p>Дата Замовлення: {new Date(order.created_at).toLocaleString()}</p>
                         <div className='line-items'>
                         {order.line_items && order.line_items.map((item, index) => (
-                    <div key={`${order.id}-${item.product_info.id}-${index}`} className='order-product-item'>
-                        <p>{item.product_info.title}</p>
-                        <p>{item.product_info.description}</p>
-                        <p>Кількість: {item.quantity}</p>
-                        <p>Ціна: {item.price}</p>
-                    </div>
-                ))}
+    item.product_info ? ( // Check if product_info exists
+        <div key={`${order.id}-${item.product_info.id}-${index}`} className='order-product-item'>
+            <p>{item.product_info.title}</p>
+            <p>{item.product_info.description}</p>
+            <p>Кількість: {item.quantity}</p>
+            <p>Ціна: {item.price}</p>
+        </div>
+    ) : null // Render nothing or a placeholder if product_info does not exist
+))}
         </div>
     </div>
     ))
