@@ -68,21 +68,24 @@ function App() {
             <ThemeProvider>
             <Router>
                 <Helmet>
-                    <meta charSet="utf-8"/>
-                    <title>Інвестиції</title>
-                    <meta name="keywords" content="інвестиції, крипта, ації, валюта, обмін валют, гроші"/>
-                    <meta name="description" content="Інвестиції: види інвестицій"/>
+                    <meta charSet="UTF-8"/>
+                    <title>Інвестиції та Фінанси</title>
+                    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+                    <meta name="keywords"
+                          content="інвестиції, фінанси, інвестиційний портфель, акції, облігації, фондовий ринок, фінансові поради"/>
+                    <meta name="description"
+                          content="Сайт про інвестиції та фінанси, де ви можете знайти корисну інформацію про різні види інвестування, фінансові поради та останні новини зі світу фінансів."/>
                     <meta property="og:locale" content="uk_UA"/>
                     <meta property="og:title" content="Інвестиції"/>
                     <meta property="og:description" content="Інвестиції: види інвестицій"/>
                     <meta property="og:url" content="https://invmnt.site/"/>
                     <meta name="google-adsense-account" content="ca-pub-9704083006647691"/>
-                    
-                     
+                    <meta name="author" content="Invmnt"/>
+
                 </Helmet>
                 <Header/>
-                    <Routes>
-                        <Route path="/" element={<HomePage/>}/>
+                <Routes>
+                <Route path="/" element={<HomePage/>}/>
                         <Route path="/shop" element={<ShopPage/>}/>
                         <Route path="/admin" element={<AdminDashboard/>}/>
                         {/* <Route path="/admin/products" element={<ManageProducts/>}/> */}
