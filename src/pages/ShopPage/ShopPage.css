@@ -1,0 +1,24 @@
+.shop-page {
+    width: 100%;
+    max-width: 1400px;
+    margin: 0 auto 100px;
+    display: flex;
+    flex-direction: row;
+    min-height: 100vh;
+    margin-top: 10px;
+    background-color: transparent;
+}
+
+.shop-page h1 {
+    color: #2c3e50;
+    font-size: 2.5em;
+    margin: 10px 10px ;
+    text-align: center;
+}
+
+
+@media (max-width: 768px) {
+    .shop-page {
+        flex-direction: column;
+    }
+}

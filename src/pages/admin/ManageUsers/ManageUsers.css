@@ -1,0 +1,95 @@
+.manage-users {
+    max-width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    min-height: 50vh;
+    background-color: #f9f9f9;
+    color: #333;
+    padding: 20px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    margin: auto 20px;
+}
+
+.manage-users h1 {
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.manage-users form {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 30px;
+}
+
+.manage-users input,
+.manage-users button {
+    flex-grow: 1;
+    margin: 0 10px;
+    padding: 10px;
+    font-size: 16px;
+}
+
+.manage-users button {
+    flex-basis: 40px;
+}
+
+.user-item {
+    background: #fff;
+    padding: 15px;
+    margin-bottom: 10px;
+    border-radius: 4px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.user-item h3 {
+    margin: 0;
+    color: #555;
+    font-size: 18px;
+}
+
+.user-item:last-child {
+    margin-bottom: 0;
+}
+
+
+.user-item button:hover {
+    background-color: #000000;
+}
+
+@media (max-width: 768px) {
+    .manage-users {
+        padding: 10px;
+    }
+
+    .manage-users h1 {
+        font-size: 20px;
+    }
+
+    .manage-users form {
+        flex-direction: column;
+    }
+
+    .manage-users input,
+    .manage-users button {
+        margin-bottom: 10px;
+    }
+
+    .user-item {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .user-item button {
+        margin-top: 10px;
+    }
+    .manage-users button {
+        flex-basis: 50px;
+    }
+}

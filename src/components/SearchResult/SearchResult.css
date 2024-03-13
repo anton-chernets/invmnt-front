@@ -1,0 +1,65 @@
+.search-results {
+    max-width: 1400px;
+    margin: 20px auto 100px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    min-height: 100vh;
+    background-color: transparent;
+    color: #333;
+    padding: 20px;
+}
+
+.search-results {
+    font-size: 30px;
+}
+
+
+.search-results-list {
+    list-style: none;
+    padding: 0;
+}
+
+.search-results-list-item {
+    margin-bottom: 10px;
+    padding: 10px;
+    border-bottom: 1px solid #ccc;
+}
+
+.search-results-list-item:last-child {
+    border-bottom: none;
+}
+
+.search-results-list-item-title {
+    font-size: 18px;
+    color: #007bff;
+    text-decoration: none;
+}
+
+.search-results-list-item-title:hover {
+    text-decoration: underline;
+}
+
+
+/* You can also directly target the news items here */
+.search-results-container .news-item {
+    /* Update individual news item styles */
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 15px;
+    margin-bottom: 15px;
+    min-height: 0;
+}
+
+.search-results-container .news-item h3 {
+    /* Update title styles in the news item */
+    color: #007bff;
+    font-size: 25px;
+}
+
+.search-results-container .news-item .content {
+    /* Update content styles in the news item */
+    color: #666;
+    font-size: 0.9rem;
+}
+
+/* Add more styles as needed */

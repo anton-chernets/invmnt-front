@@ -1,0 +1,24 @@
+.checkout-page {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.cart-items .cart-item {
+    display: flex;
+    margin-bottom: 20px;
+}
+
+.cart-item img {
+    width: 100px;
+    height: 100px;
+    margin-right: 20px;
+    object-fit: cover;
+}
+
+.total-price {
+    margin-top: 20px;
+    font-size: 1.5em;
+}

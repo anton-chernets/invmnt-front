@@ -1,0 +1,121 @@
+.news-item {
+    background-color: #ececec;
+    padding: 15px;
+    margin: 0 auto;
+    margin-left: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    box-sizing: border-box;
+    transition: transform 1s ease;
+    overflow: hidden;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    flex: 0 1 calc(50% - 20px);
+    min-height: 500px;
+}
+.form-manager input {
+    margin-top: 10px;
+    padding: 10px;
+}
+.content {
+    overflow: hidden;
+    transition: max-height 0.5s ease;
+    position: relative;
+}
+.pagination {
+    padding: 10px;
+    margin: 0 auto;
+}
+
+.pagination button {
+    border: 1px solid #ddd;
+    padding: 5px 10px;
+    margin: 0 5px;
+    cursor: pointer;
+    background-color: #f8f8f8;
+    transition: background-color 0.3s ease;
+}
+
+.pagination button:hover {
+    background-color: #e9e9e9;
+}
+
+.pagination button.active {
+    background-color: #007bff;
+    color: white;
+    border-color: #007bff;
+}
+
+.pagination button:disabled {
+    color: #666;
+    cursor: not-allowed;
+    background-color: #f8f8f8;
+}
+.toggle-content-btn {
+    background: #8a8a8a;
+    height: 30px;
+    cursor: pointer;
+    border-radius: 30px;
+    border: none;
+    color: white;
+    padding: 0 15px;
+    width: 150px;
+    margin: 10px auto 0; /* Centers button and adds space from content */
+}
+
+.news-item.expanded .content {
+    max-height: none; /* Allows content to expand fully */
+}
+
+.news-item:hover {
+    transform: scale(1.02);
+}
+
+.news-item h3 {
+    color: #000000;
+    margin-bottom: 10px;
+}
+
+.news-item .content:not(.expanded)::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 4.5em; /* Matches the max-height of .news-description */
+    background: linear-gradient(to bottom, rgba(255, 255, 255, 0), #ececec 100%);
+    pointer-events: none;
+}
+
+.news-item.expanded .content::after {
+    display: none; /* Hides the gradient on expanded items */
+}
+
+.news-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px; /* Sets gap between items */
+}
+
+@media (max-width: 1024px) {
+    .news-item {
+        flex: 0 0 calc(50% - 20px);
+        margin-top: 10px;
+    }
+}
+
+@media (max-width: 768px) {
+    .news-item {
+        flex: 0 0 100%;
+        max-width: 100%;
+        margin-bottom: 20px;
+        margin-left: 0;
+    }
+    .news-container {
+        padding: 0;
+        flex-direction: column;
+    }
+}

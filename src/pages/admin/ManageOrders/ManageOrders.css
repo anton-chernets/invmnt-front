@@ -1,0 +1,56 @@
+.manage-orders {
+    padding: 20px;
+    background: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    max-width: 100%;
+    margin: auto 20px;
+}
+
+.manage-orders h1 {
+    color: #333;
+    font-size: 24px;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.manage-orders ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.manage-orders li {
+    background: #fff;
+    padding: 15px;
+    margin-bottom: 10px;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.manage-orders li:last-child {
+    margin-bottom: 0;
+}
+
+
+@media (max-width: 768px) {
+    .manage-orders {
+        padding: 10px;
+    }
+
+    .manage-orders h1 {
+        font-size: 20px;
+    }
+
+    .manage-orders li {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .manage-orders button {
+        margin-top: 10px;
+    }
+}
